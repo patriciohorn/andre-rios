@@ -1,0 +1,23 @@
+---
+
+import Header from "@/components/layout/Header.astro";
+import Banner from "@/components/Banner.astro";
+import {SheetMobileNav} from "@components/layout/sheet-mobile-nav"
+import { MainNavigationMenu } from "@/components/main-navigation";
+import {navMenuConfig} from "@/config/nav-menu"
+import BaseLayout from "./BaseLayout.astro"
+interface Props {
+	title: string;
+  description?: string; 
+}
+
+const { title, description } = Astro.props;
+---
+
+<BaseLayout title={title} description={description}>
+  <Banner/>
+  <Header>
+    <MainNavigationMenu slot="center-header" client:load/>
+    <SheetMobileNav mainNavItems={navMenuConfig.mainNav} proceduresNavItems={navMenuConfig.proceduresNav} slot="mobile-nav-header" client:load />
+  </Header>
+</BaseLayout>

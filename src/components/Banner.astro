@@ -1,0 +1,61 @@
+---
+import { Icon } from 'astro-icon/components'
+
+const socialLinks = [
+  {
+    icon: 'instagram', 
+    url: '#'
+  }, 
+  {
+    icon: 'facebook', 
+    url: '#'
+  }, 
+ 
+  {
+    icon: 'tiktok', 
+    url: '#'
+  }, 
+]
+
+const contactInfo = [
+  {
+    icon: 'whatsapp', 
+    url: '', 
+    description: '+52 664 670 3359'
+  }, 
+  {
+    icon: 'phone', 
+    url: '', 
+    description: '+52 664 973 3708'
+  }
+]
+
+---
+
+
+<section class="bg-primary py-1 sm:py -2">
+  <div class="container flex items-center mx-auto">
+    <div class="flex-1 text-center sm:text-left">
+      {socialLinks.map((item) => (      
+        <a href={item.url} class="group inline-flex items-center justify-center text-white w-10 h-10 hover:bg-gray-800  transition-colors focus:outline-none focus:ring-4 focus:ring-gray-700 rounded-lg text-sm p-2.5 mr-1">
+          <span class="sr-only">{item.icon}</span>
+          <Icon name={item.icon}  class="text-white w-5 h-5 group-hover:text-primary-500" aria-hidden="true"/>
+        </a>          
+      ))}
+    </div>
+  
+    <div class="hidden sm:flex sm:items-center">
+      <Icon name="clock" class="text-white w-[1.1rem] h-[1.1rem] mr-2" aria-hidden="true"/>
+      <p class="text-sm text-white">M-F 11:00 - 20:00 / S 10:00 - 14:00 (PST)</p>
+    </div>
+  
+    <div class="hidden sm:flex-1 sm:justify-end sm:flex sm:items-center sm:gap-x-2">
+      {contactInfo.map((item) => (
+        <a href={item.url} class="inline-flex items-center text-white text-sm hover:bg-gray-800 hover:text-primary-500 focus:outline-none focus:ring-4 focus:ring-gray-700 rounded-lg px-5 py-2.5 transition-colors">
+          <span class=""><Icon name={item.icon} size={16} class="w-4 h-4 me-2"/></span>
+          <p class="">{item.description}</p>
+        </a>          
+      ))}
+    </div>
+  </div>
+</section>

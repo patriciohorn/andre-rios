@@ -1,0 +1,17 @@
+---
+import '@/styles/globals.css'
+interface Props {
+	title: string;
+  description?: string; 
+}
+
+const { title, description } = Astro.props;
+---
+
+
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<meta name="description" content="Astro description" />
+<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+<meta name="generator" content={Astro.generator} />
+<title>{title}</title>
