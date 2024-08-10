@@ -2,7 +2,7 @@
 import {Image} from "astro:assets"
 import logo from "@/assets/logo.png"
 import { Button } from "@/components/ui/button";
-import Banner from "@/components/Banner.astro"
+
 ---
 
 <header class="flex items-center h-16 md:h-20 z-50 sticky top-0 bg-primary-500 shadow-xl py-3">
@@ -19,7 +19,7 @@ import Banner from "@/components/Banner.astro"
 
     <div class="hidden sm:flex justify-end sm:flex-1">
 
-      <Button className="hidden md:flex">Contacto</Button>
+      <Button variant="secondary" className="hidden md:flex">Contacto</Button>
 
     </div>
   </div>

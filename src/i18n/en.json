@@ -1,0 +1,38 @@
+{
+  "SEO_TITLE": "Rios MD Plastics - Plastic, Aesthetic and Reconstructive Surgery",
+  "SEO_DESCRIPTION": "Enhance your beauty, with the best and most innovative techniques, both in surgical and non-surgical procedures",
+
+  "HERO_TITLE": "Dr. Andrei Ríos",
+  "HERO_DESCRIPTION": "Welcome to the ideal place to have that procedure which will enhance your beauty, always using the best and latest technology in surgical and non-surgical procedures, always prioritizing your safety. Our goal is to make you feel and look as you have always imagined ",
+  "HERO_TAG": "BOARD CERTIFIED PLASTIC, AESTHETIC AND RECONSTRUCTIVE SURGEON",
+  "HERO_BUTTON": "Meet Your Doctor",
+  "INTRO_TITLE": "Our goal is to make you feel and look as you have always imagined.",
+  "PROCEDURES_TITLE": "Procedures",
+  "PROCEDURES": {
+    "PROCEDURES_HEADINGS": {
+      "PROCEDURES_1": "Injectables",
+
+      "PROCEDURES_3": "Corporal",
+      "PROCEDURES_4": "Breast"
+    }
+  },
+  "TESTIMONIALS": [
+    {
+      "TESTIMONIAL_NAME": "Caro de la Garza",
+      "TESTIMONIAL_TEXT": "My experience with Dr. Andrei Rios was fantastic! Not only did he listen to me on exactly what I wanted, he also made me feel confident going through my liposuction surgery. My results have been incredible, I feel beautiful and confident. Without a doubt, I recommend him one hundred percent."
+    },
+    {
+      "TESTIMONIAL_NAME": "Claudia Guerra",
+      "TESTIMONIAL_TEXT": "Excellent doctor, excellent results, because of my body type, I wanted a natural look and I was left with a 60cm waist with super natural abs and a fabulous booty. The most important thing is that Dr. Andrei Rios explains everything step by step, so you don’t have any questions before and after the surgery. 100% recommendable!"
+    },
+    {
+      "TESTIMONIAL_NAME": "Jaky Alvarado",
+      "TESTIMONIAL_TEXT": "Dr. Andrei Rios is a professional. From the moment I met him, he generated a total confidence to carry out my surgery with him. I am very happy with my results, I feel very good about myself and I look as I have always wanted, I highly recommend him."
+    },
+    {
+      "TESTIMONIAL_NAME": "Mariana Mondragón",
+      "TESTIMONIAL_TEXT": "My results with Dr. Andrei have been excellent! He has always been willing to clarify all my doubts and give his point of view to get the best results. I received the best attention from him and his team."
+    }
+  ],
+  "GALLERY_TITLE": "Gallery"
+}

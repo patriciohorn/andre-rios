@@ -12,12 +12,31 @@ interface Props {
 }
 
 const { title, description } = Astro.props;
+
+
+import { getI18N } from "@/i18n/index"
+import { getLangFromUrl, useTranslations, useTranslatedPath, } from '@/i18n/utils';
+
+const { currentLocale } = Astro
+const i18n = getI18N({ currentLocale })
+const lang = getLangFromUrl(Astro.url);
+const t = useTranslations(lang); 
+const translations = {
+  'nav.meet': t('nav.meet'),
+  'nav.procedures': t('nav.procedures'),
+  'nav.gallery': t('nav.gallery'),
+  'nav.virtual': t('nav.virtual')
+}
+const translatePath = useTranslatedPath(lang);
 ---
 
 <BaseLayout title={title} description={description}>
   <Banner/>
   <Header>
-    <MainNavigationMenu slot="center-header" client:load/>
+    <MainNavigationMenu translations={translations} slot="center-header" client:load/>
     <SheetMobileNav mainNavItems={navMenuConfig.mainNav} proceduresNavItems={navMenuConfig.proceduresNav} slot="mobile-nav-header" client:load />
   </Header>
+  <main>
+    <slot/>
+  </main>
 </BaseLayout>

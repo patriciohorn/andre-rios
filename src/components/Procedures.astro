@@ -1,0 +1,29 @@
+---
+import SectionWrapper from "./layout/SectionWrapper.astro"
+import Heading from "./Heading.astro"
+import ProcedureCard from "./ProcedureCard.astro"
+import { getI18N } from "@/i18n"
+
+
+// Images
+import inyectablesImg from "../assets/procedures/inyectables.jpg";
+import facialImg from "../assets/procedures/facial.jpg";
+import bustoImg from "../assets/procedures/busto.jpg";
+
+
+const { currentLocale } = Astro
+const i18n = getI18N({ currentLocale })
+
+const proceduresHeadings = Object.values(i18n.PROCEDURES.PROCEDURES_HEADINGS)
+const proceduresImages = [inyectablesImg, facialImg, bustoImg]
+
+---
+
+<SectionWrapper class="bg-primary-50/10">
+  <Heading title={i18n.PROCEDURES_TITLE}/>
+  <ul class="grid sm:grid-cols-2 lg:grid-cols-3 gap-x-8 gap-y-16 mt-20">
+    {proceduresHeadings.map((heading, idx) => (
+      <ProcedureCard src={proceduresImages[idx]} alt={heading} title={heading}/>
+    ))}
+  </ul>
+</SectionWrapper>

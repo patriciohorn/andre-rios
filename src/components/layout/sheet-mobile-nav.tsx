@@ -21,7 +21,10 @@ interface SheetMobileNavProp {
   proceduresNavItems: NavItem[];
 }
 
-export function SheetMobileNav({ mainNavItems, proceduresNavItems }: SheetMobileNavProp) {
+export function SheetMobileNav({
+  mainNavItems,
+  proceduresNavItems
+}: SheetMobileNavProp | undefined) {
   const [open, setOpen] = React.useState(false);
 
   return (
@@ -66,7 +69,7 @@ export function SheetMobileNav({ mainNavItems, proceduresNavItems }: SheetMobile
                         <h4 className="text-sm text-slate-900 font-semibold p-2">{item.title}</h4>
                         <ul className="pl-4">
                           {item.items?.map((link) => (
-                            <li>
+                            <li key={link.href}>
                               <a
                                 href={link.href}
                                 className="flex items-center text-sm leading-6 text-slate-600 p-1 rounded-md">

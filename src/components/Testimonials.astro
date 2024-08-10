@@ -1,0 +1,27 @@
+---
+// Testimonial Section
+import SectionWrapper from "./layout/SectionWrapper.astro"
+import TestimonialCarousel from "@/components/TestimonialCarousel"
+
+import { getI18N } from "@/i18n"
+
+
+// Import testimonials
+import avatarCaro from "../assets/testimonials/Caro.jpg"
+import avatarClaudia from "../assets/testimonials/Claudia.jpg"
+import avatarJaky from "../assets/testimonials/Jaky.jpg"
+import avatarMariana from "../assets/testimonials/Mariana.jpg"
+
+
+const { currentLocale } = Astro
+const i18n = getI18N({ currentLocale })
+
+const testimonials = i18n.TESTIMONIALS
+const avatars = [avatarCaro, avatarClaudia, avatarJaky, avatarMariana]
+---
+
+<SectionWrapper class="bg-primary-50/10">  
+  <div>
+    <TestimonialCarousel testimonials={testimonials} client:visible/>       
+  </div>
+</SectionWrapper>

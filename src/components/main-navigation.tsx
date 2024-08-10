@@ -12,7 +12,8 @@ import {
 } from '@/components/ui/navigation-menu';
 import type { NavLink } from '@/types';
 
-export function MainNavigationMenu() {
+export function MainNavigationMenu({ translations }) {
+  console.log;
   const procedures = {
     Breast: [
       { title: 'Breast Augmentation with Fat', url: '/procedures/breast-augmentation-fat' },
@@ -45,11 +46,11 @@ export function MainNavigationMenu() {
     <NavigationMenu>
       <NavigationMenuList>
         <NavigationMenuItem className="text-sm font-medium text-slate-900 px-4 py-2 cursor-pointer hover:text-white transition-colors duration-300 ease-in-out">
-          <NavigationMenuLink href="">Meet your Doctor</NavigationMenuLink>
+          <NavigationMenuLink href="">{translations['nav.meet']}</NavigationMenuLink>
         </NavigationMenuItem>
         <NavigationMenuItem className="relative">
           <NavigationMenuTrigger className="text-sm text-slate-900 font-medium bg-transparent hover:bg-transparent hover:text-white data-[active]:bg-transparent data-[state=open]:bg-transparent">
-            Procedimientos
+            {translations['nav.procedures']}
           </NavigationMenuTrigger>
           <NavigationMenuContent>
             <div className="grid grid-cols-3  w-[400px] md:w-[600px] lg:w-[800px] justify-center bg-primary-100">
@@ -77,10 +78,10 @@ export function MainNavigationMenu() {
           </NavigationMenuContent>
         </NavigationMenuItem>
         <NavigationMenuItem className="text-sm font-medium text-slate-900 px-4 py-2 cursor-pointer hover:text-white transition-colors duration-300 ease-in-out">
-          <NavigationMenuLink href="">Gallery</NavigationMenuLink>
+          <NavigationMenuLink href=""> {translations['nav.gallery']}</NavigationMenuLink>
         </NavigationMenuItem>
         <NavigationMenuItem className="text-sm font-medium text-slate-900 px-4 py-2 cursor-pointer hover:text-white transition-colors duration-300 ease-in-out">
-          <NavigationMenuLink href="">Virtual Consultation</NavigationMenuLink>
+          <NavigationMenuLink href=""> {translations['nav.virtual']}</NavigationMenuLink>
         </NavigationMenuItem>
       </NavigationMenuList>
     </NavigationMenu>

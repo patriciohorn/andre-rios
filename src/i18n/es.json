@@ -1,0 +1,36 @@
+{
+  "SEO_TITLE": "Rios MD Plastics - Cirugía Plástica, Estética y Reconstructiva",
+  "SEO_DESCRIPTION": "Realza tu belleza, con las mejores y más innovadoras técnicas, tanto en procedimientos quirúrgicos como no quirúrgicos.",
+  "HERO_TITLE": "Dr. Andrei Ríos",
+  "HERO_DESCRIPTION": "Bienvenidos al lugar ideal para realizar ese procedimiento que realzará tu belleza, con las mejores y más novedosas técnicas, tanto en procedimientos quirúrgicos y  no quirúrgicos, siempre de la mano de la mayor seguridad en todos nuestros procesos, para que te sientas y veas como siempre lo imaginaste.",
+  "HERO_BUTTON": "Conoce a tu Doctor",
+  "HERO_TAG": "CIRUGÍA PLÁSTICA, ESTÉTICA Y RECONSTRUCTIVA",
+  "PROCEDURES_TITLE": "Procedimientos",
+  "PROCEDURES": {
+    "PROCEDURES_HEADINGS": {
+      "PROCEDURES_1": "Inyectables",
+
+      "PROCEDURES_3": "Corporal",
+      "PROCEDURES_4": "Busto"
+    }
+  },
+  "TESTIMONIALS": [
+    {
+      "TESTIMONIAL_NAME": "Caro de la Garza",
+      "TESTIMONIAL_TEXT": "Mis resultados han sido increíbles, me siento bella y segura de mi misma. Sin duda alguna le doy las gracias y lo recomiendo al cien por ciento"
+    },
+    {
+      "TESTIMONIAL_NAME": "Claudia Guerra",
+      "TESTIMONIAL_TEXT": "Excelente especialista, excelentes resultados, super naturales y justos para tu complexión y tamaño. En particular, antes de la cirugía mi miedo era quedar falsa o muy vulgar, quedé con una cintura de 60cm con unos abs super naturales. El Dr. Andrei te explica paso a paso y no te deja con dudas antes, ni después de la cirugía. ¡100% recomendable!"
+    },
+    {
+      "TESTIMONIAL_NAME": "Jaky Alvarado",
+      "TESTIMONIAL_TEXT": "El Dr. Andrei Ríos, es todo un profesional. Desde el primer momento te genera la total confianza para realizarte una cirugía con él. Estoy muy contenta con mi resultado, me siento muy bien conmigo misma y luzco como siempre he deseado, lo recomiendo ampliamente"
+    },
+    {
+      "TESTIMONIAL_NAME": "Mariana Mondragón",
+      "TESTIMONIAL_TEXT": "¡Mis resultados con el Dr. Andrei han sido excelentes! Siempre ha estado en la disposición de aclarar todas mis dudas y dar su punto de vista para llegar a obtener los mejores resultados. Recibí la mejor atención por parte de él y de su equipo."
+    }
+  ],
+  "GALLERY_TITLE": "Galería"
+}
