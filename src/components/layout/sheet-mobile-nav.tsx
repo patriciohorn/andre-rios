@@ -21,16 +21,13 @@ interface SheetMobileNavProp {
   proceduresNavItems: NavItem[];
 }
 
-export function SheetMobileNav({
-  mainNavItems,
-  proceduresNavItems
-}: SheetMobileNavProp | undefined) {
+export function SheetMobileNav({ mainNavItems = [], proceduresNavItems = [] }: SheetMobileNavProp) {
   const [open, setOpen] = React.useState(false);
 
   return (
     <Sheet open={open} onOpenChange={setOpen}>
       <SheetTrigger asChild>
-        <Button variant="secondary" size="sm" className="h-8 px-1.5 md:hidden bg-transparent">
+        <Button variant="secondary" size="sm" className="h-8 px-1.5 lg:hidden bg-transparent">
           <span className="sr-only">Desplegar Menú</span>
           <Menu className="size-6 text-slate-900" />
         </Button>

@@ -34,5 +34,33 @@
       "TESTIMONIAL_TEXT": "My results with Dr. Andrei have been excellent! He has always been willing to clarify all my doubts and give his point of view to get the best results. I received the best attention from him and his team."
     }
   ],
-  "GALLERY_TITLE": "Gallery"
+  "GALLERY_TITLE": "Gallery",
+  "GALLERY_BUTTON": "Go to Gallery",
+  "CERTIFICATIONS_TITLE": "Certified by prestigious medical associations",
+  "FOOTER": {
+    "FOOTER_DISCLAIMER": "Dr. Andrei Ríos provides information on this website or through his communication means such as mail and social networks for informational and educational purposes only. The content of these is not a substitute for a professional diagnosis, opinion, treatment or service. The material displayed here should not be used to substitute a doctor-patient relationship. You should always seek the advice of your Board Certified Plastic Surgeon to resolve your questions or concerns about your medical treatment. Photos displayed are shared with prior permission from patients, and are for demonstration purposes only.",
+    "FOOTER_NOTICE": "Notice of Privacy",
+    "FOOTER_NOTICE_HREF": "/privacy-police",
+    "FOOTER_CONTACT": {
+      "TITLE": "Contact",
+      "WHATSAPP": "664 670 3359",
+      "WHATSAPP_REF": "https://wa.me/526646703359",
+      "PHONE": "664 973 3708",
+      "PHONE_REF": "+526649733708",
+      "EMAIL": "info@riosmdplastics.com",
+      "EMAIL_HREF": "mailto:info@riosmdplastics.com"
+    },
+    "FOOTER_HOURS": {
+      "TITLE": "Business Hours",
+      "WEEK": "Monday - Friday",
+      "WEEK_HOURS": "11 am - 8 pm (PST)",
+      "WEEKEND": "Saturday",
+      "WEEKEND_HOURS": "10 am - 2 pm (PST)"
+    },
+    "FOOTER_LOCATION": {
+      "TITLE": "Location",
+      "LOCATION": "Blvrd Gral Rodolfo Sánchez Taboada 10488, Zona Urbana Rio Tijuana, 22010 Tijuana, B.C., México",
+      "LOCATION_HREF": "https://www.google.com/maps/search/?api=1&query=Blvrd+Gral+Rodolfo+S%C3%A1nchez+Taboada+10488,+Zona+Urbana+Rio+Tijuana,+22010+Tijuana,+B.C.,+M%C3%A9xico"
+    }
+  }
 }

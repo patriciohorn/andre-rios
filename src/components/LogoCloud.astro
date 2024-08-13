@@ -1,0 +1,30 @@
+--- 
+import Heading from "./Heading.astro"
+
+import { getI18N } from "@/i18n"
+const { currentLocale } = Astro
+const i18n = getI18N({ currentLocale })
+
+import logo1 from "@/assets/cert_logo_1.svg"
+import logo2 from "@/assets/cert_logo_2.svg"
+import logo3 from "@/assets/cert_logo_3.svg"
+import logo4 from "@/assets/cert_logo_4.svg"
+import logo5 from "@/assets/cert_logo_5.svg"
+
+const logoImages = [logo1, logo2, logo3, logo4, logo5]
+---
+
+
+<div class="bg-white py-24 sm:py-32">
+  <div class="mx-auto max-w-7xl px-6 lg:px-8">
+    <!-- <Heading title={i18n.CERTIFICATIONS_TITLE}/> -->
+    <h2 class="text-center text-lg font-semibold leading-8 text-gray-900">{i18n.CERTIFICATIONS_TITLE}</h2>
+    <ul class="mx-auto mt-10 grid max-w-lg grid-cols-4 items-center gap-x-8 gap-y-10 sm:max-w-xl sm:grid-cols-6 sm:gap-x-10 lg:mx-0 lg:max-w-none lg:grid-cols-5">
+      {logoImages.map((image, idx) => (        
+        <li class={idx !== logoImages.length - 1 ? `col-span-2 lg:col-span-1 mx-auto` : `col-span-2 lg:col-span-1 col-start-2 sm:col-start-auto mx-auto`}>
+          <img class="max-w-28 lg:max-w-32 w-full text-center object-contain " src={image.src} alt="Certification logo"/>          
+        </li>
+      ))}     
+    </ul>
+  </div>
+</div>

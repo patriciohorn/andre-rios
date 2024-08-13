@@ -33,24 +33,36 @@ const Gallery = () => {
   const [selectedImage, setSelectedImage] = useState(0);
 
   const imagesJpg = [gallery1, gallery2, gallery3, gallery4, gallery5, gallery6];
-  const imagesWebp = [gallery1Webp, gallery2Webp, gallery3Webp, gallery4Webp, gallery5Webp];
+  const imagesWebp = [
+    gallery1Webp,
+    gallery2Webp,
+    gallery3Webp,
+    gallery4Webp,
+    gallery5Webp,
+    gallery6Webp
+  ];
 
   const openDialog = (index: number) => {
     setSelectedImage(index);
     setIsOpen(true);
   };
 
-  const closeDialog = () => setIsOpen(false);
+  console.log(selectedImage);
 
   return (
     <div>
-      <Carousel>
-        <CarouselContent className="p-4 gap-12">
+      <Carousel
+        opts={{
+          align: 'center',
+          loop: true
+        }}>
+        <CarouselContent className="">
           {imagesWebp.map((image, idx) => (
             <CarouselItem
-              className="basis-full md:basis-1/4 overflow-hidden rounded-lg px-0"
-              key={idx}>
-              <picture>
+              className="basis-full md:basis-1/4 overflow-hidden rounded-lg relative px-0 group hover:cursor-zoom-in mr-8"
+              key={idx}
+              onClick={() => openDialog(idx)}>
+              <picture className="">
                 <source srcSet={image.src} type="image/webp" />
                 <source srcSet={imagesJpg[idx].src} type="image/jpg" />
                 <img
@@ -58,16 +70,46 @@ const Gallery = () => {
                   alt={`Gallery ${idx + 1}`}
                   width={1024}
                   height={1024}
-                  className="object-cover w-full h-full"
-                  onClick={() => openDialog(idx)}
+                  className="object-cover w-full h-full aspect-[14/13] rounded-md"
                 />
               </picture>
+              <div className="absolute inset-0 bg-gradient-to-t from-black to-black opacity-0 group-hover:opacity-40 transition-opacity rounded-md"></div>
             </CarouselItem>
           ))}
         </CarouselContent>
-        <CarouselPrevious />
-        <CarouselNext />
+        <CarouselPrevious className="hidden md:flex z-50" />
+        <CarouselNext className="hidden md:flex z-50" />
       </Carousel>
+
+      <Dialog open={isOpen} onOpenChange={setIsOpen}>
+        <DialogContent className="border-none bg-transparent text-primary-500">
+          <Carousel
+            opts={{
+              loop: true,
+              startIndex: selectedImage
+            }}>
+            <CarouselContent>
+              {imagesWebp.map((image, idx) => (
+                <CarouselItem className="basis-full rounded-md overflow-hidden" key={idx}>
+                  <picture>
+                    <source srcSet={image.src} type="image/webp" />
+                    <source srcSet={imagesJpg[idx].src} type="image/jpg" />
+                    <img
+                      src={imagesJpg[idx].src}
+                      alt={`Gallery ${idx + 1}`}
+                      width={1024}
+                      height={1024}
+                      className="object-cover w-full h-full rounded-md"
+                    />
+                  </picture>
+                </CarouselItem>
+              ))}
+            </CarouselContent>
+            <CarouselPrevious className="hover:text-primary-500/80" />
+            <CarouselNext className="hover:text-primary-500/80" />
+          </Carousel>
+        </DialogContent>
+      </Dialog>
     </div>
   );
 };

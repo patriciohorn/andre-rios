@@ -45,11 +45,11 @@ export function MainNavigationMenu({ translations }) {
   return (
     <NavigationMenu>
       <NavigationMenuList>
-        <NavigationMenuItem className="text-sm font-medium text-slate-900 px-4 py-2 cursor-pointer hover:text-white transition-colors duration-300 ease-in-out">
+        <NavigationMenuItem className="text-sm font-medium text-primary-950 px-4 py-2 cursor-pointer hover:text-white transition-colors duration-300 ease-in-out">
           <NavigationMenuLink href="">{translations['nav.meet']}</NavigationMenuLink>
         </NavigationMenuItem>
         <NavigationMenuItem className="relative">
-          <NavigationMenuTrigger className="text-sm text-slate-900 font-medium bg-transparent hover:bg-transparent hover:text-white data-[active]:bg-transparent data-[state=open]:bg-transparent">
+          <NavigationMenuTrigger className="text-sm text-primary-950  font-medium bg-transparent hover:bg-transparent hover:text-white data-[active]:bg-transparent data-[state=open]:bg-transparent">
             {translations['nav.procedures']}
           </NavigationMenuTrigger>
           <NavigationMenuContent>
@@ -57,7 +57,7 @@ export function MainNavigationMenu({ translations }) {
               {Object.entries(procedures).map(([category, items], idx) => (
                 <ul key={idx} className="p-6" role="none">
                   <li role="none">
-                    <h3 className="text-slate-900 text-sm tracking-wide font-semibold px-2 mb-1">
+                    <h3 className="text-primary-950  text-sm tracking-wide font-semibold px-2 mb-1">
                       {category}
                     </h3>
                     <ul className="py-2 flex flex-col space-y-1" role="list">
@@ -77,10 +77,10 @@ export function MainNavigationMenu({ translations }) {
             </div>
           </NavigationMenuContent>
         </NavigationMenuItem>
-        <NavigationMenuItem className="text-sm font-medium text-slate-900 px-4 py-2 cursor-pointer hover:text-white transition-colors duration-300 ease-in-out">
+        <NavigationMenuItem className="text-sm font-medium text-primary-950  px-4 py-2 cursor-pointer hover:text-white transition-colors duration-300 ease-in-out">
           <NavigationMenuLink href=""> {translations['nav.gallery']}</NavigationMenuLink>
         </NavigationMenuItem>
-        <NavigationMenuItem className="text-sm font-medium text-slate-900 px-4 py-2 cursor-pointer hover:text-white transition-colors duration-300 ease-in-out">
+        <NavigationMenuItem className="text-sm font-medium text-primary-950  px-4 py-2 cursor-pointer hover:text-white transition-colors duration-300 ease-in-out">
           <NavigationMenuLink href=""> {translations['nav.virtual']}</NavigationMenuLink>
         </NavigationMenuItem>
       </NavigationMenuList>

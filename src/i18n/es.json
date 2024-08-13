@@ -32,5 +32,33 @@
       "TESTIMONIAL_TEXT": "¡Mis resultados con el Dr. Andrei han sido excelentes! Siempre ha estado en la disposición de aclarar todas mis dudas y dar su punto de vista para llegar a obtener los mejores resultados. Recibí la mejor atención por parte de él y de su equipo."
     }
   ],
-  "GALLERY_TITLE": "Galería"
+  "GALLERY_TITLE": "Galería",
+  "GALLERY_BUTTON": "Ver Galería",
+  "CERTIFICATIONS_TITLE": "Miembro de prestigiosas asociaciones médicas",
+  "FOOTER": {
+    "FOOTER_DISCLAIMER": "Dr. Andrei Ríos proporciona información en este sitio web o en sus medios de comunicación como correo y redes sociales con propósitos informativos y educativos solamente. El contenido de estos, no es un sustituto para un diagnóstico, opinión, tratamiento o servicio profesional. El material aquí desplegado no debe ser usado para sustituir una relación médico-paciente. Siempre se debe buscar el consejo de su Cirujano Plástico Certificado para resolver sus dudas o preocupaciones acerca de su tratamiento médico. Las fotos desplegadas se comparten con previa autorización de pacientes, y sirven para propósitos demostrativos solamente.",
+    "FOOTER_NOTICE": "Aviso de Privacidad",
+    "FOOTER_NOTICE_HREF": "/aviso-privacidad",
+    "FOOTER_CONTACT": {
+      "TITLE": "Contacto",
+      "WHATSAPP": "664 670 3359",
+      "WHATSAPP_REF": "https://wa.me/526646703359",
+      "PHONE": "664 973 3708",
+      "PHONE_REF": "+526649733708",
+      "EMAIL": "info@riosmdplastics.com",
+      "EMAIL_HREF": "mailto:info@riosmdplastics.com"
+    },
+    "FOOTER_HOURS": {
+      "TITLE": "Horarios de Atención",
+      "WEEK": "Lunes - Viernes",
+      "WEEK_HOURS": "11 am - 8 pm (PST)",
+      "WEEKEND": "Sábado",
+      "WEEKEND_HOURS": "10 am - 2 pm (PST)"
+    },
+    "FOOTER_LOCATION": {
+      "TITLE": "Ubicación",
+      "LOCATION": "Blvrd Gral Rodolfo Sánchez Taboada 10488, Zona Urbana Rio Tijuana, 22010 Tijuana, B.C., México",
+      "LOCATION_HREF": "https://www.google.com/maps/search/?api=1&query=Blvrd+Gral+Rodolfo+S%C3%A1nchez+Taboada+10488,+Zona+Urbana+Rio+Tijuana,+22010+Tijuana,+B.C.,+M%C3%A9xico"
+    }
+  }
 }

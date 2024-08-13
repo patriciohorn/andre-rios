@@ -6,6 +6,8 @@ import Procedures from '../Procedures.astro';
 import Testimonials from '../Testimonials.astro';
 import Heading from '../Heading.astro';
 import Gallery from '../Gallery'
+import LogoCloud from '../LogoCloud.astro';
+import { Button } from '../ui/button';
 
 import { getI18N } from "@/i18n"
 
@@ -16,13 +18,15 @@ const i18n = getI18N({ currentLocale })
 
 <Layout title={i18n.SEO_TITLE} description={i18n.SEO_DESCRIPTION}>	
 	<HeroImage/>
-	<div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 divide-y divide-primary-300 border-t border-primary-300">		
+	<LogoCloud/>		
+	<div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 divide-y divide-primary-300 border-b border-primary-300">
 		<Procedures/>
 		<Testimonials/>
 		<div class="py-24 sm:py-32">
 			<Heading title={i18n.GALLERY_TITLE}/>
-			<div class="mt-20">
-				<Gallery client:visible/>
+			<div class="mt-20 flex flex-col gap-12 items-center">
+				<Gallery client:visible/>				
+				<Button size="lg" className="w-fit bg-primary-500 hover:bg-primary-600 text-primary-950 text-base" variant="secondary">{i18n.GALLERY_BUTTON}</Button>
 			</div>
 		</div>		
 	</div>

@@ -6,6 +6,7 @@ import {SheetMobileNav} from "@components/layout/sheet-mobile-nav"
 import { MainNavigationMenu } from "@/components/main-navigation";
 import {navMenuConfig} from "@/config/nav-menu"
 import BaseLayout from "./BaseLayout.astro"
+import Footer from "@/components/layout/Footer.astro";
 interface Props {
 	title: string;
   description?: string; 
@@ -36,7 +37,8 @@ const translatePath = useTranslatedPath(lang);
     <MainNavigationMenu translations={translations} slot="center-header" client:load/>
     <SheetMobileNav mainNavItems={navMenuConfig.mainNav} proceduresNavItems={navMenuConfig.proceduresNav} slot="mobile-nav-header" client:load />
   </Header>
-  <main>
+  <main class="overglow-x-hidden">
     <slot/>
   </main>
+  <Footer/>
 </BaseLayout>

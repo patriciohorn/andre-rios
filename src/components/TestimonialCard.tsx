@@ -14,7 +14,7 @@ const TestimonialCard: React.FC<TestimonialCardProps> = ({
   testimonialText
 }) => {
   return (
-    <div className="flex gap-6">
+    <div className="flex flex-col lg:flex-row gap-6">
       <div className="relative rounded-full overflow-hidden h-20 w-20 flex-shrink-0">
         <img src={src} alt={alt} className="h-full w-full" />
       </div>

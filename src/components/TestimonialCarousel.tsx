@@ -32,7 +32,7 @@ const TestimonialCarousel: React.FC<TestimonialCarouselProps> = ({ testimonials 
     <Carousel>
       <CarouselContent className="cursor-grab active:cursor-grabbing">
         {testimonials.map((testimonial, idx) => (
-          <CarouselItem className="basis-full md:basis-1/2" key={idx}>
+          <CarouselItem className="basis-full lg:basis-1/2" key={idx}>
             <TestimonialCard
               src={avatars[idx].src}
               alt={`${testimonial.TESTIMONIAL_NAME} avatar`}
@@ -42,8 +42,8 @@ const TestimonialCarousel: React.FC<TestimonialCarouselProps> = ({ testimonials 
           </CarouselItem>
         ))}
       </CarouselContent>
-      <CarouselPrevious />
-      <CarouselNext />
+      <CarouselPrevious className="hidden lg:flex" />
+      <CarouselNext className="hidden lg:flex" />
     </Carousel>
   );
 };
