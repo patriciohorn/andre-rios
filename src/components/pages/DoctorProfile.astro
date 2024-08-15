@@ -1,0 +1,47 @@
+---
+import MainLayout from '@/layouts/MainLayout.astro'
+import HeaderCenteredEyebrow from "../HeaderCenteredEyebrow.astro"
+import { getI18N } from "@/i18n";
+import { Image } from 'astro:assets';
+
+import doctorImage from "../../assets/doctor.jpg"
+
+const {currentLocale} = Astro
+const i18n = getI18N({currentLocale})
+
+const content = Object.values(i18n.ABOUT.CONTENT)
+console.log(content);
+---
+
+<MainLayout title={i18n.ABOUT.TITLE}>
+  <section class="py-16 md:py-28">
+    <div class="max-w-4xl mx-auto px-4 md:px-6 lg:px-6">
+      <div class="flex flex-col gap-12 md:gap-20">
+      <HeaderCenteredEyebrow eyebrow={i18n.ABOUT.TAG} title={i18n.ABOUT.TITLE}/>
+      <div class="rounded-xl overflow-hidden shadow-lg aspect-auto ">
+        <Image src={doctorImage} alt="Dr. Andre Ríos" class="w-full h-full object-cover"/>
+      </div>
+        <div class="flex flex-col space-y-8">
+          <div class="flex flex-col gap-2">
+            <div class="flex gap-2">
+              <p class="text-sm font-semibold text-gray-900">{i18n.ABOUT.CEDULA}</p>
+              <p class="text-sm text-gray-800">{i18n.ABOUT.CEDULA_NUMBER}</p>
+            </div>
+            <div class="flex gap-2">
+              <p class="text-sm font-semibold text-gray-900">{i18n.ABOUT.BOARD}</p>
+              <p class="text-sm text-gray-800">{i18n.ABOUT.BOARD_NUMBER}</p>
+            </div>
+          </div>
+          {content.map((item) => (
+            <p class="text-gray-800 text-lg">{item}</p>
+          ))}
+        </div>
+  
+  
+      </div>      
+    </div>
+        
+
+ 
+  </section>
+</MainLayout>

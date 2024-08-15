@@ -19,16 +19,17 @@ const i18n = getI18N({ currentLocale })
 <Layout title={i18n.SEO_TITLE} description={i18n.SEO_DESCRIPTION}>	
 	<HeroImage/>
 	<LogoCloud/>		
+	<Procedures/>
+	<Testimonials/>
 	<div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 divide-y divide-primary-300 border-b border-primary-300">
-		<Procedures/>
-		<Testimonials/>
 		<div class="py-24 sm:py-32">
 			<Heading title={i18n.GALLERY_TITLE}/>
-			<div class="mt-20 flex flex-col gap-12 items-center">
+			<div class="mt-20 flex flex-col gap-12 items-center -mr-4 sm:mx-0">
 				<Gallery client:visible/>				
 				<Button size="lg" className="w-fit bg-primary-500 hover:bg-primary-600 text-primary-950 text-base" variant="secondary">{i18n.GALLERY_BUTTON}</Button>
 			</div>
 		</div>		
 	</div>
 </Layout>
+
 

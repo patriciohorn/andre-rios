@@ -20,4 +20,5 @@ export default defineConfig({
       prefixDefaultLocale: false // es -> '/', en -> '/en'
     }
   }
+  // output: 'hybrid'
 });

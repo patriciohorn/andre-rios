@@ -54,12 +54,16 @@ const Gallery = () => {
       <Carousel
         opts={{
           align: 'center',
-          loop: true
-        }}>
-        <CarouselContent className="">
+
+          breakpoints: {
+            '(min-width: 768px)': { align: 'center', loop: true }
+          }
+        }}
+        className="-mr-4">
+        <CarouselContent className="ml-2">
           {imagesWebp.map((image, idx) => (
             <CarouselItem
-              className="basis-full md:basis-1/4 overflow-hidden rounded-lg relative px-0 group hover:cursor-zoom-in mr-8"
+              className="basis-1/2 md:basis-1/4 overflow-hidden rounded-lg relative group hover:cursor-zoom-in px-0 mr-4 sm:mr-8"
               key={idx}
               onClick={() => openDialog(idx)}>
               <picture className="">
@@ -77,8 +81,8 @@ const Gallery = () => {
             </CarouselItem>
           ))}
         </CarouselContent>
-        <CarouselPrevious className="hidden md:flex z-50" />
-        <CarouselNext className="hidden md:flex z-50" />
+        <CarouselPrevious className="hidden md:flex" />
+        <CarouselNext className="hidden md:flex" />
       </Carousel>
 
       <Dialog open={isOpen} onOpenChange={setIsOpen}>

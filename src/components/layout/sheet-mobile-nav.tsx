@@ -29,10 +29,10 @@ export function SheetMobileNav({ mainNavItems = [], proceduresNavItems = [] }: S
       <SheetTrigger asChild>
         <Button variant="secondary" size="sm" className="h-8 px-1.5 lg:hidden bg-transparent">
           <span className="sr-only">Desplegar Menú</span>
-          <Menu className="size-6 text-slate-900" />
+          <Menu className="size-6 text-primary-50" />
         </Button>
       </SheetTrigger>
-      <SheetContent side="left" className="flex flex-col gap-y-5">
+      <SheetContent side="left" className="flex flex-col gap-y-5 bg-primary-100">
         <div className="h-16">
           <a href="/">
             <div className="sr-only">Inicio</div>

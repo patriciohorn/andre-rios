@@ -38,7 +38,7 @@ export const routes = {
   es: {
     meet: 'conoce-a-tu-doctor',
     procedures: 'procedimientos',
-    gallery: 'galería',
+    gallery: 'galeria',
     virtual: 'consulta-virtual'
   },
   en: {

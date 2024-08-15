@@ -37,7 +37,7 @@ const translatePath = useTranslatedPath(lang);
     <MainNavigationMenu translations={translations} slot="center-header" client:load/>
     <SheetMobileNav mainNavItems={navMenuConfig.mainNav} proceduresNavItems={navMenuConfig.proceduresNav} slot="mobile-nav-header" client:load />
   </Header>
-  <main class="overglow-x-hidden">
+  <main class="overflow-x-hidden">
     <slot/>
   </main>
   <Footer/>

@@ -29,10 +29,16 @@ console.log(avatars);
 
 const TestimonialCarousel: React.FC<TestimonialCarouselProps> = ({ testimonials }) => {
   return (
-    <Carousel>
+    <Carousel
+      opts={{
+        slidesToScroll: 1,
+        breakpoints: {
+          '(min-width: 768px)': { slidesToScroll: 2 }
+        }
+      }}>
       <CarouselContent className="cursor-grab active:cursor-grabbing">
         {testimonials.map((testimonial, idx) => (
-          <CarouselItem className="basis-full lg:basis-1/2" key={idx}>
+          <CarouselItem className="basis-full lg:basis-1/2 sm:px-8" key={idx}>
             <TestimonialCard
               src={avatars[idx].src}
               alt={`${testimonial.TESTIMONIAL_NAME} avatar`}
