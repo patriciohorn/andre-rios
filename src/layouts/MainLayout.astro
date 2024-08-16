@@ -20,6 +20,7 @@ import { getLangFromUrl, useTranslations, useTranslatedPath, } from '@/i18n/util
 
 const { currentLocale } = Astro
 const i18n = getI18N({ currentLocale })
+
 const lang = getLangFromUrl(Astro.url);
 const t = useTranslations(lang); 
 const translations = {
@@ -29,12 +30,17 @@ const translations = {
   'nav.virtual': t('nav.virtual')
 }
 const translatePath = useTranslatedPath(lang);
+const paths = {
+  'nav.meet': translatePath('/conoce-a-tu-doctor/')
+}
+
+
 ---
 
-<BaseLayout title={title} description={description}>
+<BaseLayout title={title} description={description} lang={lang}>
   <Banner/>
   <Header>
-    <MainNavigationMenu translations={translations} slot="center-header" client:load/>
+    <MainNavigationMenu translations={translations} paths={paths} slot="center-header" client:load/>
     <SheetMobileNav mainNavItems={navMenuConfig.mainNav} proceduresNavItems={navMenuConfig.proceduresNav} slot="mobile-nav-header" client:load />
   </Header>
   <main class="overflow-x-hidden">

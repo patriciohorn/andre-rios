@@ -1,6 +1,7 @@
 ---
-title: 'Amarillo Hair & Beauty'
-cover: '../../assets/procedures/busto.jpg'
+tag: 'Conoce a tu doctor'
+title: 'Dr. Andrei Ríos'
+cover: '../../assets/doctor.jpg'
 slug: meet-your-doctor
 lang: 'es'
 ---

@@ -19,36 +19,41 @@ interface Translations {
   'nav.virtual': string;
 }
 
-interface MainNavigationMenuProps {
-  translations: Translations;
+interface Paths {
+  'nav.meet': string;
 }
 
-export function MainNavigationMenu({ translations }: MainNavigationMenuProps) {
+interface MainNavigationMenuProps {
+  translations: Translations;
+  paths: Paths;
+}
+
+export function MainNavigationMenu({ translations, paths }: MainNavigationMenuProps) {
   const procedures = {
     Breast: [
-      { title: 'Breast Augmentation with Fat', url: '/procedures/breast-augmentation-fat' },
-      { title: 'Breast Lift', url: '/procedures/breast-lift' },
-      { title: 'Breast Reduction', url: '/procedures/breast-reduction' },
+      { title: 'Breast Augmentation with Fat', url: '/en/breast-augmentation-with-fat' },
+      { title: 'Breast Lift', url: '/en/breast-lift' },
+      { title: 'Breast Reduction', url: '/en/breast-reduction' },
       {
         title: 'Breast Augmentation with Implants',
-        url: '/procedures/breast-augmentation-implants'
+        url: '/en/breast-augmentation-with-implants'
       }
     ],
     Injectables: [
-      { title: 'Hyperhidrosis', url: '/procedures/hyperhidrosis' },
-      { title: 'Botox (Botulinum toxin)', url: '/procedures/botox' },
-      { title: 'Fillers', url: '/procedures/fillers' }
+      { title: 'Hyperhidrosis', url: '/en/hyperhidrosis' },
+      { title: 'Botox (Botulinum toxin)', url: '/en/botox' },
+      { title: 'Fillers', url: '/en/fillers' }
     ],
     Body: [
-      { title: 'Abdominoplasty', url: '/procedures/abdominoplasty' },
-      { title: 'Brachioplasty', url: '/procedures/brachioplasty' },
-      { title: 'Gynecomastia (Thorax Liposuction)', url: '/procedures/gynecomastia' },
-      { title: 'Liposuction', url: '/procedures/liposuction' },
-      { title: 'Mommy Makeover', url: '/procedures/mommy-makeover' },
-      { title: 'Massive Weight Loss', url: '/procedures/massive-weight-loss' },
-      { title: 'Torsoplasty', url: '/procedures/torsoplasty' },
-      { title: 'Thigh Lift', url: '/procedures/thigh-lift' },
-      { title: 'LipoInfiltration', url: '/procedures/lipoinfiltration' }
+      { title: 'Abdominoplasty', url: '/en/abdominoplasty' },
+      { title: 'Brachioplasty', url: '/en/brachioplasty' },
+      { title: 'Gynecomastia (Thorax Liposuction)', url: '/en/gynecomastia' },
+      { title: 'Liposuction', url: '/en/liposuction' },
+      { title: 'Mommy Makeover', url: '/en/mommy-makeover' },
+      { title: 'Massive Weight Loss', url: '/en/massive-weight-loss' },
+      { title: 'Torsoplasty', url: '/en/torsoplasty' },
+      { title: 'Thigh Lift', url: '/en/thigh-lift' },
+      { title: 'LipoInfiltration', url: '/en/lipoinfiltration' }
     ]
   };
 
@@ -56,7 +61,9 @@ export function MainNavigationMenu({ translations }: MainNavigationMenuProps) {
     <NavigationMenu>
       <NavigationMenuList>
         <NavigationMenuItem className="text-sm font-medium text-white px-4 py-2 cursor-pointer hover:text-primary-500 transition-colors duration-200 ease-in-out">
-          <NavigationMenuLink href="">{translations['nav.meet']}</NavigationMenuLink>
+          <NavigationMenuLink href={paths['nav.meet']}>
+            {translations['nav.meet']}
+          </NavigationMenuLink>
         </NavigationMenuItem>
         <NavigationMenuItem className="relative">
           <NavigationMenuTrigger className="text-sm text-white  font-medium bg-transparent hover:bg-transparent hover:text-primary-500 data-[active]:bg-transparent data-[state=open]:bg-transparent">

@@ -1,0 +1,27 @@
+---
+import Procedure from "@/components/pages/Procedure.astro";
+import {getCollection} from "astro:content"; 
+
+
+export async function getStaticPaths(){
+  const procedures = await getCollection('procedures')
+  
+
+  return procedures.filter((procedure) => procedure.data.lang === 'en').map((procedure) => { 
+    
+    return {
+      params: {      
+        slug: procedure.slug
+      }, 
+      props : {procedure}
+    } 
+  })
+}
+
+const {procedure} = Astro.props
+const {Content} = await procedure.render()
+---
+
+<Procedure title={procedure.data.title} tag={procedure.data.tag} cover={procedure.data.cover} >
+  <Content/>
+</Procedure>

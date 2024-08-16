@@ -2,10 +2,11 @@
 import '@/styles/globals.css'
 interface Props {
 	title: string;
-  description?: string; 
+  description?: string;
+  lang: string;  
 }
 
-const { title, description } = Astro.props;
+const { title, description, lang } = Astro.props;
 ---
 
 
@@ -14,4 +15,5 @@ const { title, description } = Astro.props;
 <meta name="description" content="Astro description" />
 <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
 <meta name="generator" content={Astro.generator} />
+
 <title>{title}</title>
