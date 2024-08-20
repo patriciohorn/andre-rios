@@ -1,6 +1,6 @@
 ---
 tag: 'Inyectables'
-title: 'Toxina Botulínica'
+title: 'Botox (Toxina Botulínica)'
 cover: '../../../assets/procedures/botox.jpg'
 slug: botox-toxina-botulinica
 lang: 'es'

@@ -1,13 +1,24 @@
 ---
 import {Image} from "astro:assets"
 import logoWhite from "@/assets/logo-white.svg"
-import { Button } from "@/components/ui/button";
+// import { Button } from "@/components/ui/button";
+import { cn } from "@/lib/utils";
+import { buttonVariants } from "@/components/ui/button"
+
+import LanguagePicker from "../LanguagePicker.astro";
+
+import { getI18N } from "@/i18n/index"
+const { currentLocale } = Astro
+const i18n = getI18N({ currentLocale })
+import { getLangFromUrl, useTranslatedPath, } from '@/i18n/utils';
+const lang = getLangFromUrl(Astro.url);
+const translatePath = useTranslatedPath(lang);
 
 ---
 
 <header class="flex items-center h-16 md:h-20 z-50 sticky top-0 bg-black shadow-xl py-4">
   <div class="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex items-center justify-between w-full h-full">   
-    <a href="/" class="flex-1">
+    <a href={translatePath('/')} class="flex-1">
       <div class="sr-only">Inicio</div>
       <Image src={logoWhite} alt="logo Dr. Andrei Rios" height="64" width="252" class="h-10 sm:h-12 w-auto"/>
     </a>   
@@ -17,10 +28,11 @@ import { Button } from "@/components/ui/button";
       <slot name="center-header"/>
     </div>
 
-    <div class="hidden lg:flex lg:justify-end lg:flex-1 ">
+   
+    <div class="hidden lg:flex lg:justify-end lg:flex-1 items-center gap-4 ">
+      <LanguagePicker/>
 
-      <Button  className="hidden lg:flex bg-primary-500 text-primary-950 hover:bg-primary-600">Contacto</Button>
-
+      <a href={translatePath('/contacto/')} class={cn(buttonVariants({ size: "sm"}), "hidden lg:flex bg-primary-500 text-primary-950 hover:bg-primary-600" )}>{i18n.CONTACT_BUTTON}</a>
     </div>
   </div>
 </header>

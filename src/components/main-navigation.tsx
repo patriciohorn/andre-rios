@@ -26,37 +26,10 @@ interface Paths {
 interface MainNavigationMenuProps {
   translations: Translations;
   paths: Paths;
+  procedures: Record<string, { title: string; url: string }[]>;
 }
 
-export function MainNavigationMenu({ translations, paths }: MainNavigationMenuProps) {
-  const procedures = {
-    Breast: [
-      { title: 'Breast Augmentation with Fat', url: '/en/breast-augmentation-with-fat' },
-      { title: 'Breast Lift', url: '/en/breast-lift' },
-      { title: 'Breast Reduction', url: '/en/breast-reduction' },
-      {
-        title: 'Breast Augmentation with Implants',
-        url: '/en/breast-augmentation-with-implants'
-      }
-    ],
-    Injectables: [
-      { title: 'Hyperhidrosis', url: '/en/hyperhidrosis' },
-      { title: 'Botox (Botulinum toxin)', url: '/en/botox' },
-      { title: 'Fillers', url: '/en/fillers' }
-    ],
-    Body: [
-      { title: 'Abdominoplasty', url: '/en/abdominoplasty' },
-      { title: 'Brachioplasty', url: '/en/brachioplasty' },
-      { title: 'Gynecomastia (Thorax Liposuction)', url: '/en/gynecomastia' },
-      { title: 'Liposuction', url: '/en/liposuction' },
-      { title: 'Mommy Makeover', url: '/en/mommy-makeover' },
-      { title: 'Massive Weight Loss', url: '/en/massive-weight-loss' },
-      { title: 'Torsoplasty', url: '/en/torsoplasty' },
-      { title: 'Thigh Lift', url: '/en/thigh-lift' },
-      { title: 'LipoInfiltration', url: '/en/lipoinfiltration' }
-    ]
-  };
-
+export function MainNavigationMenu({ translations, paths, procedures }: MainNavigationMenuProps) {
   return (
     <NavigationMenu>
       <NavigationMenuList>

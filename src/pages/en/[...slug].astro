@@ -1,27 +1,67 @@
 ---
 import Procedure from "@/components/pages/Procedure.astro";
+import PrivacyNotice from "@/components/pages/PrivacyNotice.astro";
 import {getCollection} from "astro:content"; 
-
 
 export async function getStaticPaths(){
   const procedures = await getCollection('procedures')
+  const privacyPages = await getCollection('privacy')
   
-
-  return procedures.filter((procedure) => procedure.data.lang === 'en').map((procedure) => { 
-    
-    return {
-      params: {      
-        slug: procedure.slug
-      }, 
-      props : {procedure}
-    } 
+  const proceduresPaths = procedures.filter((procedure) => procedure.data.lang === 'en').map((item) =>{
+    return {      
+      params: {slug: item.slug}, 
+      props: {type: 'procedure', item}
+    }
   })
+
+  const privacyPaths = privacyPages.filter((page) => page.data.lang === 'en').map((item) => { 
+    return {
+      params: {slug: item.slug},      
+      props: {type: 'privacy', item} 
+    }    
+  })
+
+  return [...proceduresPaths, ...privacyPaths]
 }
 
-const {procedure} = Astro.props
-const {Content} = await procedure.render()
+type ProcedureItem = {
+  type: 'procedure';
+  item: {
+    data: {
+      tag: string;
+      title: string;
+      cover: { src: string; width: number; height: number; format: string };
+      lang: string;
+    };
+    render: () => Promise<{ Content: any }>;
+  };
+};
+
+type PrivacyItem = {
+  type: 'privacy';
+  item: {
+    data: {
+      title: string;
+      lang: string;
+    };
+    render: () => Promise<{ Content: any }>;
+  };
+};
+
+type Props = ProcedureItem | PrivacyItem;
+
+
+const {type, item} = Astro.props
+const {Content} = await item.render()
 ---
 
-<Procedure title={procedure.data.title} tag={procedure.data.tag} cover={procedure.data.cover} >
-  <Content/>
-</Procedure>
+{
+  type === 'procedure' ? 
+  (<Procedure title={item.data.title} tag={item.data.tag} cover={item.data.cover} >
+    <Content/>
+  </Procedure>) : (
+    <PrivacyNotice title={item.data.title}>
+      <Content/>
+    </PrivacyNotice>
+  )
+}

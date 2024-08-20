@@ -1,6 +1,6 @@
 ---
 tag: 'Injectables'
-title: 'Botulinum toxin'
+title: 'Botox (Botulinum toxin)'
 cover: '../../../assets/procedures/botox.jpg'
 slug: botulinum-toxin
 lang: 'en'

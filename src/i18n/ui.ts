@@ -3,15 +3,20 @@ import SpainFlag from '@/components/flags/Spain.astro';
 import UnitedStatesFlag from '@/components/flags/UnitedStates.astro';
 
 // Add missing imports
-export const LANGUAGES: Record<string, { code: string; name: string; flag: typeof SpainFlag }> = {
+export const LANGUAGES: Record<
+  string,
+  { code: string; name: string; label: string; flag: typeof SpainFlag }
+> = {
   en: {
     code: 'en',
     name: 'English',
+    label: 'EN',
     flag: UnitedStatesFlag
   },
   es: {
     code: 'es',
     name: 'Español',
+    label: 'ES',
     flag: SpainFlag
   }
 };
@@ -36,15 +41,17 @@ export const ui = {
 
 export const routes = {
   es: {
-    meet: 'conoce-a-tu-doctor',
+    'conoce-a-tu-doctor': 'conoce-a-tu-doctor',
     procedures: 'procedimientos',
     gallery: 'galeria',
-    virtual: 'consulta-virtual'
+    virtual: 'consulta-virtual',
+    contacto: 'contacto'
   },
   en: {
-    meet: 'meet-your-doctor',
+    'conoce-a-tu-doctor': 'meet-your-doctor',
     procedures: 'procedures',
     gallery: 'gallery',
-    virtual: 'virtual-consultation'
+    virtual: 'virtual-consultation',
+    contacto: 'contact-us'
   }
 };

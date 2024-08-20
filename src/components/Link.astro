@@ -10,6 +10,6 @@ const { currentLocale = "es" } = Astro
 const { href, class: className } = Astro.props
 ---
 
-<a href={href} class:list={`transition-colors duration-200 ease0in-out ${[className]}`}>
+<a href={href} class:list={`transition-colors duration-200 ease-in-out ${[className]}`}>
   <slot />
 </a>

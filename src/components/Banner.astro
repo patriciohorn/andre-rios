@@ -1,6 +1,10 @@
 ---
 import { Icon } from 'astro-icon/components'
 
+import { getI18N } from "@/i18n/index"
+const { currentLocale } = Astro
+const i18n = getI18N({ currentLocale })
+
 const socialLinks = [
   {
     icon: 'instagram', 
@@ -23,11 +27,11 @@ const contactInfo = [
     url: '', 
     description: '664 670 3359'
   }, 
-  {
-    icon: 'phone', 
-    url: '', 
-    description: '664 973 3708'
-  }
+  // {
+  //   icon: 'phone', 
+  //   url: '', 
+  //   description: '664 973 3708'
+  // }
 ]
 
 ---
@@ -46,7 +50,7 @@ const contactInfo = [
   
     <div class="hidden sm:flex sm:items-center">
       <Icon name="clock" class="text-black w-[1.1rem] h-[1.1rem] mr-2" aria-hidden="true"/>
-      <p class="text-sm text-black">M-F 11:00 - 20:00 / S 10:00 - 14:00 (PST)</p>
+      <p class="text-sm text-black">{i18n.BANNER.BUSINESS_HOURS}</p>
     </div>
   
     <div class="hidden sm:flex-1 sm:justify-end sm:flex sm:items-center sm:gap-x-2">

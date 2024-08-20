@@ -1,0 +1,37 @@
+---
+import { LANGUAGES } from '../i18n/ui';
+import {getRouteFromUrl, getLangFromUrl, useTranslatedPath} from "../i18n/utils"
+
+const route = getRouteFromUrl(Astro.url);
+const lang = getLangFromUrl(Astro.url);
+const translatePath = useTranslatedPath(lang);
+const currentLocaleData = LANGUAGES[lang]  
+
+const otherLocales = Object.values(LANGUAGES).filter(
+  (locale) => locale.code !== lang
+)
+
+---
+<!-- <ul class="flex gap-2">
+  {Object.entries(LANGUAGES).map(([langCode, langData]) => (    
+    <li>
+      <a href={langCode === 'es' ? '/' : `/${langCode}/`}  class="inline-flex items-center text-white uppercase hover:text-primary-500 transition-colors duration-300 ease-in-out">
+      <langData.flag/>     
+      </a>
+    </li>
+  ))}
+</ul> -->
+
+<ul>
+  {otherLocales.map((locale) => (
+    <li>
+      <a
+              class="rounded-md bg-black/30 text-white hover:bg-black/70 whitespace-no-wrap inline-flex justify-start items-center w-full gap-x-2 px-3 py-2 text-sm"
+              href={translatePath(`/${route ? route : ''}`, locale.code)}
+            >
+              <locale.flag />
+              {locale.name}
+            </a>
+    </li>
+  ))}
+</ul>

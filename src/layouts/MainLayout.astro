@@ -7,40 +7,83 @@ import { MainNavigationMenu } from "@/components/main-navigation";
 import {navMenuConfig} from "@/config/nav-menu"
 import BaseLayout from "./BaseLayout.astro"
 import Footer from "@/components/layout/Footer.astro";
-interface Props {
-	title: string;
-  description?: string; 
-}
 
-const { title, description } = Astro.props;
+// Languages
+import LanguagePicker from "@/components/LanguagePicker.astro";
 
-
+import { getCollection } from "astro:content";
 import { getI18N } from "@/i18n/index"
-import { getLangFromUrl, useTranslations, useTranslatedPath, } from '@/i18n/utils';
-
+import { getLangFromUrl,useTranslations, useTranslatedPath, } from '@/i18n/utils';
 const { currentLocale } = Astro
-const i18n = getI18N({ currentLocale })
+
 
 const lang = getLangFromUrl(Astro.url);
-const t = useTranslations(lang); 
+const t = useTranslations(lang);
+const i18n = getI18N({ currentLocale })
+const translatePath = useTranslatedPath(lang);
+
+
 const translations = {
   'nav.meet': t('nav.meet'),
   'nav.procedures': t('nav.procedures'),
   'nav.gallery': t('nav.gallery'),
   'nav.virtual': t('nav.virtual')
 }
-const translatePath = useTranslatedPath(lang);
+
 const paths = {
   'nav.meet': translatePath('/conoce-a-tu-doctor/')
 }
 
+interface Props {
+	title: string;
+  description?: string; 
+}
 
+interface ProcedureItem {
+  title: string;
+  url: string;
+}
+
+
+interface Procedures {
+  [category: string]: ProcedureItem[];
+}
+
+
+// Fetch procedures from content collection 
+const proceduresEs = await getCollection('procedures', ({data}) => data.lang === 'es');
+const proceduresEn = await getCollection('procedures', ({data}) => data.lang === 'en');
+
+
+const organizedProceduresEs = proceduresEs.reduce<Procedures>((acc, procedure) => {
+  const category = procedure.data.tag || 'Uncategorized';
+  if (!acc[category]) acc[category] = [];
+  acc[category].push({
+    title: procedure.data.title,
+    url: `/${procedure.slug}`,
+  });
+  return acc;
+}, {});
+
+
+const organizedProceduresEn = proceduresEn.reduce<Procedures>((acc, procedure) => {
+  const category = procedure.data.tag || 'Uncategorized';
+  if (!acc[category]) acc[category] = [];
+  acc[category].push({
+    title: procedure.data.title,
+    url: `/en/${procedure.slug}`,
+  });
+  return acc;
+}, {});
+
+
+const { title, description } = Astro.props;
 ---
 
 <BaseLayout title={title} description={description} lang={lang}>
   <Banner/>
   <Header>
-    <MainNavigationMenu translations={translations} paths={paths} slot="center-header" client:load/>
+    <MainNavigationMenu translations={translations} paths={paths} procedures={lang === 'es' ? organizedProceduresEs : organizedProceduresEn} slot="center-header" client:load/>
     <SheetMobileNav mainNavItems={navMenuConfig.mainNav} proceduresNavItems={navMenuConfig.proceduresNav} slot="mobile-nav-header" client:load />
   </Header>
   <main class="overflow-x-hidden">

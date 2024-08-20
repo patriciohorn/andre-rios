@@ -1,6 +1,10 @@
 {
   "SEO_TITLE": "Rios MD Plastics - Cirugía Plástica, Estética y Reconstructiva",
   "SEO_DESCRIPTION": "Realza tu belleza, con las mejores y más innovadoras técnicas, tanto en procedimientos quirúrgicos como no quirúrgicos.",
+  "CONTACT_BUTTON": "Contáctanos",
+  "BANNER": {
+    "BUSINESS_HOURS": "Lun - Vie 11 am - 8 pm / Sáb 10 am - 2 pm (PST)"
+  },
   "HERO_TITLE": "Dr. Andrei Ríos",
   "HERO_DESCRIPTION": "Bienvenidos al lugar ideal para realizar ese procedimiento que realzará tu belleza, con las mejores y más novedosas técnicas, tanto en procedimientos quirúrgicos y  no quirúrgicos, siempre de la mano de la mayor seguridad en todos nuestros procesos, para que te sientas y veas como siempre lo imaginaste.",
   "HERO_BUTTON": "Conoce a tu Doctor",
@@ -74,6 +78,41 @@
       "DESCRIPTION_3": "Además, durante su formación, realizó trabajos de investigación, por lo que ha publicado artículos científicos en revistas nacionales e internacionales, así como participado como organizador y expositor en Congresos.",
       "DESCRIPTION_4": "El Dr. Andrei Ríos es un apasionado del contorno corporal, que incluye, liposucción, transferencia de grasa (BBL), lipectomía o abdominoplastia, además de realizar cirugías de alta complejidad estética, como busto (aumento, reducción o levantamiento), rinoplastia, blefaroplastia y otoplastía, entre otras.",
       "DESCRIPTION_5": "Su prioridad es la seguridad de sus pacientes, así como ayudarles a cumplir sus expectativas y juntos lograr los resultados que desean."
+    }
+  },
+  "CONTACT": {
+    "TITLE": "Contact Us",
+    "SUBTITLE_1": "Te esperamos",
+    "SUBTITLE_2": "Envíanos un mensaje",
+    "LOCATION": {
+      "TITLE": "Location",
+      "DESCRIPTIONS": {
+        "DESCRIPTION_1": "Torre Platino",
+        "DESCRIPTION_2": "Blvd. Sánchez Taboada #10488, Zona Urbana Río Tijuana Int. 401, C.P. 22010, Tijuana, Baja California"
+      }
+    },
+    "DETAILS": {
+      "TITLE": "Contáctanos",
+      "MOVIL": {
+        "TITLE": "Móvil",
+        "DESCRIPTION_1": "664 670 3359",
+        "DESCRIPTION_1_REF": "https://wa.me/526646703359"
+      },
+      "EMAIL": {
+        "TITLE": "Email",
+        "DESCRIPTION_1": "info@riosmdplastics.com",
+        "DESCRIPTION_1_REF": "mailto:info@riosmdplastics.com"
+      }
+    },
+    "BUSINESS_HOURS": {
+      "TITLE": "Horario",
+      "DESCRIPTIONS": {
+        "DESCRIPTION_1": "Lunes a Viernes 11 am - 8 pm (PST)",
+        "DESCRIPTION_2": "Sábado 10 am - 2 pm (PST)"
+      }
+    },
+    "FOLLOW": {
+      "TITLE": "Síguenos"
     }
   }
 }

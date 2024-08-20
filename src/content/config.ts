@@ -2,7 +2,6 @@ import { defineCollection, z } from 'astro:content';
 
 const proceduresCollection = defineCollection({
   type: 'content',
-
   schema: ({ image }) =>
     z.object({
       tag: z.string(),
@@ -12,6 +11,15 @@ const proceduresCollection = defineCollection({
     })
 });
 
+const privacyCollection = defineCollection({
+  type: 'content',
+  schema: z.object({
+    title: z.string(),
+    lang: z.string()
+  })
+});
+
 export const collections = {
-  procedures: proceduresCollection
+  procedures: proceduresCollection,
+  privacy: privacyCollection
 };

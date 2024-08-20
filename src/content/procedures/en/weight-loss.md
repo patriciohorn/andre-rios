@@ -1,6 +1,6 @@
 ---
 tag: 'Body'
-title: 'Massive weight loss'
+title: 'Massive Weight Loss'
 cover: '../../../assets/procedures/perdida.jpg'
 slug: massive-weight-loss
 lang: 'en'

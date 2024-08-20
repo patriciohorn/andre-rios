@@ -1,6 +1,6 @@
 ---
 tag: 'Corporal'
-title: 'Torsoplastia'
+title: 'Torsoplastía'
 cover: '../../../assets/procedures/torsoplastia.jpg'
 slug: torsoplastia
 lang: 'es'

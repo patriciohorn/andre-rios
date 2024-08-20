@@ -1,0 +1,81 @@
+---
+import '@/styles/globals.css'
+import MainLayout from '@/layouts/MainLayout.astro'
+import HeaderCenteredEyebrow from "../HeaderCenteredEyebrow.astro"
+import Link from '../Link.astro';
+import { Icon } from 'astro-icon/components';
+import { getI18N } from "@/i18n";
+import SocialGroup from '../SocialGroup.astro';
+
+
+const {currentLocale} = Astro
+const i18n = getI18N({currentLocale})
+
+const content = Object.values(i18n.ABOUT.CONTENT)
+
+---
+
+<MainLayout title={i18n.CONTACT.TITLE}>
+  <section class="py-16 md:py-28">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="flex flex-col gap-12 md:gap-20">
+      <HeaderCenteredEyebrow title={i18n.CONTACT.TITLE}/>
+      <div class="grid sm:grid-cols-2">
+        <div>
+          <h2 class="text-gray-950 text-3xl sm:text-4xl text-balance tracking-tight font-medium">{i18n.CONTACT.SUBTITLE_1}</h2>
+          <div class="grid sm:grid-cols-2 gap-x-20 gap-y-12 mt-16">
+            <article class="flex flex-col">
+              <h3 class="font-medium text-gray-900">{i18n.CONTACT.LOCATION.TITLE}</h3>
+              <address class="flex-col space-y-2 text-gray-700 not-italic mt-2 text-sm">
+                {Object.values(i18n.CONTACT.LOCATION.DESCRIPTIONS).map((item) => (
+                  <p>{item}</p>
+                ))}
+              </address>
+            </article>
+            <article class="flex flex-col">
+              <h3 class="font-medium text-primary-950">{i18n.CONTACT.DETAILS.TITLE}</h3>
+              <div class="flex space-x-2 items-center text-gray-700 mt-2 text-sm">
+                <h4>{i18n.CONTACT.DETAILS.MOVIL.TITLE}:</h4>
+                <Link href={i18n.CONTACT.DETAILS.MOVIL.DESCRIPTION_1_REF} class="hover:text-primary-500 transition-colors duration-300 ease-in-out">{i18n.CONTACT.DETAILS.MOVIL.DESCRIPTION_1}</Link>
+              </div>
+              <div class="flex space-x-2 items-center text-gray-700 mt-2 text-sm">
+                <h4>{i18n.CONTACT.DETAILS.EMAIL.TITLE}:</h4>
+                <Link href={i18n.CONTACT.DETAILS.EMAIL.DESCRIPTION_1_REF} class="hover:text-primary-500 transition-colors duration-300 ease-in-out">{i18n.CONTACT.DETAILS.EMAIL.DESCRIPTION_1}</Link>
+              </div>
+            </article>
+            <article class="flex flex-col space-y-2">
+              <h3 class="font-medium text-primary-950">{i18n.CONTACT.BUSINESS_HOURS.TITLE}</h3>
+              {Object.values(i18n.CONTACT.BUSINESS_HOURS.DESCRIPTIONS).map((item) => (
+                <p class="text-sm text-gray-700">{item}</p>
+              ))}
+            </article>
+            <article class="flex flex-col">
+              <h3 class="font-medium text-primary-950">{i18n.CONTACT.FOLLOW.TITLE}</h3>
+              <ul class="flex space-x-4 mt-4">
+                <li>
+                  <Link href="" class="inline-flex items-center p-1 rounded-md bg-primary-500 hover:bg-primary-600 shadow-sm">
+                  <Icon name="instagram" size={24} class="text-primary-50 hover:text-primary-100"/>
+                  </Link>
+                </li>
+                <li>
+                  <Link href="" class="inline-flex items-center p-1 rounded-md bg-primary-500 hover:bg-primary-600 shadow-sm">
+                  <Icon name="facebook" size={24} class="text-primary-50 hover:text-primary-100"/>
+                  </Link>
+                </li>
+                <li>
+                  <Link href="" class="inline-flex items-center p-1 rounded-md bg-primary-500 hover:bg-primary-600 shadow-sm">
+                  <Icon name="tiktok" size={24} class="text-primary-50 hover:text-primary-100"/>
+                  </Link>
+                </li>
+              </ul>
+            </article>
+          </div>        
+        </div>
+        <div class="rounded-xl overflow-hidden shadow-sm border border-gray-100">
+          <iframe src="https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d3364.2551038810616!2d-117.01239000000001!3d32.519333!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x80d9484083360ea7%3A0x16cd0dc5cd7aa63!2sTorre%20Platino%2C%20Blvrd%20Gral%20Rodolfo%20S%C3%A1nchez%20Taboada%2010488%2C%20Zona%20Urbana%20Rio%20Tijuana%2C%2022010%20Tijuana%2C%20B.C.%2C%20M%C3%A9xico!5e0!3m2!1ses!2sus!4v1723573516278!5m2!1ses!2sus" width="400" height="300" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade" class="w-full h-full object-cover"></iframe>
+        </div>
+      </div>
+      </div>      
+    </div>
+  </section>
+</MainLayout>
