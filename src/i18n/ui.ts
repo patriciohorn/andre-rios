@@ -43,14 +43,14 @@ export const routes = {
   es: {
     'conoce-a-tu-doctor': 'conoce-a-tu-doctor',
     procedures: 'procedimientos',
-    gallery: 'galeria',
+    galeria: 'galeria',
     virtual: 'consulta-virtual',
     contacto: 'contacto'
   },
   en: {
     'conoce-a-tu-doctor': 'meet-your-doctor',
     procedures: 'procedures',
-    gallery: 'gallery',
+    galeria: 'gallery',
     virtual: 'virtual-consultation',
     contacto: 'contact-us'
   }

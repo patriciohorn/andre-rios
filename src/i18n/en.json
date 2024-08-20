@@ -81,6 +81,26 @@
       "DESCRIPTION_5": "His priority is the safety of his patients, as well as helping them to accomplish their expectations and together achieve the results they want."
     }
   },
+  "GALLERY": {
+    "TITLE": "Gallery",
+    "BODY": {
+      "TITLE": "Body",
+      "SUBTITLES": {
+        "SUBTITLE_1": "Post Massive Weight Loss",
+        "SUBTITLE_2": "Arm Lift",
+        "SUBTITLE_3": "Thigh Lift",
+        "SUBTITLE_4": "Mommy Makeover",
+        "SUBTITLE_5": "Liposculture"
+      }
+    },
+    "BREAST": {
+      "TITLE": "Breast",
+      "SUBTITLES": {
+        "SUBTITLE_1": "Breast Lift",
+        "SUBTITLE_2": "Breast Augmentation"
+      }
+    }
+  },
   "CONTACT": {
     "TITLE": "Contact Us",
     "SUBTITLE_1": "We're waiting for you",

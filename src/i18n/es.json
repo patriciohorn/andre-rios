@@ -80,6 +80,26 @@
       "DESCRIPTION_5": "Su prioridad es la seguridad de sus pacientes, así como ayudarles a cumplir sus expectativas y juntos lograr los resultados que desean."
     }
   },
+  "GALLERY": {
+    "TITLE": "Galería",
+    "BODY": {
+      "TITLE": "Corporal",
+      "SUBTITLES": {
+        "SUBTITLE_1": "Perdida de Peso Masiva",
+        "SUBTITLE_2": "Braquioplastía",
+        "SUBTITLE_3": "Cruroplastía",
+        "SUBTITLE_4": "Mommy Makeover",
+        "SUBTITLE_5": "Lipoescultura"
+      }
+    },
+    "BREAST": {
+      "TITLE": "Busto",
+      "SUBTITLES": {
+        "SUBTITLE_1": "Levantamiento de Busto",
+        "SUBTITLE_2": "Aumento de Busto"
+      }
+    }
+  },
   "CONTACT": {
     "TITLE": "Contact Us",
     "SUBTITLE_1": "Te esperamos",

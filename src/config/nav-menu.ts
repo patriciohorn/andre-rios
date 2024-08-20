@@ -22,19 +22,19 @@ export const navMenuConfig: NavMenuConfig = {
       items: [
         {
           title: 'Breast Augmentation with Fat',
-          href: '/procedures/breast/breast-augmentation-with-fat'
+          href: '/en/augmentation-with-fat'
         },
         {
           title: 'Breast Lift',
-          href: '/procedures/breast/breast-lift'
+          href: '/en/lift'
         },
         {
           title: 'Breast Reduction',
-          href: '/procedures/breast/breast-reduction'
+          href: '/en/reduction'
         },
         {
           title: 'Breast Augmentation with Implants',
-          href: '/procedures/breast/breast-augmentation-with-implants'
+          href: '/en/augmentation-with-implants'
         }
       ]
     },
@@ -43,15 +43,15 @@ export const navMenuConfig: NavMenuConfig = {
       items: [
         {
           title: 'Hyperhidrosis',
-          href: '/procedures/injectables/hyperhidrosis'
+          href: '/en/hyperhidrosis'
         },
         {
           title: 'Botox (Botulinum toxin)',
-          href: '/procedures/injectables/botox'
+          href: '/en/botox'
         },
         {
           title: 'Fillers',
-          href: '/procedures/injectables/fillers'
+          href: '/en/fillers'
         }
       ]
     },
@@ -60,39 +60,39 @@ export const navMenuConfig: NavMenuConfig = {
       items: [
         {
           title: 'Abdominoplasty',
-          href: '/procedures/body/abdominoplasty'
+          href: '/en/abdominoplasty'
         },
         {
           title: 'Brachioplasty',
-          href: '/procedures/body/brachioplasty'
+          href: '/en/brachioplasty'
         },
         {
           title: 'Gynecomastia (Thorax Liposuction)',
-          href: '/procedures/body/gynecomastia'
+          href: '/en/gynecomastia'
         },
         {
           title: 'Liposuction',
-          href: '/procedures/body/liposuction'
+          href: '/en/liposuction'
         },
         {
           title: 'Mommy Makeover',
-          href: '/procedures/body/mommy-makeover'
+          href: '/en/mommy-makeover'
         },
         {
           title: 'Massive Weight Loss',
-          href: '/procedures/body/massive-weight-loss'
+          href: '/en/massive-weight-loss'
         },
         {
           title: 'Torsoplasty',
-          href: '/procedures/body/torsoplasty'
+          href: '/en/torsoplasty'
         },
         {
           title: 'Thigh Lift',
-          href: '/procedures/body/thigh-lift'
+          href: '/en/thigh-lift'
         },
         {
           title: 'LipoInfiltration',
-          href: '/procedures/body/lipoinfiltration'
+          href: '/en/lipoinfiltration'
         }
       ]
     }

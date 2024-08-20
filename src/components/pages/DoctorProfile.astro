@@ -10,11 +10,10 @@ const {currentLocale} = Astro
 const i18n = getI18N({currentLocale})
 
 const content = Object.values(i18n.ABOUT.CONTENT)
-console.log(content);
 ---
 
 <MainLayout title={i18n.ABOUT.TITLE}>
-  <section class="py-16 md:py-28 px-6 lg:px-8">
+  <section class="py-16 md:py-28 px-6 lg:px-8 bg-[#FAFAFA]">
     <div class="max-w-3xl mx-auto">
       <div class="flex flex-col gap-12 md:gap-20">
       <HeaderCenteredEyebrow eyebrow={i18n.ABOUT.TAG} title={i18n.ABOUT.TITLE}/>

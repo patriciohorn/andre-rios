@@ -21,6 +21,7 @@ interface Translations {
 
 interface Paths {
   'nav.meet': string;
+  'nav.gallery': string;
 }
 
 interface MainNavigationMenuProps {
@@ -68,7 +69,9 @@ export function MainNavigationMenu({ translations, paths, procedures }: MainNavi
           </NavigationMenuContent>
         </NavigationMenuItem>
         <NavigationMenuItem className="text-sm font-medium text-white  px-4 py-2 cursor-pointer hover:text-primary-500 transition-colors duration-200 ease-in-out">
-          <NavigationMenuLink href=""> {translations['nav.gallery']}</NavigationMenuLink>
+          <NavigationMenuLink href={paths['nav.gallery']}>
+            {translations['nav.gallery']}
+          </NavigationMenuLink>
         </NavigationMenuItem>
         <NavigationMenuItem className="text-sm font-medium text-white  px-4 py-2 cursor-pointer hover:text-primary-500 transition-colors duration-200 ease-in-out">
           <NavigationMenuLink href=""> {translations['nav.virtual']}</NavigationMenuLink>

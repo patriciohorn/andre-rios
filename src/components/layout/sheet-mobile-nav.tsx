@@ -2,7 +2,7 @@ import * as React from 'react';
 
 // Components
 import { Button } from '@components/ui/button';
-import { Sheet, SheetContent, SheetTrigger } from '@/components/ui/sheet';
+import { Sheet, SheetContent, SheetTrigger, SheetTitle } from '@/components/ui/sheet';
 import { ScrollArea } from '@/components/ui/scroll-area';
 import { Collapsible, CollapsibleContent, CollapsibleTrigger } from '@/components/ui/collapsible';
 
@@ -16,14 +16,34 @@ import logo from '../../assets/logo.png';
 // types
 import type { NavLink, NavItem } from '@/types';
 
+interface Translations {
+  'nav.meet': string;
+  'nav.procedures': string;
+  'nav.gallery': string;
+  'nav.virtual': string;
+}
+
 interface SheetMobileNavProp {
-  mainNavItems: NavLink[];
+  translations: Translations;
   proceduresNavItems: NavItem[];
 }
 
-export function SheetMobileNav({ mainNavItems = [], proceduresNavItems = [] }: SheetMobileNavProp) {
+export function SheetMobileNav({
+  translations = { 'nav.meet': '', 'nav.procedures': '', 'nav.gallery': '', 'nav.virtual': '' },
+  proceduresNavItems = []
+}: SheetMobileNavProp) {
   const [open, setOpen] = React.useState(false);
+  const [isLoaded, setIsLoaded] = React.useState(false);
 
+  React.useEffect(() => {
+    if (translations) {
+      setIsLoaded(true);
+    }
+  }, [translations]);
+
+  if (!isLoaded) {
+    return null;
+  }
   return (
     <Sheet open={open} onOpenChange={setOpen}>
       <SheetTrigger asChild>
@@ -33,6 +53,7 @@ export function SheetMobileNav({ mainNavItems = [], proceduresNavItems = [] }: S
         </Button>
       </SheetTrigger>
       <SheetContent side="left" className="flex flex-col gap-y-5 bg-primary-100">
+        <SheetTitle className="sr-only">Menu</SheetTitle>
         <div className="h-16">
           <a href="/">
             <div className="sr-only">Inicio</div>
@@ -44,42 +65,47 @@ export function SheetMobileNav({ mainNavItems = [], proceduresNavItems = [] }: S
           <div className="mb-20">
             <nav className="flex flex-col gap-1">
               <ul role="list" className="flex flex-col flex-1">
-                {mainNavItems?.map((item) => (
-                  <li key={item.href}>
-                    <a
-                      href={item.href}
-                      className="flex items-center text-sm font-medium leading-6 text-slate-900 p-2 -mx-2">
-                      {item.title}
-                    </a>
-                  </li>
-                ))}
-              </ul>
-              <Collapsible>
-                <CollapsibleTrigger className="flex items-center justify-between gap-2 [&[data-state=open]>svg]:rotate-90 text-sm text-slate-900 font-medium leading-6 p-2 -mx-2">
-                  Procedures
-                  <ChevronRight className="h-4 w-4 transition-transform text-slate-900" />
-                </CollapsibleTrigger>
-                <CollapsibleContent>
-                  <div className="flex flex-col space-y-2">
-                    {proceduresNavItems?.map((item) => (
-                      <div className="flex flex-col pl-2">
-                        <h4 className="text-sm text-slate-900 font-semibold p-2">{item.title}</h4>
-                        <ul className="pl-4">
-                          {item.items?.map((link) => (
-                            <li key={link.href}>
-                              <a
-                                href={link.href}
-                                className="flex items-center text-sm leading-6 text-slate-600 p-1 rounded-md">
-                                {link.title}
-                              </a>
-                            </li>
+                {Object.values(translations || {}).map((item, idx) =>
+                  item === 'Procedures' || item === 'Procedimientos' ? (
+                    <Collapsible>
+                      <CollapsibleTrigger className="flex items-center justify-between gap-2 [&[data-state=open]>svg]:rotate-90 text-sm text-slate-900 font-medium leading-6 p-2 -mx-2">
+                        {item}
+                        <ChevronRight className="h-4 w-4 transition-transform text-slate-900" />
+                      </CollapsibleTrigger>
+                      <CollapsibleContent>
+                        <div className="flex flex-col space-y-2">
+                          {proceduresNavItems?.map((item, idx) => (
+                            <div className="flex flex-col pl-2">
+                              <h4 className="text-sm text-slate-900 font-semibold p-2">
+                                {item.title}
+                              </h4>
+                              <ul className="pl-4">
+                                {item.items?.map((link) => (
+                                  <li key={idx}>
+                                    <a
+                                      href={link.href}
+                                      className="flex items-center text-sm leading-6 text-slate-600 p-1 rounded-md">
+                                      {link.title}
+                                    </a>
+                                  </li>
+                                ))}
+                              </ul>
+                            </div>
                           ))}
-                        </ul>
-                      </div>
-                    ))}
-                  </div>
-                </CollapsibleContent>
-              </Collapsible>
+                        </div>
+                      </CollapsibleContent>
+                    </Collapsible>
+                  ) : (
+                    <li key={idx}>
+                      <a
+                        href={item.href}
+                        className="flex items-center text-sm font-medium leading-6 text-slate-900 p-2 -mx-2">
+                        {item}
+                      </a>
+                    </li>
+                  )
+                )}
+              </ul>
             </nav>
           </div>
         </ScrollArea>
