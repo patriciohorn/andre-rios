@@ -6,16 +6,17 @@
   },
   "CONTACT_BUTTON": "Contact Us",
   "HERO_TITLE": "Dr. Andrei Ríos",
-  "HERO_DESCRIPTION": "Welcome to the ideal place to have that procedure which will enhance your beauty, always using the best and latest technology in surgical and non-surgical procedures, always prioritizing your safety. Our goal is to make you feel and look as you have always imagined ",
+  "HERO_DESCRIPTION": "BOARD CERTIFIED PLASTIC, AESTHETIC AND RECONSTRUCTIVE SURGEON",
   "HERO_TAG": "BOARD CERTIFIED PLASTIC, AESTHETIC AND RECONSTRUCTIVE SURGEON",
   "HERO_BUTTON": "Meet Your Doctor",
-  "INTRO_TITLE": "Our goal is to make you feel and look as you have always imagined.",
+  "INTRO_TITLE": "About Us",
+  "INTRO": "Welcome to the ideal place to have that procedure which will enhance your beauty, always using the best and latest technology in surgical and non-surgical procedures, always prioritizing your safety. Our goal is to make you feel and look as you have always imagined",
   "PROCEDURES_TITLE": "Procedures",
   "PROCEDURES": {
     "PROCEDURES_HEADINGS": {
       "PROCEDURES_1": "Injectables",
 
-      "PROCEDURES_3": "Corporal",
+      "PROCEDURES_3": "Body",
       "PROCEDURES_4": "Breast"
     }
   },
@@ -39,7 +40,7 @@
   ],
   "GALLERY_TITLE": "Gallery",
   "GALLERY_BUTTON": "Go to Gallery",
-  "CERTIFICATIONS_TITLE": "Certified by prestigious medical associations",
+  "CERTIFICATIONS_TITLE": "Certifications",
   "FOOTER": {
     "FOOTER_DISCLAIMER": "Dr. Andrei Ríos provides information on this website or through his communication means such as mail and social networks for informational and educational purposes only. The content of these is not a substitute for a professional diagnosis, opinion, treatment or service. The material displayed here should not be used to substitute a doctor-patient relationship. You should always seek the advice of your Board Certified Plastic Surgeon to resolve your questions or concerns about your medical treatment. Photos displayed are shared with prior permission from patients, and are for demonstration purposes only.",
     "FOOTER_NOTICE": "Notice of Privacy",

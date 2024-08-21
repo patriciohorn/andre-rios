@@ -8,7 +8,7 @@ import Heading from '../Heading.astro';
 import Gallery from '../Gallery'
 import LogoCloud from '../LogoCloud.astro';
 import { Button } from '../ui/button';
-
+import Intro from "@/components/Intro.astro"
 import { getI18N } from "@/i18n"
 
 const { currentLocale } = Astro
@@ -18,11 +18,12 @@ const i18n = getI18N({ currentLocale })
 
 <Layout title={i18n.SEO_TITLE} description={i18n.SEO_DESCRIPTION}>	
 	<HeroImage/>
+	<Intro/>
 	<LogoCloud/>		
 	<Procedures/>
 	<Testimonials/>
 	<div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 divide-y divide-primary-300 border-b border-primary-300">
-		<div class="py-24 sm:py-32">
+		<div class="py-16 sm:py-28">
 			<Heading title={i18n.GALLERY_TITLE}/>
 			<div class="mt-20 flex flex-col gap-12 items-center -mr-4 sm:mx-0">
 				<Gallery client:visible/>				

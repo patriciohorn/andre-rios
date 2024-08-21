@@ -9,20 +9,16 @@ const { currentLocale } = Astro
 const i18n = getI18N({ currentLocale })
 ---
 
-
-<section class="relative h-[70vh] sm:h-screen grid items-end sm:items-center py-16">
-  <div class="absolute inset-0 bg-gradient-to-t sm:bg-gradient-to-tr from-slate-900/60 sm:from-slate-900/40 from-50% sm:from-20% to-slate-10 -z-10"></div>
-  <div class="absolute inset-0 bg-[url('/hero-img.webp')] bg-no-repeat bg-top  bg-cover -z-50"></div>
-  <div class="container mx-auto px-6">
-    <div class="flex flex-col space-y-4 max-w-lg">
+<section class="relative h-[70vh] sm:h-screen">
+  <div class="absolute inset-0 bg-gradient-to-t sm:bg-gradient-to-t from-slate-900/60 sm:from-slate-900/50 from-50% sm:from-20% to-slate-10 -z-10"></div>
+  <div class="absolute inset-0 bg-[url('/hero-img.webp')] bg-no-repeat bg-top bg-cover -z-50"></div>
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-32 sm:py-48 lg:py-56">
+    <div class="flex flex-col space-y-4 justify-center">
       <h1 class="text-4xl sm:text-6xl leading-[1.2] text-slate-100 font-bold">{i18n.HERO_TITLE}</h1>      
-      <p class="text-slate-300 text-base sm:text-lg leading-6">{i18n.HERO_DESCRIPTION}</p>
+      <p class="text-slate-300 text-base sm:text-lg leading-6 max-w-md">{i18n.HERO_DESCRIPTION}</p>
       <div class="flex pt-4">
         <Button className="bg-primary-500 hover:bg-primary-600 text-base text-primary-950" size="lg">{i18n.HERO_BUTTON}</Button>     
       </div>
     </div>
-  </div>
- 
-  
-  
+  </div>  
 </section>

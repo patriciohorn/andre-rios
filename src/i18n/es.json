@@ -6,9 +6,11 @@
     "BUSINESS_HOURS": "Lun - Vie 11 am - 8 pm / Sáb 10 am - 2 pm (PST)"
   },
   "HERO_TITLE": "Dr. Andrei Ríos",
-  "HERO_DESCRIPTION": "Bienvenidos al lugar ideal para realizar ese procedimiento que realzará tu belleza, con las mejores y más novedosas técnicas, tanto en procedimientos quirúrgicos y  no quirúrgicos, siempre de la mano de la mayor seguridad en todos nuestros procesos, para que te sientas y veas como siempre lo imaginaste.",
+  "HERO_DESCRIPTION": "CIRUGÍA PLÁSTICA, ESTÉTICA Y RECONSTRUCTIVA",
   "HERO_BUTTON": "Conoce a tu Doctor",
   "HERO_TAG": "CIRUGÍA PLÁSTICA, ESTÉTICA Y RECONSTRUCTIVA",
+  "INTRO_TITLE": "Nosotros",
+  "INTRO": "Bienvenidos al lugar ideal para realizar ese procedimiento que realzará tu belleza, con las mejores y más novedosas técnicas, tanto en procedimientos quirúrgicos y  no quirúrgicos, siempre de la mano de la mayor seguridad en todos nuestros procesos, para que te sientas y veas como siempre lo imaginaste.",
   "PROCEDURES_TITLE": "Procedimientos",
   "PROCEDURES": {
     "PROCEDURES_HEADINGS": {
@@ -38,7 +40,7 @@
   ],
   "GALLERY_TITLE": "Galería",
   "GALLERY_BUTTON": "Ver Galería",
-  "CERTIFICATIONS_TITLE": "Miembro de prestigiosas asociaciones médicas",
+  "CERTIFICATIONS_TITLE": "Certificaciones",
   "FOOTER": {
     "FOOTER_DISCLAIMER": "Dr. Andrei Ríos proporciona información en este sitio web o en sus medios de comunicación como correo y redes sociales con propósitos informativos y educativos solamente. El contenido de estos, no es un sustituto para un diagnóstico, opinión, tratamiento o servicio profesional. El material aquí desplegado no debe ser usado para sustituir una relación médico-paciente. Siempre se debe buscar el consejo de su Cirujano Plástico Certificado para resolver sus dudas o preocupaciones acerca de su tratamiento médico. Las fotos desplegadas se comparten con previa autorización de pacientes, y sirven para propósitos demostrativos solamente.",
     "FOOTER_NOTICE": "Aviso de Privacidad",
