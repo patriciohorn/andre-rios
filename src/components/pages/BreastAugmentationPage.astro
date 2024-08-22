@@ -1,0 +1,60 @@
+---
+// ProcedurePage.astro
+import GalleryLayout from "../GalleryLayout.astro";
+
+import { getI18N } from "@/i18n";
+const {currentLocale} = Astro
+const i18n = getI18N({currentLocale})
+
+
+import breastAugmentation_tab1_img1_jpg from "@/assets/galleryPages/breast-augmentation-tab1-img1.jpg"
+import breastAugmentation_tab1_img2_jpg from "@/assets/galleryPages/breast-augmentation-tab1-img2.jpg"
+import breastAugmentation_tab1_img3_jpg from "@/assets/galleryPages/breast-augmentation-tab1-img3.jpg"
+import breastAugmentation_tab1_img4_jpg from "@/assets/galleryPages/breast-augmentation-tab1-img4.jpg"
+import breastAugmentation_tab1_img5_jpg from "@/assets/galleryPages/breast-augmentation-tab1-img5.jpg"
+import breastAugmentation_tab1_img6_jpg from "@/assets/galleryPages/breast-augmentation-tab1-img6.jpg"
+import breastAugmentation_tab1_img1_webp from "@/assets/galleryPages/breast-augmentation-1-1.webp"
+import breastAugmentation_tab1_img2_webp from "@/assets/galleryPages/breast-augmentation-1-2.webp"
+import breastAugmentation_tab1_img3_webp from "@/assets/galleryPages/breast-augmentation-1-3.webp"
+import breastAugmentation_tab1_img4_webp from "@/assets/galleryPages/breast-augmentation-1-4.webp"
+import breastAugmentation_tab1_img5_webp from "@/assets/galleryPages/breast-augmentation-1-5.webp"
+import breastAugmentation_tab1_img6_webp from "@/assets/galleryPages/breast-augmentation-1-6.webp"
+
+import breastAugmentation_tab2_img1_jpg from "@/assets/galleryPages/breast-augmentation-2-1.jpg"
+import breastAugmentation_tab2_img2_jpg from "@/assets/galleryPages/breast-augmentation-2-2.jpg"
+import breastAugmentation_tab2_img3_jpg from "@/assets/galleryPages/breast-augmentation-2-3.jpg"
+import breastAugmentation_tab2_img1_webp from "@/assets/galleryPages/breast-augmentation-2-1.webp"
+import breastAugmentation_tab2_img2_webp from "@/assets/galleryPages/breast-augmentation-2-2.webp"
+import breastAugmentation_tab2_img3_webp from "@/assets/galleryPages/breast-augmentation-2-3.webp"
+
+// const imagesTab1Jpg = [breastAugmentation_tab1_img1_jpg, breastAugmentation_tab1_img2_jpg, breastAugmentation_tab1_img3_jpg, breastAugmentation_tab1_img4_jpg, breastAugmentation_tab1_img5_jpg, breastAugmentation_tab1_img6_jpg]; 
+// const imagesTab1Webp = [breastAugmentation_tab1_img1_webp, breastAugmentation_tab1_img2_webp, breastAugmentation_tab1_img3_webp, breastAugmentation_tab1_img4_webp, breastAugmentation_tab1_img5_webp, breastAugmentation_tab1_img6_webp]
+
+const tabsData = [
+  {
+    title: i18n.GALLERY.GALLERY_BREAST_AUGMENTATION.TABS.TAB_1, 
+    images: [
+      { webpSrc: breastAugmentation_tab1_img1_webp.src, jpgSrc: breastAugmentation_tab1_img1_jpg.src, alt: "Image 1" },
+      { webpSrc: breastAugmentation_tab1_img2_webp.src, jpgSrc: breastAugmentation_tab1_img2_jpg.src, alt: "Image 2" },
+      { webpSrc: breastAugmentation_tab1_img3_webp.src, jpgSrc: breastAugmentation_tab1_img3_jpg.src, alt: "Image 3" },
+      { webpSrc: breastAugmentation_tab1_img4_webp.src, jpgSrc: breastAugmentation_tab1_img4_jpg.src, alt: "Image 4" },
+      { webpSrc: breastAugmentation_tab1_img5_webp.src, jpgSrc: breastAugmentation_tab1_img5_jpg.src, alt: "Image 5" },
+      { webpSrc: breastAugmentation_tab1_img6_webp.src, jpgSrc: breastAugmentation_tab1_img6_jpg.src, alt: "Image 6" },
+    ]
+  }, 
+  {
+    title: i18n.GALLERY.GALLERY_BREAST_AUGMENTATION.TABS.TAB_2, 
+    images: [
+      { webpSrc: breastAugmentation_tab2_img1_webp.src, jpgSrc: breastAugmentation_tab2_img1_jpg.src, alt: "Image 7" },
+      { webpSrc: breastAugmentation_tab2_img2_webp.src, jpgSrc: breastAugmentation_tab2_img2_jpg.src, alt: "Image 2" },
+      { webpSrc: breastAugmentation_tab2_img3_webp.src, jpgSrc: breastAugmentation_tab2_img3_jpg.src, alt: "Image 3" },
+    ]
+  }
+]
+
+const tabsTitles = Object.values(i18n.GALLERY.GALLERY_BREAST_AUGMENTATION.TABS)
+
+---
+
+<GalleryLayout title={i18n.GALLERY.GALLERY_BREAST_AUGMENTATION.TITLE} eyebrow={i18n.GALLERY.GALLERY_BREAST_AUGMENTATION.TAG} tabsTitles={tabsTitles} tabsData={tabsData}/>
+

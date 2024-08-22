@@ -7,12 +7,17 @@ import Testimonials from '../Testimonials.astro';
 import Heading from '../Heading.astro';
 import Gallery from '../Gallery'
 import LogoCloud from '../LogoCloud.astro';
+import { buttonVariants } from '../ui/button';
+import { cn } from "@/lib/utils";
 import { Button } from '../ui/button';
 import Intro from "@/components/Intro.astro"
 import { getI18N } from "@/i18n"
+import { getLangFromUrl, useTranslatedPath } from '@/i18n/utils';
 
 const { currentLocale } = Astro
 const i18n = getI18N({ currentLocale })
+const lang = getLangFromUrl(Astro.url);
+const translatePath = useTranslatedPath(lang);
 ---
 
 
@@ -26,8 +31,9 @@ const i18n = getI18N({ currentLocale })
 		<div class="py-16 sm:py-28">
 			<Heading title={i18n.GALLERY_TITLE}/>
 			<div class="mt-20 flex flex-col gap-12 items-center -mr-4 sm:mx-0">
-				<Gallery client:visible/>				
-				<Button size="lg" className="w-fit bg-primary-500 hover:bg-primary-600 text-primary-950 text-base" variant="secondary">{i18n.GALLERY_BUTTON}</Button>
+				<Gallery client:visible/>
+				<a href={translatePath('/galeria/')} class={cn(buttonVariants({ size: "lg"}), "hidden lg:flex bg-primary-500 text-primary-950 text-base hover:bg-primary-600" )}>{i18n.GALLERY_BUTTON}</a>	
+				
 			</div>
 		</div>		
 	</div>

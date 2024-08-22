@@ -94,6 +94,18 @@
         "SUBTITLE_5": "Liposculture"
       }
     },
+    "GALLERY_BREAST_AUGMENTATION": {
+      "TAG": "Breast",
+      "TITLE": "Breast Augmentation",
+      "TABS": {
+        "TAB_1": "Case 1",
+        "TAB_2": "Case 2",
+        "TAB_3": "Case 3",
+        "TAB_4": "Case 4",
+        "TAB_5": "Case 5",
+        "TAB_6": "Case 6"
+      }
+    },
     "BREAST": {
       "TITLE": "Breast",
       "SUBTITLES": {

@@ -94,6 +94,18 @@
         "SUBTITLE_5": "Lipoescultura"
       }
     },
+    "GALLERY_BREAST_AUGMENTATION": {
+      "TAG": "BUSTO",
+      "TITLE": "Levantamiento de Busto",
+      "TABS": {
+        "TAB_1": "Caso 1",
+        "TAB_2": "Caso 2",
+        "TAB_3": "Caso 3",
+        "TAB_4": "Caso 4",
+        "TAB_5": "Caso 5",
+        "TAB_6": "Caso 6"
+      }
+    },
     "BREAST": {
       "TITLE": "Busto",
       "SUBTITLES": {

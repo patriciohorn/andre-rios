@@ -19,7 +19,7 @@ const translatePath = useTranslatedPath(lang);
   <div class="absolute inset-0 bg-[url('/hero-img.webp')] bg-no-repeat bg-top bg-cover -z-50"></div>
   <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-32 sm:py-48 lg:py-56">
     <div class="flex flex-col space-y-4 justify-center">
-      <h1 class="text-4xl sm:text-6xl leading-[1.2] text-slate-100 font-bold">{i18n.HERO_TITLE}</h1>      
+      <h1 class="font-display font-bold uppercase text-4xl sm:text-6xl leading-[1.2] text-slate-100">{i18n.HERO_TITLE}</h1>      
       <p class="text-slate-300 text-base sm:text-lg leading-6 max-w-md">{i18n.HERO_DESCRIPTION}</p>
       <div class="flex pt-4">
         <a href={translatePath('/conoce-a-tu-doctor/')} class={cn(buttonVariants({ size: "lg"}), "hidden lg:flex bg-primary-500 text-primary-950 text-base hover:bg-primary-600" )}>{i18n.HERO_BUTTON}</a>

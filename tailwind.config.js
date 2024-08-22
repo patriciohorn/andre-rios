@@ -13,7 +13,8 @@ module.exports = {
     },
     extend: {
       fontFamily: {
-        sans: ['Inter']
+        display: ['Inter', 'sans-serif'],
+        sans: ['Inter', 'sans-serif']
       },
       colors: {
         border: 'hsl(var(--border))',
