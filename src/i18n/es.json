@@ -15,11 +15,33 @@
   "PROCEDURES": {
     "PROCEDURES_HEADINGS": {
       "PROCEDURES_1": "Inyectables",
-
-      "PROCEDURES_3": "Corporal",
-      "PROCEDURES_4": "Busto"
+      "PROCEDURES_2": "Corporal",
+      "PROCEDURES_3": "Busto"
+    }, 
+    "PROCEDURES_BREAST": {
+      "PROCEDURE_1": "Breast Augmentation with Implants", 
+      "PROCEDURE_2": "Breast Lift", 
+      "PROCEDURE_3": "Breast Reduction", 
+      "PROCEDURE_4": "Breast Augmentation with Fat"
+    }, 
+    "PROCEDURES_INJECTABLES": {
+      "PROCEDURE_1": "Hyperhidrosis", 
+      "PROCEDURE_2": "Botulinum Toxin (Botox)", 
+      "PROCEDURE_3": "Fillers"
+    }, 
+    "PROCEDURES_BODY": {
+      "PROCEDURE_1": "Abdmonioplasty", 
+      "PROCEDURE_2": "Brachioplasty", 
+      "PROCEDURE_3": "Gynecomastia Thorax Liposuction", 
+      "PROCEDURE_4": "Liposuction", 
+      "PROCEDURE_5": "Mommy Makeover", 
+      "PROCEDURE_6": "Massive Weight Loss", 
+      "PROCEDURE_7": "Torsoplasty", 
+      "PROCEDURE_8": "Thigh Lift", 
+      "PROCEDURE_9": "Lipoinfiltration"
     }
   },
+  
   "TESTIMONIALS": [
     {
       "TESTIMONIAL_NAME": "Caro de la Garza",
@@ -94,24 +116,38 @@
         "SUBTITLE_5": "Lipoescultura"
       }
     },
-    "GALLERY_BREAST_AUGMENTATION": {
-      "TAG": "BUSTO",
-      "TITLE": "Levantamiento de Busto",
-      "TABS": {
-        "TAB_1": "Caso 1",
-        "TAB_2": "Caso 2",
-        "TAB_3": "Caso 3",
-        "TAB_4": "Caso 4",
-        "TAB_5": "Caso 5",
-        "TAB_6": "Caso 6"
-      }
-    },
+
     "BREAST": {
       "TITLE": "Busto",
       "SUBTITLES": {
         "SUBTITLE_1": "Levantamiento de Busto",
         "SUBTITLE_2": "Aumento de Busto"
       }
+    }
+  },
+  "GALLERY_BREAST_AUGMENTATION": {
+    "PATH": "levantamiento-busto",
+    "TAG": "Busto",
+    "TITLE": "Levantamiento de Busto",
+    "TABS": {
+      "TAB_1": "Caso 1",
+      "TAB_2": "Caso 2",
+      "TAB_3": "Caso 3",
+      "TAB_4": "Caso 4",
+      "TAB_5": "Caso 5",
+      "TAB_6": "Caso 6"
+    }
+  },
+  "GALLERY_LIPOSCULTURE": {
+    "PATH": "lipoescultura",
+    "TAG": "Corporal",
+    "TITLE": "Lipoescultura",
+    "TABS": {
+      "TAB_1": "Caso 1",
+      "TAB_2": "Caso 2",
+      "TAB_3": "Caso 3",
+      "TAB_4": "Caso 4",
+      "TAB_5": "Caso 5"
     }
   },
   "CONTACT": {
@@ -148,5 +184,144 @@
     "FOLLOW": {
       "TITLE": "Síguenos"
     }
+  },
+  "VIRTUAL_CONSULTATION": {
+    "TITLE": "Virtual Consultation",
+    "steps": [
+      {
+        "step": 1,
+        "inputs": [
+          {
+            "label": "Email",
+            "type": "email",
+            "required": true
+          },
+          {
+            "label": "First Name",
+            "type": "text",
+            "required": true
+          },
+          {
+            "label": "Last Name",
+            "type": "text",
+            "required": true
+          },
+          {
+            "label": "Phone Number",
+            "type": "tel"
+          },
+          {
+            "label": "Procedure",
+            "type": "text",
+            "required": true
+          },
+          {
+            "label": "Prospective Surgery Date (Range)",
+            "type": "date",
+            "required": true
+          },
+          {
+            "label": "Gender",
+            "type": "select",
+            "options": ["Male", "Female", "Other"]
+          },
+          {
+            "label": "Height",
+            "type": "text",
+            "required": true
+          },
+          {
+            "label": "Weight",
+            "type": "number"
+          },
+          {
+            "label": "Country/Region",
+            "type": "text",
+            "required": true
+          },
+          {
+            "label": "Birthdate",
+            "type": "date",
+            "required": true
+          },
+          {
+            "label": "What do you expect of your procedure?",
+            "type": "textarea",
+            "required": true
+          }
+        ]
+      },
+      {
+        "step": 2,
+        "inputs": [
+          {
+            "label": "Allergies",
+            "type": "text",
+            "required": true
+          },
+          {
+            "label": "Medication or Supplements (current and recent)",
+            "type": "textarea",
+            "placeholder": "Medications or supplements used recently or currently",
+            "required": true
+          },
+          {
+            "label": "Diagnosed Diseases",
+            "type": "text"
+          },
+          {
+            "label": "Do you smoke? If so, how often?",
+            "type": "text",
+            "required": true
+          },
+          {
+            "label": "Do you drink? If so, how often?",
+            "type": "text",
+            "required": true
+          },
+          {
+            "label": "Recreational Drug use",
+            "type": "text"
+          },
+          {
+            "label": "Previous surgeries and year",
+            "type": "textarea",
+            "required": true
+          },
+          {
+            "label": "Do you take birth control?",
+            "type": "text",
+            "required": true
+          },
+          {
+            "label": "History of thrombosis in your family?",
+            "type": "text",
+            "required": true
+          },
+          {
+            "label": "Number of pregnancies and type of delivery",
+            "type": "text"
+          },
+          {
+            "label": "Is there a chance you could be pregnant?",
+            "type": "text",
+            "required": true
+          },
+          {
+            "label": "Special diet (vegan, gluten free) or Bariatric Surgery history",
+            "type": "textarea",
+            "required": true
+          }
+        ]
+      },
+      {
+        "step": 3,
+        "instructions": [
+          "Face pictures must be taken from forehead to neck, from front and sides angles.",
+          "Breast pictures must be taken from neck to abdomen, from front, sides and back angles and without clothes.",
+          "Body pictures must be taken from neck to knees, from front, sides and back angles and without clothes."
+        ]
+      }
+    ]
   }
 }

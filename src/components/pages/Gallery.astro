@@ -6,6 +6,7 @@ import { Image } from 'astro:assets';
 import { Icon } from 'astro-icon/components';
 
 
+
 import weightLossImg from "@/assets/procedures/perdida.jpg"
 import breastLiftImg from "@/assets/procedures/levantamiento-busto.jpg"
 import armLiftImg from "@/assets/procedures/braquioplastia.jpg"
@@ -17,12 +18,20 @@ import liposcultureImg from "@/assets/procedures/liposucción.jpg"
 
 const {currentLocale} = Astro
 const i18n = getI18N({currentLocale})
+import { getLangFromUrl, useTranslatedPath, } from '@/i18n/utils';
 
-const content = Object.values(i18n.ABOUT.CONTENT)
+const lang = getLangFromUrl(Astro.url)
+const translatePath = useTranslatedPath(lang)
+
 const bodyImages = [weightLossImg, armLiftImg, thigLiftImg, mmoImg, liposcultureImg]
 const breastImages = [breastLiftImg, breastImg]; 
 const bodyTitles = Object.values(i18n.GALLERY.BODY.SUBTITLES)
 const breastTitles = Object.values(i18n.GALLERY.BREAST.SUBTITLES)
+
+const bodyPaths = ['', '', '', '', i18n.GALLERY_LIPOSCULTURE.PATH]
+const breastPaths = [i18n.GALLERY_BREAST_AUGMENTATION.PATH, '']
+
+console.log(bodyPaths);
 
 ---
 
@@ -37,7 +46,7 @@ const breastTitles = Object.values(i18n.GALLERY.BREAST.SUBTITLES)
           </h3>
           <div class="col-span-3 grid sm:grid-cols-2 md:grid-cols-3 gap-6 sm:gap-y-7 lg:gap-x-7">
             {bodyImages.map((item, idx) => (
-              <a href="" class="group shadow-sm rounded-xl border overflow-hidden bg-white ">
+              <a href={`${translatePath('/galeria')}/${bodyPaths[idx]}`} class="group shadow-sm rounded-xl border overflow-hidden bg-white ">
                 <div class="overflow-hidden aspect-[3/2]">
                 <Image src={item} alt={bodyTitles[idx]} class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300 ease-in-out" loading="eager"/>
                 </div>
@@ -55,7 +64,7 @@ const breastTitles = Object.values(i18n.GALLERY.BREAST.SUBTITLES)
           </h3>
           <div class="col-span-3 grid sm:grid-cols-2 md:grid-cols-3 gap-6 sm:gap-y-7 lg:gap-x-7">
             {breastImages.map((item, idx) => (
-              <a href="" class="group shadow-sm rounded-xl border overflow-hidden bg-white">
+              <a href={`${translatePath('/galeria')}/${breastPaths[idx]}`} class="group shadow-sm rounded-xl border overflow-hidden bg-white">
                 <div class="overflow-hidden aspect-[3/2]">
                 <Image src={item} alt={breastTitles[idx]} class="w-full h-full object-cover" loading="eager"/>
                 </div>

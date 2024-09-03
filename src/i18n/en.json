@@ -15,9 +15,30 @@
   "PROCEDURES": {
     "PROCEDURES_HEADINGS": {
       "PROCEDURES_1": "Injectables",
-
-      "PROCEDURES_3": "Body",
-      "PROCEDURES_4": "Breast"
+      "PROCEDURES_2": "Body",
+      "PROCEDURES_3": "Breast"
+    }, 
+    "PROCEDURES_BREAST": {
+      "PROCEDURE_1": "Breast Augmentation with Implants", 
+      "PROCEDURE_2": "Breast Lift", 
+      "PROCEDURE_3": "Breast Reduction", 
+      "PROCEDURE_4": "Breast Augmentation with Fat"
+    }, 
+    "PROCEDURES_INJECTABLES": {
+      "PROCEDURE_1": "Hyperhidrosis", 
+      "PROCEDURE_2": "Botulinum Toxin (Botox)", 
+      "PROCEDURE_3": "Fillers"
+    }, 
+    "PROCEDURES_BODY": {
+      "PROCEDURE_1": "Abdmonioplasty", 
+      "PROCEDURE_2": "Brachioplasty", 
+      "PROCEDURE_3": "Gynecomastia Thorax Liposuction", 
+      "PROCEDURE_4": "Liposuction", 
+      "PROCEDURE_5": "Mommy Makeover", 
+      "PROCEDURE_6": "Massive Weight Loss", 
+      "PROCEDURE_7": "Torsoplasty", 
+      "PROCEDURE_8": "Thigh Lift", 
+      "PROCEDURE_9": "Lipoinfiltration"
     }
   },
   "TESTIMONIALS": [
@@ -94,24 +115,37 @@
         "SUBTITLE_5": "Liposculture"
       }
     },
-    "GALLERY_BREAST_AUGMENTATION": {
-      "TAG": "Breast",
-      "TITLE": "Breast Augmentation",
-      "TABS": {
-        "TAB_1": "Case 1",
-        "TAB_2": "Case 2",
-        "TAB_3": "Case 3",
-        "TAB_4": "Case 4",
-        "TAB_5": "Case 5",
-        "TAB_6": "Case 6"
-      }
-    },
     "BREAST": {
       "TITLE": "Breast",
       "SUBTITLES": {
         "SUBTITLE_1": "Breast Lift",
         "SUBTITLE_2": "Breast Augmentation"
       }
+    }
+  },
+  "GALLERY_BREAST_AUGMENTATION": {
+    "PATH": "breast-augmentation",
+    "TAG": "Breast",
+    "TITLE": "Breast Augmentation",
+    "TABS": {
+      "TAB_1": "Case 1",
+      "TAB_2": "Case 2",
+      "TAB_3": "Case 3",
+      "TAB_4": "Case 4",
+      "TAB_5": "Case 5",
+      "TAB_6": "Case 6"
+    }
+  },
+  "GALLERY_LIPOSCULTURE": {
+    "PATH": "liposculture",
+    "TAG": "Body",
+    "TITLE": "Liposculture",
+    "TABS": {
+      "TAB_1": "Case 1",
+      "TAB_2": "Case 2",
+      "TAB_3": "Case 3",
+      "TAB_4": "Case 4",
+      "TAB_5": "Case 5"
     }
   },
   "CONTACT": {

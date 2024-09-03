@@ -12,6 +12,7 @@ export function useTranslations(lang: keyof typeof ui) {
   };
 }
 
+// Router translation logic
 export function useTranslatedPath(lang: keyof typeof ui) {
   return function translatePath(path: string, l: string = lang) {
     const pathName = path.replaceAll('/', '');
@@ -26,13 +27,11 @@ export function useTranslatedPath(lang: keyof typeof ui) {
   };
 }
 
+// Get the routhe if it exists, basedon the current URL
 export function getRouteFromUrl(url: URL): string | undefined {
   const pathname = new URL(url).pathname;
-  console.log(pathname);
   const parts = pathname?.split('/');
-  console.log(parts);
   const path = parts.pop() || parts.pop();
-  console.log(path);
 
   if (path === undefined) {
     return undefined;
