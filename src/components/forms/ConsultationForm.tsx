@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { z } from 'zod';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { useForm } from 'react-hook-form';
@@ -93,12 +93,13 @@ type Input = z.infer<typeof consultationSchema>;
 export function ConsultationForm() {
   const [currentStep, setCurrentStep] = useState(0);
   const [dop, setDop] = useState<Date | null>(null);
+  const [isMale, setIsMale] = useState(false);
 
   const form = useForm<Input>({
     resolver: zodResolver(consultationSchema)
   });
 
-  const onSubmit = (values: Input) => {
+  const onSubmit = (values: any) => {
     console.log(JSON.stringify(values));
     console.log(values.backPhoto);
   };
@@ -370,7 +371,12 @@ export function ConsultationForm() {
               render={({ field }) => (
                 <FormItem>
                   <FormLabel>Gender</FormLabel>
-                  <Select onValueChange={field.onChange} defaultValue={field.value}>
+                  <Select
+                    onValueChange={(value) => {
+                      field.onChange(value);
+                      setIsMale(value === 'Male');
+                    }}
+                    defaultValue={field.value}>
                     <FormControl>
                       <SelectTrigger className="text-gray-500">
                         <SelectValue placeholder="Select a gender" />
@@ -435,7 +441,7 @@ export function ConsultationForm() {
                   </FormLabel>
                   <FormControl>
                     <Textarea
-                      placeholder="Medications or supplements used recently or currently"
+                      placeholder="List any medications or supplement used recently or currently"
                       className="resize-none"
                       {...field}
                     />
@@ -455,7 +461,7 @@ export function ConsultationForm() {
                   </FormLabel>
                   <FormControl>
                     <Textarea
-                      placeholder="List all diagnosed diseases"
+                      placeholder="List any diagnosed diseases"
                       className="resize-none"
                       {...field}
                     />
@@ -495,7 +501,7 @@ export function ConsultationForm() {
               render={({ field }) => (
                 <FormItem>
                   <FormLabel className="inline-flex items-center">
-                    Do you drink? If so, how often?
+                    Do you consume alcohol? If yes, how often?
                     <Asterisk className="w-3 h-3 text-red-600 ms-1" />
                   </FormLabel>
                   <Select onValueChange={field.onChange} defaultValue={field.value}>
@@ -565,11 +571,15 @@ export function ConsultationForm() {
               name="birthControl"
               render={({ field }) => (
                 <FormItem>
-                  <FormLabel className="inline-flex items-center">
+                  <FormLabel
+                    className={`inline-flex items-center ${isMale ? 'text-gray-400' : ''}`}>
                     Do you take birth control?
-                    <Asterisk className="w-3 h-3 ms-1 text-red-600" />
+                    <Asterisk className={`w-3 h-3 ms-1 ${!isMale ? 'text-red-600' : 'hidden'}`} />
                   </FormLabel>
-                  <Select onValueChange={field.onChange} defaultValue={field.value}>
+                  <Select
+                    onValueChange={field.onChange}
+                    defaultValue={field.value}
+                    disabled={isMale !== null ? isMale : !isMale}>
                     <FormControl>
                       <SelectTrigger>
                         <SelectValue placeholder="Select an option" />
@@ -590,7 +600,7 @@ export function ConsultationForm() {
               render={({ field }) => (
                 <FormItem>
                   <FormLabel className="inline-flex items-center">
-                    History of Thrombosis in Your Family?{' '}
+                    History of Thrombosis in Your Family?
                     <Asterisk className="w-3 h-3 ms-1 text-red-600" />
                   </FormLabel>
                   <Select onValueChange={field.onChange} defaultValue={field.value}>
@@ -613,11 +623,17 @@ export function ConsultationForm() {
               name="pregnancyDetails"
               render={({ field }) => (
                 <FormItem>
-                  <FormLabel className="inline-flex flex-row items-center">
+                  <FormLabel
+                    className={`inline-flex items-center ${isMale ? 'text-gray-400' : ''}`}>
                     Number of Pregnancies and Type of Delivery
                   </FormLabel>
                   <FormControl>
-                    <Textarea placeholder="" className="resize-none" {...field} />
+                    <Textarea
+                      placeholder="Please provide details if applicable"
+                      className="resize-none"
+                      {...field}
+                      disabled={isMale !== null ? isMale : !isMale}
+                    />
                   </FormControl>
                   <FormMessage />
                 </FormItem>
@@ -629,11 +645,15 @@ export function ConsultationForm() {
               name="pregnancyChance"
               render={({ field }) => (
                 <FormItem>
-                  <FormLabel className="inline-flex items-center">
+                  <FormLabel
+                    className={`inline-flex items-center ${isMale ? 'text-gray-400' : ''}`}>
                     Is There a Chance You Could Be Pregnant?
-                    <Asterisk className="w-3 h-3 ms-1 text-red-600" />
+                    <Asterisk className={`w-3 h-3 ms-1 ${!isMale ? 'text-red-600' : 'hidden'}`} />
                   </FormLabel>
-                  <Select onValueChange={field.onChange} defaultValue={field.value}>
+                  <Select
+                    onValueChange={field.onChange}
+                    defaultValue={field.value}
+                    disabled={isMale !== null ? isMale : !isMale}>
                     <FormControl>
                       <SelectTrigger>
                         <SelectValue placeholder="Select an option" />
@@ -659,7 +679,11 @@ export function ConsultationForm() {
                     <Asterisk className="w-3 h-3 text-red-600 ms-1" />
                   </FormLabel>
                   <FormControl>
-                    <Textarea placeholder="" className="resize-none" {...field} />
+                    <Textarea
+                      placeholder="Are you following any special diet?"
+                      className="resize-none"
+                      {...field}
+                    />
                   </FormControl>
                   <FormMessage />
                 </FormItem>
