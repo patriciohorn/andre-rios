@@ -9,10 +9,10 @@ const i18n = getI18N({ currentLocale })
 
 <section class="py-16 sm:py-28 bg-[#FAFAFA]">
   <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-    <div class="grid lg:grid-cols-2 gap-x-20 items-center">
+    <div class="grid lg:grid-cols-2 gap-x-20 gap-y-12 items-center">
       <div class="flex flex-col space-y-6">
         <h2 class="font-display font-bold text-4xl sm:text-5xl text-gray-900">{i18n.INTRO_TITLE}</h2>    
-        <p class="text-lg text-gray-700 max-w-prose">{i18n.INTRO}</p>
+        <p class="text-base sm:text-lg text-gray-700 max-w-prose">{i18n.INTRO}</p>
       </div>
       <div class="overflow-hidden rounded-xl shadow-md">
         <Image src={IntroImg} alt="Dr. Andre Rios" class="w-full h-full max-h-[640px] object-cover"/>

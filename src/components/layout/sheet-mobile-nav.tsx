@@ -15,6 +15,7 @@ import logo from '../../assets/logo.png';
 
 // types
 import type { NavLink, NavItem } from '@/types';
+import { useTranslations } from '@/i18n/utils';
 
 interface Translations {
   'nav.meet': string;
@@ -23,15 +24,19 @@ interface Translations {
   'nav.virtual': string;
 }
 
-interface SheetMobileNavProp {
-  translations: Translations;
-  proceduresNavItems: NavItem[];
+interface Paths {
+  'nav.meet': string;
+  'nav.gallery': string;
+  'nav.virtual': string;
 }
 
-export function SheetMobileNav({
-  translations = { 'nav.meet': '', 'nav.procedures': '', 'nav.gallery': '', 'nav.virtual': '' },
-  proceduresNavItems = []
-}: SheetMobileNavProp) {
+interface SheetMobileNavProps {
+  translations: Translations;
+  paths: Paths;
+  procedures: Record<string, { title: string; url: string }[]>;
+}
+
+export function SheetMobileNav({ translations, paths, procedures }: SheetMobileNavProps) {
   const [open, setOpen] = React.useState(false);
   const [isLoaded, setIsLoaded] = React.useState(false);
 
@@ -65,7 +70,58 @@ export function SheetMobileNav({
           <div className="mb-20">
             <nav className="flex flex-col gap-1">
               <ul role="list" className="flex flex-col flex-1">
-                {Object.values(translations || {}).map((item, idx) =>
+                <li>
+                  <a
+                    href={paths['nav.meet']}
+                    className="flex items-center text-sm font-medium leading-6 text-slate-900 p-2 -mx-2">
+                    {translations['nav.meet']}
+                  </a>
+                </li>
+
+                <Collapsible>
+                  <CollapsibleTrigger className="flex items-center justify-between gap-2 [&[data-state=open]>svg]:rotate-90 text-sm text-slate-900 font-medium leading-6 p-2 -mx-2">
+                    {translations['nav.procedures']}
+                    <ChevronRight className="h-4 w-4 transition-transform text-slate-900" />
+                  </CollapsibleTrigger>
+                  <CollapsibleContent>
+                    <div className="flex flex-col space-y-2">
+                      {Object.entries(procedures).map(([category, items], idx) => (
+                        <div className="flex flex-col pl-2">
+                          <h4 className="text-sm text-slate-900 font-semibold p-2">{category}</h4>
+                          <ul className="pl-4">
+                            {items?.map((item, i) => (
+                              <li key={i}>
+                                <a
+                                  href={item.url}
+                                  className="flex items-center text-sm leading-6 text-slate-600 p-1 rounded-md">
+                                  {item.title}
+                                </a>
+                              </li>
+                            ))}
+                          </ul>
+                        </div>
+                      ))}
+                    </div>
+                  </CollapsibleContent>
+                </Collapsible>
+
+                <li>
+                  <a
+                    href={paths['nav.gallery']}
+                    className="flex items-center text-sm font-medium leading-6 text-slate-900 p-2 -mx-2">
+                    {translations['nav.gallery']}
+                  </a>
+                </li>
+
+                <li>
+                  <a
+                    href={paths['nav.virtual']}
+                    className="flex items-center text-sm font-medium leading-6 text-slate-900 p-2 -mx-2">
+                    {translations['nav.virtual']}
+                  </a>
+                </li>
+
+                {/* {Object.values(translations || {}).map((item, idx) =>
                   item === 'Procedures' || item === 'Procedimientos' ? (
                     <Collapsible>
                       <CollapsibleTrigger className="flex items-center justify-between gap-2 [&[data-state=open]>svg]:rotate-90 text-sm text-slate-900 font-medium leading-6 p-2 -mx-2">
@@ -104,7 +160,7 @@ export function SheetMobileNav({
                       </a>
                     </li>
                   )
-                )}
+                )} */}
               </ul>
             </nav>
           </div>

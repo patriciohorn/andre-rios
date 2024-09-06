@@ -14,15 +14,15 @@ const lang = getLangFromUrl(Astro.url);
 const translatePath = useTranslatedPath(lang);
 ---
 
-<section class="relative h-[70vh] sm:h-screen">
+<section class="relative h-[50vh] sm:h-screen">
   <div class="absolute inset-0 bg-gradient-to-t sm:bg-gradient-to-t from-slate-900/60 sm:from-slate-900/50 from-50% sm:from-20% to-slate-10 -z-10"></div>
   <div class="absolute inset-0 bg-[url('/hero-img.webp')] bg-no-repeat bg-top bg-cover -z-50"></div>
   <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-32 sm:py-48 lg:py-56">
-    <div class="flex flex-col space-y-4 justify-center">
+    <div class="flex flex-col space-y-4 items-center py-16 sm:py-0 sm:items-start sm:justify-center">
       <h1 class="font-display font-bold uppercase text-4xl sm:text-6xl leading-[1.2] text-slate-100">{i18n.HERO_TITLE}</h1>      
       <p class="text-slate-300 text-base sm:text-lg leading-6 max-w-md">{i18n.HERO_DESCRIPTION}</p>
       <div class="flex pt-4">
-        <a href={translatePath('/conoce-a-tu-doctor/')} class={cn(buttonVariants({ size: "lg"}), "hidden lg:flex bg-primary-500 text-primary-950 text-base hover:bg-primary-600" )}>{i18n.HERO_BUTTON}</a>
+        <a href={translatePath('/conoce-a-tu-doctor/')} class={cn(buttonVariants({ size: "lg"}), "flex bg-primary-500 text-primary-950 text-base hover:bg-primary-600" )}>{i18n.HERO_BUTTON}</a>
         
       </div>
     </div>
