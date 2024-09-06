@@ -2,6 +2,9 @@ import * as React from 'react';
 
 // Components
 import { Button } from '@components/ui/button';
+import { cn } from '@/lib/utils';
+import { buttonVariants } from '@/components/ui/button';
+
 import { Sheet, SheetContent, SheetTrigger, SheetTitle } from '@/components/ui/sheet';
 import { ScrollArea } from '@/components/ui/scroll-area';
 import { Collapsible, CollapsibleContent, CollapsibleTrigger } from '@/components/ui/collapsible';
@@ -22,12 +25,14 @@ interface Translations {
   'nav.procedures': string;
   'nav.gallery': string;
   'nav.virtual': string;
+  'nav.contacto': string;
 }
 
 interface Paths {
   'nav.meet': string;
   'nav.gallery': string;
   'nav.virtual': string;
+  'nav.contacto': string;
 }
 
 interface SheetMobileNavProps {
@@ -120,49 +125,17 @@ export function SheetMobileNav({ translations, paths, procedures }: SheetMobileN
                     {translations['nav.virtual']}
                   </a>
                 </li>
-
-                {/* {Object.values(translations || {}).map((item, idx) =>
-                  item === 'Procedures' || item === 'Procedimientos' ? (
-                    <Collapsible>
-                      <CollapsibleTrigger className="flex items-center justify-between gap-2 [&[data-state=open]>svg]:rotate-90 text-sm text-slate-900 font-medium leading-6 p-2 -mx-2">
-                        {item}
-                        <ChevronRight className="h-4 w-4 transition-transform text-slate-900" />
-                      </CollapsibleTrigger>
-                      <CollapsibleContent>
-                        <div className="flex flex-col space-y-2">
-                          {proceduresNavItems?.map((item, idx) => (
-                            <div className="flex flex-col pl-2">
-                              <h4 className="text-sm text-slate-900 font-semibold p-2">
-                                {item.title}
-                              </h4>
-                              <ul className="pl-4">
-                                {item.items?.map((link) => (
-                                  <li key={idx}>
-                                    <a
-                                      href={link.href}
-                                      className="flex items-center text-sm leading-6 text-slate-600 p-1 rounded-md">
-                                      {link.title}
-                                    </a>
-                                  </li>
-                                ))}
-                              </ul>
-                            </div>
-                          ))}
-                        </div>
-                      </CollapsibleContent>
-                    </Collapsible>
-                  ) : (
-                    <li key={idx}>
-                      <a
-                        href={item.href}
-                        className="flex items-center text-sm font-medium leading-6 text-slate-900 p-2 -mx-2">
-                        {item}
-                      </a>
-                    </li>
-                  )
-                )} */}
               </ul>
             </nav>
+            <div className="mt-6">
+              <Button asChild>
+                <a
+                  href={paths['nav.contacto']}
+                  className="flex bg-primary text-primary-950 hover:bg-primary-600 w-full">
+                  {translations['nav.contacto']}
+                </a>
+              </Button>
+            </div>
           </div>
         </ScrollArea>
       </SheetContent>

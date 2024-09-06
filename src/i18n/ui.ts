@@ -29,13 +29,15 @@ export const ui = {
     'nav.meet': 'Conoce a tu Doctor',
     'nav.procedures': 'Procedimientos',
     'nav.gallery': 'Galería',
-    'nav.virtual': 'Consulta Virtual'
+    'nav.virtual': 'Consulta Virtual',
+    'nav.contacto': 'Contacto'
   },
   en: {
     'nav.meet': 'Meet Your Doctor',
     'nav.procedures': 'Procedures',
     'nav.gallery': 'Gallery',
-    'nav.virtual': 'Virtual Consultation'
+    'nav.virtual': 'Virtual Consultation',
+    'nav.contacto': 'Contact Us'
   }
 } as const;
 

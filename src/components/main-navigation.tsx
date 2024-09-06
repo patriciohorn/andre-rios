@@ -17,12 +17,14 @@ interface Translations {
   'nav.procedures': string;
   'nav.gallery': string;
   'nav.virtual': string;
+  'nav.contacto': string;
 }
 
 interface Paths {
   'nav.meet': string;
   'nav.gallery': string;
   'nav.virtual': string;
+  'nav.contacto': string;
 }
 
 interface MainNavigationMenuProps {
