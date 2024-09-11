@@ -11,18 +11,23 @@ import { getI18N } from "@/i18n/index"
 const { currentLocale } = Astro
 const i18n = getI18N({ currentLocale })
 import { getLangFromUrl, useTranslatedPath, } from '@/i18n/utils';
+import LangPickSmall from "../LangPickSmall.astro";
 const lang = getLangFromUrl(Astro.url);
 const translatePath = useTranslatedPath(lang);
 
 ---
 
-<header class="flex items-center h-16 md:h-20 z-50 sticky top-0 bg-black shadow-xl py-4">
+<header class="flex items-center h-16 md:h-20 z-50 sticky top-0 bg-neutral-900 shadow-xl py-4">
   <div class="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex items-center justify-between w-full h-full">   
     <a href={translatePath('/')} class="flex-1">
       <div class="sr-only">Inicio</div>
       <Image src={logoWhite} alt="logo Dr. Andrei Rios" height="64" width="252" class="h-10 sm:h-12 w-auto"/>
-    </a>   
-    <slot name="mobile-nav-header"/>
+    </a> 
+
+
+    <LangPickSmall/>
+    <slot name="mobile-nav-header"/>  
+
 
     <div class="hidden lg:flex">
       <slot name="center-header"/>

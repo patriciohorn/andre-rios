@@ -18,15 +18,18 @@ export function GalleryTabs({ tabsData }: TabsProps) {
   // const [activeTab, setActiveTab] = useState(0);
   return (
     <Tabs defaultValue={tabsData[0].title} className="w-full">
-      <TabsList className="py-4 bg-transparent flex items-center mb-8">
+      <TabsList className="py-4 bg-transparent flex flex-wrap gap-4 sm:items-center items-start h-auto">
         {tabsData.map((tab, idx) => (
-          <TabsTrigger value={tab.title} className="text-base px-8 py-1" key={idx}>
+          <TabsTrigger
+            value={tab.title}
+            className="sm:text-base text-sm sm:px-8 px-4 py-1"
+            key={idx}>
             {tab.title}
           </TabsTrigger>
         ))}
       </TabsList>
       {tabsData.map((tab, idx) => (
-        <TabsContent value={tab.title} key={idx} className="grid grid-cols-4 gap-4">
+        <TabsContent value={tab.title} key={idx} className="grid grid-cols-2 sm:grid-cols-4 gap-4">
           {tab.images.map((image, imgIndex) => (
             <picture key={imgIndex} className="animate__animated animate__zoomIn">
               <source srcSet={image.webPSrc} type="image/webp" />

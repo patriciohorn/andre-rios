@@ -90,18 +90,41 @@ const submissionGuidelines = [
 
 type Input = z.infer<typeof consultationSchema>;
 
-export function ConsultationForm() {
+interface ConsultationFormProps {
+  onFormSubmit: (data: any) => void;
+}
+
+export function ConsultationForm({ onFormSubmit }: ConsultationFormProps) {
   const [currentStep, setCurrentStep] = useState(0);
   const [dop, setDop] = useState<Date | null>(null);
   const [isMale, setIsMale] = useState(false);
 
   const form = useForm<Input>({
-    resolver: zodResolver(consultationSchema)
+    resolver: zodResolver(consultationSchema),
+    defaultValues: {
+      firstName: '',
+      lastName: '',
+      email: '',
+      phone: '',
+      birthControl: 'No',
+      pregnancyChance: 'No',
+      pregnancyDetails: 'No'
+    }
   });
 
+  function formatDate(date: Date) {
+    return new Intl.DateTimeFormat('en-US', {
+      month: 'long',
+      day: '2-digit',
+      year: 'numeric'
+    }).format(date);
+  }
+
   const onSubmit = (values: any) => {
-    console.log(JSON.stringify(values));
-    console.log(values.backPhoto);
+    onFormSubmit({
+      ...values,
+      procedureDate: formatDate(values.procedureDate)
+    });
   };
 
   const handleDopChange = (dop: Date | null) => {

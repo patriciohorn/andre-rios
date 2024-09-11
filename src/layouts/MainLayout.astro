@@ -92,7 +92,7 @@ const { title, description } = Astro.props;
     <MainNavigationMenu translations={translations} paths={paths} procedures={lang === 'es' ? organizedProceduresEs : organizedProceduresEn} slot="center-header" client:load/>
     <SheetMobileNav translations={translations} paths={paths} procedures={lang === 'es' ? organizedProceduresEs : organizedProceduresEn} slot="mobile-nav-header" client:load />
   </Header>
-  <main class="overflow-x-hidden">
+  <main>
     <slot/>
   </main>
   <Footer/>

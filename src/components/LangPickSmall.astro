@@ -1,0 +1,79 @@
+---
+import { LANGUAGES } from '../i18n/ui';
+import {getRouteFromUrl, getLangFromUrl, useTranslatedPath} from "../i18n/utils"
+import ChevronIcon from "@/components/icons/Chevron.astro"
+
+const route = getRouteFromUrl(Astro.url);
+const lang = getLangFromUrl(Astro.url);
+const translatePath = useTranslatedPath(lang);
+const currentLocaleData = LANGUAGES[lang]
+
+
+const otherLocales = Object.values(LANGUAGES).filter(
+  (locale) => locale.code !== lang
+)
+
+
+
+---
+
+
+<div class="relative inline-block text-left lg:hidden">
+  <div
+    class=" bg-neutral-800 w-[80px] rounded-md text-sm text-white hover:bg-neutral-800/80 transition-all"
+  >
+    <button
+      type="button"
+      class="dropdown-btn inline-flex justify-between items-center w-full gap-x-2 px-3 py-2"
+      aria-expanded="true"
+      aria-haspopup="true"
+      
+    > 
+      <currentLocaleData.flag />    
+      {currentLocaleData.name.toUpperCase().slice(0, 2)}
+      <ChevronIcon/>    
+    </button>
+    <ul
+      class="dropdown-menu hidden absolute w-full bg-neutral-800 pt-0.5"
+    >
+      {
+        otherLocales.map((locale) => (
+
+          <li class="py-[2px]">
+            <a
+              class="rounded-md bg-neutral-800  hover:bg-neutral-700/80 whitespace-no-wrap inline-flex justify-start items-center w-full gap-x-2 px-3 py-2"
+              href={translatePath(`/${route ? route : ''}`, locale.code)}
+            > 
+              <locale.flag />             
+              {locale.name.toUpperCase().slice(0, 2)}
+            </a>
+          </li>
+        ))
+      }
+    </ul>
+  </div>
+</div>
+
+<script>
+  document.addEventListener('DOMContentLoaded', () => {
+    const dropdownBtn = document.querySelector<HTMLButtonElement>('.dropdown-btn');
+    const dropdownMenu = document.querySelector<HTMLButtonElement>('.dropdown-menu');
+    if(dropdownBtn && dropdownMenu){
+      dropdownBtn.addEventListener('click', (event) => {
+        const isExpanded = dropdownBtn.getAttribute('aria-expanded') === 'true';
+        dropdownBtn.setAttribute('aria-expanded', (!isExpanded).toString());
+        dropdownMenu.classList.toggle('hidden');
+      });
+  
+      document.addEventListener('click', (event) => {
+        const target = event.target as HTMLElement | null;
+        if (target && !target.closest('.relative')) {
+          dropdownBtn.setAttribute('aria-expanded', 'false');
+          dropdownMenu.classList.add('hidden');
+        }
+  
+      });
+
+    }
+  });
+</script>

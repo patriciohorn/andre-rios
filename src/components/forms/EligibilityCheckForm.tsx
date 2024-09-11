@@ -48,26 +48,14 @@ const formSchema = z.object({
 });
 
 interface EligibilityCheckFormProps {
-  onEligibilityStatusChange: (eligible: boolean) => void;
-  onFormSubmit: (data: any) => void;
+  onEligibilityStatusChange: (eligible: boolean, eligibilityData: any) => void;
 }
 
-export function EligibilityCheckForm({
-  onEligibilityStatusChange,
-  onFormSubmit
-}: EligibilityCheckFormProps) {
+export function EligibilityCheckForm({ onEligibilityStatusChange }: EligibilityCheckFormProps) {
   const [bmi, setBmi] = useState<number | null>(null);
   const [isMetric, setIsMetric] = useState(true);
   const [age, setAge] = useState<number | null>(null);
-  const [formData, setFormData] = useState({
-    age: '',
-    bmi: '',
-    height: '',
-    weight: '',
-    surgery: false,
-    pregnancy: false
-  });
-
+  console.log(age);
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
     defaultValues: {
@@ -129,6 +117,14 @@ export function EligibilityCheckForm({
     setAge(calculatedAge);
   }
 
+  function formatDate(date: Date) {
+    return new Intl.DateTimeFormat('en-US', {
+      month: 'long',
+      day: '2-digit',
+      year: 'numeric'
+    }).format(date);
+  }
+
   function onSubmit(data: z.infer<typeof formSchema>) {
     let eligible = true;
     form.clearErrors();
@@ -168,11 +164,11 @@ export function EligibilityCheckForm({
 
     const height = isMetric ? data.heightCm : (data.heightFt || 0) * 12 + (data.heightIn || 0);
 
-    onEligibilityStatusChange(eligible);
-    onFormSubmit({
+    onEligibilityStatusChange(eligible, {
       ...data,
       bmi: bmi || undefined,
-      age: age || undefined
+      age: age || undefined,
+      dob: dob ? formatDate(dob) : undefined
     });
   }
 
