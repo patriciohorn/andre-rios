@@ -106,9 +106,7 @@ export function ConsultationForm({ onFormSubmit }: ConsultationFormProps) {
       lastName: '',
       email: '',
       phone: '',
-      birthControl: 'No',
-      pregnancyChance: 'No',
-      pregnancyDetails: 'No'
+      pregnancyDetails: ''
     }
   });
 
@@ -133,27 +131,17 @@ export function ConsultationForm({ onFormSubmit }: ConsultationFormProps) {
     }
   };
 
-  const nextStep = () => {
+  const nextStep = async () => {
     const step1Fields: Array<
-      | 'firstName'
-      | 'lastName'
-      | 'email'
-      | 'phone'
-      | 'gender'
-      | 'procedure'
-      | 'procedureDate'
-      | 'procedureMessage'
-    > = [
-      'firstName',
-      'lastName',
-      'email',
-      'phone',
-      'gender',
-      'procedure',
-      'procedureDate',
-      'procedureMessage'
-    ];
+      'firstName' | 'lastName' | 'email' | 'procedure' | 'procedureDate' | 'procedureMessage'
+    > = ['firstName', 'lastName', 'email', 'procedure', 'procedureDate', 'procedureMessage'];
 
+    const optionalFields1: Array<'phone' | 'gender'> = ['phone', 'gender'];
+    const optionalFields2: Array<'birthControl' | 'pregnancyDetails' | 'pregnancyChance'> = [
+      'birthControl',
+      'pregnancyDetails',
+      'pregnancyChance'
+    ];
     const step2Fields: Array<
       | 'allergies'
       | 'medication'
@@ -162,10 +150,7 @@ export function ConsultationForm({ onFormSubmit }: ConsultationFormProps) {
       | 'drinking'
       | 'drugUse'
       | 'previousSurgeries'
-      | 'birthControl'
       | 'thrombosisHistory'
-      | 'pregnancyDetails'
-      | 'pregnancyChance'
       | 'specialDiet'
     > = [
       'allergies',
@@ -175,33 +160,66 @@ export function ConsultationForm({ onFormSubmit }: ConsultationFormProps) {
       'drinking',
       'drugUse',
       'previousSurgeries',
-      'birthControl',
       'thrombosisHistory',
-      'pregnancyDetails',
-      'pregnancyChance',
       'specialDiet'
     ];
 
     if (currentStep === 0) {
-      form.trigger(step1Fields as (keyof typeof form.getValues)[]);
-
-      const fields = step1Fields.map((field) => form.getFieldState(field));
-      const allFieldsValid = fields.every(
-        (fieldState) => fieldState.isDirty && !fieldState.invalid
+      form.trigger([...step1Fields, ...optionalFields1] as (keyof typeof form.getValues)[]);
+      const requiredFieldsValid = step1Fields.every(
+        (field) => form.getFieldState(field).isDirty && !form.getFieldState(field).invalid
       );
-      if (!allFieldsValid) return;
+      const phone = form.getValues('phone');
+
+      // Allowing optional fields to be empty or valid
+      const optionalFieldsValid = optionalFields1.every(
+        (field) =>
+          !form.getFieldState(field).isDirty || // Not filled (considered valid)
+          (form.getFieldState(field).isDirty &&
+            !form.getFieldState(field).invalid &&
+            !isNaN(Number(phone))) // is filled and isn't invalid
+      );
+      if (!requiredFieldsValid || !optionalFieldsValid) return;
+      setCurrentStep((step) => step + 1);
     }
 
     if (currentStep === 1) {
-      form.trigger(step2Fields as (keyof typeof form.getValues)[]);
-      const fields = step2Fields.map((field) => form.getFieldState(field));
-      const allFieldsValid = fields.every(
-        (fieldState) => fieldState.isDirty && !fieldState.invalid
-      );
-      if (!allFieldsValid) return;
-    }
+      // Trigger form validation for all the fields
+      const isValid = await form.trigger([
+        ...step2Fields,
+        ...optionalFields2
+      ] as (keyof typeof form.getValues)[]);
 
-    setCurrentStep((step) => step + 1);
+      const birthControlValue = form.getValues('birthControl');
+      const pregnancyDetailsValue = form.getValues('pregnancyDetails');
+      const pregnancyChanceValue = form.getValues('pregnancyChance');
+
+      // If the user is not male, check if these fields are filled
+      if (!isMale) {
+        if (!birthControlValue) {
+          form.setError('birthControl', { type: 'manual', message: 'Required field' });
+        }
+        if (!pregnancyDetailsValue) {
+          form.setError('pregnancyDetails', { type: 'manual', message: 'Required field' });
+        }
+        if (!pregnancyChanceValue) {
+          form.setError('pregnancyChance', { type: 'manual', message: 'Required field' });
+        }
+
+        // If any of the required fields are missing, prevent moving to the next step
+        if (!birthControlValue || !pregnancyDetailsValue || !pregnancyChanceValue) {
+          return;
+        }
+      }
+
+      // If the form validation is not valid, stop the user from proceeding
+      if (!isValid) {
+        return;
+      }
+
+      // If everything is valid, proceed to the next step
+      setCurrentStep((step) => step + 1);
+    }
   };
 
   const prevStep = () => {
@@ -251,7 +269,10 @@ export function ConsultationForm({ onFormSubmit }: ConsultationFormProps) {
                 name="firstName"
                 render={({ field }) => (
                   <FormItem>
-                    <FormLabel>First Name</FormLabel>
+                    <FormLabel className="flex flex-row items-center">
+                      First Name
+                      <Asterisk className="w-3 h-3 text-red-600 ms-1" />
+                    </FormLabel>
                     <FormControl>
                       <Input placeholder="First Name" {...field} />
                     </FormControl>
@@ -264,7 +285,10 @@ export function ConsultationForm({ onFormSubmit }: ConsultationFormProps) {
                 name="lastName"
                 render={({ field }) => (
                   <FormItem>
-                    <FormLabel>Last Name</FormLabel>
+                    <FormLabel className="flex flex-row items-center">
+                      Last Name
+                      <Asterisk className="w-3 h-3 text-red-600 ms-1" />
+                    </FormLabel>
                     <FormControl>
                       <Input placeholder="Last Name" {...field} />
                     </FormControl>
@@ -279,7 +303,10 @@ export function ConsultationForm({ onFormSubmit }: ConsultationFormProps) {
                 name="email"
                 render={({ field }) => (
                   <FormItem>
-                    <FormLabel>Email</FormLabel>
+                    <FormLabel className="flex flex-row items-center">
+                      Email
+                      <Asterisk className="w-3 h-3 text-red-600 ms-1" />
+                    </FormLabel>
                     <FormControl>
                       <Input placeholder="Email" {...field} />
                     </FormControl>
@@ -307,7 +334,10 @@ export function ConsultationForm({ onFormSubmit }: ConsultationFormProps) {
               name="country"
               render={({ field }) => (
                 <FormItem>
-                  <FormLabel>Country</FormLabel>
+                  <FormLabel className="flex flex-row items-center">
+                    Country
+                    <Asterisk className="w-3 h-3 text-red-600 ms-1" />
+                  </FormLabel>
                   <Select onValueChange={field.onChange} defaultValue={field.value}>
                     <FormControl>
                       <SelectTrigger className="text-gray-500">
@@ -332,7 +362,10 @@ export function ConsultationForm({ onFormSubmit }: ConsultationFormProps) {
                 name="procedure"
                 render={({ field }) => (
                   <FormItem>
-                    <FormLabel>Procedure</FormLabel>
+                    <FormLabel className="flex flex-row items-center">
+                      Procedure
+                      <Asterisk className="w-3 h-3 text-red-600 ms-1" />
+                    </FormLabel>
                     <Select onValueChange={field.onChange} defaultValue={field.value}>
                       <FormControl>
                         <SelectTrigger className="text-gray-500">
@@ -356,7 +389,9 @@ export function ConsultationForm({ onFormSubmit }: ConsultationFormProps) {
                 name="procedureDate"
                 render={({ field }) => (
                   <FormItem className="flex flex-col">
-                    <FormLabel>Prospective Surgery Date</FormLabel>
+                    <FormLabel className="flex flex-row items-center">
+                      Prospective Surgery Date <Asterisk className="w-3 h-3 text-red-600 ms-1" />
+                    </FormLabel>
                     <Popover>
                       <PopoverTrigger asChild>
                         <Button
@@ -422,7 +457,10 @@ export function ConsultationForm({ onFormSubmit }: ConsultationFormProps) {
               name="procedureMessage"
               render={({ field }) => (
                 <FormItem>
-                  <FormLabel>What do you expect of your procedure?</FormLabel>
+                  <FormLabel className="flex flex-row items-center">
+                    What do you expect of your procedure?{' '}
+                    <Asterisk className="w-3 h-3 text-red-600 ms-1" />
+                  </FormLabel>
                   <FormControl>
                     <Textarea
                       placeholder="Tell us a little bit about your expectations"

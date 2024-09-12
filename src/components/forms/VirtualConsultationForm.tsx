@@ -18,7 +18,6 @@ export function VirtualConsultationForm() {
       ...eligibilityData
     }));
   }
-  console.log(formData);
 
   function handleFormSubmit(consultationData: any) {
     const combinedData = { ...formData, ...consultationData };

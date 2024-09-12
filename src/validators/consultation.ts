@@ -22,55 +22,41 @@ export const PROCEDURES = [
 
 const GENDERS = ['Male', 'Female'] as const;
 
-export const consultationSchema = z
-  .object({
-    // Step 1
-    firstName: z.string().min(3, { message: 'Please enter a valid name' }).max(200),
-    lastName: z.string().min(3, { message: 'Please enter a valid name' }).max(200),
-    email: z.string().email({ message: 'Please enter a valid email' }),
-    phone: z
-      .string({ message: 'Phone number must be 10 digits' })
-      .min(10, { message: 'Phone number must be 10 digits' })
-      .max(10, { message: 'Phone number must be 10 digits' })
-      .refine((val) => !isNaN(val as unknown as number), {
-        message: 'Phone number must be 10 digits'
-      }),
-    country: z.enum(COUNTRIES, { message: 'Please select a country' }),
-    procedure: z.enum(PROCEDURES, { message: 'Please select a procedure' }),
-    procedureDate: z.date({ message: 'Please select a date' }),
-    gender: z.enum(GENDERS, { message: 'Please select a gender' }),
-    procedureMessage: z.string({ message: 'Please tell us about your procedure expectations' }),
+export const consultationSchema = z.object({
+  // Step 1
+  firstName: z.string().min(3, { message: 'Please enter a valid name' }).max(200),
+  lastName: z.string().min(3, { message: 'Please enter a valid name' }).max(200),
+  email: z.string().email({ message: 'Please enter a valid email' }),
+  phone: z
+    .string({ message: 'Phone number must be 10 digits' })
+    .optional()
+    .refine((val) => !val || (val.length === 10 && !isNaN(val as unknown as number)), {
+      message: 'Phone number must be 10 digits and contain only numbers'
+    }),
+  country: z.enum(COUNTRIES, { message: 'Please select a country' }),
+  procedure: z.enum(PROCEDURES, { message: 'Please select a procedure' }),
+  procedureDate: z.date({ message: 'Please select a date' }),
+  gender: z.enum(GENDERS, { message: 'Please select a gender' }).optional(),
+  procedureMessage: z.string({ message: 'Please tell us about your procedure expectations' }),
 
-    // Step 2
-    allergies: z.string().min(2).max(160),
-    medication: z.string().min(2).max(160),
-    diagnosedDiseases: z.string().min(2).max(160),
-    smoking: z.string().min(2).max(160),
-    drinking: z.string().min(2).max(160),
-    drugUse: z.string().min(2).max(160),
-    previousSurgeries: z.string().min(2).max(160),
+  // Step 2
+  allergies: z.string().min(2).max(160),
+  medication: z.string().min(2).max(160),
+  diagnosedDiseases: z.string().min(2).max(160),
+  smoking: z.string().min(2).max(160),
+  drinking: z.string().min(2).max(160),
+  drugUse: z.string().min(2).max(160),
+  previousSurgeries: z.string().min(2).max(160),
 
-    birthControl: z.string().optional(),
-    thrombosisHistory: z.string().min(2).max(160),
-    pregnancyDetails: z.string().optional(),
-    pregnancyChance: z.string().optional(),
-    specialDiet: z.string().min(2).max(160),
+  birthControl: z.string().optional(),
+  thrombosisHistory: z.string().min(2).max(160),
+  pregnancyDetails: z.string().optional(),
+  pregnancyChance: z.string().optional(),
+  specialDiet: z.string().min(2).max(160),
 
-    // Step 3
-    frontPhoto: z.instanceof(File),
-    backPhoto: z.instanceof(File),
-    leftSidePhoto: z.instanceof(File),
-    rightSidePhoto: z.instanceof(File)
-  })
-  .refine(
-    (data) => {
-      if (data.gender === 'Female') {
-        return data.birthControl && data.pregnancyDetails && data.pregnancyChance;
-      }
-      return true; // If gender is Male, skip validation
-    },
-    {
-      path: ['gender'],
-      message: 'Some fields are required for females'
-    }
-  );
+  // Step 3
+  frontPhoto: z.instanceof(File),
+  backPhoto: z.instanceof(File),
+  leftSidePhoto: z.instanceof(File),
+  rightSidePhoto: z.instanceof(File)
+});
