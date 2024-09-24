@@ -1,9 +1,8 @@
 --- 
-import Heading from "./Heading.astro"
-
 import { getI18N } from "@/i18n"
 const { currentLocale } = Astro
 const i18n = getI18N({ currentLocale })
+
 
 import logo1 from "@/assets/cert_logo_1.svg"
 import logo2 from "@/assets/cert_logo_2.svg"
@@ -16,8 +15,7 @@ const logoImages = [logo1, logo2, logo3, logo4, logo5]
 
 
 <div class="bg-[#FAFAFA] py-16 sm:py-28">
-  <div class="mx-auto max-w-7xl px-6 lg:px-8">
-    <!-- <Heading title={i18n.CERTIFICATIONS_TITLE}/> -->
+  <div class="mx-auto max-w-7xl px-6 lg:px-8">   
     <h2 class="text-center text-4xl sm:text-5xl font-semibold leading-8 text-gray-900">{i18n.CERTIFICATIONS_TITLE}</h2>
     <ul class="mx-auto mt-12 sm:mt-20 grid max-w-lg grid-cols-4 items-center gap-x-8 gap-y-10 sm:max-w-xl sm:grid-cols-6 sm:gap-x-10 lg:mx-0 lg:max-w-none lg:grid-cols-5">
       {logoImages.map((image, idx) => (        

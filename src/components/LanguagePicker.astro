@@ -4,8 +4,6 @@ import {getRouteFromUrl, getLangFromUrl, useTranslatedPath} from "../i18n/utils"
 import ChevronIcon from "@/components/icons/Chevron.astro"
 
 
-
-
 const route = getRouteFromUrl(Astro.url);
 const lang = getLangFromUrl(Astro.url);
 const translatePath = useTranslatedPath(lang);

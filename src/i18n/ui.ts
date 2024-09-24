@@ -1,11 +1,11 @@
 // ui.ts
-import SpainFlag from '@/components/flags/Spain.astro';
+import MexicoFlag from '@/components/flags/Mexico.astro';
 import UnitedStatesFlag from '@/components/flags/UnitedStates.astro';
 
 // Add missing imports
 export const LANGUAGES: Record<
   string,
-  { code: string; name: string; label: string; flag: typeof SpainFlag }
+  { code: string; name: string; label: string; flag: typeof MexicoFlag }
 > = {
   en: {
     code: 'en',
@@ -17,7 +17,7 @@ export const LANGUAGES: Record<
     code: 'es',
     name: 'Español',
     label: 'ES',
-    flag: SpainFlag
+    flag: MexicoFlag
   }
 };
 

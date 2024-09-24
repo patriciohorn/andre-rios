@@ -17,21 +17,17 @@ const socialLinks = [
  
   {
     icon: 'tiktok', 
-    url: '#'
+    url: 'https://www.tiktok.com/@drandreirios'
   }, 
 ]
 
 const contactInfo = [
   {
     icon: 'whatsapp', 
-    url: '', 
+    url: 'https://wa.me/526646703359', 
     description: '664 670 3359'
   }, 
-  // {
-  //   icon: 'phone', 
-  //   url: '', 
-  //   description: '664 973 3708'
-  // }
+ 
 ]
 
 ---
@@ -41,7 +37,7 @@ const contactInfo = [
   <div class="max-w-7xl flex items-center mx-auto px-4 md:px-6 lg:px-8">
     <div class="flex-1 text-center sm:text-left">
       {socialLinks.map((item) => (        
-        <a href={item.url} class="group inline-flex items-center justify-center text-black w-10 h-10 focus:outline-none focus:ring-4 focus:ring-gray-700 rounded-lg text-sm p-2.5 mr-1">
+        <a href={item.url} target="_blank" class="group inline-flex items-center justify-center text-black w-10 h-10 focus:outline-none focus:ring-4 focus:ring-gray-700 rounded-lg text-sm p-2.5 mr-1">
           <span class="sr-only">{item.icon}</span>
           <Icon name={item.icon}  class="text-black w-5 h-5 group-hover:text-primary-700 transition-colors duration-200 ease-in-out" aria-hidden="true"/>
         </a>          
@@ -55,9 +51,9 @@ const contactInfo = [
   
     <div class="hidden sm:flex-1 sm:justify-end sm:flex sm:items-center sm:gap-x-2">
       {contactInfo.map((item) => (
-        <a href={item.url} class="inline-flex items-center text-black text-sm hover:text-primary-700 focus:outline-none focus:ring-4 focus:ring-gray-700 rounded-lg px-5 py-2.5 transition-colors duration-200 ease-in-out">
+        <a href={item.url} target="_blank" class="inline-flex items-center text-black text-sm hover:text-primary-700 focus:outline-none focus:ring-4 focus:ring-gray-700 rounded-lg px-5 py-2.5 transition-colors duration-200 ease-in-out">
           <span class=""><Icon name={item.icon} size={16} class="w-4 h-4 me-2"/></span>
-          <p class="">{item.description}</p>
+          <p>{item.description}</p>
         </a>          
       ))}
     </div>
