@@ -55,17 +55,11 @@ export function EligibilityCheckForm({ onEligibilityStatusChange }: EligibilityC
   const [bmi, setBmi] = useState<number | null>(null);
   const [isMetric, setIsMetric] = useState(true);
   const [age, setAge] = useState<number | null>(null);
-  console.log(age);
+
+  const [valuesetValue] = useState(0);
+
   const form = useForm<z.infer<typeof formSchema>>({
-    resolver: zodResolver(formSchema),
-    defaultValues: {
-      heightCm: 0,
-      heightFt: 0,
-      heightIn: 0,
-      weight: 0,
-      surgery: false,
-      pregnant: false
-    }
+    resolver: zodResolver(formSchema)
   });
 
   const { watch, setValue } = form;
@@ -175,7 +169,7 @@ export function EligibilityCheckForm({ onEligibilityStatusChange }: EligibilityC
   return (
     <div className="flex flex-col space-y-8">
       <div>
-        <h2 className="mb-4 text-xl font-bold text-gray-900">Pre-Consultation Requisites</h2>
+        <h2 className="mb-4 text-xl font-bold text-gray-900">Pre-Consultation Requirements</h2>
         <p className="text-gray-700">
           Please fill out the information asked below to confirm that you meet criteria to proceed
           with your virtual consultation.
@@ -203,10 +197,10 @@ export function EligibilityCheckForm({ onEligibilityStatusChange }: EligibilityC
                     checked={!isMetric}
                     onCheckedChange={() => {
                       setIsMetric(!isMetric);
-                      setValue('heightCm', 0);
-                      setValue('heightFt', 0);
-                      setValue('heightIn', 0);
-                      setValue('weight', 0);
+                      // setValue('heightCm', 0);
+                      // setValue('heightFt', 0);
+                      // setValue('heightIn', 0);
+                      // setValue('weight', 0);
                     }}
                   />
                 </div>
@@ -223,7 +217,9 @@ export function EligibilityCheckForm({ onEligibilityStatusChange }: EligibilityC
                           type="number"
                           placeholder="cm"
                           {...field}
-                          onChange={(e) => field.onChange(Number(e.target.value))}
+                          onChange={(e) =>
+                            field.onChange(e.target.value ? Number(e.target.value) : '')
+                          }
                         />
                       </FormControl>
                       <FormMessage />
@@ -263,7 +259,9 @@ export function EligibilityCheckForm({ onEligibilityStatusChange }: EligibilityC
                             type="number"
                             placeholder="in"
                             {...field}
-                            onChange={(e) => field.onChange(Number(e.target.value))}
+                            onChange={(e) =>
+                              field.onChange(e.target.value ? Number(e.target.value) : '')
+                            }
                           />
                         </FormControl>
                         <FormMessage />
@@ -283,7 +281,9 @@ export function EligibilityCheckForm({ onEligibilityStatusChange }: EligibilityC
                         type="number"
                         placeholder={isMetric ? 'kg' : 'lbs'}
                         {...field}
-                        onChange={(e) => field.onChange(Number(e.target.value))}
+                        onChange={(e) =>
+                          field.onChange(e.target.value ? Number(e.target.value) : '')
+                        }
                       />
                     </FormControl>
                     <FormMessage />
@@ -369,7 +369,7 @@ export function EligibilityCheckForm({ onEligibilityStatusChange }: EligibilityC
                     </FormControl>
                     <div className="flex flex-col gap-2 space-y-1">
                       <FormLabel className="text-sm">
-                        At least 10 months after your weight loss surgery
+                        At least 6 months after your weight loss surgery
                       </FormLabel>
                       <FormMessage className="text-xs" />
                     </div>
