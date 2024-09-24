@@ -1,20 +1,31 @@
 ---
 import { Icon } from "astro-icon/components";
 
+
+const socialLinks = [
+  {
+    icon: 'instagram', 
+    url: 'https://www.instagram.com/drandreirios/'
+  }, 
+  {
+    icon: 'facebook', 
+    url: 'https://www.facebook.com/dr.rios.cpr'
+  }, 
+ 
+  {
+    icon: 'tiktok', 
+    url: 'https://www.tiktok.com/@drandreirios'
+  }, 
+]
 ---
 
 
 <div class="flex mt-8 space-x-6">
-  <a href="" class="text-gray-100 hover:text-primary-500 transition-colors duration-200 ease-in-out">
-    <span class="sr-only">Instagram</span>
-    <Icon name="instagram" size={24}/>
-  </a>
-  <a href="" class="text-gray-100 hover:text-primary-500 transition-colors duration-200 ease-in-out">
-    <span class="sr-only">Facebook</span>
-    <Icon name="facebook" size={24}/>
-  </a>
-  <a href="" class="text-gray-100 hover:text-primary-500 transition-colors duration-200 ease-in-out">
-    <span class="sr-only">TikTok</span>
-    <Icon name="tiktok" size={24}/>
-  </a>
+  {socialLinks.map((link, idx) => (
+    <a href={link.url} class="text-gray-100 hover:text-primary-500 transition-colors duration-200 ease-in-out">
+      <span class="sr-only">{link.icon}</span>
+      <Icon name={link.icon} size={24}/>
+    </a>
+
+  ))}
 </div>
