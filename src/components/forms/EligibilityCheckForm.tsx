@@ -4,7 +4,7 @@ import { z } from 'zod';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { useForm } from 'react-hook-form';
 import { useState, useEffect } from 'react';
-import { CalendarIcon } from 'lucide-react';
+import { CalendarIcon, Divide } from 'lucide-react';
 import { cn } from '@/lib/utils';
 import { format } from 'date-fns';
 
@@ -33,6 +33,9 @@ import {
   CardHeader,
   CardTitle
 } from '@/components/ui/card';
+
+// Icons
+import { CircleCheck, CircleAlert, CircleX } from 'lucide-react';
 
 const formSchema = z.object({
   heightCm: z.number().optional(),
@@ -123,11 +126,11 @@ export function EligibilityCheckForm({ onEligibilityStatusChange }: EligibilityC
     let eligible = true;
     form.clearErrors();
 
-    if (bmi !== null && bmi >= 31) {
+    if (bmi !== null && bmi >= 32.9) {
       eligible = false;
       form.setError('weight', {
         type: 'manual',
-        message: 'Your BMI should be below 31 to be eligible for the virtual consultation.'
+        message: 'Your BMI should be below 32.9 to be eligible for the virtual consultation.'
       });
     }
 
@@ -184,7 +187,8 @@ export function EligibilityCheckForm({ onEligibilityStatusChange }: EligibilityC
               </CardTitle>
               <CardDescription className="mt-1 text-sm leading-6 text-gray-600">
                 To proceed, please enter your height and weight below to get your BMI value. Your
-                BMI should be below 31 to be eligible for the virtual consultation.
+                BMI should be below 32.9 to be eligible for the virtual consultation and{' '}
+                <strong>below 31 at the day of surgery.</strong>
               </CardDescription>
             </CardHeader>
             <CardContent className="space-y-6">
@@ -291,8 +295,51 @@ export function EligibilityCheckForm({ onEligibilityStatusChange }: EligibilityC
                 )}
               />
               {bmi !== null && (
-                <div className="mt-6 p-4 bg-muted rounded-md">
-                  <p className="text-lg font-semibold">Your BMI: {bmi}</p>
+                <div
+                  className={cn(
+                    `mt-6 p-4 rounded-md flex flex-col gap-2`,
+                    bmi <= 31
+                      ? 'bg-green-100'
+                      : bmi > 31 && bmi <= 32.9
+                        ? 'bg-yellow-50'
+                        : 'bg-red-50'
+                  )}>
+                  <p
+                    className={cn(
+                      `text-lg font-semibold`,
+                      bmi <= 31
+                        ? 'text-green-800'
+                        : bmi > 31 && bmi <= 32.9
+                          ? 'text-yellow-800'
+                          : 'text-red-800'
+                    )}>
+                    Your BMI: {bmi}
+                  </p>
+                  {bmi <= 31 ? (
+                    <div className="flex items-center gap-2 text-green-800">
+                      <CircleCheck size={16} />
+                      <p className="text-sm">
+                        Your BMI is below 31, you're elegible for virtual consultation
+                      </p>
+                    </div>
+                  ) : bmi > 31 && bmi <= 32.9 ? (
+                    <div className="flex items-start gap-2 text-yellow-800">
+                      <CircleAlert size={16} className="w-4 h-4 flex-shrink-0 mt-1" />
+                      <p className="text-sm">
+                        If you're between a BMI of 31 to 32.9, you can still get an evaluation, but
+                        you need to know that we can't proceed with surgery unless you're below a 31
+                        BMI <strong>AT THE DAY OF SURGERY</strong>
+                      </p>
+                    </div>
+                  ) : (
+                    <div className="flex items-center gap-2 text-red-800">
+                      <CircleX size={16} />
+                      <p className="text-sm">
+                        Your BMI should be below 32.9 to be eligible for the virtual consultation.
+                      </p>
+                    </div>
+                  )}
+                  <p></p>
                 </div>
               )}
             </CardContent>
