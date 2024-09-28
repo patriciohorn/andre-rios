@@ -17,31 +17,31 @@
       "PROCEDURES_1": "Inyectables",
       "PROCEDURES_2": "Corporal",
       "PROCEDURES_3": "Busto"
-    }, 
+    },
     "PROCEDURES_BREAST": {
-      "PROCEDURE_1": "Breast Augmentation with Implants", 
-      "PROCEDURE_2": "Breast Lift", 
-      "PROCEDURE_3": "Breast Reduction", 
+      "PROCEDURE_1": "Breast Augmentation with Implants",
+      "PROCEDURE_2": "Breast Lift",
+      "PROCEDURE_3": "Breast Reduction",
       "PROCEDURE_4": "Breast Augmentation with Fat"
-    }, 
+    },
     "PROCEDURES_INJECTABLES": {
-      "PROCEDURE_1": "Hyperhidrosis", 
-      "PROCEDURE_2": "Botulinum Toxin (Botox)", 
+      "PROCEDURE_1": "Hyperhidrosis",
+      "PROCEDURE_2": "Botulinum Toxin (Botox)",
       "PROCEDURE_3": "Fillers"
-    }, 
+    },
     "PROCEDURES_BODY": {
-      "PROCEDURE_1": "Abdmonioplasty", 
-      "PROCEDURE_2": "Brachioplasty", 
-      "PROCEDURE_3": "Gynecomastia Thorax Liposuction", 
-      "PROCEDURE_4": "Liposuction", 
-      "PROCEDURE_5": "Mommy Makeover", 
-      "PROCEDURE_6": "Massive Weight Loss", 
-      "PROCEDURE_7": "Torsoplasty", 
-      "PROCEDURE_8": "Thigh Lift", 
+      "PROCEDURE_1": "Abdmonioplasty",
+      "PROCEDURE_2": "Brachioplasty",
+      "PROCEDURE_3": "Gynecomastia Thorax Liposuction",
+      "PROCEDURE_4": "Liposuction",
+      "PROCEDURE_5": "Mommy Makeover",
+      "PROCEDURE_6": "Massive Weight Loss",
+      "PROCEDURE_7": "Torsoplasty",
+      "PROCEDURE_8": "Thigh Lift",
       "PROCEDURE_9": "Lipoinfiltration"
     }
   },
-  
+
   "TESTIMONIALS": [
     {
       "TESTIMONIAL_NAME": "Caro de la Garza",
@@ -58,6 +58,38 @@
     {
       "TESTIMONIAL_NAME": "Mariana Mondragón",
       "TESTIMONIAL_TEXT": "¡Mis resultados con el Dr. Andrei han sido excelentes! Siempre ha estado en la disposición de aclarar todas mis dudas y dar su punto de vista para llegar a obtener los mejores resultados. Recibí la mejor atención por parte de él y de su equipo."
+    },
+    {
+      "TESTIMONIAL_NAME": "",
+      "TESTIMONIAL_TEXT": "Dr. Andrei Ríos ¡Es excepcional! ¡Él es muy minucioso y realmente se preocupa por sus pacientes y su seguridad es claramente su prioridad! ¡Él vino a mi casa en la recuperación para verme así que no tuve que salir en medio de una tormenta de lluvia! ¡Él es de primera clase y se lo recomendaría a cualquiera!"
+    },
+    {
+      "TESTIMONIAL_NAME": "",
+      "TESTIMONIAL_TEXT": "¡Le daría 10+ estrellas si pudiera!  No tengo palabras para describir al Dr. Ríos, ¡es increíble! Todos los involucrados - coordinadores, conductores, enfermeras, personal del hospital, el Dr. González (anestesiólogo), personal de la oficina, el personal del Grand Hotel - absolutamente maravilloso. He viajado (solo) a Tijuana dos veces para cirugías con el Dr. Ríos. Mi atención fue de primera clase en ambas ocasiones."
+    },
+    {
+      "TESTIMONIAL_NAME": "",
+      "TESTIMONIAL_TEXT": "¡Cirujano fenomenal! Nunca me sentí tan tranquila y más segura de mi decisión al salir de una consulta. Sin duda la mejor decisión que he tomado. Dr Rios escuchó el resultado que quería para mi cuerpo y él lo logró."
+    },
+    {
+      "TESTIMONIAL_NAME": "",
+      "TESTIMONIAL_TEXT": "Si quieres los mejores resultados con un cirujano sincero que hará todo lo posible para satisfacer todos tus deseos, ¡no busques más! Rios me ha devuelto mi confianza y ya no llevo mis 8 libras de piel en mi vientre. Solía pararme en las esquinas de los parques acuáticos y ahora me muero por encontrar el traje de baño que más me favorezca."
+    },
+    {
+      "TESTIMONIAL_NAME": "",
+      "TESTIMONIAL_TEXT": "¡El Dr. Ríos y su personal son increíbles! Estoy muy feliz con mi elección de tener la cirugía con él. El personal de la oficina fue muy comunicativo, respondió a todas mis preguntas, manejó todo lo que necesitaba sin ningún problema. Toda la experiencia fue fluida. ¡Llevo 6 días después de la operación y totalmente hinchado, pero mis resultados son increíbles hasta ahora! Yo vivo en Los Ángeles, la meca de la cirugía plástica, y el trabajo del Dr. Ríos es tan bueno como cualquier otro cirujano de clase mundial."
+    },
+    {
+      "TESTIMONIAL_NAME": "",
+      "TESTIMONIAL_TEXT": "La experiencia de ver al Dr. Ríos fue increíble. Yo soy de BC Canadá y bajar a TJ fue increíble. La atención que recibí fue increíble. Mucho mejor de lo que he tenido aquí en Canadá. El tiempo que se tomó en cada paso fue reflexivo y gentil y un oído atento. Tener una buena hora alrededor de la anestesia solo. Fue increíble. El Dr. Ríos escuchó lo que yo quería y me llevó a metas que eran exactamente lo que se necesitaba."
+    },
+    {
+      "TESTIMONIAL_NAME": "",
+      "TESTIMONIAL_TEXT": "Cuando encontré al Dr. Ríos, marcó todas las casillas para mí. Él hace que la seguridad de sus pacientes el aspecto más importante de la cirugía. Él toma todas las medidas para garantizar su seguridad. Eso incluye trabajar siempre con el mismo anestesiólogo y equipo quirúrgico que comparten las mismas normas de seguridad. Mientras que poner tu seguridad en primer lugar es una prioridad, en segundo lugar está su firma. Su firma son sus increíbles resultados. Realmente tiene manos mágicas."
+    },
+    {
+      "TESTIMONIAL_NAME": "",
+      "TESTIMONIAL_TEXT": "Recientemente tuve el placer de someterse a varios procedimientos cosméticos con el Dr. Andrei Ríos, incluyendo la liposucción 360, un levantamiento de glúteos brasileño (BBL), una abdominoplastia, un levantamiento de busto, y una torsoplastia. De principio a fin, mi experiencia con el Dr. Ríos y todo su equipo fue nada menos que excepcional."
     }
   ],
   "GALLERY_TITLE": "Galería",

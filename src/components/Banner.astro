@@ -19,6 +19,13 @@ const socialLinks = [
     icon: 'tiktok', 
     url: 'https://www.tiktok.com/@drandreirios'
   }, 
+  {
+    icon: 'realself', 
+    url: 'https://www.realself.com/dr/andrei-rios-tijuana-mexico'
+  }, 
+  
+  
+  
 ]
 
 const contactInfo = [
@@ -29,7 +36,6 @@ const contactInfo = [
   }, 
  
 ]
-
 ---
 
 
@@ -42,6 +48,12 @@ const contactInfo = [
           <Icon name={item.icon}  class="text-black w-5 h-5 group-hover:text-primary-700 transition-colors duration-200 ease-in-out" aria-hidden="true"/>
         </a>          
       ))}
+     
+
+      <!-- <a href={item.url} target="_blank" class="group inline-flex items-center justify-center text-black w-10 h-10 focus:outline-none focus:ring-4 focus:ring-gray-700 rounded-lg text-sm p-2.5 mr-1">
+        <span class="sr-only">{item.icon}</span>
+        
+      </a>           -->
     </div>
   
     <div class="hidden sm:flex sm:items-center">
@@ -56,6 +68,7 @@ const contactInfo = [
           <p>{item.description}</p>
         </a>          
       ))}
+      
     </div>
   </div>
 </section>

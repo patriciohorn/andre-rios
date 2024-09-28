@@ -199,10 +199,10 @@ export function EligibilityCheckForm({ onEligibilityStatusChange }: EligibilityC
                     checked={!isMetric}
                     onCheckedChange={() => {
                       setIsMetric(!isMetric);
-                      // setValue('heightCm', 0);
-                      // setValue('heightFt', 0);
-                      // setValue('heightIn', 0);
-                      // setValue('weight', 0);
+                      setValue('heightCm', 0);
+                      setValue('heightFt', 0);
+                      setValue('heightIn', 0);
+                      setValue('weight', 0);
                     }}
                   />
                 </div>

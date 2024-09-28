@@ -754,12 +754,18 @@ export function ConsultationForm({ onFormSubmit }: ConsultationFormProps) {
 
           {/* {Step 3} */}
           <div className={cn({ hidden: currentStep !== steps.length - 1 })}>
-            <ul className="flex flex-col space-y-4 list-disc list-inside">
-              {submissionGuidelines.map((guideline, idx) => (
-                <li key={`guideline-${idx}`}>{guideline}</li>
-              ))}
-            </ul>
-            <div className="grid sm:grid-cols-2 gap-x-12 gap-y-12 mt-12">
+            <div className="flex flex-col gap-8">
+              <ul className="flex flex-col space-y-2 list-disc list-inside">
+                {submissionGuidelines.map((guideline, idx) => (
+                  <li key={`guideline-${idx}`}>{guideline}</li>
+                ))}
+              </ul>
+              <p className="text-sm">
+                Note: All photos uploaded will be kept secure and protected. They will not be shared
+                without your consent.
+              </p>
+            </div>
+            <div className="grid sm:grid-cols-2 gap-x-12 gap-y-12 mt-8">
               <FormField
                 control={form.control}
                 name="frontPhoto"

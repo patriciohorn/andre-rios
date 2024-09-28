@@ -40,8 +40,8 @@ const TestimonialCarousel: React.FC<TestimonialCarouselProps> = ({ testimonials 
         {testimonials.map((testimonial, idx) => (
           <CarouselItem className="basis-full lg:basis-1/2 sm:px-8" key={idx}>
             <TestimonialCard
-              src={avatars[idx].src}
-              alt={`${testimonial.TESTIMONIAL_NAME} avatar`}
+              // src={avatars[idx].src}
+              // alt={`${testimonial.TESTIMONIAL_NAME} avatar`}
               testimonialName={testimonial.TESTIMONIAL_NAME}
               testimonialText={testimonial.TESTIMONIAL_TEXT}
             />
