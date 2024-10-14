@@ -548,8 +548,9 @@ export function ConsultationForm({ onFormSubmit }: ConsultationFormProps) {
                     </FormControl>
                     <SelectContent>
                       <SelectItem value="No">No</SelectItem>
+                      <SelectItem value="Quit">Used to but quit</SelectItem>
                       <SelectItem value="Ocassionally">Ocassionally</SelectItem>
-                      <SelectItem value="Daiky">Daily</SelectItem>
+                      <SelectItem value="Daily">Daily</SelectItem>
                     </SelectContent>
                   </Select>
                   <FormMessage />
@@ -573,6 +574,7 @@ export function ConsultationForm({ onFormSubmit }: ConsultationFormProps) {
                     </FormControl>
                     <SelectContent>
                       <SelectItem value="No">No</SelectItem>
+                      <SelectItem value="Quit">Used to but quit</SelectItem>
                       <SelectItem value="Ocassionally">Ocassionally</SelectItem>
                       <SelectItem value="Weekly">Weekly</SelectItem>
                       <SelectItem value="Daily">Daily</SelectItem>

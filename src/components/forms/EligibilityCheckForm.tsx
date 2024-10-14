@@ -186,7 +186,7 @@ export function EligibilityCheckForm({ onEligibilityStatusChange }: EligibilityC
               <CardDescription className="mt-1 text-sm leading-6 text-gray-600">
                 To proceed, please enter your height and weight below to get your BMI value. Your
                 BMI should be below 32.9 to be eligible for the virtual consultation and
-                <strong>below 31 at the day of surgery.</strong>
+                <strong> below 31 at the day of surgery.</strong>
               </CardDescription>
             </CardHeader>
             <CardContent className="space-y-6 mt-4">

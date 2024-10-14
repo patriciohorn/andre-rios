@@ -9,7 +9,7 @@ export const PROCEDURES = [
   'Hyperhidrosis',
   'Botulinum Toxin (Botox)',
   'Fillers',
-  'Abdmonioplasty',
+  'Abdominoplasty (Tummy Tuck)',
   'Brachioplasty',
   'Gynecomastia Thorax Liposuction',
   'Liposuction',
