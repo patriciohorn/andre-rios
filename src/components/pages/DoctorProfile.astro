@@ -1,25 +1,29 @@
 ---
-import MainLayout from '@/layouts/MainLayout.astro'
-import HeaderCenteredEyebrow from "../HeaderCenteredEyebrow.astro"
-import { getI18N } from "@/i18n";
+import MainLayout from '@/layouts/MainLayout.astro';
+import HeaderCenteredEyebrow from '../HeaderCenteredEyebrow.astro';
+import { getI18N } from '@/i18n';
 import { Image } from 'astro:assets';
 
-import doctorImage from "../../assets/doctor.jpg"
+import doctorImage from '../../assets/doctor.jpg';
 
-const {currentLocale} = Astro
-const i18n = getI18N({currentLocale})
+const { currentLocale } = Astro;
+const i18n = getI18N({ currentLocale });
 
-const content = Object.values(i18n.ABOUT.CONTENT)
+const content = Object.values(i18n.ABOUT.CONTENT);
 ---
 
 <MainLayout title={i18n.ABOUT.TITLE}>
   <section class="py-16 md:py-28 px-6 lg:px-8 bg-[#FAFAFA]">
     <div class="max-w-3xl mx-auto">
       <div class="flex flex-col gap-12 md:gap-20">
-      <HeaderCenteredEyebrow eyebrow={i18n.ABOUT.TAG} title={i18n.ABOUT.TITLE}/>
-      <div class="rounded-xl overflow-hidden shadow-lg">
-        <Image src={doctorImage} alt="Dr. Andre Ríos" class="w-full h-full object-cover aspect-[3/2]"/>
-      </div>
+        <HeaderCenteredEyebrow eyebrow={i18n.ABOUT.TAG} title={i18n.ABOUT.TITLE} />
+        <div class="rounded-xl overflow-hidden shadow-lg">
+          <Image
+            src={doctorImage}
+            alt="Dr. Andre Ríos"
+            class="w-full h-full object-cover aspect-[3/2]"
+          />
+        </div>
         <div class="flex flex-col space-y-8">
           <div class="flex flex-col gap-2">
             <div class="flex gap-2">
@@ -31,16 +35,13 @@ const content = Object.values(i18n.ABOUT.CONTENT)
               <p class="text-sm text-gray-800">{i18n.ABOUT.BOARD_NUMBER}</p>
             </div>
           </div>
-          {content.map((item) => (
-            <p class="text-gray-800 text-lg leading-7 max-w-prose">{item}</p>
-          ))}
+          {
+            content.map((item) => (
+              <p class="text-gray-800 text-lg leading-7 max-w-prose text-justify">{item}</p>
+            ))
+          }
         </div>
-  
-  
-      </div>      
+      </div>
     </div>
-        
-
- 
   </section>
 </MainLayout>

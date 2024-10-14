@@ -20,6 +20,6 @@ He has international experience, rotating through different hospitals in the Uni
 
 In addition, during his training, he carried out research work, for which he has published scientific articles in national and international journals, as well as participated as an organizer and speaker at Meetings and Symposiums.
 
-Dr. Andrei Ríos is passionate about body contouring, which includes liposuction, fat transfer (BBL), lipectomy or abdominoplasty, in addition he performs highly complex cosmetic surgeries, such as post weight loss reconstructive surgery, breast augmentation, reduction or lifting, rhinoplasty, blepharoplasty and otoplasty, among others.
+Dr. Andrei Ríos is passionate about body contouring, which includes liposuction, fat transfer (BBL), lipectomy or abdominoplasty, in addition he performs highly complex cosmetic surgeries, such as post weight loss reconstructive surgery, breast augmentation, reduction or lifting, among others.
 
 His priority is the safety of his patients, as well as helping them to accomplish their expectations and together achieve the results they want.

@@ -25,9 +25,8 @@
       "PROCEDURE_4": "Breast Augmentation with Fat"
     },
     "PROCEDURES_INJECTABLES": {
-      "PROCEDURE_1": "Hyperhidrosis",
-      "PROCEDURE_2": "Botulinum Toxin (Botox)",
-      "PROCEDURE_3": "Fillers"
+      "PROCEDURE_1": "Botulinum Toxin (Botox)",
+      "PROCEDURE_2": "Fillers"
     },
     "PROCEDURES_BODY": {
       "PROCEDURE_1": "Abdmonioplasty",
