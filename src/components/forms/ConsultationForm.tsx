@@ -41,7 +41,7 @@ const ACCEPTED_FILE_TYPES = ['image/png'];
 const steps = [
   {
     id: 'Step 1',
-    name: 'Personal Information',
+    name: 'General Information',
     fields: [
       'email',
       'firstName',
@@ -428,7 +428,7 @@ export function ConsultationForm({ onFormSubmit }: ConsultationFormProps) {
               name="gender"
               render={({ field }) => (
                 <FormItem>
-                  <FormLabel>Gender</FormLabel>
+                  <FormLabel>Birth Gender</FormLabel>
                   <Select
                     onValueChange={(value) => {
                       field.onChange(value);
