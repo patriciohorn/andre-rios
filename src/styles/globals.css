@@ -71,4 +71,8 @@
   body {
     @apply bg-background text-foreground font-sans;
   }
+
+  .animate-down {
+    @apply animate-fade-down animate-ease-in-out animate-duration-300;
+  }
 }

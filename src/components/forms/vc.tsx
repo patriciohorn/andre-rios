@@ -4,7 +4,7 @@ import { Step2Expectations } from './Step2Expectations';
 import { Step3MedicalHistory } from './Step3MedicalHistory';
 import { Step4UploadPictures } from './Step4UploadPictures';
 export const ConsultationForm = () => {
-  const [step, setStep] = useState(0);
+  const [step, setStep] = useState(2);
 
   const handleNext = () => {
     setStep(step + 1);
