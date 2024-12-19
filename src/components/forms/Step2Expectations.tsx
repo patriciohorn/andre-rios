@@ -1,10 +1,6 @@
 import { useState } from 'react';
-import { zodResolver } from '@hookform/resolvers/zod';
-import { useForm } from 'react-hook-form';
-import { z } from 'zod';
 
 // Shadcn components
-import { Button } from '@/components/ui/button';
 import {
   Form,
   FormControl,
@@ -25,40 +21,11 @@ import { Textarea } from '@/components/ui/textarea';
 import { Input } from '@/components/ui/input';
 import { RadioGroup, RadioGroupItem } from '@/components/ui/radio-group';
 
-// Form Schema
-const ExpectationsSchema = z.object({
-  desiredProcedure: z.string().min(1, 'Desired procedure is required'),
-  otherProcedure: z.string().optional(),
-  dislikesAndDesires: z.string().min(1, 'Please tell us a little about your dislikes and desires'),
-  breastSurgery: z.enum(['yes', 'no'], { required_error: 'Please select an option' }),
-  cupSize: z.string(),
-  breastImplants: z.enum(['yes', 'no'], { required_error: 'Please select an option' }),
-  breastAugmentationBefore: z.enum(['yes', 'no'], { required_error: 'Please select an option' }),
-  hasBeenPregnant: z.enum(['yes', 'no'], { required_error: 'Please select an option' }),
-  timesPregnant: z.string().optional(),
-  delivered: z.enum(['Vaginal', 'C-Section', 'Both', 'Other']),
-  birthControl: z.string().min(1, 'Please select a birth control'),
-  otherBirthControl: z.string().optional(),
-  currentlyPregnant: z.enum(['yes', 'no'], { required_error: 'Please select an option' }),
-  breastFeeding: z.enum(['yes', 'no'], { required_error: 'Please select an option' })
-});
-
 // Component
-export const Step2Expectations = ({ onNext, onBack }: any) => {
-  const form = useForm<z.infer<typeof ExpectationsSchema>>({
-    resolver: zodResolver(ExpectationsSchema),
-    defaultValues: {
-      desiredProcedure: '',
-      otherProcedure: '',
-      dislikesAndDesires: '',
-      cupSize: '',
-      timesPregnant: '',
-      birthControl: ''
-    }
-  });
-  const [procedure, setProcedure] = useState<string | null>('');
-  const [pregnant, setPregnant] = useState<boolean | null>(null);
-  const [birthControl, setBirthControl] = useState<string | null>('');
+export const Step2Expectations = ({ form }: any) => {
+  const hasBeenPregnant = form.watch('hasBeenPregnant'); // Watch the pregnant field dynamically
+  const desiredProcedure = form.watch('desiredProcedure'); // Watch the procedure field
+  const birthControl = form.watch('birthControl'); // Watch the birth control field
 
   const procedures = [
     'Breast Augmentation with Implants',
@@ -92,27 +59,9 @@ export const Step2Expectations = ({ onNext, onBack }: any) => {
     'Other'
   ];
 
-  const onSubmit = (data: any) => {
-    if (procedure === 'Other' && !data.otherProcedure) {
-      form.setError('otherProcedure', { type: 'manual', message: 'Please specify the procedure' });
-      return;
-    }
-
-    if (pregnant && !data.timesPregnant) {
-      form.setError('timesPregnant', {
-        type: 'manual',
-        message: 'Please specify how many times have you been pregnant'
-      });
-      return;
-    }
-    onNext();
-  };
-
   return (
     <Form {...form}>
-      <form
-        onSubmit={form.handleSubmit(onSubmit)}
-        className="w-2/3 space-y-8 animate-fade-right animate-ease-in-out">
+      <form className="space-y-8 animate-fade-right animate-ease-in-out">
         {/* Desired Procedure */}
         <div className="space-y-4">
           <FormField
@@ -120,21 +69,18 @@ export const Step2Expectations = ({ onNext, onBack }: any) => {
             name="desiredProcedure"
             render={({ field }) => (
               <FormItem>
-                <FormLabel>What’s your Desired Medical Procedure(s) ?</FormLabel>
-                <Select
-                  onValueChange={(value) => {
-                    field.onChange(value);
-                    setProcedure(value);
-                  }}
-                  defaultValue={field.value}>
+                <FormLabel>What’s your Desired Medical Procedure(s)?</FormLabel>
+                <Select onValueChange={field.onChange} defaultValue={field.value}>
                   <FormControl>
                     <SelectTrigger>
                       <SelectValue placeholder="Select a desired procedure or other" />
                     </SelectTrigger>
                   </FormControl>
                   <SelectContent>
-                    {procedures.map((procedure: string) => (
-                      <SelectItem value={procedure}>{procedure}</SelectItem>
+                    {procedures.map((procedure) => (
+                      <SelectItem value={procedure} key={procedure}>
+                        {procedure}
+                      </SelectItem>
                     ))}
                   </SelectContent>
                 </Select>
@@ -142,12 +88,12 @@ export const Step2Expectations = ({ onNext, onBack }: any) => {
               </FormItem>
             )}
           />
-          {procedure === 'Other' && (
+          {desiredProcedure === 'Other' && (
             <FormField
               control={form.control}
               name="otherProcedure"
               render={({ field }) => (
-                <FormItem className="animate-fade-down animate-ease-in-out animate-duration-300">
+                <FormItem>
                   <FormLabel>Please specify the procedure</FormLabel>
                   <FormControl>
                     <Input placeholder="Enter the procedure" {...field} />
@@ -291,36 +237,30 @@ export const Step2Expectations = ({ onNext, onBack }: any) => {
           control={form.control}
           name="hasBeenPregnant"
           render={({ field }) => (
-            <FormItem className="space-y-3">
+            <FormItem>
               <FormLabel>Have you been pregnant?</FormLabel>
-              <FormControl>
-                <RadioGroup
-                  onValueChange={(value) => {
-                    field.onChange(value);
-                    setPregnant(value === 'yes');
-                  }}
-                  defaultValue={field.value}
-                  className="flex flex-col space-y-1">
-                  <FormItem className="flex items-center space-x-3 space-y-0">
-                    <FormControl>
-                      <RadioGroupItem value="yes" />
-                    </FormControl>
-                    <FormLabel className="font-normal">Yes</FormLabel>
-                  </FormItem>
-                  <FormItem className="flex items-center space-x-3 space-y-0">
-                    <FormControl>
-                      <RadioGroupItem value="no" />
-                    </FormControl>
-                    <FormLabel className="font-normal">No</FormLabel>
-                  </FormItem>
-                </RadioGroup>
-              </FormControl>
+              <RadioGroup
+                className="flex flex-col space-y-1"
+                onValueChange={field.onChange}
+                defaultValue={field.value}>
+                <FormItem className="flex items-center space-x-3 space-y-0">
+                  <FormControl>
+                    <RadioGroupItem value="yes" />
+                  </FormControl>
+                  <FormLabel className="font-normal">Yes</FormLabel>
+                </FormItem>
+                <FormItem className="flex items-center space-x-3 space-y-0">
+                  <FormControl>
+                    <RadioGroupItem value="no" />
+                  </FormControl>
+                  <FormLabel className="font-normal">No</FormLabel>
+                </FormItem>
+              </RadioGroup>
               <FormMessage />
             </FormItem>
           )}
         />
-
-        {pregnant && (
+        {hasBeenPregnant === 'yes' && (
           <>
             <FormField
               control={form.control}
@@ -348,7 +288,7 @@ export const Step2Expectations = ({ onNext, onBack }: any) => {
                       defaultValue={field.value}
                       className="flex flex-col space-y-1">
                       {deliveredProcedures.map((procedure) => (
-                        <FormItem className="flex items-center space-x-3 space-y-0">
+                        <FormItem key={procedure} className="flex items-center space-x-3 space-y-0">
                           <FormControl>
                             <RadioGroupItem value={procedure} />
                           </FormControl>
@@ -372,12 +312,7 @@ export const Step2Expectations = ({ onNext, onBack }: any) => {
             render={({ field }) => (
               <FormItem>
                 <FormLabel>Birth control used</FormLabel>
-                <Select
-                  onValueChange={(value) => {
-                    field.onChange(value);
-                    setBirthControl(value);
-                  }}
-                  defaultValue={field.value}>
+                <Select onValueChange={field.onChange} defaultValue={field.value}>
                   <FormControl>
                     <SelectTrigger>
                       <SelectValue placeholder="Select a birth control" />
@@ -385,7 +320,9 @@ export const Step2Expectations = ({ onNext, onBack }: any) => {
                   </FormControl>
                   <SelectContent>
                     {birthControls.map((control) => (
-                      <SelectItem value={control}>{control}</SelectItem>
+                      <SelectItem value={control} key={control}>
+                        {control}
+                      </SelectItem>
                     ))}
                   </SelectContent>
                 </Select>
@@ -398,7 +335,7 @@ export const Step2Expectations = ({ onNext, onBack }: any) => {
               control={form.control}
               name="otherBirthControl"
               render={({ field }) => (
-                <FormItem className=" animate-fade-down animate-ease-in-out animate-duration-300">
+                <FormItem>
                   <FormLabel>Please specify other birth control used</FormLabel>
                   <FormControl>
                     <Input placeholder="Enter birth control used" {...field} />
@@ -473,12 +410,6 @@ export const Step2Expectations = ({ onNext, onBack }: any) => {
             </FormItem>
           )}
         />
-        <div className="flex gap-6">
-          <Button type="button" onClick={onBack}>
-            Back
-          </Button>
-          <Button type="submit">Next</Button>
-        </div>
       </form>
     </Form>
   );

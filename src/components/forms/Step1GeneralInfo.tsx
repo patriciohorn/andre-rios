@@ -1,9 +1,6 @@
-import { zodResolver } from '@hookform/resolvers/zod';
-import { useForm } from 'react-hook-form';
-import { z } from 'zod';
 import { cn } from '@/lib/utils';
-import { format } from 'date-fns';
-import { useState, useEffect } from 'react';
+import { format, differenceInYears } from 'date-fns';
+import { useState, useEffect, useMemo } from 'react';
 
 // Icons
 import { Info, CalendarIcon } from 'lucide-react';
@@ -31,138 +28,119 @@ import {
   SelectValue
 } from '@/components/ui/select';
 
-// Form Schema
-const generalInfoSchema = z.object({
-  firstName: z.string().min(1, 'First name is required'),
-  lastName: z.string().min(1, 'Last name is required'),
-  gender: z.enum(['male', 'female', 'other'], {
-    required_error: 'Please select a gender'
-  }),
-  dateOfBirth: z.date({
-    required_error: 'Date of Birth is required to calculate your age'
-  }),
-  address: z.string().min(1, 'Address is required'),
-  email: z.string().email({ message: 'Please enter a valid email' }),
-  phone: z
-    .string()
-    .min(10, { message: 'Phone number must be at least 10 digits' })
-    .regex(/^[0-9()-\s]+$/, { message: 'Invalid phone number format' }),
-  occupation: z.string().min(2, 'Please enter your occupation'),
-  heightFt: z.number(),
-  heightIn: z.number(),
-  weight: z.number(),
-  hadSurgery: z.boolean(),
-  surgeryType: z.enum(['gastric-sleeve', 'bypass', 'lapband', 'weight-loss']).optional(),
-  reference: z.enum([
-    'facebook',
-    'instagram',
-    'realself',
-    'tiktok',
-    'friend-or-relative',
-    'others'
-  ]),
-  procedureMonth: z.string().min(1, 'Please select an estimated year for the procedure'),
-  procedureYear: z.string().min(1, 'Please select an estimated year for the procedure')
-});
+const months = [
+  'January',
+  'February',
+  'March',
+  'April',
+  'May',
+  'June',
+  'July',
+  'August',
+  'September',
+  'October',
+  'November',
+  'December'
+];
 
-export const Step1GeneralInfo = ({ onNext }: any) => {
-  const form = useForm<z.infer<typeof generalInfoSchema>>({
-    resolver: zodResolver(generalInfoSchema),
-    defaultValues: {
-      firstName: '',
-      lastName: '',
-      dateOfBirth: undefined,
-      address: '',
-      email: '',
-      phone: '',
-      occupation: '',
-      heightFt: undefined,
-      heightIn: undefined,
-      weight: undefined,
-      hadSurgery: false,
-      surgeryType: undefined,
-      procedureMonth: '',
-      procedureYear: ''
-    }
-  });
-  const [age, setAge] = useState<number | null>(null);
-  const [bmi, setBmi] = useState<number | null>(null);
-  const [bmiError, setBmiError] = useState<string | null>(null);
-  const [hadSurgery, setHadSurgery] = useState(false);
+const years = Array.from({ length: 5 }, (_, i) => new Date().getFullYear() + i);
 
-  // Variables
-  const maxBmi = 32.9;
-  const year = new Date().getFullYear();
-  const months = [
-    'January',
-    'February',
-    'March',
-    'April',
-    'May',
-    'June',
-    'July',
-    'August',
-    'September',
-    'October',
-    'November',
-    'December'
-  ];
-  const years = Array.from({ length: 5 }, (_, i) => year + i);
+export const Step1GeneralInfo = ({ form }: any) => {
+  const [dateOfBirthTouched, setDateOfBirthTouched] = useState(false);
 
-  // Watch Fields
-  const { watch } = form;
-  const dateOfBirth = watch('dateOfBirth');
-  const weight = watch('weight');
-  const heightFt = watch('heightFt');
-  const heightIn = watch('heightIn');
+  const dateOfBirth = form.watch('dateOfBirth');
+  const weight = form.watch('weight');
+  const heightFt = form.watch('heightFt');
+  const heightIn = form.watch('heightIn');
 
-  // Age calculation
-  useEffect(() => {
-    if (dateOfBirth) {
-      const today = new Date();
-      const birthDate = new Date(dateOfBirth);
-      let calculatedAge = today.getFullYear() - birthDate.getFullYear();
-      const monthDiff = today.getMonth() - birthDate.getMonth();
-
-      if (monthDiff < 0 || (monthDiff === 0 && today.getDate() < birthDate.getDate())) {
-        calculatedAge--;
-      }
-      setAge(calculatedAge);
-    } else {
-      setAge(null);
-    }
+  const age = useMemo(() => {
+    if (!dateOfBirth) return null;
+    return differenceInYears(new Date(), dateOfBirth);
   }, [dateOfBirth]);
 
-  // BMI calculation
-  useEffect(() => {
-    if (weight && heightFt !== undefined && heightIn !== undefined) {
-      const totalHeightInches = heightFt * 12 + heightIn;
-      const calculatedBmi = (weight / (totalHeightInches * totalHeightInches)) * 703;
-      setBmi(calculatedBmi);
-      if (calculatedBmi > maxBmi) {
-        setBmiError(
-          `Your BMI should be below ${maxBmi} to be eligible for the virtual consultation`
-        );
-      } else {
-        setBmiError(null);
-      }
-    }
-  });
+  const isValidAge = age !== null && age >= 18 && age <= 60;
 
-  // Event handlers
-  const onSubmit = () => {
-    if (!bmiError) {
-      onNext();
+  const calculateBmi = (heightFt: any, heightIn: any, weight: any) => {
+    if (!heightFt || !heightIn || !weight) {
+      return null;
+    }
+
+    const totalHeightInches = heightFt * 12 + heightIn;
+    const totalHeightMeters = totalHeightInches * 0.0254;
+    const totalWeightKilograms = weight * 0.453592;
+    const bmi = totalWeightKilograms / (totalHeightMeters * totalHeightMeters);
+
+    return bmi;
+  };
+
+  const bmi = useMemo(() => {
+    return calculateBmi(heightFt, heightIn, weight);
+  }, [heightFt, heightIn, weight]);
+
+  const bmiError = useMemo(() => {
+    if (!weight || !heightFt || !heightIn) return null;
+
+    if (bmi !== null && bmi > 32.9) {
+      return 'Your BMI should be below 32.9 to be eligible for the virtual consultation';
+    }
+    return null;
+  }, [bmi, weight, heightFt, heightIn]);
+
+  const hadSurgery = form.watch('hadSurgery');
+
+  const handleSurgeryChange = (value: any) => {
+    form.setValue('surgeryType', null);
+    if (!value) {
+      form.setValue('surgeryType', undefined);
     }
   };
 
-  const handleSurgeryChange = (value: boolean) => {
-    setHadSurgery(value);
+  const handleDateChange = (date: any) => {
+    form.setValue('dateOfBirth', date);
+    setDateOfBirthTouched(true);
   };
+
+  // useEffect(() => {
+  //   if (dateOfBirth) {
+  //     const today = new Date();
+  //     const birthDate = new Date(dateOfBirth);
+  //     let calculatedAge = today.getFullYear() - birthDate.getFullYear();
+  //     const monthDiff = today.getMonth() - birthDate.getMonth();
+
+  //     if (monthDiff < 0 || (monthDiff === 0 && today.getDate() < birthDate.getDate())) {
+  //       calculatedAge--;
+  //     }
+  //     setAge(calculatedAge);
+  //     // Age validation logic
+  //     if (calculatedAge < 18 || calculatedAge > 60) {
+  //       setIsAgeValid(false);
+  //     } else {
+  //       setIsAgeValid(true);
+  //     }
+  //   } else {
+  //     setAge(null);
+  //     setIsAgeValid(true);
+  //   }
+  // }, [dateOfBirth]);
+
+  // useEffect(() => {
+  //   if (weight && heightFt !== undefined && heightIn !== undefined) {
+  //     const totalHeightInches = heightFt * 12 + heightIn;
+  //     const calculatedBmi = (weight / (totalHeightInches * totalHeightInches)) * 703;
+  //     setBmi(calculatedBmi);
+  //     if (calculatedBmi > maxBmi) {
+  //       setBmiError(
+  //         `Your BMI should be below ${maxBmi} to be eligible for the virtual consultation`
+  //       );
+  //     } else {
+  //       setBmiError(null);
+  //     }
+  //   }
+  // });
 
   return (
     <Form {...form}>
-      <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-8 ">
+      <form className="space-y-8">
         {/* Names Field */}
         <div className="grid sm:grid-cols-2 gap-6">
           <FormField
@@ -199,33 +177,20 @@ export const Step1GeneralInfo = ({ onNext }: any) => {
           control={form.control}
           name="gender"
           render={({ field }) => (
-            <FormItem className="space-y-3">
-              <FormLabel>Gender</FormLabel>
-              <FormControl>
-                <RadioGroup
-                  onValueChange={field.onChange}
-                  defaultValue={field.value}
-                  className="flex flex-col space-y-1">
-                  <FormItem className="flex items-center space-x-3 space-y-0">
-                    <FormControl>
-                      <RadioGroupItem value="male" />
-                    </FormControl>
-                    <FormLabel className="font-normal">Male</FormLabel>
-                  </FormItem>
-                  <FormItem className="flex items-center space-x-3 space-y-0">
-                    <FormControl>
-                      <RadioGroupItem value="female" />
-                    </FormControl>
-                    <FormLabel className="font-normal">Female</FormLabel>
-                  </FormItem>
-                  <FormItem className="flex items-center space-x-3 space-y-0">
-                    <FormControl>
-                      <RadioGroupItem value="other" />
-                    </FormControl>
-                    <FormLabel className="font-normal">Other</FormLabel>
-                  </FormItem>
-                </RadioGroup>
-              </FormControl>
+            <FormItem>
+              <FormLabel>Birth Gender</FormLabel>
+              <Select onValueChange={field.onChange} defaultValue={field.value}>
+                <FormControl>
+                  <SelectTrigger>
+                    <SelectValue placeholder="Select a gender" />
+                  </SelectTrigger>
+                </FormControl>
+                <SelectContent>
+                  <SelectItem value="female">Female</SelectItem>
+                  <SelectItem value="male">Male</SelectItem>
+                  <SelectItem value="other">Other</SelectItem>
+                </SelectContent>
+              </Select>
               <FormMessage />
             </FormItem>
           )}
@@ -255,7 +220,7 @@ export const Step1GeneralInfo = ({ onNext }: any) => {
                       mode="single"
                       captionLayout="dropdown-buttons"
                       selected={field.value}
-                      onSelect={field.onChange}
+                      onSelect={handleDateChange}
                       fromYear={1950}
                       toYear={2024}
                     />
@@ -265,15 +230,18 @@ export const Step1GeneralInfo = ({ onNext }: any) => {
               </FormItem>
             )}
           />
+          {dateOfBirthTouched && !isValidAge && (
+            <div
+              className="flex items-center p-4 text-sm text-red-800 rounded-lg bg-red-50 border border-red-300 animate-fade-down animate-duration-300 animate-ease-in-out"
+              role="alert">
+              <Info className="flex-shrink-0 inline w-5 h-5 fill-red-800 text-red-50 me-3" />
+              Your age must be between 18 and 60 to proceed with the evaluation
+            </div>
+          )}
           <FormItem>
-            <FormLabel>Age</FormLabel>
+            <FormLabel>Age (calculated)</FormLabel>
             <FormControl>
-              <Input
-                type="number"
-                placeholder="Age (calculated)"
-                value={age !== null ? age : ''}
-                readOnly
-              />
+              <Input type="number" placeholder="Age" value={age !== null ? age : ''} readOnly />
             </FormControl>
           </FormItem>
         </div>
@@ -349,7 +317,7 @@ export const Step1GeneralInfo = ({ onNext }: any) => {
                   <FormControl>
                     <Input
                       placeholder="Enter feet"
-                      {...field}
+                      value={field.value || ''}
                       onChange={(e) => field.onChange(e.target.value ? Number(e.target.value) : '')}
                     />
                   </FormControl>
@@ -366,7 +334,7 @@ export const Step1GeneralInfo = ({ onNext }: any) => {
                   <FormControl>
                     <Input
                       placeholder="Enter inches"
-                      {...field}
+                      value={field.value || ''}
                       onChange={(e) => field.onChange(e.target.value ? Number(e.target.value) : '')}
                     />
                   </FormControl>
@@ -383,7 +351,7 @@ export const Step1GeneralInfo = ({ onNext }: any) => {
                   <FormControl>
                     <Input
                       placeholder="Enter your weight"
-                      {...field}
+                      value={field.value || ''}
                       onChange={(e) => field.onChange(e.target.value ? Number(e.target.value) : '')}
                     />
                   </FormControl>
@@ -580,8 +548,6 @@ export const Step1GeneralInfo = ({ onNext }: any) => {
             />
           </div>
         </div>
-
-        <Button type="submit">Next</Button>
       </form>
     </Form>
   );

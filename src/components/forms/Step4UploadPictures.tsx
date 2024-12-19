@@ -5,50 +5,87 @@ import {
   FormField,
   FormItem,
   FormLabel,
-  FormMessage
+  FormMessage,
+  FormDescription
 } from '@/components/ui/form';
 import { Input } from '@/components/ui/input';
-import { zodResolver } from '@hookform/resolvers/zod';
-import { useForm } from 'react-hook-form';
-import { z } from 'zod';
 
-// Form Schema
-const filesSchema = z.object({
-  file: z.any()
-});
-
-export const Step4UploadPictures = ({ onSubmit }: any) => {
-  const form = useForm<z.infer<typeof filesSchema>>({
-    resolver: zodResolver(filesSchema)
-  });
-
-  const fileRef = form.register('file');
-
-  const handleFormSubmit = () => {
-    onSubmit();
-  };
-
+export const Step4UploadPictures = ({ form }: any) => {
   return (
     <Form {...form}>
-      <form
-        onSubmit={form.handleSubmit(handleFormSubmit)}
-        className="w-full p-10 animate-fade-right animate-ease-in-out">
+      <form className="space-y-8 animate-fade-right animate-ease-in-out">
         <FormField
           control={form.control}
-          name="file"
-          render={({ field }) => {
-            return (
-              <FormItem>
-                <FormLabel>Upload Picture</FormLabel>
-                <FormControl>
-                  <Input type="file" placeholder="Front Photo" {...fileRef} />
-                </FormControl>
-                <FormMessage />
-              </FormItem>
-            );
-          }}
+          name="frontPhoto"
+          render={({ field }) => (
+            <FormItem>
+              <FormLabel>Front Photo</FormLabel>
+              <FormControl>
+                <Input
+                  type="file"
+                  placeholder="Front Photo"
+                  onChange={(e) => field.onChange(e.target.files?.[0])}
+                />
+              </FormControl>
+              <FormDescription>Please upload a photo from the front</FormDescription>
+              <FormMessage />
+            </FormItem>
+          )}
         />
-        <Button type="submit">Submit</Button>
+        <FormField
+          control={form.control}
+          name="backPhoto"
+          render={({ field }) => (
+            <FormItem>
+              <FormLabel>Back Photo</FormLabel>
+              <FormControl>
+                <Input
+                  type="file"
+                  placeholder="Back Photo"
+                  onChange={(e) => field.onChange(e.target.files?.[0])}
+                />
+              </FormControl>
+              <FormDescription>Please upload a photo from the back</FormDescription>
+              <FormMessage />
+            </FormItem>
+          )}
+        />
+        <FormField
+          control={form.control}
+          name="leftPhoto"
+          render={({ field }) => (
+            <FormItem>
+              <FormLabel>Left Side Photo</FormLabel>
+              <FormControl>
+                <Input
+                  type="file"
+                  placeholder="Left Side Photo"
+                  onChange={(e) => field.onChange(e.target.files?.[0])}
+                />
+              </FormControl>
+              <FormDescription>Please upload a photo from your left side</FormDescription>
+              <FormMessage />
+            </FormItem>
+          )}
+        />
+        <FormField
+          control={form.control}
+          name="rightPhoto"
+          render={({ field }) => (
+            <FormItem>
+              <FormLabel>Right Side Photo</FormLabel>
+              <FormControl>
+                <Input
+                  type="file"
+                  placeholder="Right Side Photo"
+                  onChange={(e) => field.onChange(e.target.files?.[0])}
+                />
+              </FormControl>
+              <FormDescription>Please upload a photo from your right side</FormDescription>
+              <FormMessage />
+            </FormItem>
+          )}
+        />
       </form>
     </Form>
   );

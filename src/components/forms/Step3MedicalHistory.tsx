@@ -1,7 +1,6 @@
 import { useState } from 'react';
 import { useForm, useFieldArray } from 'react-hook-form';
-import { zodResolver } from '@hookform/resolvers/zod';
-import { z } from 'zod';
+
 import { cn } from '@/lib/utils';
 import { format } from 'date-fns';
 
@@ -32,178 +31,9 @@ import {
 import { Calendar } from '@/components/ui/calendar';
 import { Popover, PopoverContent, PopoverTrigger } from '@/components/ui/popover';
 
-// Zod validation
-const MedicalHistorySchema = z.object({
-  hasIllness: z.enum(['yes', 'no'], {
-    required_error: 'You need to select an option.'
-  }),
-  illnesses: z.array(
-    z
-      .object({
-        condition: z.string().min(1, 'Condition is required'),
-        yearDiagnosed: z.string().min(1, 'Year diagnosed is required'),
-        description: z.string().min(1, 'Description is required')
-      })
-      .optional()
-  ),
-  hasAllergies: z.enum(['yes', 'no'], {
-    required_error: 'You need to select an option.'
-  }),
-  allergies: z.array(
-    z.object({
-      allergicTo: z.string().min(1, 'Allergic to is required'),
-      reaction: z.string().min(1, 'Reaction is required')
-    })
-  ),
-  diabetes: z.enum(['yes', 'no'], {
-    required_error: 'You need to select an option.'
-  }),
-  diabetesType: z
-    .enum(['type 1', 'type 2'], { required_error: 'You need to select an option' })
-    .optional(),
-  hgbResult: z.string().min(1, 'Please provide your last hgb A1c'),
-  heartCondition: z.enum(['yes', 'no'], {
-    required_error: 'You need to select an option.'
-  }),
-  heartConditionDetails: z.string().min(1, 'Please provide details of your condition'),
-  heartSymptoms: z.enum(['yes', 'no'], {
-    required_error: 'You need to select an option.'
-  }),
-  heartSymptomsDetails: z.string().min(1, 'Please provide details of your symptoms'),
-  hasThyroidCondition: z.enum(['yes', 'no'], {
-    required_error: 'You need to select an option.'
-  }),
-  thyroidConditionType: z.string().optional(),
-  thyroidYearDiagnosis: z.string().optional(),
-  otherThyroidCondition: z.string().optional(),
-  isThyroidControlled: z
-    .enum(['yes', 'no'], {
-      required_error: 'Please select an option'
-    })
-    .optional(),
-  deepVein: z.enum(['yes', 'no'], {
-    required_error: 'You need to select an option.'
-  }),
-  deepVeinDetails: z.string().optional(),
-  highBloodPresure: z.enum(['yes', 'no'], {
-    required_error: 'You need to select an option.'
-  }),
-  cholesterol: z.enum(['yes', 'no'], {
-    required_error: 'You need to select an option.'
-  }),
-  kidenyOrUrinary: z.enum(['yes', 'no'], {
-    required_error: 'You need to select an option.'
-  }),
-  asthma: z.enum(['yes', 'no'], {
-    required_error: 'You need to select an option.'
-  }),
-  orthopedic: z.enum(['yes', 'no'], {
-    required_error: 'You need to select an option.'
-  }),
-  orthopedicDetails: z.string().optional(),
-  breathingProblems: z.enum(['yes', 'no'], {
-    required_error: 'You need to select an option.'
-  }),
-  breathingProblemsDetails: z.string().optional(),
-  mentalCondition: z.string().min(1, 'Please choose an option'),
-  otherMentalCondition: z.string().optional(),
-  reflux: z.enum(['yes', 'no'], {
-    required_error: 'You need to select an option.'
-  }),
-  refluxDetails: z.string().optional(),
-  liverDisease: z.enum(['yes', 'no'], {
-    required_error: 'You need to select an option.'
-  }),
-  liverDiseaseDetails: z.string().optional(),
-  anemiaOrBleeding: z.enum(['yes', 'no'], {
-    required_error: 'You need to select an option.'
-  }),
-  anemiaOrBleedingDetails: z.string().optional(),
-  swellingOrVaricose: z.enum(['yes', 'no'], {
-    required_error: 'You need to select an option.'
-  }),
-  swellingOrVaricoseDetails: z.string().optional(),
-  infectiousDisease: z.enum(['yes', 'no'], {
-    required_error: 'You need to select an option.'
-  }),
-  infectiousDiseaseDetails: z.string().optional(),
-  hivPositive: z.enum(['yes', 'no'], {
-    required_error: 'You need to select an option.'
-  }),
-  hivMedications: z
-    .array(
-      z.object({
-        medicationName: z.string().min(1, 'Name of medication is required'),
-        dosage: z.string().min(1, 'Dosage is required'),
-        frequency: z.string().min(1, 'Frequency is required')
-      })
-    )
-    .optional(),
-  lastViralLoadDate: z.date({
-    required_error: 'A date of last viral load is required'
-  }),
-  drinkAlcohol: z.enum(['yes', 'no'], {
-    required_error: 'You need to select an option.'
-  }),
-  alcoholFrequency: z.string().optional(),
-  smokedOrVape: z.enum(['yes', 'quit', 'no'], {
-    required_error: 'You need to select an option.'
-  }),
-  currentSmokingAmount: z.string().optional(),
-  currentSmokingSince: z.string().optional(),
-  pastSmokingAmount: z.string().optional(),
-  pastSmokingSince: z.string().optional(),
-  recreationalDrugUse: z.enum(['yes', 'no'], {
-    required_error: 'You need to select an option.'
-  }),
-  drugUseDetails: z.string().optional(),
-  chronicPainMedications: z.enum(['yes', 'no'], {
-    required_error: 'You need to select an option.'
-  }),
-  antidepressants: z.enum(['yes', 'no'], {
-    required_error: 'You need to select an option.'
-  }),
-  takingSupplements: z.enum(['yes', 'no'], {
-    required_error: 'You need to select an option.'
-  }),
-  previousSurgeries: z.enum(['yes', 'no'], {
-    required_error: 'You need to select an option.'
-  })
-});
-
-export const Step3MedicalHistory = ({ onNext }: any) => {
-  // Form Schema
-  const form = useForm<z.infer<typeof MedicalHistorySchema>>({
-    resolver: zodResolver(MedicalHistorySchema),
-    defaultValues: {
-      illnesses: [{ condition: '', yearDiagnosed: '', description: '' }],
-      allergies: [{ allergicTo: '', reaction: '' }],
-      hgbResult: '',
-      heartConditionDetails: '',
-      heartSymptomsDetails: '',
-      thyroidConditionType: '',
-      thyroidYearDiagnosis: '',
-      otherThyroidCondition: '',
-      deepVeinDetails: '',
-      orthopedicDetails: '',
-      breathingProblemsDetails: '',
-      otherMentalCondition: '',
-      refluxDetails: '',
-      liverDiseaseDetails: '',
-      anemiaOrBleedingDetails: '',
-      swellingOrVaricoseDetails: '',
-      infectiousDiseaseDetails: '',
-      hivMedications: [{ medicationName: '', dosage: '', frequency: '' }],
-      lastViralLoadDate: undefined,
-      alcoholFrequency: '',
-      currentSmokingAmount: '',
-      currentSmokingSince: '',
-      pastSmokingAmount: '',
-      pastSmokingSince: '',
-      drugUseDetails: ''
-    }
-  });
-
+export const Step3MedicalHistory = ({ form }: any) => {
+  const errors = form.formState.errors;
+  console.log(errors);
   const {
     fields: illnessFields,
     append: appendIllness,
@@ -231,59 +61,44 @@ export const Step3MedicalHistory = ({ onNext }: any) => {
     name: 'hivMedications'
   });
 
-  const [illness, setIllness] = useState(false);
-  const [allergy, setAllergy] = useState(false);
-  const [hasDiabetes, setHasDiabetes] = useState(false);
-  const [hasHeartCondition, setHasHeartCondition] = useState(false);
-  const [hasHeartSymptoms, setHasHeartSymptoms] = useState(false);
-  const [showThyroidOptions, setShowThyroidOptions] = useState(false);
-  const [otherThyroidCondition, setIsOtherThyroidCondition] = useState(false);
-  const [hasDeepVeinHistory, setHasDeepVeinHistory] = useState(false);
-  const [hasOrthopedicProblems, setHasOrthopedicProblems] = useState(false);
-  const [hasBreathingProblems, setHasBreathingProblems] = useState(false);
-  const [mentalCondition, setMentalCondition] = useState('');
-  const [hasReflux, setHasReflux] = useState(false);
-  const [hasLiverDisease, setHasLiverDisease] = useState(false);
-  const [hasAnemiaOrBleeding, setHasAnemiaOrBleeding] = useState(false);
-  const [hasSwellingOrVaricose, setHasSwellingOrVaricose] = useState(false);
-  const [hasInfectiousDisease, setHasInfectiousDisease] = useState(false);
-  const [isHivPositive, setIsHivPositive] = useState(false);
-  const [showAlcoholFrequency, setShowAlcoholFrequency] = useState(false);
-  const [smokingStatus, setSmokingStatus] = useState('');
-  const [useDrugs, setUseDrugs] = useState(false);
+  const {
+    fields: medicationFields,
+    append: appendMedication,
+    remove: removeMedication
+  } = useFieldArray({
+    control: form.control,
+    name: 'medications'
+  });
 
-  const onSubmit = (data: any) => {
-    if (data.hasIllness === 'yes' && data.illnesses.length === 0) {
-      form.setError('illnesses', {
-        type: 'manual',
-        message: 'Please add at least one illness record'
-      });
-      return;
-    }
+  const illness = form.watch('hasIllness') === 'yes';
+  const allergy = form.watch('hasAllergies') === 'yes';
+  const hasDiabetes = form.watch('diabetes') === 'yes';
+  const hasHeartCondition = form.watch('heartCondition') === 'yes';
+  const hasHeartSymptoms = form.watch('heartSymptoms') === 'yes';
+  const showThyroidOptions = form.watch('hasThyroidCondition') === 'yes';
+  const otherThyroidCondition = form.watch('thyroidConditionType') === 'other';
+  const hasDeepVeinHistory = form.watch('deepVein') === 'yes';
+  const hasOrthopedicProblems = form.watch('orthopedic') === 'yes';
+  const hasBreathingProblems = form.watch('breathingProblems') === 'yes';
 
-    if (data.hasAllergies === 'yes' && data.allergies.length === 0) {
-      form.setError('allergies', {
-        type: 'manual',
-        message: 'Please add at least one allergy record'
-      });
-      return;
-    }
+  const mentalCondition = form.watch('mentalCondition') === 'other';
 
-    if (data.hivPositive === 'yes' && data.hivMedcations.length === 0) {
-      form.setError('hivMedications', {
-        type: 'manual',
-        message: 'Please add at least one medication record'
-      });
-      return;
-    }
-    onNext();
-  };
+  const hasReflux = form.watch('reflux') === 'yes';
+
+  const hasLiverDisease = form.watch('liverDisease') === 'yes';
+  const hasAnemiaOrBleeding = form.watch('anemiaOrBleeding') === 'yes';
+  const hasSwellingOrVaricose = form.watch('swellingOrVaricose') === 'yes';
+  const hasInfectiousDisease = form.watch('infectiousDisease') === 'yes';
+  const isHivPositive = form.watch('hivPositive') === 'yes';
+  const showAlcoholFrequency = form.watch('drinkAlcohol') === 'yes';
+  const smokingStatus = form.watch('smokedOrVape') === 'yes';
+  const quitSmoking = form.watch('smokedOrVape') === 'quit';
+  const useDrugs = form.watch('recreationalDrugUse') === 'yes';
+  const currentMedication = form.watch('currentMedication') === 'yes';
 
   return (
     <Form {...form}>
-      <form
-        onSubmit={form.handleSubmit(onSubmit)}
-        className="space-y-8 animate-fade-right animate-ease-in-out">
+      <form className="space-y-8 animate-fade-right animate-ease-in-out">
         {/* Illness */}
         <div className="space-y-6">
           {/* hasIllness */}
@@ -300,7 +115,7 @@ export const Step3MedicalHistory = ({ onNext }: any) => {
                   <RadioGroup
                     onValueChange={(value) => {
                       field.onChange(value);
-                      setIllness(value === 'yes');
+                      // setIllness(value === 'yes');
                     }}
                     defaultValue={field.value}
                     className="flex flex-col space-y-1">
@@ -407,7 +222,6 @@ export const Step3MedicalHistory = ({ onNext }: any) => {
                   <RadioGroup
                     onValueChange={(value) => {
                       field.onChange(value);
-                      setAllergy(value === 'yes');
                     }}
                     defaultValue={field.value}
                     className="flex flex-col space-y-1">
@@ -499,7 +313,6 @@ export const Step3MedicalHistory = ({ onNext }: any) => {
                   <RadioGroup
                     onValueChange={(value) => {
                       field.onChange(value);
-                      setHasDiabetes(value === 'yes');
                     }}
                     defaultValue={field.value}
                     className="flex flex-col space-y-1">
@@ -585,7 +398,6 @@ export const Step3MedicalHistory = ({ onNext }: any) => {
                   <RadioGroup
                     onValueChange={(value) => {
                       field.onChange(value);
-                      setHasHeartCondition(value === 'yes');
                     }}
                     defaultValue={field.value}
                     className="flex flex-col space-y-1">
@@ -643,7 +455,6 @@ export const Step3MedicalHistory = ({ onNext }: any) => {
                   <RadioGroup
                     onValueChange={(value) => {
                       field.onChange(value);
-                      setHasHeartSymptoms(value === 'yes');
                     }}
                     defaultValue={field.value}
                     className="flex flex-col space-y-1">
@@ -701,7 +512,6 @@ export const Step3MedicalHistory = ({ onNext }: any) => {
                   <RadioGroup
                     onValueChange={(value) => {
                       field.onChange(value);
-                      setShowThyroidOptions(value === 'yes');
                     }}
                     defaultValue={field.value}
                     className="flex flex-col space-y-1">
@@ -734,7 +544,6 @@ export const Step3MedicalHistory = ({ onNext }: any) => {
                     <Select
                       onValueChange={(value) => {
                         field.onChange(value);
-                        setIsOtherThyroidCondition(value === 'other');
                       }}
                       defaultValue={field.value}>
                       <FormControl>
@@ -753,7 +562,21 @@ export const Step3MedicalHistory = ({ onNext }: any) => {
                   </FormItem>
                 )}
               />
-
+              {otherThyroidCondition && (
+                <FormField
+                  control={form.control}
+                  name="otherThyroidCondition"
+                  render={({ field }) => (
+                    <FormItem className="animate-down">
+                      <FormLabel>Please describe your thyroid condition</FormLabel>
+                      <FormControl>
+                        <Input placeholder="Provide details of your condition" {...field} />
+                      </FormControl>
+                      <FormMessage />
+                    </FormItem>
+                  )}
+                />
+              )}
               <FormField
                 control={form.control}
                 name="thyroidYearDiagnosis"
@@ -796,22 +619,6 @@ export const Step3MedicalHistory = ({ onNext }: any) => {
                   </FormItem>
                 )}
               />
-
-              {otherThyroidCondition && (
-                <FormField
-                  control={form.control}
-                  name="otherThyroidCondition"
-                  render={({ field }) => (
-                    <FormItem className="animate-down">
-                      <FormLabel>Please describe your thyroid condition</FormLabel>
-                      <FormControl>
-                        <Input placeholder="Provide details of your condition" {...field} />
-                      </FormControl>
-                      <FormMessage />
-                    </FormItem>
-                  )}
-                />
-              )}
             </div>
           )}
         </div>
@@ -830,7 +637,6 @@ export const Step3MedicalHistory = ({ onNext }: any) => {
                   <RadioGroup
                     onValueChange={(value) => {
                       field.onChange(value);
-                      setHasDeepVeinHistory(value === 'yes');
                     }}
                     defaultValue={field.value}
                     className="flex flex-col space-y-1">
@@ -1006,7 +812,6 @@ export const Step3MedicalHistory = ({ onNext }: any) => {
                   <RadioGroup
                     onValueChange={(value) => {
                       field.onChange(value);
-                      setHasOrthopedicProblems(value === 'yes');
                     }}
                     defaultValue={field.value}
                     className="flex flex-col space-y-1">
@@ -1061,7 +866,6 @@ export const Step3MedicalHistory = ({ onNext }: any) => {
                   <RadioGroup
                     onValueChange={(value) => {
                       field.onChange(value);
-                      setHasBreathingProblems(value === 'yes');
                     }}
                     defaultValue={field.value}
                     className="flex flex-col space-y-1">
@@ -1117,7 +921,6 @@ export const Step3MedicalHistory = ({ onNext }: any) => {
                 <Select
                   onValueChange={(value) => {
                     field.onChange(value);
-                    setMentalCondition(value);
                   }}
                   defaultValue={field.value}>
                   <FormControl>
@@ -1140,7 +943,7 @@ export const Step3MedicalHistory = ({ onNext }: any) => {
               </FormItem>
             )}
           />
-          {mentalCondition === 'other' && (
+          {mentalCondition && (
             <FormField
               control={form.control}
               name="otherMentalCondition"
@@ -1173,7 +976,6 @@ export const Step3MedicalHistory = ({ onNext }: any) => {
                   <RadioGroup
                     onValueChange={(value) => {
                       field.onChange(value);
-                      setHasReflux(value === 'yes');
                     }}
                     defaultValue={field.value}
                     className="flex flex-col space-y-1">
@@ -1230,7 +1032,6 @@ export const Step3MedicalHistory = ({ onNext }: any) => {
                   <RadioGroup
                     onValueChange={(value) => {
                       field.onChange(value);
-                      setHasLiverDisease(value === 'yes');
                     }}
                     defaultValue={field.value}
                     className="flex flex-col space-y-1">
@@ -1285,7 +1086,6 @@ export const Step3MedicalHistory = ({ onNext }: any) => {
                   <RadioGroup
                     onValueChange={(value) => {
                       field.onChange(value);
-                      setHasAnemiaOrBleeding(value === 'yes');
                     }}
                     defaultValue={field.value}
                     className="flex flex-col space-y-1">
@@ -1339,7 +1139,6 @@ export const Step3MedicalHistory = ({ onNext }: any) => {
                   <RadioGroup
                     onValueChange={(value) => {
                       field.onChange(value);
-                      setHasSwellingOrVaricose(value === 'yes');
                     }}
                     defaultValue={field.value}
                     className="flex flex-col space-y-1">
@@ -1393,7 +1192,6 @@ export const Step3MedicalHistory = ({ onNext }: any) => {
                   <RadioGroup
                     onValueChange={(value) => {
                       field.onChange(value);
-                      setHasInfectiousDisease(value === 'yes');
                     }}
                     defaultValue={field.value}
                     className="flex flex-col space-y-1">
@@ -1448,7 +1246,6 @@ export const Step3MedicalHistory = ({ onNext }: any) => {
                   <RadioGroup
                     onValueChange={(value) => {
                       field.onChange(value);
-                      setIsHivPositive(value === 'yes');
                     }}
                     defaultValue={field.value}
                     className="flex flex-col space-y-1">
@@ -1591,7 +1388,6 @@ export const Step3MedicalHistory = ({ onNext }: any) => {
                   <RadioGroup
                     onValueChange={(value) => {
                       field.onChange(value);
-                      setShowAlcoholFrequency(value === 'yes');
                     }}
                     defaultValue={field.value}
                     className="flex flex-col space-y-1">
@@ -1644,7 +1440,6 @@ export const Step3MedicalHistory = ({ onNext }: any) => {
                   <RadioGroup
                     onValueChange={(value) => {
                       field.onChange(value);
-                      setSmokingStatus(value);
                     }}
                     defaultValue={field.value}
                     className="flex flex-col space-y-1">
@@ -1672,7 +1467,7 @@ export const Step3MedicalHistory = ({ onNext }: any) => {
               </FormItem>
             )}
           />
-          {smokingStatus === 'yes' && (
+          {smokingStatus && (
             <div className="space-y-4 animate-down">
               <FormField
                 control={form.control}
@@ -1705,7 +1500,7 @@ export const Step3MedicalHistory = ({ onNext }: any) => {
             </div>
           )}
 
-          {smokingStatus === 'quit' && (
+          {quitSmoking && (
             <div className="space-y-4 animate-down">
               <FormField
                 control={form.control}
@@ -1750,7 +1545,6 @@ export const Step3MedicalHistory = ({ onNext }: any) => {
                   <RadioGroup
                     onValueChange={(value) => {
                       field.onChange(value);
-                      setUseDrugs(value === 'yes');
                     }}
                     defaultValue={field.value}
                     className="flex flex-col space-y-1">
@@ -1789,6 +1583,131 @@ export const Step3MedicalHistory = ({ onNext }: any) => {
             />
           )}
         </div>
+
+        {/* Current Medication */}
+        <FormField
+          control={form.control}
+          name="currentMedication"
+          render={({ field }) => (
+            <FormItem className="space-y-3">
+              <FormLabel>Do you currently take any medication?</FormLabel>
+              <FormControl>
+                <RadioGroup
+                  onValueChange={field.onChange}
+                  defaultValue={field.value}
+                  className="flex flex-col space-y-1">
+                  <FormItem className="flex items-center space-x-3 space-y-0">
+                    <FormControl>
+                      <RadioGroupItem value="yes" />
+                    </FormControl>
+                    <FormLabel className="font-normal">Yes</FormLabel>
+                  </FormItem>
+                  <FormItem className="flex items-center space-x-3 space-y-0">
+                    <FormControl>
+                      <RadioGroupItem value="no" />
+                    </FormControl>
+                    <FormLabel className="font-normal">No</FormLabel>
+                  </FormItem>
+                </RadioGroup>
+              </FormControl>
+              <FormMessage />
+            </FormItem>
+          )}
+        />
+        {currentMedication && (
+          <div className="space-y-6 animate-fade-down">
+            <div className="flex items-center mb-2">
+              <FormLabel>Current Medications</FormLabel>
+              <Button
+                type="button"
+                size="sm"
+                className="ml-auto"
+                onClick={() =>
+                  appendMedication({
+                    medicationName: '',
+                    dosage: '',
+                    frequency: '',
+                    purpose: ''
+                  })
+                }>
+                Add Medication
+              </Button>
+            </div>
+
+            {/* Iterate through the medication fields */}
+            {medicationFields.map((item, index) => (
+              <div
+                key={item.id}
+                className="grid gap-4 sm:items-end bg-gray-300 p-4 border rounded-md mb-2">
+                <div className="grid sm:grid-cols-2 items-center gap-x-8 gap-y-4">
+                  <FormField
+                    control={form.control}
+                    name={`medications.${index}.medicationName`}
+                    render={({ field }) => (
+                      <FormItem className="flex-1">
+                        <FormLabel>Name of Medication</FormLabel>
+                        <FormControl>
+                          <Input placeholder="e.g., Ibuprofen" {...field} />
+                        </FormControl>
+                        <FormMessage />
+                      </FormItem>
+                    )}
+                  />
+                  <FormField
+                    control={form.control}
+                    name={`medications.${index}.dosage`}
+                    render={({ field }) => (
+                      <FormItem className="flex-1">
+                        <FormLabel>Dosage</FormLabel>
+                        <FormControl>
+                          <Input placeholder="e.g., 200 mg" {...field} />
+                        </FormControl>
+                        <FormMessage />
+                      </FormItem>
+                    )}
+                  />
+                </div>
+                <div className="grid sm:grid-cols-2 items-center gap-x-8 gap-y-4">
+                  <FormField
+                    control={form.control}
+                    name={`medications.${index}.frequency`}
+                    render={({ field }) => (
+                      <FormItem className="flex-1">
+                        <FormLabel>How Often</FormLabel>
+                        <FormControl>
+                          <Input placeholder="e.g., Twice a day" {...field} />
+                        </FormControl>
+                        <FormMessage />
+                      </FormItem>
+                    )}
+                  />
+                  <FormField
+                    control={form.control}
+                    name={`medications.${index}.purpose`}
+                    render={({ field }) => (
+                      <FormItem className="flex-1">
+                        <FormLabel>Purpose (Condition Treated)</FormLabel>
+                        <FormControl>
+                          <Input placeholder="e.g., Pain relief for arthritis" {...field} />
+                        </FormControl>
+                        <FormMessage />
+                      </FormItem>
+                    )}
+                  />
+                </div>
+                <Button
+                  type="button"
+                  variant="destructive"
+                  size="icon"
+                  className="ml-auto"
+                  aria-label="Delete"
+                  onClick={() => removeMedication(index)}>
+                  <Trash2 className="shrink-0 w-4 h-4" />
+                </Button>
+              </div>
+            ))}
+          </div>
+        )}
         {/* Antidepressants */}
         <FormField
           control={form.control}
@@ -1879,7 +1798,6 @@ export const Step3MedicalHistory = ({ onNext }: any) => {
             </FormItem>
           )}
         />
-        <Button type="submit">Next</Button>
       </form>
     </Form>
   );

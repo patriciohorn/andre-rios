@@ -1,28 +1,31 @@
 ---
-import '../../styles/globals.css'
-import MainLayout from "@/layouts/MainLayout.astro";
-import { VirtualConsultationForm } from '../forms/VirtualConsultationForm';
+import '../../styles/globals.css';
+import MainLayout from '@/layouts/MainLayout.astro';
+import { ConsultationForm } from '../forms/vc';
 import HeaderCenteredEyebrow from '../HeaderCenteredEyebrow.astro';
 
-import { getI18N } from "@/i18n";
-const {currentLocale} = Astro
-const i18n = getI18N({currentLocale})
+import { getI18N } from '@/i18n';
+const { currentLocale } = Astro;
+const i18n = getI18N({ currentLocale });
 
-const proceduresBreast = Object.values(i18n.PROCEDURES.PROCEDURES_BREAST)
-const proceduresInjectables = Object.values(i18n.PROCEDURES.PROCEDURES_INJECTABLES)
-const proceduresCorporal = Object.values(i18n.PROCEDURES.PROCEDURES_BODY)
+const proceduresBreast = Object.values(i18n.PROCEDURES.PROCEDURES_BREAST);
+const proceduresInjectables = Object.values(i18n.PROCEDURES.PROCEDURES_INJECTABLES);
+const proceduresCorporal = Object.values(i18n.PROCEDURES.PROCEDURES_BODY);
 
-const proceduresField = [proceduresBreast, proceduresInjectables, proceduresCorporal]
+const proceduresField = [proceduresBreast, proceduresInjectables, proceduresCorporal];
 
-const formFieldsData = proceduresField
-console.log(formFieldsData.flat())
+const formFieldsData = proceduresField;
+console.log(formFieldsData.flat());
 ---
 
 <MainLayout title="Virtual Consultation">
-  <section class="py-16 sm:py-28 bg-[#F8F8F8]">
-    <div class="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8">      
-      <HeaderCenteredEyebrow title="Virtual Consultation"/>
-      <VirtualConsultationForm  client:load />      
+  <section class="py-16 sm:py-20 bg-[#F8F8F8]">
+    <div class="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8">
+      <h1
+        class="mb-12 text-center text-2xl sm:text-3xl sm:leading-[1.16] font-semibold tracking-tight text-primary-950">
+        Virtual Consultation
+      </h1>
+      <ConsultationForm client:load />
     </div>
   </section>
 </MainLayout>
