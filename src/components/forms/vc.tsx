@@ -2,6 +2,8 @@ import { useState } from 'react';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { z } from 'zod';
 import { useForm, type UseFormWatch } from 'react-hook-form';
+import { useToast } from '@/components/hooks/use-toast';
+import { Toaster } from '@/components/ui/toaster';
 
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardHeader, CardTitle, CardDescription } from '@/components/ui/card';
@@ -264,6 +266,7 @@ const imageUploadSchema = z.object({
 const steps = ['Personal Information', 'General Information', 'Medical History', 'Upload Picture'];
 
 export const ConsultationForm = () => {
+  const { toast } = useToast();
   const [currentStep, setCurrentStep] = useState(0);
   const [formData, setFormData] = useState({});
   const [isSubmitted, setIsSubmitted] = useState(false);
@@ -397,7 +400,15 @@ export const ConsultationForm = () => {
   };
 
   const handleSubmit = () => {
-    console.log('Submitted', formData);
+    // console.log('Submitted', formData);
+    toast({
+      title: 'Pacient Information',
+      description: (
+        <pre className="mt-2 w-[320px] max-h-[60vh] rounded-md bg-slate-950 p-4">
+          <code className="text-white">{JSON.stringify(formData, null, 2)}</code>
+        </pre>
+      )
+    });
     setIsSubmitted(true);
   };
 
@@ -418,6 +429,7 @@ export const ConsultationForm = () => {
 
   return (
     <>
+      <Toaster />
       {isSubmitted ? (
         <Card>
           <CardContent className="min-h-screen grid place-content-center">
