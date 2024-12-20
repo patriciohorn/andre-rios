@@ -25,7 +25,6 @@ interface TestimonialCarouselProps {
 }
 
 const avatars = [avatarCaro, avatarClaudia, avatarJaky, avatarMariana];
-console.log(avatars);
 
 const TestimonialCarousel: React.FC<TestimonialCarouselProps> = ({ testimonials }) => {
   return (

@@ -1,23 +1,23 @@
 ---
-import "../styles/globals.css"
-import HeaderCenteredEyebrow from './HeaderCenteredEyebrow.astro'
-import {GalleryTabs} from '@/components/GalleryTabs'
-import MainLayout from '@/layouts/MainLayout.astro'
+import '../styles/globals.css';
+import HeaderCenteredEyebrow from './HeaderCenteredEyebrow.astro';
+import { GalleryTabs } from '@/components/GalleryTabs';
+import MainLayout from '@/layouts/MainLayout.astro';
 
-const {eyebrow, title, tabsTitles, tabsData} = Astro.props
---- 
-<MainLayout title={title}>
-<section class="bg-[#FAFAFA] py-12 sm:py-28">
-  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-    <div class="flex flex-col gap-12 lg:gap-20">
-      <div class="">
-        <HeaderCenteredEyebrow eyebrow={eyebrow} title={title}/>
-      </div>
-      <div class="h-screen">
-        <GalleryTabs tabsData={tabsData}  client:load/>
+const { eyebrow, title, tabsTitles, tabsData } = Astro.props;
+---
+
+<MainLayout title={`Rios MD Plastics | Gallery - ${title}`}>
+  <section class="bg-[#FAFAFA] py-12 sm:py-28">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="flex flex-col gap-12 lg:gap-20">
+        <div class="">
+          <HeaderCenteredEyebrow eyebrow={eyebrow} title={title} />
+        </div>
+        <div class="h-screen">
+          <GalleryTabs tabsData={tabsData} client:load />
+        </div>
       </div>
     </div>
-  </div>
-</section>
+  </section>
 </MainLayout>
-
