@@ -20,12 +20,15 @@ import {
 import { Textarea } from '@/components/ui/textarea';
 import { Input } from '@/components/ui/input';
 import { RadioGroup, RadioGroupItem } from '@/components/ui/radio-group';
+import AlertError from '@/components/forms/AlertError';
 
 // Component
 export const Step2Expectations = ({ form }: any) => {
   const hasBeenPregnant = form.watch('hasBeenPregnant'); // Watch the pregnant field dynamically
   const desiredProcedure = form.watch('desiredProcedure'); // Watch the procedure field
   const birthControl = form.watch('birthControl'); // Watch the birth control field
+  const currentlyPregnant = form.watch('currentlyPregnant') === 'yes';
+  const breastFeeding = form.watch('breastFeeding') === 'yes';
 
   const procedures = [
     'Breast Augmentation with Implants',
@@ -346,70 +349,82 @@ export const Step2Expectations = ({ form }: any) => {
             />
           )}
         </div>
-        <FormField
-          control={form.control}
-          name="currentlyPregnant"
-          render={({ field }) => (
-            <FormItem className="space-y-3">
-              <FormLabel>
-                Are you currently pregnant? (You need to be at least 6 months after delivering to
-                apply)
-              </FormLabel>
-              <FormControl>
-                <RadioGroup
-                  onValueChange={field.onChange}
-                  defaultValue={field.value}
-                  className="flex flex-col space-y-1">
-                  <FormItem className="flex items-center space-x-3 space-y-0">
-                    <FormControl>
-                      <RadioGroupItem value="yes" />
-                    </FormControl>
-                    <FormLabel className="font-normal">Yes</FormLabel>
-                  </FormItem>
-                  <FormItem className="flex items-center space-x-3 space-y-0">
-                    <FormControl>
-                      <RadioGroupItem value="no" />
-                    </FormControl>
-                    <FormLabel className="font-normal">No</FormLabel>
-                  </FormItem>
-                </RadioGroup>
-              </FormControl>
-              <FormMessage />
-            </FormItem>
+
+        <div className="space-y-4">
+          <FormField
+            control={form.control}
+            name="currentlyPregnant"
+            render={({ field }) => (
+              <FormItem className="space-y-3">
+                <FormLabel>
+                  Are you currently pregnant? (Applicants must wait at least 6 months after delivery
+                  to apply)
+                </FormLabel>
+                <FormControl>
+                  <RadioGroup
+                    onValueChange={field.onChange}
+                    defaultValue={field.value}
+                    className="flex flex-col space-y-1">
+                    <FormItem className="flex items-center space-x-3 space-y-0">
+                      <FormControl>
+                        <RadioGroupItem value="yes" />
+                      </FormControl>
+                      <FormLabel className="font-normal">Yes</FormLabel>
+                    </FormItem>
+                    <FormItem className="flex items-center space-x-3 space-y-0">
+                      <FormControl>
+                        <RadioGroupItem value="no" />
+                      </FormControl>
+                      <FormLabel className="font-normal">No</FormLabel>
+                    </FormItem>
+                  </RadioGroup>
+                </FormControl>
+                <FormMessage />
+              </FormItem>
+            )}
+          />
+          {currentlyPregnant && (
+            <AlertError errorMessage="Applicants must wait at least 6 months after delivery to apply" />
           )}
-        />
-        <FormField
-          control={form.control}
-          name="breastFeeding"
-          render={({ field }) => (
-            <FormItem className="space-y-3">
-              <FormLabel>
-                Are you breastfeeding? (You need to have stopped at least 6 months prior to
-                applying)
-              </FormLabel>
-              <FormControl>
-                <RadioGroup
-                  onValueChange={field.onChange}
-                  defaultValue={field.value}
-                  className="flex flex-col space-y-1">
-                  <FormItem className="flex items-center space-x-3 space-y-0">
-                    <FormControl>
-                      <RadioGroupItem value="yes" />
-                    </FormControl>
-                    <FormLabel className="font-normal">Yes</FormLabel>
-                  </FormItem>
-                  <FormItem className="flex items-center space-x-3 space-y-0">
-                    <FormControl>
-                      <RadioGroupItem value="no" />
-                    </FormControl>
-                    <FormLabel className="font-normal">No</FormLabel>
-                  </FormItem>
-                </RadioGroup>
-              </FormControl>
-              <FormMessage />
-            </FormItem>
+        </div>
+
+        <div className="space-y-4">
+          <FormField
+            control={form.control}
+            name="breastFeeding"
+            render={({ field }) => (
+              <FormItem className="space-y-3">
+                <FormLabel>
+                  Are you breastfeeding? (Applicants must stop breastfeeding at least 6 months
+                  before applying)
+                </FormLabel>
+                <FormControl>
+                  <RadioGroup
+                    onValueChange={field.onChange}
+                    defaultValue={field.value}
+                    className="flex flex-col space-y-1">
+                    <FormItem className="flex items-center space-x-3 space-y-0">
+                      <FormControl>
+                        <RadioGroupItem value="yes" />
+                      </FormControl>
+                      <FormLabel className="font-normal">Yes</FormLabel>
+                    </FormItem>
+                    <FormItem className="flex items-center space-x-3 space-y-0">
+                      <FormControl>
+                        <RadioGroupItem value="no" />
+                      </FormControl>
+                      <FormLabel className="font-normal">No</FormLabel>
+                    </FormItem>
+                  </RadioGroup>
+                </FormControl>
+                <FormMessage />
+              </FormItem>
+            )}
+          />
+          {breastFeeding && (
+            <AlertError errorMessage="Applicants must stop breastfeeding at least 6 months before applying" />
           )}
-        />
+        </div>
       </form>
     </Form>
   );

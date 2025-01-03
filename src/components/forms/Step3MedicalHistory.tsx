@@ -1,5 +1,4 @@
-import { useState } from 'react';
-import { useForm, useFieldArray } from 'react-hook-form';
+import { useFieldArray } from 'react-hook-form';
 
 import { cn } from '@/lib/utils';
 import { format } from 'date-fns';
@@ -33,7 +32,7 @@ import { Popover, PopoverContent, PopoverTrigger } from '@/components/ui/popover
 
 export const Step3MedicalHistory = ({ form }: any) => {
   const errors = form.formState.errors;
-  console.log(errors);
+
   const {
     fields: illnessFields,
     append: appendIllness,
@@ -70,6 +69,15 @@ export const Step3MedicalHistory = ({ form }: any) => {
     name: 'medications'
   });
 
+  const {
+    fields: surgeryFields,
+    append: appendSurgery,
+    remove: removeSurgery
+  } = useFieldArray({
+    control: form.control,
+    name: 'surgeries'
+  });
+
   const illness = form.watch('hasIllness') === 'yes';
   const allergy = form.watch('hasAllergies') === 'yes';
   const hasDiabetes = form.watch('diabetes') === 'yes';
@@ -95,6 +103,7 @@ export const Step3MedicalHistory = ({ form }: any) => {
   const quitSmoking = form.watch('smokedOrVape') === 'quit';
   const useDrugs = form.watch('recreationalDrugUse') === 'yes';
   const currentMedication = form.watch('currentMedication') === 'yes';
+  const previousSurgeries = form.watch('previousSurgeries') === 'yes';
 
   return (
     <Form {...form}>
@@ -1768,36 +1777,110 @@ export const Step3MedicalHistory = ({ form }: any) => {
             </FormItem>
           )}
         />
-        {/* Previous Surgeries */}
-        <FormField
-          control={form.control}
-          name="previousSurgeries"
-          render={({ field }) => (
-            <FormItem className="space-y-3">
-              <FormLabel>Have you had any previous surgeries ?</FormLabel>
-              <FormControl>
-                <RadioGroup
-                  onValueChange={field.onChange}
-                  defaultValue={field.value}
-                  className="flex flex-col space-y-1">
-                  <FormItem className="flex items-center space-x-3 space-y-0">
-                    <FormControl>
-                      <RadioGroupItem value="yes" />
-                    </FormControl>
-                    <FormLabel className="font-normal">Yes</FormLabel>
-                  </FormItem>
-                  <FormItem className="flex items-center space-x-3 space-y-0">
-                    <FormControl>
-                      <RadioGroupItem value="no" />
-                    </FormControl>
-                    <FormLabel className="font-normal">No</FormLabel>
-                  </FormItem>
-                </RadioGroup>
-              </FormControl>
-              <FormMessage />
-            </FormItem>
+        <div className="space-y-6">
+          {/* Previous Surgeries */}
+          <FormField
+            control={form.control}
+            name="previousSurgeries"
+            render={({ field }) => (
+              <FormItem className="space-y-3">
+                <FormLabel>Have you had any previous surgeries ?</FormLabel>
+                <FormControl>
+                  <RadioGroup
+                    onValueChange={field.onChange}
+                    defaultValue={field.value}
+                    className="flex flex-col space-y-1">
+                    <FormItem className="flex items-center space-x-3 space-y-0">
+                      <FormControl>
+                        <RadioGroupItem value="yes" />
+                      </FormControl>
+                      <FormLabel className="font-normal">Yes</FormLabel>
+                    </FormItem>
+                    <FormItem className="flex items-center space-x-3 space-y-0">
+                      <FormControl>
+                        <RadioGroupItem value="no" />
+                      </FormControl>
+                      <FormLabel className="font-normal">No</FormLabel>
+                    </FormItem>
+                  </RadioGroup>
+                </FormControl>
+                <FormMessage />
+              </FormItem>
+            )}
+          />
+          {previousSurgeries && (
+            <div className="flex flex-col animate-fade-down animate-ease-in-out animate-duration-300">
+              <div className="flex items-center mb-2">
+                <FormLabel>History of Surgeries</FormLabel>
+                <Button
+                  type="button"
+                  size="sm"
+                  className="mt-2 sm:ml-auto"
+                  onClick={() =>
+                    appendSurgery({ surgeryName: '', surgeryYear: '', surgeryReason: '' })
+                  }>
+                  Add Surgery
+                </Button>
+              </div>
+              {surgeryFields.map((item: any, index: any) => (
+                <div
+                  key={item.id}
+                  className="animate-fade-down animate-ease-in-out animate-duration-300 flex flex-col sm:flex-row gap-4 sm:items-end  bg-gray-300 p-4 border rounded-md mb-2">
+                  <FormField
+                    control={form.control}
+                    name={`surgery.${index}.surgeryName`}
+                    render={({ field }) => (
+                      <FormItem className="flex-1">
+                        <FormLabel>Surgery name</FormLabel>
+                        <FormControl>
+                          <Input placeholder="Enter surgery name" {...field} />
+                        </FormControl>
+                        <FormMessage />
+                      </FormItem>
+                    )}
+                  />
+                  <FormField
+                    control={form.control}
+                    name={`surgery.${index}.surgeryYear`}
+                    render={({ field }) => (
+                      <FormItem className="flex-1 ">
+                        <FormLabel>Surgery Year </FormLabel>
+                        <FormControl>
+                          <Input placeholder="Enter year (YYYY)" {...field} />
+                        </FormControl>
+                        <FormMessage />
+                      </FormItem>
+                    )}
+                  />
+                  <FormField
+                    control={form.control}
+                    name={`surgery.${index}.surgeryReason`}
+                    render={({ field }) => (
+                      <FormItem className="flex-1 ">
+                        <FormLabel>Please describe</FormLabel>
+                        <FormControl>
+                          <Input placeholder="Enter surgery reason" {...field} />
+                        </FormControl>
+                        <FormMessage />
+                      </FormItem>
+                    )}
+                  />
+                  <div className="flex items-center">
+                    <Button
+                      type="button"
+                      variant="destructive"
+                      size="icon"
+                      className="ml-auto"
+                      aria-label="Delete"
+                      onClick={() => removeSurgery(index)}>
+                      <Trash2 className="shrink-0 w-4 h-4" />
+                    </Button>
+                  </div>
+                </div>
+              ))}
+            </div>
           )}
-        />
+        </div>
       </form>
     </Form>
   );

@@ -52,6 +52,7 @@ export const Step1GeneralInfo = ({ form }: any) => {
   const weight = form.watch('weight');
   const heightFt = form.watch('heightFt');
   const heightIn = form.watch('heightIn');
+  const reference = form.watch('reference');
 
   const age = useMemo(() => {
     if (!dateOfBirth) return null;
@@ -60,8 +61,16 @@ export const Step1GeneralInfo = ({ form }: any) => {
 
   const isValidAge = age !== null && age >= 18 && age <= 60;
 
-  const calculateBmi = (heightFt: any, heightIn: any, weight: any) => {
-    if (!heightFt || !heightIn || !weight) {
+  const calculateBmi = (
+    heightFt: number | undefined,
+    heightIn: number | undefined,
+    weight: number | undefined
+  ) => {
+    if (heightFt === undefined || heightIn === undefined || weight === undefined) {
+      return null;
+    }
+
+    if (heightFt <= 0 || heightIn < 0 || weight <= 0) {
       return null;
     }
 
@@ -70,7 +79,7 @@ export const Step1GeneralInfo = ({ form }: any) => {
     const totalWeightKilograms = weight * 0.453592;
     const bmi = totalWeightKilograms / (totalHeightMeters * totalHeightMeters);
 
-    return bmi;
+    return Number(bmi.toFixed(1));
   };
 
   const bmi = useMemo(() => {
@@ -317,8 +326,10 @@ export const Step1GeneralInfo = ({ form }: any) => {
                   <FormControl>
                     <Input
                       placeholder="Enter feet"
-                      value={field.value || ''}
-                      onChange={(e) => field.onChange(e.target.value ? Number(e.target.value) : '')}
+                      value={field.value ?? ''}
+                      onChange={(e) =>
+                        field.onChange(e.target.value === undefined ? '' : Number(e.target.value))
+                      }
                     />
                   </FormControl>
                   <FormMessage />
@@ -334,8 +345,10 @@ export const Step1GeneralInfo = ({ form }: any) => {
                   <FormControl>
                     <Input
                       placeholder="Enter inches"
-                      value={field.value || ''}
-                      onChange={(e) => field.onChange(e.target.value ? Number(e.target.value) : '')}
+                      value={field.value ?? ''}
+                      onChange={(e) =>
+                        field.onChange(e.target.value === '' ? undefined : Number(e.target.value))
+                      }
                     />
                   </FormControl>
                   <FormMessage />
@@ -351,8 +364,10 @@ export const Step1GeneralInfo = ({ form }: any) => {
                   <FormControl>
                     <Input
                       placeholder="Enter your weight"
-                      value={field.value || ''}
-                      onChange={(e) => field.onChange(e.target.value ? Number(e.target.value) : '')}
+                      value={field.value ?? ''}
+                      onChange={(e) =>
+                        field.onChange(e.target.value === '' ? undefined : Number(e.target.value))
+                      }
                     />
                   </FormControl>
                   <FormMessage />
@@ -422,51 +437,67 @@ export const Step1GeneralInfo = ({ form }: any) => {
         />
 
         {hadSurgery && (
-          <FormField
-            control={form.control}
-            name="surgeryType"
-            render={({ field }) => (
-              <FormItem
-                className={cn(
-                  'space-y-3 animate-ease-in-out animate-duration-300',
-                  hadSurgery ? 'animate-fade-down' : 'animate-fade-up'
-                )}>
-                <FormLabel>If yes, please select an option:</FormLabel>
-                <FormControl>
-                  <RadioGroup
-                    onValueChange={field.onChange}
-                    defaultValue={field.value}
-                    className="flex flex-col space-y-1">
-                    <FormItem className="flex items-center space-x-3 space-y-0">
-                      <FormControl>
-                        <RadioGroupItem value="gastric-sleeve" />
-                      </FormControl>
-                      <FormLabel className="font-normal">Gastric Sleeve</FormLabel>
-                    </FormItem>
-                    <FormItem className="flex items-center space-x-3 space-y-0">
-                      <FormControl>
-                        <RadioGroupItem value="bypass" />
-                      </FormControl>
-                      <FormLabel className="font-normal">Bypass</FormLabel>
-                    </FormItem>
-                    <FormItem className="flex items-center space-x-3 space-y-0">
-                      <FormControl>
-                        <RadioGroupItem value="lapband" />
-                      </FormControl>
-                      <FormLabel className="font-normal">Lap band</FormLabel>
-                    </FormItem>
-                    <FormItem className="flex items-center space-x-3 space-y-0">
-                      <FormControl>
-                        <RadioGroupItem value="weight-loss" />
-                      </FormControl>
-                      <FormLabel className="font-normal">Weight loss without surgery</FormLabel>
-                    </FormItem>
-                  </RadioGroup>
-                </FormControl>
-                <FormMessage />
-              </FormItem>
-            )}
-          />
+          <>
+            <FormField
+              control={form.control}
+              name="surgeryType"
+              render={({ field }) => (
+                <FormItem
+                  className={cn(
+                    'space-y-3 animate-ease-in-out animate-duration-300',
+                    hadSurgery ? 'animate-fade-down' : 'animate-fade-up'
+                  )}>
+                  <FormLabel>If yes, please specify the type of surgery:</FormLabel>
+                  <FormControl>
+                    <RadioGroup
+                      onValueChange={field.onChange}
+                      defaultValue={field.value}
+                      className="flex flex-col space-y-1">
+                      <FormItem className="flex items-center space-x-3 space-y-0">
+                        <FormControl>
+                          <RadioGroupItem value="gastric-sleeve" />
+                        </FormControl>
+                        <FormLabel className="font-normal">Gastric Sleeve</FormLabel>
+                      </FormItem>
+                      <FormItem className="flex items-center space-x-3 space-y-0">
+                        <FormControl>
+                          <RadioGroupItem value="bypass" />
+                        </FormControl>
+                        <FormLabel className="font-normal">Bypass</FormLabel>
+                      </FormItem>
+                      <FormItem className="flex items-center space-x-3 space-y-0">
+                        <FormControl>
+                          <RadioGroupItem value="lapband" />
+                        </FormControl>
+                        <FormLabel className="font-normal">Lap band</FormLabel>
+                      </FormItem>
+                      <FormItem className="flex items-center space-x-3 space-y-0">
+                        <FormControl>
+                          <RadioGroupItem value="weight-loss" />
+                        </FormControl>
+                        <FormLabel className="font-normal">Weight loss without surgery</FormLabel>
+                      </FormItem>
+                    </RadioGroup>
+                  </FormControl>
+                  <FormMessage />
+                </FormItem>
+              )}
+            />
+            <FormField
+              control={form.control}
+              name="weightLoss"
+              render={({ field }) => (
+                <FormItem className="animate-ease-in-out animate-duration-300 animate-fade-down">
+                  <FormLabel>How many lbs (kg) did you lose from your highest weight?</FormLabel>
+                  <FormControl>
+                    <Input placeholder="Enter the amount (e.g., 20 lbs / 9 kg)" {...field} />
+                  </FormControl>
+                  {/* <FormDescription>This is your public display name.</FormDescription> */}
+                  <FormMessage />
+                </FormItem>
+              )}
+            />
+          </>
         )}
 
         <FormField
@@ -494,6 +525,26 @@ export const Step1GeneralInfo = ({ form }: any) => {
             </FormItem>
           )}
         />
+
+        {(reference === 'friend-or-relative' || reference === 'others') && (
+          <FormField
+            control={form.control}
+            name="referralSource"
+            render={({ field }) => (
+              <FormItem className="animate-ease-in-out animate-duration-300 animate-fade-down">
+                <FormLabel>Please specify/elaborate</FormLabel>
+                <FormControl>
+                  <Input
+                    placeholder="Enter details here (e.g., friend's name or other sources)"
+                    {...field}
+                  />
+                </FormControl>
+                {/* <FormDescription>This is your public display name.</FormDescription> */}
+                <FormMessage />
+              </FormItem>
+            )}
+          />
+        )}
 
         <div>
           <p className="text-sm mb-2">When would you like to book your surgery?</p>

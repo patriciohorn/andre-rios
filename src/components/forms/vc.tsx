@@ -253,7 +253,19 @@ const medicalHistorySchema = (watch: UseFormWatch<any>) =>
     }),
     previousSurgeries: z.enum(['yes', 'no'], {
       required_error: 'You need to select an option.'
-    })
+    }),
+    surgeries:
+      watch('previousSurgeries') === 'yes'
+        ? z
+            .array(
+              z.object({
+                surgeryName: z.string().min(1, 'Condition is required'),
+                surgeryYear: z.string().min(1, 'Year diagnosed is required'),
+                surgeryReason: z.string().min(1, 'Description is required')
+              })
+            )
+            .optional()
+        : z.array(z.any()).optional()
   });
 
 const imageUploadSchema = z.object({
@@ -267,7 +279,7 @@ const steps = ['Personal Information', 'General Information', 'Medical History',
 
 export const ConsultationForm = () => {
   const { toast } = useToast();
-  const [currentStep, setCurrentStep] = useState(0);
+  const [currentStep, setCurrentStep] = useState(2);
   const [formData, setFormData] = useState({});
   const [isSubmitted, setIsSubmitted] = useState(false);
 
@@ -301,17 +313,17 @@ export const ConsultationForm = () => {
       desiredProcedure: '',
       otherProcedure: '',
       dislikesAndDesires: '',
-      breastSurgery: undefined, // Updated
+      breastSurgery: undefined,
       cupSize: '',
-      breastImplants: undefined, // Updated
-      breastAugmentationBefore: undefined, // Updated
-      hasBeenPregnant: undefined, // Updated
+      breastImplants: undefined,
+      breastAugmentationBefore: undefined,
+      hasBeenPregnant: undefined,
       timesPregnant: '',
-      delivered: undefined, // Updated
+      delivered: undefined,
       birthControl: '',
       otherBirthControl: '',
-      currentlyPregnant: undefined, // Updated
-      breastFeeding: undefined // Updated
+      currentlyPregnant: undefined,
+      breastFeeding: undefined
     },
     mode: 'onSubmit'
   });
@@ -373,7 +385,8 @@ export const ConsultationForm = () => {
       medications: [{ medicationName: '', dosage: '', frequency: '', purpose: '' }],
       antidepressants: '',
       takingSupplements: '',
-      previousSurgeries: ''
+      previousSurgeries: '',
+      surgeries: [{ surgeryName: '', surgeryYear: '', surgeryReason: '' }]
     },
     mode: 'onSubmit',
     shouldUnregister: true
