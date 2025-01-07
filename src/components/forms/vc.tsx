@@ -312,7 +312,7 @@ const steps = ['Personal Information', 'General Information', 'Medical History',
 
 export const ConsultationForm = () => {
   const { toast } = useToast();
-  const [currentStep, setCurrentStep] = useState(3);
+  const [currentStep, setCurrentStep] = useState(0);
   const [formData, setFormData] = useState({});
   const [isSubmitted, setIsSubmitted] = useState(false);
 
