@@ -317,7 +317,9 @@ export const Step2Expectations = ({ form, data }: any) => {
                   render={({ field }) => (
                     <FormItem>
                       <FormLabel>Birth control used</FormLabel>
-                      <Select onValueChange={field.onChange} defaultValue={field.value}>
+                      <Select
+                        onValueChange={field.onChange}
+                        defaultValue={field.value || undefined}>
                         <FormControl>
                           <SelectTrigger>
                             <SelectValue placeholder="Select a birth control" />

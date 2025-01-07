@@ -183,7 +183,18 @@ const medicalHistorySchema = (watch: UseFormWatch<any>) =>
     }),
     breathingProblemsDetails:
       watch('breathingProblems') === 'yes' ? z.string().optional() : z.string().optional(),
-    mentalCondition: z.string().min(1, 'Please choose an option'),
+    mentalCondition: z
+      .enum([
+        'none',
+        'fibromyalgia',
+        'depression',
+        'anxiety',
+        'panic attacks',
+        'ocd',
+        'personality disorders',
+        'other'
+      ])
+      .optional(),
     otherMentalCondition:
       watch('mentalCondition') === 'other' ? z.string().optional() : z.string().optional(),
     reflux: z.enum(['yes', 'no'], {
@@ -271,9 +282,6 @@ const medicalHistorySchema = (watch: UseFormWatch<any>) =>
     antidepressants: z.enum(['yes', 'no'], {
       required_error: 'You need to select an option.'
     }),
-    takingSupplements: z.enum(['yes', 'no'], {
-      required_error: 'You need to select an option.'
-    }),
     previousSurgeries: z.enum(['yes', 'no'], {
       required_error: 'You need to select an option.'
     }),
@@ -315,7 +323,7 @@ export const ConsultationForm = () => {
   const [currentStep, setCurrentStep] = useState(0);
   const [formData, setFormData] = useState({});
   const [isSubmitted, setIsSubmitted] = useState(false);
-
+  console.log(currentStep);
   const personalInformationForm = useForm({
     resolver: zodResolver(personalInformationSchema),
     defaultValues: {
@@ -334,6 +342,7 @@ export const ConsultationForm = () => {
       hadSurgery: false,
       surgeryType: undefined,
       reference: '',
+      referralSource: '',
       procedureMonth: '',
       procedureYear: ''
     },
@@ -353,7 +362,7 @@ export const ConsultationForm = () => {
       hasBeenPregnant: undefined,
       timesPregnant: '',
       delivered: undefined,
-      birthControl: '',
+      birthControl: undefined,
       otherBirthControl: '',
       currentlyPregnant: undefined,
       breastFeeding: undefined,
@@ -366,65 +375,64 @@ export const ConsultationForm = () => {
   const medicalHistoryForm = useForm({
     resolver: zodResolver(medicalHistorySchema(useForm().watch)),
     defaultValues: {
-      hasIllness: '',
+      hasIllness: undefined,
       illnesses: [{ condition: '', yearDiagnosed: '', description: '' }],
-      hasAllergies: '',
+      hasAllergies: undefined,
       allergies: [{ allergicTo: '', reaction: '' }],
-      diabetes: '',
+      diabetes: undefined,
       diabetesType: undefined,
       hgbResult: undefined,
-      heartCondition: '',
+      heartCondition: undefined,
       heartConditionDetails: undefined,
-      heartSymptoms: '',
+      heartSymptoms: undefined,
       heartSymptomsDetails: undefined,
-      hasThyroidCondition: '',
+      hasThyroidCondition: undefined,
       thyroidConditionType: undefined,
       thyroidYearDiagnosis: undefined,
       otherThyroidCondition: undefined,
       isThyroidControlled: undefined,
-      deepVein: '',
-      deepVeinDetails: undefined,
-      highBloodPresure: '',
-      cholesterol: '',
-      kidenyOrUrinary: '',
-      asthma: '',
-      orthopedic: '',
-      orthopedicDetails: undefined,
-      breathingProblems: '',
-      breathingProblemsDetails: undefined,
-      mentalCondition: 'none',
-      otherMentalCondition: undefined,
-      reflux: '',
-      refluxDetails: undefined,
-      liverDisease: '',
-      liverDiseaseDetails: undefined,
-      anemiaOrBleeding: '',
-      anemiaOrBleedingDetails: undefined,
-      swellingOrVaricose: '',
-      swellingOrVaricoseDetails: undefined,
-      infectiousDisease: '',
-      infectiousDiseaseDetails: undefined,
-      hivPositive: '',
+      deepVein: undefined,
+      deepVeinDetails: '',
+      highBloodPresure: undefined,
+      cholesterol: undefined,
+      kidenyOrUrinary: undefined,
+      asthma: undefined,
+      orthopedic: undefined,
+      orthopedicDetails: '',
+      breathingProblems: undefined,
+      breathingProblemsDetails: '',
+      mentalCondition: undefined,
+      otherMentalCondition: '',
+      reflux: undefined,
+      refluxDetails: '',
+      liverDisease: undefined,
+      liverDiseaseDetails: '',
+      anemiaOrBleeding: undefined,
+      anemiaOrBleedingDetails: '',
+      swellingOrVaricose: undefined,
+      swellingOrVaricoseDetails: '',
+      infectiousDisease: undefined,
+      infectiousDiseaseDetails: '',
+      hivPositive: undefined,
       hivMedications: [{ medicationName: '', dosage: '', frequency: '' }],
       lastViralLoadDate: undefined,
-      drinkAlcohol: '',
-      alcoholFrequency: undefined,
-      smokedOrVape: '',
-      currentSmokingAmount: undefined,
-      currentSmokingSince: undefined,
-      pastSmokingAmount: undefined,
-      pastSmokingSince: undefined,
-      recreationalDrugUse: '',
-      drugUseDetails: undefined,
-      currentMedication: '',
+      drinkAlcohol: undefined,
+      alcoholFrequency: '',
+      smokedOrVape: undefined,
+      currentSmokingAmount: '',
+      currentSmokingSince: '',
+      pastSmokingAmount: '',
+      pastSmokingSince: '',
+      recreationalDrugUse: undefined,
+      drugUseDetails: '',
+      currentMedication: undefined,
       medications: [{ medicationName: '', dosage: '', frequency: '', purpose: '' }],
-      antidepressants: '',
-      takingSupplements: '',
-      previousSurgeries: '',
+      antidepressants: undefined,
+      previousSurgeries: undefined,
       surgeries: [{ surgeryName: '', surgeryYear: '', surgeryReason: '' }]
     },
-    mode: 'onSubmit',
-    shouldUnregister: true
+    mode: 'onSubmit'
+    // shouldUnregister: true
   });
 
   const imageUploadForm = useForm({
@@ -455,30 +463,15 @@ export const ConsultationForm = () => {
   };
 
   const handleSubmit = () => {
-    // Validate form data using Zod schema
-    const validationResult = imageUploadSchema.safeParse(formData);
-
-    if (!validationResult.success) {
-      // Show error messages for validation failures
-      validationResult.error.errors.forEach((error) => {
-        toast({
-          title: 'Validation Error',
-          description: `Error in ${error.path.join('.')}: ${error.message}`,
-          variant: 'destructive' // Assuming your toast supports variants
-        });
-      });
-    } else {
-      // If validation passes, show success message
-      toast({
-        title: 'Pacient Information',
-        description: (
-          <pre className="mt-2 w-[320px] max-h-[60vh] rounded-md bg-slate-950 p-4">
-            <code className="text-white">{JSON.stringify(formData, null, 2)}</code>
-          </pre>
-        )
-      });
-      setIsSubmitted(true);
-    }
+    toast({
+      title: 'Pacient Information',
+      description: (
+        <pre className="mt-2 w-[320px] max-h-[60vh] rounded-md bg-slate-950 p-4">
+          <code className="text-white">{JSON.stringify(formData, null, 2)}</code>
+        </pre>
+      )
+    });
+    setIsSubmitted(true);
   };
 
   const renderStepContent = () => {

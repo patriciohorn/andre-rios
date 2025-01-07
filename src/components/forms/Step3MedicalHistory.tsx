@@ -317,7 +317,7 @@ export const Step3MedicalHistory = ({ form }: any) => {
             name="diabetes"
             render={({ field }) => (
               <FormItem className="space-y-3">
-                <FormLabel>Do you have any diabetes?</FormLabel>
+                <FormLabel>Do you have diabetes?</FormLabel>
                 <FormControl>
                   <RadioGroup
                     onValueChange={(value) => {
@@ -552,9 +552,9 @@ export const Step3MedicalHistory = ({ form }: any) => {
                     <FormLabel>Type of Thyroid Condition</FormLabel>
                     <Select
                       onValueChange={(value) => {
-                        field.onChange(value);
+                        field.onChange(value || undefined);
                       }}
-                      defaultValue={field.value}>
+                      defaultValue={field.value || undefined}>
                       <FormControl>
                         <SelectTrigger>
                           <SelectValue placeholder="Select a condition" />
@@ -929,9 +929,9 @@ export const Step3MedicalHistory = ({ form }: any) => {
                 </FormLabel>
                 <Select
                   onValueChange={(value) => {
-                    field.onChange(value);
+                    field.onChange(value || undefined);
                   }}
-                  defaultValue={field.value}>
+                  defaultValue={field.value || undefined}>
                   <FormControl>
                     <SelectTrigger>
                       <SelectValue placeholder="Select an option" />
@@ -1748,7 +1748,7 @@ export const Step3MedicalHistory = ({ form }: any) => {
           )}
         />
         {/* Supplements & Vitamins */}
-        <FormField
+        {/* <FormField
           control={form.control}
           name="takingSupplements"
           render={({ field }) => (
@@ -1776,7 +1776,7 @@ export const Step3MedicalHistory = ({ form }: any) => {
               <FormMessage />
             </FormItem>
           )}
-        />
+        /> */}
         <div className="space-y-6">
           {/* Previous Surgeries */}
           <FormField
