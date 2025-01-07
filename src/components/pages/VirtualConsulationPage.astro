@@ -2,7 +2,6 @@
 import '../../styles/globals.css';
 import MainLayout from '@/layouts/MainLayout.astro';
 import { ConsultationForm } from '../forms/vc';
-import HeaderCenteredEyebrow from '../HeaderCenteredEyebrow.astro';
 
 import { getI18N } from '@/i18n';
 const { currentLocale } = Astro;
@@ -13,9 +12,6 @@ const proceduresInjectables = Object.values(i18n.PROCEDURES.PROCEDURES_INJECTABL
 const proceduresCorporal = Object.values(i18n.PROCEDURES.PROCEDURES_BODY);
 
 const proceduresField = [proceduresBreast, proceduresInjectables, proceduresCorporal];
-
-const formFieldsData = proceduresField;
-console.log(formFieldsData.flat());
 ---
 
 <MainLayout title="Rios MD Plastics | Virtual Consultation">

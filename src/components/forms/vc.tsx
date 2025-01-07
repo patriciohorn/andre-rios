@@ -41,20 +41,43 @@ const personalInformationSchema = z.object({
 });
 
 const generalInformationSchema = z.object({
+  // General fields
   desiredProcedure: z.string().min(1, 'Desired procedure is required'),
   otherProcedure: z.string().optional(),
   dislikesAndDesires: z.string().min(1, 'Please tell us a little about your dislikes and desires'),
-  breastSurgery: z.enum(['yes', 'no'], { required_error: 'Please select an option' }),
-  cupSize: z.string(),
-  breastImplants: z.enum(['yes', 'no'], { required_error: 'Please select an option' }),
-  breastAugmentationBefore: z.enum(['yes', 'no'], { required_error: 'Please select an option' }),
-  hasBeenPregnant: z.enum(['yes', 'no'], { required_error: 'Please select an option' }),
+
+  // Women fields
+  breastSurgery: z.enum(['yes', 'no'], { required_error: 'Please select an option' }).optional(),
+  cupSize: z.string().optional(),
+  breastImplants: z.enum(['yes', 'no'], { required_error: 'Please select an option' }).optional(),
+  breastAugmentationBefore: z
+    .enum(['yes', 'no'], { required_error: 'Please select an option' })
+    .optional(),
+  hasBeenPregnant: z.enum(['yes', 'no'], { required_error: 'Please select an option' }).optional(),
   timesPregnant: z.string().optional(),
   delivered: z.enum(['Vaginal', 'C-Section', 'Both', 'Other']).optional(),
-  birthControl: z.string().min(1, 'Please select a birth control'),
+  birthControl: z
+    .enum([
+      'None',
+      'Tubal ligation',
+      'IUD',
+      'Pills',
+      'Condom',
+      'Hormone replacement therapy',
+      'Hormone implant',
+      'Secondary to surgical procedure (hysterectomy)',
+      'Other'
+    ])
+    .optional(),
   otherBirthControl: z.string().optional(),
-  currentlyPregnant: z.enum(['yes', 'no'], { required_error: 'Please select an option' }),
-  breastFeeding: z.enum(['yes', 'no'], { required_error: 'Please select an option' })
+  currentlyPregnant: z
+    .enum(['yes', 'no'], { required_error: 'Please select an option' })
+    .optional(),
+  breastFeeding: z.enum(['yes', 'no'], { required_error: 'Please select an option' }).optional(),
+
+  // Male fields
+  chestSurgery: z.enum(['yes', 'no'], { required_error: 'Please select an option' }).optional(),
+  chestExpectation: z.string().optional()
 });
 
 const medicalHistorySchema = (watch: UseFormWatch<any>) =>
@@ -268,18 +291,28 @@ const medicalHistorySchema = (watch: UseFormWatch<any>) =>
         : z.array(z.any()).optional()
   });
 
+const MAX_FILE_SIZE = 2 * 1024 * 1024;
+
+const fileSchema = z.instanceof(File).refine((file) => file.size <= MAX_FILE_SIZE, {
+  message: `File size must not exceed ${MAX_FILE_SIZE / (1024 * 1024)} MB.`
+});
+
 const imageUploadSchema = z.object({
-  frontPhoto: z.instanceof(File).optional(),
-  backPhoto: z.instanceof(File).optional(),
-  leftPhoto: z.instanceof(File).optional(),
-  rightPhoto: z.instanceof(File).optional()
+  frontPhoto: fileSchema.optional(),
+  backPhoto: fileSchema.optional(),
+  leftPhoto: fileSchema.optional(),
+  rightPhoto: fileSchema.optional(),
+  additionalPhotos: z
+    .array(fileSchema)
+    .max(3, 'You can upload up to 3 additional photos.')
+    .optional()
 });
 
 const steps = ['Personal Information', 'General Information', 'Medical History', 'Upload Picture'];
 
 export const ConsultationForm = () => {
   const { toast } = useToast();
-  const [currentStep, setCurrentStep] = useState(2);
+  const [currentStep, setCurrentStep] = useState(3);
   const [formData, setFormData] = useState({});
   const [isSubmitted, setIsSubmitted] = useState(false);
 
@@ -323,7 +356,9 @@ export const ConsultationForm = () => {
       birthControl: '',
       otherBirthControl: '',
       currentlyPregnant: undefined,
-      breastFeeding: undefined
+      breastFeeding: undefined,
+      chestSurgery: undefined,
+      chestExpectation: ''
     },
     mode: 'onSubmit'
   });
@@ -403,38 +438,75 @@ export const ConsultationForm = () => {
     mode: 'onSubmit'
   });
 
+  const scrollToElement = (stepIndex: number) => {
+    // stepRefs[stepIndex]?.current?.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    window.scrollTo({ top: 208, behavior: 'smooth' });
+  };
+
   const handleNextStep = (data: any) => {
     setFormData((prev) => ({ ...prev, ...data }));
     setCurrentStep((prev) => prev + 1);
+    scrollToElement(currentStep + 1);
   };
 
   const handlePreviousStep = () => {
     setCurrentStep((prev) => prev - 1);
+    scrollToElement(currentStep - 1);
   };
 
   const handleSubmit = () => {
-    // console.log('Submitted', formData);
-    toast({
-      title: 'Pacient Information',
-      description: (
-        <pre className="mt-2 w-[320px] max-h-[60vh] rounded-md bg-slate-950 p-4">
-          <code className="text-white">{JSON.stringify(formData, null, 2)}</code>
-        </pre>
-      )
-    });
-    setIsSubmitted(true);
+    // Validate form data using Zod schema
+    const validationResult = imageUploadSchema.safeParse(formData);
+
+    if (!validationResult.success) {
+      // Show error messages for validation failures
+      validationResult.error.errors.forEach((error) => {
+        toast({
+          title: 'Validation Error',
+          description: `Error in ${error.path.join('.')}: ${error.message}`,
+          variant: 'destructive' // Assuming your toast supports variants
+        });
+      });
+    } else {
+      // If validation passes, show success message
+      toast({
+        title: 'Pacient Information',
+        description: (
+          <pre className="mt-2 w-[320px] max-h-[60vh] rounded-md bg-slate-950 p-4">
+            <code className="text-white">{JSON.stringify(formData, null, 2)}</code>
+          </pre>
+        )
+      });
+      setIsSubmitted(true);
+    }
   };
 
   const renderStepContent = () => {
     switch (currentStep) {
       case 0:
-        return <Step1GeneralInfo form={personalInformationForm} />;
+        return (
+          <div>
+            <Step1GeneralInfo form={personalInformationForm} />
+          </div>
+        );
       case 1:
-        return <Step2Expectations form={generalInformationForm} />;
+        return (
+          <div>
+            <Step2Expectations form={generalInformationForm} data={formData} />
+          </div>
+        );
       case 2:
-        return <Step3MedicalHistory form={medicalHistoryForm} />;
+        return (
+          <div>
+            <Step3MedicalHistory form={medicalHistoryForm} />
+          </div>
+        );
       case 3:
-        return <Step4UploadPictures form={imageUploadForm} />;
+        return (
+          <div>
+            <Step4UploadPictures form={imageUploadForm} />
+          </div>
+        );
       default:
         return null;
     }

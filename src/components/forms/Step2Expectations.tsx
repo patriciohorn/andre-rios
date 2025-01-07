@@ -1,6 +1,3 @@
-import { useState } from 'react';
-
-// Shadcn components
 import {
   Form,
   FormControl,
@@ -21,14 +18,15 @@ import { Textarea } from '@/components/ui/textarea';
 import { Input } from '@/components/ui/input';
 import { RadioGroup, RadioGroupItem } from '@/components/ui/radio-group';
 import AlertError from '@/components/forms/AlertError';
+import { RadioField } from './RadioField';
 
-// Component
-export const Step2Expectations = ({ form }: any) => {
+export const Step2Expectations = ({ form, data }: any) => {
   const hasBeenPregnant = form.watch('hasBeenPregnant'); // Watch the pregnant field dynamically
   const desiredProcedure = form.watch('desiredProcedure'); // Watch the procedure field
   const birthControl = form.watch('birthControl'); // Watch the birth control field
   const currentlyPregnant = form.watch('currentlyPregnant') === 'yes';
   const breastFeeding = form.watch('breastFeeding') === 'yes';
+  const chestSurgery = form.watch('chestSurgery');
 
   const procedures = [
     'Breast Augmentation with Implants',
@@ -129,300 +127,333 @@ export const Step2Expectations = ({ form }: any) => {
           )}
         />
 
-        {/* Breast Surgery Question */}
-        <div className="space-y-8">
-          <FormField
-            control={form.control}
-            name="breastSurgery"
-            render={({ field }) => (
-              <FormItem className="space-y-3">
-                <FormLabel>Are you interested in breast surgery?</FormLabel>
-                <FormControl>
-                  <RadioGroup
-                    onValueChange={field.onChange}
-                    defaultValue={field.value}
-                    className="flex flex-col space-y-1">
-                    <FormItem className="flex items-center space-x-3 space-y-0">
-                      <FormControl>
-                        <RadioGroupItem value="yes" />
-                      </FormControl>
-                      <FormLabel className="font-normal">Yes</FormLabel>
-                    </FormItem>
-                    <FormItem className="flex items-center space-x-3 space-y-0">
-                      <FormControl>
-                        <RadioGroupItem value="no" />
-                      </FormControl>
-                      <FormLabel className="font-normal">No</FormLabel>
-                    </FormItem>
-                  </RadioGroup>
-                </FormControl>
-                <FormMessage />
-              </FormItem>
-            )}
-          />
-          <FormField
-            control={form.control}
-            name="cupSize"
-            render={({ field }) => (
-              <FormItem>
-                <FormLabel>What is your current cup size?</FormLabel>
-                <FormControl>
-                  <Input placeholder="Enter a cup size" {...field} />
-                </FormControl>
-                <FormMessage />
-              </FormItem>
-            )}
-          />
-          {/* Breast Implants */}
-          <FormField
-            control={form.control}
-            name="breastImplants"
-            render={({ field }) => (
-              <FormItem className="space-y-3">
-                <FormLabel>Are you interested in breast implants?</FormLabel>
-                <FormControl>
-                  <RadioGroup
-                    onValueChange={field.onChange}
-                    defaultValue={field.value}
-                    className="flex flex-col space-y-1">
-                    <FormItem className="flex items-center space-x-3 space-y-0">
-                      <FormControl>
-                        <RadioGroupItem value="yes" />
-                      </FormControl>
-                      <FormLabel className="font-normal">Yes</FormLabel>
-                    </FormItem>
-                    <FormItem className="flex items-center space-x-3 space-y-0">
-                      <FormControl>
-                        <RadioGroupItem value="no" />
-                      </FormControl>
-                      <FormLabel className="font-normal">No</FormLabel>
-                    </FormItem>
-                  </RadioGroup>
-                </FormControl>
-                <FormMessage />
-              </FormItem>
-            )}
-          />
-          {/* Breast Augmentation */}
-          <FormField
-            control={form.control}
-            name="breastAugmentationBefore"
-            render={({ field }) => (
-              <FormItem className="space-y-3">
-                <FormLabel>Have you had breast augmentation before?</FormLabel>
-                <FormControl>
-                  <RadioGroup
-                    onValueChange={field.onChange}
-                    defaultValue={field.value}
-                    className="flex flex-col space-y-1">
-                    <FormItem className="flex items-center space-x-3 space-y-0">
-                      <FormControl>
-                        <RadioGroupItem value="yes" />
-                      </FormControl>
-                      <FormLabel className="font-normal">Yes</FormLabel>
-                    </FormItem>
-                    <FormItem className="flex items-center space-x-3 space-y-0">
-                      <FormControl>
-                        <RadioGroupItem value="no" />
-                      </FormControl>
-                      <FormLabel className="font-normal">No</FormLabel>
-                    </FormItem>
-                  </RadioGroup>
-                </FormControl>
-                <FormMessage />
-              </FormItem>
-            )}
-          />
-        </div>
-
-        {/* Pregnant Questions*/}
-        <FormField
-          control={form.control}
-          name="hasBeenPregnant"
-          render={({ field }) => (
-            <FormItem>
-              <FormLabel>Have you been pregnant?</FormLabel>
-              <RadioGroup
-                className="flex flex-col space-y-1"
-                onValueChange={field.onChange}
-                defaultValue={field.value}>
-                <FormItem className="flex items-center space-x-3 space-y-0">
-                  <FormControl>
-                    <RadioGroupItem value="yes" />
-                  </FormControl>
-                  <FormLabel className="font-normal">Yes</FormLabel>
-                </FormItem>
-                <FormItem className="flex items-center space-x-3 space-y-0">
-                  <FormControl>
-                    <RadioGroupItem value="no" />
-                  </FormControl>
-                  <FormLabel className="font-normal">No</FormLabel>
-                </FormItem>
-              </RadioGroup>
-              <FormMessage />
-            </FormItem>
-          )}
-        />
-        {hasBeenPregnant === 'yes' && (
-          <>
-            <FormField
-              control={form.control}
-              name="timesPregnant"
-              render={({ field }) => (
-                <FormItem className="animate-fade-down animate-ease-in-out animate-duration-300">
-                  <FormLabel>How many times have you been pregnant?</FormLabel>
-                  <FormControl>
-                    <Input placeholder="Enter the number of pregnancies" {...field} />
-                  </FormControl>
-                  <FormMessage />
-                </FormItem>
-              )}
-            />
-
-            <FormField
-              control={form.control}
-              name="delivered"
-              render={({ field }) => (
-                <FormItem className="space-y-3 animate-fade-down animate-ease-in-out animate-duration-400">
-                  <FormLabel>How were they delivered?</FormLabel>
-                  <FormControl>
-                    <RadioGroup
-                      onValueChange={field.onChange}
-                      defaultValue={field.value}
-                      className="flex flex-col space-y-1">
-                      {deliveredProcedures.map((procedure) => (
-                        <FormItem key={procedure} className="flex items-center space-x-3 space-y-0">
+        <div>
+          {data.gender !== 'male' ? (
+            // Female and Other Questions
+            <div className="space-y-8">
+              {/* Breast Surgery Question */}
+              <FormField
+                control={form.control}
+                name="breastSurgery"
+                render={({ field }) => (
+                  <FormItem className="space-y-3">
+                    <FormLabel>Are you interested in breast surgery?</FormLabel>
+                    <FormControl>
+                      <RadioGroup
+                        onValueChange={field.onChange}
+                        defaultValue={field.value}
+                        className="flex flex-col space-y-1">
+                        <FormItem className="flex items-center space-x-3 space-y-0">
                           <FormControl>
-                            <RadioGroupItem value={procedure} />
+                            <RadioGroupItem value="yes" />
                           </FormControl>
-                          <FormLabel className="font-normal">{procedure}</FormLabel>
+                          <FormLabel className="font-normal">Yes</FormLabel>
                         </FormItem>
-                      ))}
+                        <FormItem className="flex items-center space-x-3 space-y-0">
+                          <FormControl>
+                            <RadioGroupItem value="no" />
+                          </FormControl>
+                          <FormLabel className="font-normal">No</FormLabel>
+                        </FormItem>
+                      </RadioGroup>
+                    </FormControl>
+                    <FormMessage />
+                  </FormItem>
+                )}
+              />
+              <FormField
+                control={form.control}
+                name="cupSize"
+                render={({ field }) => (
+                  <FormItem>
+                    <FormLabel>What is your current cup size?</FormLabel>
+                    <FormControl>
+                      <Input placeholder="Enter a cup size" {...field} />
+                    </FormControl>
+                    <FormMessage />
+                  </FormItem>
+                )}
+              />
+              {/* Breast Implants */}
+              <FormField
+                control={form.control}
+                name="breastImplants"
+                render={({ field }) => (
+                  <FormItem className="space-y-3">
+                    <FormLabel>Are you interested in breast implants?</FormLabel>
+                    <FormControl>
+                      <RadioGroup
+                        onValueChange={field.onChange}
+                        defaultValue={field.value}
+                        className="flex flex-col space-y-1">
+                        <FormItem className="flex items-center space-x-3 space-y-0">
+                          <FormControl>
+                            <RadioGroupItem value="yes" />
+                          </FormControl>
+                          <FormLabel className="font-normal">Yes</FormLabel>
+                        </FormItem>
+                        <FormItem className="flex items-center space-x-3 space-y-0">
+                          <FormControl>
+                            <RadioGroupItem value="no" />
+                          </FormControl>
+                          <FormLabel className="font-normal">No</FormLabel>
+                        </FormItem>
+                      </RadioGroup>
+                    </FormControl>
+                    <FormMessage />
+                  </FormItem>
+                )}
+              />
+              {/* Breast Augmentation */}
+              <FormField
+                control={form.control}
+                name="breastAugmentationBefore"
+                render={({ field }) => (
+                  <FormItem className="space-y-3">
+                    <FormLabel>Have you had breast augmentation before?</FormLabel>
+                    <FormControl>
+                      <RadioGroup
+                        onValueChange={field.onChange}
+                        defaultValue={field.value}
+                        className="flex flex-col space-y-1">
+                        <FormItem className="flex items-center space-x-3 space-y-0">
+                          <FormControl>
+                            <RadioGroupItem value="yes" />
+                          </FormControl>
+                          <FormLabel className="font-normal">Yes</FormLabel>
+                        </FormItem>
+                        <FormItem className="flex items-center space-x-3 space-y-0">
+                          <FormControl>
+                            <RadioGroupItem value="no" />
+                          </FormControl>
+                          <FormLabel className="font-normal">No</FormLabel>
+                        </FormItem>
+                      </RadioGroup>
+                    </FormControl>
+                    <FormMessage />
+                  </FormItem>
+                )}
+              />
+
+              {/* Pregnant Questions*/}
+              <FormField
+                control={form.control}
+                name="hasBeenPregnant"
+                render={({ field }) => (
+                  <FormItem>
+                    <FormLabel>Have you been pregnant?</FormLabel>
+                    <RadioGroup
+                      className="flex flex-col space-y-1"
+                      onValueChange={field.onChange}
+                      defaultValue={field.value}>
+                      <FormItem className="flex items-center space-x-3 space-y-0">
+                        <FormControl>
+                          <RadioGroupItem value="yes" />
+                        </FormControl>
+                        <FormLabel className="font-normal">Yes</FormLabel>
+                      </FormItem>
+                      <FormItem className="flex items-center space-x-3 space-y-0">
+                        <FormControl>
+                          <RadioGroupItem value="no" />
+                        </FormControl>
+                        <FormLabel className="font-normal">No</FormLabel>
+                      </FormItem>
                     </RadioGroup>
-                  </FormControl>
-                  <FormMessage />
-                </FormItem>
+                    <FormMessage />
+                  </FormItem>
+                )}
+              />
+              {hasBeenPregnant === 'yes' && (
+                <>
+                  <FormField
+                    control={form.control}
+                    name="timesPregnant"
+                    render={({ field }) => (
+                      <FormItem className="animate-fade-down animate-ease-in-out animate-duration-300">
+                        <FormLabel>How many times have you been pregnant?</FormLabel>
+                        <FormControl>
+                          <Input placeholder="Enter the number of pregnancies" {...field} />
+                        </FormControl>
+                        <FormMessage />
+                      </FormItem>
+                    )}
+                  />
+
+                  <FormField
+                    control={form.control}
+                    name="delivered"
+                    render={({ field }) => (
+                      <FormItem className="space-y-3 animate-fade-down animate-ease-in-out animate-duration-400">
+                        <FormLabel>How were they delivered?</FormLabel>
+                        <FormControl>
+                          <RadioGroup
+                            onValueChange={field.onChange}
+                            defaultValue={field.value}
+                            className="flex flex-col space-y-1">
+                            {deliveredProcedures.map((procedure) => (
+                              <FormItem
+                                key={procedure}
+                                className="flex items-center space-x-3 space-y-0">
+                                <FormControl>
+                                  <RadioGroupItem value={procedure} />
+                                </FormControl>
+                                <FormLabel className="font-normal">{procedure}</FormLabel>
+                              </FormItem>
+                            ))}
+                          </RadioGroup>
+                        </FormControl>
+                        <FormMessage />
+                      </FormItem>
+                    )}
+                  />
+                </>
               )}
-            />
-          </>
-        )}
 
-        {/* Birth Control */}
-        <div className="space-y-6">
-          <FormField
-            control={form.control}
-            name="birthControl"
-            render={({ field }) => (
-              <FormItem>
-                <FormLabel>Birth control used</FormLabel>
-                <Select onValueChange={field.onChange} defaultValue={field.value}>
-                  <FormControl>
-                    <SelectTrigger>
-                      <SelectValue placeholder="Select a birth control" />
-                    </SelectTrigger>
-                  </FormControl>
-                  <SelectContent>
-                    {birthControls.map((control) => (
-                      <SelectItem value={control} key={control}>
-                        {control}
-                      </SelectItem>
-                    ))}
-                  </SelectContent>
-                </Select>
-                <FormMessage />
-              </FormItem>
-            )}
-          />
-          {birthControl === 'Other' && (
-            <FormField
-              control={form.control}
-              name="otherBirthControl"
-              render={({ field }) => (
-                <FormItem>
-                  <FormLabel>Please specify other birth control used</FormLabel>
-                  <FormControl>
-                    <Input placeholder="Enter birth control used" {...field} />
-                  </FormControl>
-                  <FormMessage />
-                </FormItem>
+              {/* Birth Control */}
+              <div className="space-y-6">
+                <FormField
+                  control={form.control}
+                  name="birthControl"
+                  render={({ field }) => (
+                    <FormItem>
+                      <FormLabel>Birth control used</FormLabel>
+                      <Select onValueChange={field.onChange} defaultValue={field.value}>
+                        <FormControl>
+                          <SelectTrigger>
+                            <SelectValue placeholder="Select a birth control" />
+                          </SelectTrigger>
+                        </FormControl>
+                        <SelectContent>
+                          {birthControls.map((control) => (
+                            <SelectItem value={control} key={control}>
+                              {control}
+                            </SelectItem>
+                          ))}
+                        </SelectContent>
+                      </Select>
+                      <FormMessage />
+                    </FormItem>
+                  )}
+                />
+                {birthControl === 'Other' && (
+                  <FormField
+                    control={form.control}
+                    name="otherBirthControl"
+                    render={({ field }) => (
+                      <FormItem>
+                        <FormLabel>Please specify other birth control used</FormLabel>
+                        <FormControl>
+                          <Input placeholder="Enter birth control used" {...field} />
+                        </FormControl>
+                        <FormMessage />
+                      </FormItem>
+                    )}
+                  />
+                )}
+              </div>
+              <div className="space-y-4">
+                <FormField
+                  control={form.control}
+                  name="currentlyPregnant"
+                  render={({ field }) => (
+                    <FormItem className="space-y-3">
+                      <FormLabel>
+                        Are you currently pregnant? (Applicants must wait at least 6 months after
+                        delivery to apply)
+                      </FormLabel>
+                      <FormControl>
+                        <RadioGroup
+                          onValueChange={field.onChange}
+                          defaultValue={field.value}
+                          className="flex flex-col space-y-1">
+                          <FormItem className="flex items-center space-x-3 space-y-0">
+                            <FormControl>
+                              <RadioGroupItem value="yes" />
+                            </FormControl>
+                            <FormLabel className="font-normal">Yes</FormLabel>
+                          </FormItem>
+                          <FormItem className="flex items-center space-x-3 space-y-0">
+                            <FormControl>
+                              <RadioGroupItem value="no" />
+                            </FormControl>
+                            <FormLabel className="font-normal">No</FormLabel>
+                          </FormItem>
+                        </RadioGroup>
+                      </FormControl>
+                      <FormMessage />
+                    </FormItem>
+                  )}
+                />
+                {currentlyPregnant && (
+                  <AlertError errorMessage="Applicants must wait at least 6 months after delivery to apply" />
+                )}
+              </div>
+              <div className="space-y-4">
+                <FormField
+                  control={form.control}
+                  name="breastFeeding"
+                  render={({ field }) => (
+                    <FormItem className="space-y-3">
+                      <FormLabel>
+                        Are you breastfeeding? (Applicants must stop breastfeeding at least 6 months
+                        before applying)
+                      </FormLabel>
+                      <FormControl>
+                        <RadioGroup
+                          onValueChange={field.onChange}
+                          defaultValue={field.value}
+                          className="flex flex-col space-y-1">
+                          <FormItem className="flex items-center space-x-3 space-y-0">
+                            <FormControl>
+                              <RadioGroupItem value="yes" />
+                            </FormControl>
+                            <FormLabel className="font-normal">Yes</FormLabel>
+                          </FormItem>
+                          <FormItem className="flex items-center space-x-3 space-y-0">
+                            <FormControl>
+                              <RadioGroupItem value="no" />
+                            </FormControl>
+                            <FormLabel className="font-normal">No</FormLabel>
+                          </FormItem>
+                        </RadioGroup>
+                      </FormControl>
+                      <FormMessage />
+                    </FormItem>
+                  )}
+                />
+                {breastFeeding && (
+                  <AlertError errorMessage="Applicants must stop breastfeeding at least 6 months before applying" />
+                )}
+              </div>
+            </div>
+          ) : (
+            // Male Questions
+            <div className="space-y-8">
+              <RadioField
+                form={form}
+                nameField="chestSurgery"
+                question="Are you interested in chest surgery?"
+              />
+              {chestSurgery === 'yes' && (
+                <FormField
+                  control={form.control}
+                  name="chestExpectation"
+                  render={({ field }) => (
+                    <FormItem>
+                      <FormLabel>What results do you hope to achieve with chest surgery?</FormLabel>
+                      <FormControl>
+                        <Textarea
+                          placeholder="Describe your goals or expectations (e.g., a more defined chest, reduction in size)"
+                          className="resize-none"
+                          {...field}
+                        />
+                      </FormControl>
+                      <FormMessage />
+                    </FormItem>
+                  )}
+                />
               )}
-            />
-          )}
-        </div>
-
-        <div className="space-y-4">
-          <FormField
-            control={form.control}
-            name="currentlyPregnant"
-            render={({ field }) => (
-              <FormItem className="space-y-3">
-                <FormLabel>
-                  Are you currently pregnant? (Applicants must wait at least 6 months after delivery
-                  to apply)
-                </FormLabel>
-                <FormControl>
-                  <RadioGroup
-                    onValueChange={field.onChange}
-                    defaultValue={field.value}
-                    className="flex flex-col space-y-1">
-                    <FormItem className="flex items-center space-x-3 space-y-0">
-                      <FormControl>
-                        <RadioGroupItem value="yes" />
-                      </FormControl>
-                      <FormLabel className="font-normal">Yes</FormLabel>
-                    </FormItem>
-                    <FormItem className="flex items-center space-x-3 space-y-0">
-                      <FormControl>
-                        <RadioGroupItem value="no" />
-                      </FormControl>
-                      <FormLabel className="font-normal">No</FormLabel>
-                    </FormItem>
-                  </RadioGroup>
-                </FormControl>
-                <FormMessage />
-              </FormItem>
-            )}
-          />
-          {currentlyPregnant && (
-            <AlertError errorMessage="Applicants must wait at least 6 months after delivery to apply" />
-          )}
-        </div>
-
-        <div className="space-y-4">
-          <FormField
-            control={form.control}
-            name="breastFeeding"
-            render={({ field }) => (
-              <FormItem className="space-y-3">
-                <FormLabel>
-                  Are you breastfeeding? (Applicants must stop breastfeeding at least 6 months
-                  before applying)
-                </FormLabel>
-                <FormControl>
-                  <RadioGroup
-                    onValueChange={field.onChange}
-                    defaultValue={field.value}
-                    className="flex flex-col space-y-1">
-                    <FormItem className="flex items-center space-x-3 space-y-0">
-                      <FormControl>
-                        <RadioGroupItem value="yes" />
-                      </FormControl>
-                      <FormLabel className="font-normal">Yes</FormLabel>
-                    </FormItem>
-                    <FormItem className="flex items-center space-x-3 space-y-0">
-                      <FormControl>
-                        <RadioGroupItem value="no" />
-                      </FormControl>
-                      <FormLabel className="font-normal">No</FormLabel>
-                    </FormItem>
-                  </RadioGroup>
-                </FormControl>
-                <FormMessage />
-              </FormItem>
-            )}
-          />
-          {breastFeeding && (
-            <AlertError errorMessage="Applicants must stop breastfeeding at least 6 months before applying" />
+            </div>
           )}
         </div>
       </form>

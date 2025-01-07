@@ -1,3 +1,4 @@
+import React, { useState } from 'react';
 import { Button } from '@/components/ui/button';
 import {
   Form,
@@ -11,6 +12,16 @@ import {
 import { Input } from '@/components/ui/input';
 
 export const Step4UploadPictures = ({ form }: any) => {
+  const [extraFields, setExtraFields] = useState<{ id: number; name: string }[]>([]);
+  const maxFields = 3;
+
+  const addExtraField = () => {
+    setExtraFields((prevFields) => [
+      ...prevFields,
+      { id: prevFields.length, name: `extraPhoto${prevFields.length + 1}` }
+    ]);
+  };
+
   return (
     <Form {...form}>
       <form className="space-y-8 animate-fade-right animate-ease-in-out">
@@ -86,6 +97,34 @@ export const Step4UploadPictures = ({ form }: any) => {
             </FormItem>
           )}
         />
+
+        {/* Dynamically rendering additional fields */}
+        {extraFields.map((field) => (
+          <FormField
+            key={field.id}
+            control={form.control}
+            name={field.name}
+            render={({ field: dynamicField }) => (
+              <FormItem>
+                <FormLabel>Additional Photo {field.id + 1}</FormLabel>
+                <FormControl>
+                  <Input
+                    type="file"
+                    placeholder={`Additional Photo ${field.id + 1}`}
+                    onChange={(e) => dynamicField.onChange(e.target.files?.[0])}
+                  />
+                </FormControl>
+                <FormDescription>Upload an additional photo</FormDescription>
+                <FormMessage />
+              </FormItem>
+            )}
+          />
+        ))}
+
+        {/* Button to add new fields */}
+        <Button type="button" onClick={addExtraField} disabled={extraFields.length >= maxFields}>
+          Add Additional Photo
+        </Button>
       </form>
     </Form>
   );
