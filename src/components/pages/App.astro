@@ -1,43 +1,45 @@
 ---
-import '@/styles/globals.css'
+import '@/styles/globals.css';
 import Layout from '../../layouts/MainLayout.astro';
 import HeroImage from '../hero/HeroImage.astro';
 import Procedures from '../Procedures.astro';
 import Testimonials from '../Testimonials.astro';
 import Heading from '../Heading.astro';
-import Gallery from '../Gallery'
+import Gallery from '../Gallery';
 import LogoCloud from '../LogoCloud.astro';
 import { buttonVariants } from '../ui/button';
-import { cn } from "@/lib/utils";
-import Intro from "@/components/Intro.astro"
-import { getI18N } from "@/i18n"
+import { cn } from '@/lib/utils';
+import Intro from '@/components/Intro.astro';
+import { getI18N } from '@/i18n';
 import { getLangFromUrl, useTranslatedPath } from '@/i18n/utils';
 
-
-
-const { currentLocale } = Astro
-const i18n = getI18N({ currentLocale })
+const { currentLocale } = Astro;
+const i18n = getI18N({ currentLocale });
 const lang = getLangFromUrl(Astro.url);
 const translatePath = useTranslatedPath(lang);
 ---
 
-
-<Layout title={i18n.SEO_TITLE} description={i18n.SEO_DESCRIPTION}>		
-	<HeroImage/>
-	<Intro/>
-	<LogoCloud/>		
-	<Procedures/>
-	<Testimonials/>
-	<div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 divide-y divide-primary-300 border-b border-primary-300">
-		<div class="py-16 sm:py-28">
-			<Heading title={i18n.GALLERY_TITLE}/>
-			<div class="mt-20 flex flex-col gap-12 items-center -mr-4 sm:mx-0">
-				<Gallery client:visible/>
-				<a href={translatePath('/galeria/')} class={cn(buttonVariants({ size: "lg"}), "hidden lg:flex bg-primary-500 text-primary-950 text-base hover:bg-primary-600" )}>{i18n.GALLERY_BUTTON}</a>	
-				
-			</div>
-		</div>		
-	</div>
+<Layout title={i18n.SEO_TITLE} description={i18n.SEO_DESCRIPTION}>
+  <HeroImage />
+  <Intro />
+  <LogoCloud />
+  <Procedures />
+  <Testimonials />
+  <div
+    class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 divide-y divide-primary-300 border-b border-primary-300">
+    <div class="py-16 sm:py-28">
+      <Heading title={i18n.GALLERY_TITLE} />
+      <div
+        class="mt-20 flex flex-col gap-12 items-center -mr-4 sm:mx-0">
+        <Gallery client:visible />
+        <a
+          href={translatePath('/galeria/')}
+          class={cn(
+            buttonVariants({ size: 'lg' }),
+            'hidden lg:flex bg-primary-500 text-primary-950 text-base hover:bg-primary-600'
+          )}>{i18n.GALLERY_BUTTON}</a
+        >
+      </div>
+    </div>
+  </div>
 </Layout>
-
-
