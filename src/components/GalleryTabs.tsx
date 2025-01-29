@@ -35,15 +35,15 @@ export function GalleryTabs({ tabsData }: TabsProps) {
         <TabsContent
           value={tab.title}
           key={idx}
-          className="grid grid-cols-2 sm:grid-cols-4 gap-4">
+          className="flex flex-col md:flex-row md:flex-wrap justify-center gap-x-8 gap-y-8 data-[state=inactive]:hidden">
           {tab.images.map((image, imgIndex) => (
-            <picture key={imgIndex}>
+            <picture key={imgIndex} className="max-w-sm">
               <source srcSet={image.webPSrc} type="image/webp" />
               <source srcSet={image.jpgSrc} type="image/jpeg" />
               <img
                 src={image.jpgSrc}
                 alt={image.alt}
-                className="rounded-md overflow-hidden animate-fade-right"
+                className="rounded-md overflow-hidden animate-fade-right w-full h-full shadow-md object-cover"
               />
             </picture>
           ))}

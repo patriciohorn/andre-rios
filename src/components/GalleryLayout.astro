@@ -2,9 +2,10 @@
 import '../styles/globals.css';
 import HeaderCenteredEyebrow from './HeaderCenteredEyebrow.astro';
 import { GalleryTabs } from '@/components/GalleryTabs';
+import { WeightLossGalleryTabs } from '@/components/WeightLossGalleryTabs';
 import MainLayout from '@/layouts/MainLayout.astro';
 
-const { eyebrow, title, tabsTitles, tabsData } = Astro.props;
+const { eyebrow, title, tabsData } = Astro.props;
 ---
 
 <MainLayout title={`Rios MD Plastics | Gallery - ${title}`}>
@@ -14,8 +15,17 @@ const { eyebrow, title, tabsTitles, tabsData } = Astro.props;
         <div class="">
           <HeaderCenteredEyebrow eyebrow={eyebrow} title={title} />
         </div>
-        <div class="h-screen">
-          <GalleryTabs tabsData={tabsData} client:load />
+        <div class="min-h-screen">
+          {
+            title.includes('Weight') || title.includes('Peso') ? (
+              <WeightLossGalleryTabs
+                tabsData={tabsData}
+                client:visible
+              />
+            ) : (
+              <GalleryTabs tabsData={tabsData} client:visible />
+            )
+          }
         </div>
       </div>
     </div>

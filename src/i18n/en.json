@@ -153,6 +153,21 @@
       }
     }
   },
+  "GALLERY_WEIGHT_LOSS": {
+    "PATH": "post-massive-weight-loss",
+    "TAG": "Corporal",
+    "TITLE": "Post Massive Weight Loss",
+    "TABS": {
+      "TAB_1": "Case 1",
+      "TAB_2": "Case 2",
+      "TAB_3": "Case 3",
+      "TAB_4": "Case 4",
+      "TAB_5": "Case 5",
+      "TAB_6": "Case 6",
+      "TAB_7": "Case 7",
+      "TAB_8": "Case 8"
+    }
+  },
   "GALLERY_BREAST_AUGMENTATION": {
     "PATH": "breast-augmentation",
     "TAG": "Breast",

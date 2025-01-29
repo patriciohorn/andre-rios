@@ -35,7 +35,7 @@ export function BreastLiftTabs({ tabsData }: TabsProps) {
         <TabsContent
           value={tab.title}
           key={idx}
-          className="grid justify-center gap-x-4">
+          className="flex flex-col md:flex-row justify-center gap-x-8 gap-y-8 data-[state=inactive]:hidden">
           {tab.images.map((image, imgIndex) => (
             <picture key={imgIndex}>
               <source srcSet={image.webPSrc} type="image/webp" />
@@ -43,7 +43,7 @@ export function BreastLiftTabs({ tabsData }: TabsProps) {
               <img
                 src={image.jpgSrc}
                 alt={image.alt}
-                className="rounded-md overflow-hidden animate-fade-right max-w-auto md:max-w-sm mx-auto"
+                className="rounded-md overflow-hidden animate-fade-right w-full max-w-lg shadow-md"
               />
             </picture>
           ))}
