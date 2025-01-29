@@ -1,0 +1,55 @@
+---
+import BreastLiftGallery from '../BreastLiftGallery.astro';
+
+import { getI18N } from '@/i18n';
+const { currentLocale } = Astro;
+const i18n = getI18N({ currentLocale });
+
+import breastLift_tab1_img1_jpg from '@/assets/galleryPages/breast-lift/breast-lift-tab1-img1.jpg';
+import breastLift_tab1_img1_webp from '@/assets/galleryPages/breast-lift/breast-lift-tab1-img1.webp';
+
+import breastLift_tab2_img1_jpg from '@/assets/galleryPages/breast-lift/breast-lift-tab2-img1.jpg';
+import breastLift_tab2_img1_webp from '@/assets/galleryPages/breast-lift/breast-lift-tab2-img1.webp';
+
+import breastLift_tab3_img1_jpg from '@/assets/galleryPages/breast-lift/breast-lift-tab3-img1.jpg';
+import breastLift_tab3_img1_webp from '@/assets/galleryPages/breast-lift/breast-lift-tab3-img1.webp';
+
+const tabsData = [
+  {
+    title: i18n.GALLERY_BREAST_AUGMENTATION.TABS.TAB_1,
+    images: [
+      {
+        webpSrc: breastLift_tab1_img1_webp.src,
+        jpgSrc: breastLift_tab1_img1_jpg.src,
+        alt: 'Image 1',
+      },
+    ],
+  },
+  {
+    title: i18n.GALLERY_BREAST_AUGMENTATION.TABS.TAB_2,
+    images: [
+      {
+        webpSrc: breastLift_tab2_img1_webp.src,
+        jpgSrc: breastLift_tab2_img1_jpg.src,
+        alt: 'Image 2',
+      },
+    ],
+  },
+  {
+    title: i18n.GALLERY_BREAST_AUGMENTATION.TABS.TAB_3,
+    images: [
+      {
+        webpSrc: breastLift_tab3_img1_webp.src,
+        jpgSrc: breastLift_tab3_img1_jpg.src,
+        alt: 'Image 3',
+      },
+    ],
+  },
+];
+---
+
+<BreastLiftGallery
+  title={i18n.GALLERY_BREAST_LIFT.TITLE}
+  eyebrow={i18n.GALLERY_BREAST_LIFT.TAG}
+  tabsData={tabsData}
+/>

@@ -1,0 +1,119 @@
+---
+import GalleryLayout from "../GalleryLayout.astro";
+
+import { getI18N } from "@/i18n";
+const {currentLocale} = Astro
+const i18n = getI18N({currentLocale})
+
+
+import breastAugmentation_tab1_img1_jpg from "@/assets/galleryPages/breast-augmentation-tab1-img1.jpg"
+import breastAugmentation_tab1_img2_jpg from "@/assets/galleryPages/breast-augmentation-tab1-img2.jpg"
+import breastAugmentation_tab1_img3_jpg from "@/assets/galleryPages/breast-augmentation-tab1-img3.jpg"
+import breastAugmentation_tab1_img4_jpg from "@/assets/galleryPages/breast-augmentation-tab1-img4.jpg"
+import breastAugmentation_tab1_img5_jpg from "@/assets/galleryPages/breast-augmentation-tab1-img5.jpg"
+import breastAugmentation_tab1_img6_jpg from "@/assets/galleryPages/breast-augmentation-tab1-img6.jpg"
+import breastAugmentation_tab1_img1_webp from "@/assets/galleryPages/breast-augmentation-1-1.webp"
+import breastAugmentation_tab1_img2_webp from "@/assets/galleryPages/breast-augmentation-1-2.webp"
+import breastAugmentation_tab1_img3_webp from "@/assets/galleryPages/breast-augmentation-1-3.webp"
+import breastAugmentation_tab1_img4_webp from "@/assets/galleryPages/breast-augmentation-1-4.webp"
+import breastAugmentation_tab1_img5_webp from "@/assets/galleryPages/breast-augmentation-1-5.webp"
+import breastAugmentation_tab1_img6_webp from "@/assets/galleryPages/breast-augmentation-1-6.webp"
+
+import breastAugmentation_tab2_img1_jpg from "@/assets/galleryPages/breast-augmentation-2-1.jpg"
+import breastAugmentation_tab2_img2_jpg from "@/assets/galleryPages/breast-augmentation-2-2.jpg"
+import breastAugmentation_tab2_img3_jpg from "@/assets/galleryPages/breast-augmentation-2-3.jpg"
+import breastAugmentation_tab2_img1_webp from "@/assets/galleryPages/breast-augmentation-2-1.webp"
+import breastAugmentation_tab2_img2_webp from "@/assets/galleryPages/breast-augmentation-2-2.webp"
+import breastAugmentation_tab2_img3_webp from "@/assets/galleryPages/breast-augmentation-2-3.webp"
+
+import breastAugmentation_tab3_img1_jpg from "@/assets/galleryPages/breast-augmentation-3-1.jpg"
+import breastAugmentation_tab3_img2_jpg from "@/assets/galleryPages/breast-augmentation-3-2.jpg"
+import breastAugmentation_tab3_img3_jpg from "@/assets/galleryPages/breast-augmentation-3-3.jpg"
+import breastAugmentation_tab3_img4_jpg from "@/assets/galleryPages/breast-augmentation-3-4.jpg"
+import breastAugmentation_tab3_img1_webp from "@/assets/galleryPages/breast-augmentation-3-1.webp"
+import breastAugmentation_tab3_img2_webp from "@/assets/galleryPages/breast-augmentation-3-2.webp"
+import breastAugmentation_tab3_img3_webp from "@/assets/galleryPages/breast-augmentation-3-3.webp"
+import breastAugmentation_tab3_img4_webp from "@/assets/galleryPages/breast-augmentation-3-4.webp"
+
+import breastAugmentation_tab4_img1_jpg from "@/assets/galleryPages/breast-augmentation-4-1.jpg"
+import breastAugmentation_tab4_img2_jpg from "@/assets/galleryPages/breast-augmentation-4-2.jpg"
+import breastAugmentation_tab4_img3_jpg from "@/assets/galleryPages/breast-augmentation-4-3.jpg"
+import breastAugmentation_tab4_img4_jpg from "@/assets/galleryPages/breast-augmentation-4-4.jpg"
+import breastAugmentation_tab4_img1_webp from "@/assets/galleryPages/breast-augmentation-4-1.webp"
+import breastAugmentation_tab4_img2_webp from "@/assets/galleryPages/breast-augmentation-4-2.webp"
+import breastAugmentation_tab4_img3_webp from "@/assets/galleryPages/breast-augmentation-4-3.webp"
+import breastAugmentation_tab4_img4_webp from "@/assets/galleryPages/breast-augmentation-4-4.webp"
+
+import breastAugmentation_tab5_img1_jpg from "@/assets/galleryPages/breast-augmentation-5-1.jpg"
+import breastAugmentation_tab5_img2_jpg from "@/assets/galleryPages/breast-augmentation-5-2.jpg"
+import breastAugmentation_tab5_img3_jpg from "@/assets/galleryPages/breast-augmentation-5-3.jpg"
+import breastAugmentation_tab5_img4_jpg from "@/assets/galleryPages/breast-augmentation-5-4.jpg"
+import breastAugmentation_tab5_img1_webp from "@/assets/galleryPages/breast-augmentation-5-1.webp"
+import breastAugmentation_tab5_img2_webp from "@/assets/galleryPages/breast-augmentation-5-2.webp"
+import breastAugmentation_tab5_img3_webp from "@/assets/galleryPages/breast-augmentation-5-3.webp"
+import breastAugmentation_tab5_img4_webp from "@/assets/galleryPages/breast-augmentation-5-4.webp"
+
+import breastAugmentation_tab6_img1_jpg from "@/assets/galleryPages/breast-augmentation-6-1.jpg"
+import breastAugmentation_tab6_img2_jpg from "@/assets/galleryPages/breast-augmentation-6-2.jpg"
+import breastAugmentation_tab6_img1_webp from "@/assets/galleryPages/breast-augmentation-6-1.webp"
+import breastAugmentation_tab6_img2_webp from "@/assets/galleryPages/breast-augmentation-6-2.webp"
+
+const tabsData = [
+  {
+    title: i18n.GALLERY_BREAST_AUGMENTATION.TABS.TAB_1, 
+    images: [
+      { webpSrc: breastAugmentation_tab1_img1_webp.src, jpgSrc: breastAugmentation_tab1_img1_jpg.src, alt: "Image 1" },
+      { webpSrc: breastAugmentation_tab1_img2_webp.src, jpgSrc: breastAugmentation_tab1_img2_jpg.src, alt: "Image 2" },
+      { webpSrc: breastAugmentation_tab1_img3_webp.src, jpgSrc: breastAugmentation_tab1_img3_jpg.src, alt: "Image 3" },
+      { webpSrc: breastAugmentation_tab1_img4_webp.src, jpgSrc: breastAugmentation_tab1_img4_jpg.src, alt: "Image 4" },
+      { webpSrc: breastAugmentation_tab1_img5_webp.src, jpgSrc: breastAugmentation_tab1_img5_jpg.src, alt: "Image 5" },
+      { webpSrc: breastAugmentation_tab1_img6_webp.src, jpgSrc: breastAugmentation_tab1_img6_jpg.src, alt: "Image 6" },
+    ]
+  }, 
+  {
+    title: i18n.GALLERY_BREAST_AUGMENTATION.TABS.TAB_2, 
+    images: [
+      { webpSrc: breastAugmentation_tab2_img1_webp.src, jpgSrc: breastAugmentation_tab2_img1_jpg.src, alt: "Image 7" },
+      { webpSrc: breastAugmentation_tab2_img2_webp.src, jpgSrc: breastAugmentation_tab2_img2_jpg.src, alt: "Image 2" },
+      { webpSrc: breastAugmentation_tab2_img3_webp.src, jpgSrc: breastAugmentation_tab2_img3_jpg.src, alt: "Image 3" },
+    ]
+  }, 
+  { 
+    title: i18n.GALLERY_BREAST_AUGMENTATION.TABS.TAB_3, 
+    images: [{ webpSrc: breastAugmentation_tab3_img1_webp.src, jpgSrc: breastAugmentation_tab3_img1_jpg.src, alt: "Image 7" },
+      { webpSrc: breastAugmentation_tab3_img2_webp.src, jpgSrc: breastAugmentation_tab3_img2_jpg.src, alt: "Image 2" },
+      { webpSrc: breastAugmentation_tab3_img3_webp.src, jpgSrc: breastAugmentation_tab3_img3_jpg.src, alt: "Image 3" },
+      { webpSrc: breastAugmentation_tab3_img4_webp.src, jpgSrc: breastAugmentation_tab3_img4_jpg.src, alt: "Image 3" },
+    ]
+  },
+  { 
+    title: i18n.GALLERY_BREAST_AUGMENTATION.TABS.TAB_4, 
+    images: [
+      { webpSrc: breastAugmentation_tab4_img1_webp.src, jpgSrc: breastAugmentation_tab4_img1_jpg.src, alt: "Image 7" },
+      { webpSrc: breastAugmentation_tab4_img2_webp.src, jpgSrc: breastAugmentation_tab4_img2_jpg.src, alt: "Image 2" },
+      { webpSrc: breastAugmentation_tab4_img3_webp.src, jpgSrc: breastAugmentation_tab4_img3_jpg.src, alt: "Image 3" },
+      { webpSrc: breastAugmentation_tab4_img4_webp.src, jpgSrc: breastAugmentation_tab4_img4_jpg.src, alt: "Image 3" },
+    ]
+  },
+  { 
+    title: i18n.GALLERY_BREAST_AUGMENTATION.TABS.TAB_5, 
+    images: [
+      { webpSrc: breastAugmentation_tab5_img1_webp.src, jpgSrc: breastAugmentation_tab5_img1_jpg.src, alt: "Image 7" },
+      { webpSrc: breastAugmentation_tab5_img2_webp.src, jpgSrc: breastAugmentation_tab5_img2_jpg.src, alt: "Image 2" },
+      { webpSrc: breastAugmentation_tab5_img3_webp.src, jpgSrc: breastAugmentation_tab5_img3_jpg.src, alt: "Image 3" },
+      { webpSrc: breastAugmentation_tab5_img4_webp.src, jpgSrc: breastAugmentation_tab5_img4_jpg.src, alt: "Image 3" },
+    ]
+  },
+  { 
+    title: i18n.GALLERY_BREAST_AUGMENTATION.TABS.TAB_6, 
+    images: [
+      { webpSrc: breastAugmentation_tab6_img1_webp.src, jpgSrc: breastAugmentation_tab6_img1_jpg.src, alt: "Image 7" },
+      { webpSrc: breastAugmentation_tab6_img2_webp.src, jpgSrc: breastAugmentation_tab6_img2_jpg.src, alt: "Image 2" },
+     
+    ]
+  },
+]
+---
+
+<GalleryLayout title={i18n.GALLERY_BREAST_AUGMENTATION.TITLE} eyebrow={i18n.GALLERY_BREAST_AUGMENTATION.TAG}  tabsData={tabsData}/>
+

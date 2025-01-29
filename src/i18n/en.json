@@ -141,7 +141,6 @@
       "SUBTITLES": {
         "SUBTITLE_1": "Post Massive Weight Loss",
         "SUBTITLE_2": "Arm Lift",
-        "SUBTITLE_3": "Thigh Lift",
         "SUBTITLE_4": "Mommy Makeover",
         "SUBTITLE_5": "Liposculture"
       }
@@ -177,6 +176,36 @@
       "TAB_3": "Case 3",
       "TAB_4": "Case 4",
       "TAB_5": "Case 5"
+    }
+  },
+  "GALLERY_BREAST_LIFT": {
+    "PATH": "breast-lift",
+    "TAG": "Breast",
+    "TITLE": "Breast Lift",
+    "TABS": {
+      "TAB_1": "Case 1",
+      "TAB_2": "Case 2",
+      "TAB_3": "Case 3"
+    }
+  },
+  "GALLERY_MOMMY_MAKEOVER": {
+    "PATH": "mommy-makeover",
+    "TAG": "Body",
+    "TITLE": "Mommy Makeover",
+    "TABS": {
+      "TAB_1": "Case 1",
+      "TAB_2": "Case 2",
+      "TAB_3": "Case 3",
+      "TAB_4": "Case 4"
+    }
+  },
+  "GALLERY_ARMS_LIFT": {
+    "PATH": "arm-lift",
+    "TAG": "Body",
+    "TITLE": "Arm Lift",
+    "TABS": {
+      "TAB_1": "Case 1",
+      "TAB_2": "Case 2"
     }
   },
   "CONTACT": {

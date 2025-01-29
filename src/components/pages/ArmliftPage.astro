@@ -1,0 +1,42 @@
+---
+import BreastLiftGallery from '../BreastLiftGallery.astro';
+
+import { getI18N } from '@/i18n';
+const { currentLocale } = Astro;
+const i18n = getI18N({ currentLocale });
+
+import armLift_1_jpg from '@/assets/galleryPages/arm-lift/arms-lift_1.jpg';
+import armLift_1_webp from '@/assets/galleryPages/arm-lift/arms-lift_1.webp';
+
+import armLift_2_jpg from '@/assets/galleryPages/arm-lift/arms-lift_2.jpg';
+import armLift_2_webp from '@/assets/galleryPages/arm-lift/arms-lift_2.webp';
+
+const tabsData = [
+  {
+    title: i18n.GALLERY_ARMS_LIFT.TABS.TAB_1,
+    images: [
+      {
+        webpSrc: armLift_1_webp.src,
+        jpgSrc: armLift_1_jpg.src,
+        alt: 'Image 1',
+      },
+    ],
+  },
+  {
+    title: i18n.GALLERY_ARMS_LIFT.TABS.TAB_2,
+    images: [
+      {
+        webpSrc: armLift_2_webp.src,
+        jpgSrc: armLift_2_jpg.src,
+        alt: 'Image 2',
+      },
+    ],
+  },
+];
+---
+
+<BreastLiftGallery
+  title={i18n.GALLERY_ARMS_LIFT.TITLE}
+  eyebrow={i18n.GALLERY_ARMS_LIFT.TAG}
+  tabsData={tabsData}
+/>

@@ -142,7 +142,6 @@
       "SUBTITLES": {
         "SUBTITLE_1": "Perdida de Peso Masiva",
         "SUBTITLE_2": "Braquioplastía",
-        "SUBTITLE_3": "Cruroplastía",
         "SUBTITLE_4": "Mommy Makeover",
         "SUBTITLE_5": "Lipoescultura"
       }
@@ -157,9 +156,9 @@
     }
   },
   "GALLERY_BREAST_AUGMENTATION": {
-    "PATH": "levantamiento-busto",
+    "PATH": "aumento-busto",
     "TAG": "Busto",
-    "TITLE": "Levantamiento de Busto",
+    "TITLE": "Aumento de Busto",
     "TABS": {
       "TAB_1": "Caso 1",
       "TAB_2": "Caso 2",
@@ -179,6 +178,36 @@
       "TAB_3": "Caso 3",
       "TAB_4": "Caso 4",
       "TAB_5": "Caso 5"
+    }
+  },
+  "GALLERY_BREAST_LIFT": {
+    "PATH": "levantamiento-busto",
+    "TAG": "Busto",
+    "TITLE": "Levantamiento de Busto",
+    "TABS": {
+      "TAB_1": "Case 1",
+      "TAB_2": "Case 2",
+      "TAB_3": "Case 3"
+    }
+  },
+  "GALLERY_MOMMY_MAKEOVER": {
+    "PATH": "mommy-makeover",
+    "TAG": "Corporal",
+    "TITLE": "Mommy Makeover",
+    "TABS": {
+      "TAB_1": "Case 1",
+      "TAB_2": "Case 2",
+      "TAB_3": "Case 3",
+      "TAB_4": "Case 4"
+    }
+  },
+  "GALLERY_ARMS_LIFT": {
+    "PATH": "braquioplastia",
+    "TAG": "Corporal",
+    "TITLE": "Braquioplastía",
+    "TABS": {
+      "TAB_1": "Case 1",
+      "TAB_2": "Case 2"
     }
   },
   "CONTACT": {

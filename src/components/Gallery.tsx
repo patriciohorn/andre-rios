@@ -4,9 +4,13 @@ import {
   CarouselContent,
   CarouselItem,
   CarouselNext,
-  CarouselPrevious
+  CarouselPrevious,
 } from '@/components/ui/carousel';
-import { Dialog, DialogContent, DialogTrigger } from '@/components/ui/dialog';
+import {
+  Dialog,
+  DialogContent,
+  DialogTrigger,
+} from '@/components/ui/dialog';
 
 // Images
 import gallery1 from '../assets/gallery/gallery_1.jpg';
@@ -32,22 +36,27 @@ const Gallery = () => {
   const [isOpen, setIsOpen] = useState(false);
   const [selectedImage, setSelectedImage] = useState(0);
 
-  const imagesJpg = [gallery1, gallery2, gallery3, gallery4, gallery5, gallery6];
+  const imagesJpg = [
+    gallery1,
+    gallery2,
+    gallery3,
+    gallery4,
+    gallery5,
+    gallery6,
+  ];
   const imagesWebp = [
     gallery1Webp,
     gallery2Webp,
     gallery3Webp,
     gallery4Webp,
     gallery5Webp,
-    gallery6Webp
+    gallery6Webp,
   ];
 
   const openDialog = (index: number) => {
     setSelectedImage(index);
     setIsOpen(true);
   };
-
-  console.log(selectedImage);
 
   return (
     <div>
@@ -56,8 +65,8 @@ const Gallery = () => {
           align: 'center',
 
           breakpoints: {
-            '(min-width: 768px)': { align: 'center', loop: true }
-          }
+            '(min-width: 768px)': { align: 'center', loop: true },
+          },
         }}
         className="-mr-4">
         <CarouselContent className="ml-2">
@@ -68,7 +77,10 @@ const Gallery = () => {
               onClick={() => openDialog(idx)}>
               <picture className="">
                 <source srcSet={image.src} type="image/webp" />
-                <source srcSet={imagesJpg[idx].src} type="image/jpg" />
+                <source
+                  srcSet={imagesJpg[idx].src}
+                  type="image/jpg"
+                />
                 <img
                   src={imagesJpg[idx].src}
                   alt={`Gallery ${idx + 1}`}
@@ -90,14 +102,19 @@ const Gallery = () => {
           <Carousel
             opts={{
               loop: true,
-              startIndex: selectedImage
+              startIndex: selectedImage,
             }}>
             <CarouselContent>
               {imagesWebp.map((image, idx) => (
-                <CarouselItem className="basis-full rounded-md overflow-hidden" key={idx}>
+                <CarouselItem
+                  className="basis-full rounded-md overflow-hidden"
+                  key={idx}>
                   <picture>
                     <source srcSet={image.src} type="image/webp" />
-                    <source srcSet={imagesJpg[idx].src} type="image/jpg" />
+                    <source
+                      srcSet={imagesJpg[idx].src}
+                      type="image/jpg"
+                    />
                     <img
                       src={imagesJpg[idx].src}
                       alt={`Gallery ${idx + 1}`}

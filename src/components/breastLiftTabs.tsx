@@ -18,10 +18,10 @@ interface Tab {
 interface TabsProps {
   tabsData: Tab[];
 }
-export function GalleryTabs({ tabsData }: TabsProps) {
+export function BreastLiftTabs({ tabsData }: TabsProps) {
   return (
     <Tabs defaultValue={tabsData[0].title} className="w-full">
-      <TabsList className="py-4 bg-transparent flex flex-wrap gap-4 sm:items-center items-start h-auto">
+      <TabsList className="mb-4 bg-transparent flex flex-wrap gap-4 sm:items-center items-start h-auto">
         {tabsData.map((tab, idx) => (
           <TabsTrigger
             value={tab.title}
@@ -35,7 +35,7 @@ export function GalleryTabs({ tabsData }: TabsProps) {
         <TabsContent
           value={tab.title}
           key={idx}
-          className="grid grid-cols-2 sm:grid-cols-4 gap-4">
+          className="grid justify-center gap-x-4">
           {tab.images.map((image, imgIndex) => (
             <picture key={imgIndex}>
               <source srcSet={image.webPSrc} type="image/webp" />
@@ -43,7 +43,7 @@ export function GalleryTabs({ tabsData }: TabsProps) {
               <img
                 src={image.jpgSrc}
                 alt={image.alt}
-                className="rounded-md overflow-hidden animate-fade-right"
+                className="rounded-md overflow-hidden animate-fade-right max-w-auto md:max-w-sm mx-auto"
               />
             </picture>
           ))}

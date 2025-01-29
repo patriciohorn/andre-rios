@@ -1,0 +1,68 @@
+---
+import BreastLiftGallery from '../BreastLiftGallery.astro';
+
+import { getI18N } from '@/i18n';
+const { currentLocale } = Astro;
+const i18n = getI18N({ currentLocale });
+
+import mommyMakeover_1_jpg from '@/assets/galleryPages/mommy-makeover/mmo_1.jpg';
+import mommyMakeover_1_webp from '@/assets/galleryPages/mommy-makeover/mmo_1.webp';
+
+import mommyMakeover_2_jpg from '@/assets/galleryPages/mommy-makeover/mmo_2.jpg';
+import mommyMakeover_2_webp from '@/assets/galleryPages/mommy-makeover/mmo_2.webp';
+
+import mommyMakeover_3_jpg from '@/assets/galleryPages/mommy-makeover/mmo_3.jpg';
+import mommyMakeover_3_webp from '@/assets/galleryPages/mommy-makeover/mmo_3.webp';
+
+import mommyMakeover_4_jpg from '@/assets/galleryPages/mommy-makeover/mmo_4.jpg';
+import mommyMakeover_4_webp from '@/assets/galleryPages/mommy-makeover/mmo_4.webp';
+
+const tabsData = [
+  {
+    title: i18n.GALLERY_MOMMY_MAKEOVER.TABS.TAB_1,
+    images: [
+      {
+        webpSrc: mommyMakeover_1_webp.src,
+        jpgSrc: mommyMakeover_1_jpg.src,
+        alt: 'Image 1',
+      },
+    ],
+  },
+  {
+    title: i18n.GALLERY_MOMMY_MAKEOVER.TABS.TAB_2,
+    images: [
+      {
+        webpSrc: mommyMakeover_2_webp.src,
+        jpgSrc: mommyMakeover_2_jpg.src,
+        alt: 'Image 2',
+      },
+    ],
+  },
+  {
+    title: i18n.GALLERY_MOMMY_MAKEOVER.TABS.TAB_3,
+    images: [
+      {
+        webpSrc: mommyMakeover_3_webp.src,
+        jpgSrc: mommyMakeover_3_jpg.src,
+        alt: 'Image 3',
+      },
+    ],
+  },
+  {
+    title: i18n.GALLERY_MOMMY_MAKEOVER.TABS.TAB_4,
+    images: [
+      {
+        webpSrc: mommyMakeover_4_webp.src,
+        jpgSrc: mommyMakeover_4_jpg.src,
+        alt: 'Image 4',
+      },
+    ],
+  },
+];
+---
+
+<BreastLiftGallery
+  title={i18n.GALLERY_MOMMY_MAKEOVER.TITLE}
+  eyebrow={i18n.GALLERY_MOMMY_MAKEOVER.TAG}
+  tabsData={tabsData}
+/>
