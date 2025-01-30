@@ -21,11 +21,11 @@ interface TabsProps {
 export function GalleryTabs({ tabsData }: TabsProps) {
   return (
     <Tabs defaultValue={tabsData[0].title} className="w-full">
-      <TabsList className="py-4 bg-transparent flex flex-wrap gap-4 sm:items-center items-start h-auto">
+      <TabsList className="py-4 bg-transparent flex flex-wrap gap-4 h-auto justify-start">
         {tabsData.map((tab, idx) => (
           <TabsTrigger
             value={tab.title}
-            className="sm:text-base text-sm sm:px-8 px-4 py-1"
+            className="sm:text-base text-sm py-1 text-neutral-600 px-0 min-w-20"
             key={idx}>
             {tab.title}
           </TabsTrigger>
@@ -35,7 +35,7 @@ export function GalleryTabs({ tabsData }: TabsProps) {
         <TabsContent
           value={tab.title}
           key={idx}
-          className="flex flex-col md:flex-row md:flex-wrap justify-center gap-x-8 gap-y-8 data-[state=inactive]:hidden">
+          className="mt-4 flex flex-col md:flex-row md:flex-wrap gap-x-8 gap-y-8 data-[state=inactive]:hidden">
           {tab.images.map((image, imgIndex) => (
             <picture key={imgIndex} className="max-w-sm">
               <source srcSet={image.webPSrc} type="image/webp" />

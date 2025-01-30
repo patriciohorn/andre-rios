@@ -46,15 +46,18 @@ const breastPaths = [
   <section class="bg-[#FAFAFA]">
     <div class="max-w-7xl px-8 mx-auto py-16">
       <div class="flex flex-col">
-        <HeaderCenteredEyebrow title={i18n.GALLERY.TITLE} />
+        <h1
+          class="text-4xl sm:text-5xl sm:leading-[1.16] font-semibold tracking-tight text-neutral-900">
+          {i18n.GALLERY_TITLE}
+        </h1>
         <div
-          class="grid md:grid-cols-[0.5fr_1fr_1fr_1fr] py-8 gap-x-8 gap-y-16 mt-16">
+          class="grid md:grid-cols-[0.5fr_1fr_1fr_1fr_1fr] py-8 gap-x-8 gap-y-16 mt-16">
           <h3
-            class="text-lg text-foreground font-semibold col-span-3 xl:col-span-1">
+            class="text-lg font-bold text-neutral-700col-span-3 xl:col-span-1">
             {i18n.GALLERY.BODY.TITLE}
           </h3>
           <div
-            class="col-span-3 grid sm:grid-cols-2 md:grid-cols-3 gap-6 sm:gap-y-7 lg:gap-x-7">
+            class="col-span-4 grid sm:grid-cols-2 md:grid-cols-4 gap-6 sm:gap-y-7 lg:gap-x-7">
             {
               bodyImages.map((item, idx) => (
                 <a
@@ -84,9 +87,9 @@ const breastPaths = [
           </div>
         </div>
         <div
-          class="grid md:grid-cols-[0.5fr_1fr_1fr_1fr] py-8 gap-x-8 gap-y-6">
+          class="grid md:grid-cols-[0.5fr_1fr_1fr_1fr_1fr] py-8 gap-x-8 gap-y-6">
           <h3
-            class="text-lg text-foreground font-semibold col-span-3 xl:col-span-1">
+            class="text-lg font-bold text-neutral-700 col-span-3 xl:col-span-1">
             {i18n.GALLERY.BREAST.TITLE}
           </h3>
           <div
