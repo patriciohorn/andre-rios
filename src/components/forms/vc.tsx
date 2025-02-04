@@ -439,7 +439,7 @@ const steps = [
   'Upload Picture',
 ];
 
-export const ConsultationForm = () => {
+function ConsultationForm() {
   const [currentStep, setCurrentStep] = useState(0);
   const [formData, setFormData] = useState({});
   const [isSubmitted, setIsSubmitted] = useState(false);
@@ -718,4 +718,6 @@ export const ConsultationForm = () => {
       )}
     </>
   );
-};
+}
+
+export default ConsultationForm;

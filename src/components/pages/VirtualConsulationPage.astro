@@ -1,17 +1,27 @@
 ---
 import '../../styles/globals.css';
 import MainLayout from '@/layouts/MainLayout.astro';
-import { ConsultationForm } from '../forms/vc';
+import ConsultationForm from '../forms/vc';
 
 import { getI18N } from '@/i18n';
 const { currentLocale } = Astro;
 const i18n = getI18N({ currentLocale });
 
-const proceduresBreast = Object.values(i18n.PROCEDURES.PROCEDURES_BREAST);
-const proceduresInjectables = Object.values(i18n.PROCEDURES.PROCEDURES_INJECTABLES);
-const proceduresCorporal = Object.values(i18n.PROCEDURES.PROCEDURES_BODY);
+const proceduresBreast = Object.values(
+  i18n.PROCEDURES.PROCEDURES_BREAST
+);
+const proceduresInjectables = Object.values(
+  i18n.PROCEDURES.PROCEDURES_INJECTABLES
+);
+const proceduresCorporal = Object.values(
+  i18n.PROCEDURES.PROCEDURES_BODY
+);
 
-const proceduresField = [proceduresBreast, proceduresInjectables, proceduresCorporal];
+const proceduresField = [
+  proceduresBreast,
+  proceduresInjectables,
+  proceduresCorporal,
+];
 ---
 
 <MainLayout title="Rios MD Plastics | Virtual Consultation">
@@ -21,7 +31,7 @@ const proceduresField = [proceduresBreast, proceduresInjectables, proceduresCorp
         class="mb-12 text-center text-2xl sm:text-3xl sm:leading-[1.16] font-semibold tracking-tight text-primary-950">
         Virtual Consultation
       </h1>
-      <ConsultationForm client:load />
+      <ConsultationForm client:visible />
     </div>
   </section>
 </MainLayout>
