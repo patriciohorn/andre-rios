@@ -126,292 +126,577 @@ const generalInformationSchema = z.object({
   chestExpectation: z.string().optional(),
 });
 
-const medicalHistorySchema = (watch: UseFormWatch<any>) =>
-  z.object({
-    hasIllness: z.enum(['yes', 'no'], {
-      required_error: 'You need to select an option.',
-    }),
-    illnesses:
-      watch('hasIllness') === 'yes'
-        ? z
-            .array(
-              z.object({
-                condition: z.string().min(1, 'Condition is required'),
-                yearDiagnosed: z
-                  .string()
-                  .min(1, 'Year diagnosed is required'),
-                description: z
-                  .string()
-                  .min(1, 'Description is required'),
-              })
-            )
-            .optional()
-        : z.array(z.any()).optional(),
-    hasAllergies: z.enum(['yes', 'no'], {
-      required_error: 'You need to select an option.',
-    }),
-    allergies:
-      watch('hasAllergies') === 'yes'
-        ? z
-            .array(
-              z.object({
-                allergicTo: z
-                  .string()
-                  .min(1, 'Allergic to is required'),
-                reaction: z.string().min(1, 'Reaction is required'),
-              })
-            )
-            .optional()
-        : z.array(z.any()).optional(),
-    diabetes: z.enum(['yes', 'no'], {
-      required_error: 'You need to select an option.',
-    }),
-    diabetesType:
-      watch('diabetes') === 'yes'
-        ? z
-            .enum(['type 1', 'type 2'], {
-              required_error: 'You need to select an option',
-            })
-            .optional()
-        : z.string().optional(),
-    hgbResult:
-      watch('diabetes') === 'yes'
-        ? z
-            .string()
-            .min(1, 'Please provide your last hgb A1c')
-            .optional()
-        : z.string().optional(),
-    heartCondition: z.enum(['yes', 'no'], {
-      required_error: 'You need to select an option.',
-    }),
-    heartConditionDetails:
-      watch('heartCondition') === 'yes'
-        ? z
-            .string()
-            .min(1, 'Please provide details of your condition')
-            .optional()
-        : z.string().optional(),
-    heartSymptoms: z.enum(['yes', 'no'], {
-      required_error: 'You need to select an option.',
-    }),
-    heartSymptomsDetails:
-      watch('heartSymptoms') === 'yes'
-        ? z
-            .string()
-            .min(1, 'Please provide details of your symptoms')
-            .optional()
-        : z.string().optional(),
-    hasThyroidCondition: z.enum(['yes', 'no'], {
-      required_error: 'You need to select an option.',
-    }),
-    thyroidConditionType:
-      watch('hasThyroidCondition') === 'yes'
-        ? z.string().optional()
-        : z.string().optional(),
-    thyroidYearDiagnosis:
-      watch('hasThyroidCondition') === 'yes'
-        ? z.string().optional()
-        : z.string().optional(),
-    otherThyroidCondition:
-      watch('hasThyroidCondition') === 'yes' &&
-      watch('thyroidConditionType') === 'other'
-        ? z.string().optional()
-        : z.string().optional(),
-    isThyroidControlled:
-      watch('hasThyroidCondition') === 'yes'
-        ? z
-            .enum(['yes', 'no'], {
-              required_error: 'Please select an option',
-            })
-            .optional()
-        : z.string().optional(),
-    deepVein: z.enum(['yes', 'no'], {
-      required_error: 'You need to select an option.',
-    }),
-    deepVeinDetails:
-      watch('deepVein') === 'yes'
-        ? z.string().optional()
-        : z.string().optional(),
-    highBloodPresure: z.enum(['yes', 'no'], {
-      required_error: 'You need to select an option.',
-    }),
-    cholesterol: z.enum(['yes', 'no'], {
-      required_error: 'You need to select an option.',
-    }),
-    kidenyOrUrinary: z.enum(['yes', 'no'], {
-      required_error: 'You need to select an option.',
-    }),
-    asthma: z.enum(['yes', 'no'], {
-      required_error: 'You need to select an option.',
-    }),
-    orthopedic: z.enum(['yes', 'no'], {
-      required_error: 'You need to select an option.',
-    }),
-    orthopedicDetails:
-      watch('orthopedic') === 'yes'
-        ? z.string().optional()
-        : z.string().optional(),
-    breathingProblems: z.enum(['yes', 'no'], {
-      required_error: 'You need to select an option.',
-    }),
-    breathingProblemsDetails:
-      watch('breathingProblems') === 'yes'
-        ? z.string().optional()
-        : z.string().optional(),
-    mentalCondition: z
-      .enum([
-        'none',
-        'fibromyalgia',
-        'depression',
-        'anxiety',
-        'panic attacks',
-        'ocd',
-        'personality disorders',
-        'other',
-      ])
-      .optional(),
-    otherMentalCondition:
-      watch('mentalCondition') === 'other'
-        ? z.string().optional()
-        : z.string().optional(),
-    reflux: z.enum(['yes', 'no'], {
-      required_error: 'You need to select an option.',
-    }),
-    refluxDetails:
-      watch('reflux') === 'yes'
-        ? z.string().optional()
-        : z.string().optional(),
-    liverDisease: z.enum(['yes', 'no'], {
-      required_error: 'You need to select an option.',
-    }),
-    liverDiseaseDetails:
-      watch('liverDisease') === 'yes'
-        ? z.string().optional()
-        : z.string().optional(),
-    anemiaOrBleeding: z.enum(['yes', 'no'], {
-      required_error: 'You need to select an option.',
-    }),
-    anemiaOrBleedingDetails:
-      watch('anemiaOrBleeding') === 'yes'
-        ? z.string().optional()
-        : z.string().optional(),
-    swellingOrVaricose: z.enum(['yes', 'no'], {
-      required_error: 'You need to select an option.',
-    }),
-    swellingOrVaricoseDetails:
-      watch('swellingOrVaricose') === 'yes'
-        ? z.string().optional()
-        : z.string().optional(),
-    infectiousDisease: z.enum(['yes', 'no'], {
-      required_error: 'You need to select an option.',
-    }),
-    infectiousDiseaseDetails:
-      watch('infectiousDisease') === 'yes'
-        ? z.string().optional()
-        : z.string().optional(),
-    hivPositive: z.enum(['yes', 'no'], {
-      required_error: 'You need to select an option.',
-    }),
-    hivMedications:
-      watch('hivPositive') === 'yes'
-        ? z
-            .array(
-              z.object({
-                medicationName: z
-                  .string()
-                  .min(1, 'Name of medication is required'),
-                dosage: z.string().min(1, 'Dosage is required'),
-                frequency: z.string().min(1, 'Frequency is required'),
-              })
-            )
-            .optional()
-        : z.array(z.any()).optional(),
-    lastViralLoadDate:
-      watch('hivPositive') === 'yes'
-        ? z.date({
-            required_error: 'A date of last viral load is required',
-          })
-        : z.date().optional(),
-    drinkAlcohol: z.enum(['yes', 'no'], {
-      required_error: 'You need to select an option.',
-    }),
-    alcoholFrequency:
-      watch('drinkAlcohol') === 'yes'
-        ? z.string().optional()
-        : z.string().optional(),
-    smokedOrVape: z.enum(['yes', 'quit', 'no'], {
-      required_error: 'You need to select an option.',
-    }),
-    currentSmokingAmount:
-      watch('smokedOrVape') === 'yes'
-        ? z.string().optional()
-        : z.string().optional(),
-    currentSmokingSince:
-      watch('smokedOrVape') === 'yes'
-        ? z.string().optional()
-        : z.string().optional(),
-    pastSmokingAmount:
-      watch('smokedOrVape') === 'quit'
-        ? z.string().optional()
-        : z.string().optional(),
-    pastSmokingSince:
-      watch('smokedOrVape') === 'quit'
-        ? z.string().optional()
-        : z.string().optional(),
-    recreationalDrugUse: z.enum(['yes', 'no'], {
-      required_error: 'You need to select an option.',
-    }),
-    drugUseDetails:
-      watch('recreationalDrugUse') === 'yes'
-        ? z.string().optional()
-        : z.string().optional(),
-    currentMedication: z.enum(['yes', 'no'], {
-      required_error: 'You need to select an option.',
-    }),
-    medications:
-      watch('currentMedication') === 'yes'
-        ? z
-            .array(
-              z.object({
-                medicationName: z
-                  .string()
-                  .min(1, 'Condition is required'),
-                dosage: z
-                  .string()
-                  .min(1, 'Year diagnosed is required'),
-                frequency: z
-                  .string()
-                  .min(1, 'Description is required'),
-                purpose: z.string().min(1, 'Description is required'),
-              })
-            )
-            .optional()
-        : z.array(z.any()).optional(),
-    antidepressants: z.enum(['yes', 'no'], {
-      required_error: 'You need to select an option.',
-    }),
-    previousSurgeries: z.enum(['yes', 'no'], {
-      required_error: 'You need to select an option.',
-    }),
-    surgeries:
-      watch('previousSurgeries') === 'yes'
-        ? z
-            .array(
-              z.object({
-                surgeryName: z
-                  .string()
-                  .min(1, 'Condition is required'),
-                surgeryYear: z
-                  .string()
-                  .min(1, 'Year diagnosed is required'),
-                surgeryReason: z
-                  .string()
-                  .min(1, 'Description is required'),
-              })
-            )
-            .optional()
-        : z.array(z.any()).optional(),
-  });
+/* ============================
+   Medical History Schema
+   ============================ */
+const medicalHistoryBaseSchema = z.object({
+  hasIllness: z.enum(['yes', 'no'], {
+    required_error: 'You need to select an option.',
+  }),
+  illnesses: z
+    .array(
+      z.object({
+        condition: z.string(),
+        yearDiagnosed: z.string(),
+        description: z.string(),
+      })
+    )
+    .optional(),
+  hasAllergies: z.enum(['yes', 'no'], {
+    required_error: 'You need to select an option.',
+  }),
+  allergies: z
+    .array(
+      z.object({
+        allergicTo: z.string(),
+        reaction: z.string(),
+      })
+    )
+    .optional(),
+  diabetes: z.enum(['yes', 'no'], {
+    required_error: 'You need to select an option.',
+  }),
+  diabetesType: z.string(),
+  hgbResult: z.string(),
+  heartCondition: z.enum(['yes', 'no'], {
+    required_error: 'You need to select an option.',
+  }),
+  heartConditionDetails: z.string(),
+  heartSymptoms: z.enum(['yes', 'no'], {
+    required_error: 'You need to select an option.',
+  }),
+  heartSymptomsDetails: z.string(),
+  hasThyroidCondition: z.enum(['yes', 'no'], {
+    required_error: 'You need to select an option.',
+  }),
+  thyroidConditionType: z.string(),
+  thyroidYearDiagnosis: z.string(),
+  otherThyroidCondition: z.string(),
+  isThyroidControlled: z
+    .union([z.enum(['yes', 'no']), z.literal('')])
+    .optional(),
+  deepVein: z.enum(['yes', 'no'], {
+    required_error: 'You need to select an option.',
+  }),
+  deepVeinDetails: z.string(),
+  highBloodPresure: z.enum(['yes', 'no'], {
+    required_error: 'You need to select an option.',
+  }),
+  cholesterol: z.enum(['yes', 'no'], {
+    required_error: 'You need to select an option.',
+  }),
+  kidenyOrUrinary: z.enum(['yes', 'no'], {
+    required_error: 'You need to select an option.',
+  }),
+  asthma: z.enum(['yes', 'no'], {
+    required_error: 'You need to select an option.',
+  }),
+  orthopedic: z.enum(['yes', 'no'], {
+    required_error: 'You need to select an option.',
+  }),
+  orthopedicDetails: z.string(),
+  breathingProblems: z.enum(['yes', 'no'], {
+    required_error: 'You need to select an option.',
+  }),
+  breathingProblemsDetails: z.string(),
+  mentalCondition: z
+    .enum([
+      'none',
+      'fibromyalgia',
+      'depression',
+      'anxiety',
+      'panic attacks',
+      'ocd',
+      'personality disorders',
+      'other',
+    ])
+    .optional(),
+  otherMentalCondition: z.string(),
+  reflux: z.enum(['yes', 'no'], {
+    required_error: 'You need to select an option.',
+  }),
+  refluxDetails: z.string(),
+  liverDisease: z.enum(['yes', 'no'], {
+    required_error: 'You need to select an option.',
+  }),
+  liverDiseaseDetails: z.string(),
+  anemiaOrBleeding: z.enum(['yes', 'no'], {
+    required_error: 'You need to select an option.',
+  }),
+  anemiaOrBleedingDetails: z.string(),
+  swellingOrVaricose: z.enum(['yes', 'no'], {
+    required_error: 'You need to select an option.',
+  }),
+  swellingOrVaricoseDetails: z.string(),
+  infectiousDisease: z.enum(['yes', 'no'], {
+    required_error: 'You need to select an option.',
+  }),
+  infectiousDiseaseDetails: z.string(),
+  hivPositive: z.enum(['yes', 'no'], {
+    required_error: 'You need to select an option.',
+  }),
+  hivMedications: z
+    .array(
+      z.object({
+        medicationName: z.string(),
+        dosage: z.string(),
+        frequency: z.string(),
+      })
+    )
+    .optional(),
+  lastViralLoadDate: z.date().nullable().optional(),
+  drinkAlcohol: z.enum(['yes', 'no'], {
+    required_error: 'You need to select an option.',
+  }),
+  alcoholFrequency: z.string(),
+  smokedOrVape: z.enum(['yes', 'quit', 'no'], {
+    required_error: 'You need to select an option.',
+  }),
+  currentSmokingAmount: z.string(),
+  currentSmokingSince: z.string(),
+  pastSmokingAmount: z.string(),
+  pastSmokingSince: z.string(),
+  recreationalDrugUse: z.enum(['yes', 'no'], {
+    required_error: 'You need to select an option.',
+  }),
+  drugUseDetails: z.string(),
+  currentMedication: z.enum(['yes', 'no'], {
+    required_error: 'You need to select an option.',
+  }),
+  medications: z
+    .array(
+      z.object({
+        medicationName: z.string(),
+        dosage: z.string(),
+        frequency: z.string(),
+        purpose: z.string(),
+      })
+    )
+    .optional(),
+  antidepressants: z.enum(['yes', 'no'], {
+    required_error: 'You need to select an option.',
+  }),
+  previousSurgeries: z.enum(['yes', 'no'], {
+    required_error: 'You need to select an option.',
+  }),
+  surgeries: z
+    .array(
+      z.object({
+        surgeryName: z.string(),
+        surgeryYear: z.string(),
+        surgeryReason: z.string(),
+      })
+    )
+    .optional(),
+});
+
+const medicalHistorySchema = medicalHistoryBaseSchema.superRefine(
+  (data, ctx) => {
+    // Illness details required only if hasIllness === 'yes'
+    if (data.hasIllness === 'yes') {
+      if (!data.illnesses || data.illnesses.length === 0) {
+        ctx.addIssue({
+          code: z.ZodIssueCode.custom,
+          message: 'Please provide details for your illnesses',
+          path: ['illnesses'],
+        });
+      } else {
+        data.illnesses.forEach((item, index) => {
+          if (item.condition.trim() === '') {
+            ctx.addIssue({
+              code: z.ZodIssueCode.custom,
+              message: 'Condition is required',
+              path: ['illnesses', index, 'condition'],
+            });
+          }
+          if (item.yearDiagnosed.trim() === '') {
+            ctx.addIssue({
+              code: z.ZodIssueCode.custom,
+              message: 'Year diagnosed is required',
+              path: ['illnesses', index, 'yearDiagnosed'],
+            });
+          }
+          if (item.description.trim() === '') {
+            ctx.addIssue({
+              code: z.ZodIssueCode.custom,
+              message: 'Description is required',
+              path: ['illnesses', index, 'description'],
+            });
+          }
+        });
+      }
+    }
+
+    // Allergies required only if hasAllergies === 'yes'
+    if (data.hasAllergies === 'yes') {
+      if (!data.allergies || data.allergies.length === 0) {
+        ctx.addIssue({
+          code: z.ZodIssueCode.custom,
+          message: 'Please provide details for your allergies',
+          path: ['allergies'],
+        });
+      } else {
+        data.allergies.forEach((item, index) => {
+          if (item.allergicTo.trim() === '') {
+            ctx.addIssue({
+              code: z.ZodIssueCode.custom,
+              message: 'Allergic to is required',
+              path: ['allergies', index, 'allergicTo'],
+            });
+          }
+          if (item.reaction.trim() === '') {
+            ctx.addIssue({
+              code: z.ZodIssueCode.custom,
+              message: 'Reaction is required',
+              path: ['allergies', index, 'reaction'],
+            });
+          }
+        });
+      }
+    }
+
+    // Diabetes: if yes, require diabetesType and hgbResult
+    if (data.diabetes === 'yes') {
+      if (
+        data.diabetesType.trim() === '' ||
+        data.hgbResult.trim() === ''
+      ) {
+        ctx.addIssue({
+          code: z.ZodIssueCode.custom,
+          message:
+            'Please provide your diabetes type and last HGB A1C result',
+          path: ['diabetesType'],
+        });
+      }
+    }
+
+    // Heart condition: if yes, require details
+    if (
+      data.heartCondition === 'yes' &&
+      data.heartConditionDetails.trim() === ''
+    ) {
+      ctx.addIssue({
+        code: z.ZodIssueCode.custom,
+        message: 'Please provide details for your heart condition',
+        path: ['heartConditionDetails'],
+      });
+    }
+
+    // Heart symptoms: if yes, require details
+    if (
+      data.heartSymptoms === 'yes' &&
+      data.heartSymptomsDetails.trim() === ''
+    ) {
+      ctx.addIssue({
+        code: z.ZodIssueCode.custom,
+        message: 'Please provide details for your heart symptoms',
+        path: ['heartSymptomsDetails'],
+      });
+    }
+
+    // Thyroid: if hasThyroidCondition is yes, require thyroidConditionType
+    if (data.hasThyroidCondition === 'yes') {
+      if (data.thyroidConditionType.trim() === '') {
+        ctx.addIssue({
+          code: z.ZodIssueCode.custom,
+          message: 'Please select the type of your thyroid condition',
+          path: ['thyroidConditionType'],
+        });
+      }
+      // And if the type is 'other', require otherThyroidCondition details
+      if (
+        data.thyroidConditionType === 'other' &&
+        data.otherThyroidCondition.trim() === ''
+      ) {
+        ctx.addIssue({
+          code: z.ZodIssueCode.custom,
+          message:
+            'Please provide details for your thyroid condition',
+          path: ['otherThyroidCondition'],
+        });
+      }
+    }
+
+    // Deep vein: if yes, require details
+    if (
+      data.deepVein === 'yes' &&
+      data.deepVeinDetails.trim() === ''
+    ) {
+      ctx.addIssue({
+        code: z.ZodIssueCode.custom,
+        message: 'Please provide details for your deep vein history',
+        path: ['deepVeinDetails'],
+      });
+    }
+
+    // Orthopedic: if yes, require details
+    if (
+      data.orthopedic === 'yes' &&
+      data.orthopedicDetails.trim() === ''
+    ) {
+      ctx.addIssue({
+        code: z.ZodIssueCode.custom,
+        message:
+          'Please provide details for your orthopedic problems',
+        path: ['orthopedicDetails'],
+      });
+    }
+
+    // Breathing problems: if yes, require details
+    if (
+      data.breathingProblems === 'yes' &&
+      data.breathingProblemsDetails.trim() === ''
+    ) {
+      ctx.addIssue({
+        code: z.ZodIssueCode.custom,
+        message: 'Please provide details for your breathing problems',
+        path: ['breathingProblemsDetails'],
+      });
+    }
+
+    // Mental condition: if 'other', require details
+    if (
+      data.mentalCondition === 'other' &&
+      data.otherMentalCondition.trim() === ''
+    ) {
+      ctx.addIssue({
+        code: z.ZodIssueCode.custom,
+        message: 'Please provide details for your mental condition',
+        path: ['otherMentalCondition'],
+      });
+    }
+
+    // Reflux: if yes, require details
+    if (data.reflux === 'yes' && data.refluxDetails.trim() === '') {
+      ctx.addIssue({
+        code: z.ZodIssueCode.custom,
+        message:
+          'Please provide details for your reflux/heartburn symptoms',
+        path: ['refluxDetails'],
+      });
+    }
+
+    // Liver disease: if yes, require details
+    if (
+      data.liverDisease === 'yes' &&
+      data.liverDiseaseDetails.trim() === ''
+    ) {
+      ctx.addIssue({
+        code: z.ZodIssueCode.custom,
+        message: 'Please provide details for your liver disease',
+        path: ['liverDiseaseDetails'],
+      });
+    }
+
+    // Anemia or bleeding: if yes, require details
+    if (
+      data.anemiaOrBleeding === 'yes' &&
+      data.anemiaOrBleedingDetails.trim() === ''
+    ) {
+      ctx.addIssue({
+        code: z.ZodIssueCode.custom,
+        message:
+          'Please provide details for your anemia or bleeding disorder',
+        path: ['anemiaOrBleedingDetails'],
+      });
+    }
+
+    // Swelling or varicose veins: if yes, require details
+    if (
+      data.swellingOrVaricose === 'yes' &&
+      data.swellingOrVaricoseDetails.trim() === ''
+    ) {
+      ctx.addIssue({
+        code: z.ZodIssueCode.custom,
+        message:
+          'Please provide details for your leg swelling or varicose veins',
+        path: ['swellingOrVaricoseDetails'],
+      });
+    }
+
+    // Infectious disease: if yes, require details
+    if (
+      data.infectiousDisease === 'yes' &&
+      data.infectiousDiseaseDetails.trim() === ''
+    ) {
+      ctx.addIssue({
+        code: z.ZodIssueCode.custom,
+        message: 'Please provide details for your infectious disease',
+        path: ['infectiousDiseaseDetails'],
+      });
+    }
+
+    // HIV: if yes, require at least one medication with valid details
+    if (data.hivPositive === 'yes') {
+      if (!data.hivMedications || data.hivMedications.length === 0) {
+        ctx.addIssue({
+          code: z.ZodIssueCode.custom,
+          message: 'Please provide details for your HIV medications',
+          path: ['hivMedications'],
+        });
+      } else {
+        data.hivMedications.forEach((item, index) => {
+          if (item.medicationName.trim() === '') {
+            ctx.addIssue({
+              code: z.ZodIssueCode.custom,
+              message: 'Name of medication is required',
+              path: ['hivMedications', index, 'medicationName'],
+            });
+          }
+          if (item.dosage.trim() === '') {
+            ctx.addIssue({
+              code: z.ZodIssueCode.custom,
+              message: 'Dosage is required',
+              path: ['hivMedications', index, 'dosage'],
+            });
+          }
+          if (item.frequency.trim() === '') {
+            ctx.addIssue({
+              code: z.ZodIssueCode.custom,
+              message: 'Frequency is required',
+              path: ['hivMedications', index, 'frequency'],
+            });
+          }
+        });
+      }
+    }
+
+    // Alcohol: if yes, require details
+    if (
+      data.drinkAlcohol === 'yes' &&
+      data.alcoholFrequency.trim() === ''
+    ) {
+      ctx.addIssue({
+        code: z.ZodIssueCode.custom,
+        message:
+          'Please provide details for your alcohol consumption',
+        path: ['alcoholFrequency'],
+      });
+    }
+
+    // Smoking: if smokedOrVape === 'yes', require current smoking details
+    if (data.smokedOrVape === 'yes') {
+      if (
+        data.currentSmokingAmount.trim() === '' ||
+        data.currentSmokingSince.trim() === ''
+      ) {
+        ctx.addIssue({
+          code: z.ZodIssueCode.custom,
+          message:
+            'Please provide details for your current smoking habits',
+          path: ['currentSmokingAmount'],
+        });
+      }
+    }
+
+    // Smoking: if smokedOrVape === 'quit', require past smoking details
+    if (data.smokedOrVape === 'quit') {
+      if (
+        data.pastSmokingAmount.trim() === '' ||
+        data.pastSmokingSince.trim() === ''
+      ) {
+        ctx.addIssue({
+          code: z.ZodIssueCode.custom,
+          message:
+            'Please provide details for your past smoking habits',
+          path: ['pastSmokingAmount'],
+        });
+      }
+    }
+
+    // Recreational drug use: if yes, require details
+    if (
+      data.recreationalDrugUse === 'yes' &&
+      data.drugUseDetails.trim() === ''
+    ) {
+      ctx.addIssue({
+        code: z.ZodIssueCode.custom,
+        message:
+          'Please provide details for your recreational drug use',
+        path: ['drugUseDetails'],
+      });
+    }
+
+    // Current medication: if yes, require at least one medication with valid details
+    if (data.currentMedication === 'yes') {
+      if (!data.medications || data.medications.length === 0) {
+        ctx.addIssue({
+          code: z.ZodIssueCode.custom,
+          message:
+            'Please provide details for your current medications',
+          path: ['medications'],
+        });
+      } else {
+        data.medications.forEach((item, index) => {
+          if (item.medicationName.trim() === '') {
+            ctx.addIssue({
+              code: z.ZodIssueCode.custom,
+              message: 'Medication name is required',
+              path: ['medications', index, 'medicationName'],
+            });
+          }
+          if (item.dosage.trim() === '') {
+            ctx.addIssue({
+              code: z.ZodIssueCode.custom,
+              message: 'Dosage is required',
+              path: ['medications', index, 'dosage'],
+            });
+          }
+          if (item.frequency.trim() === '') {
+            ctx.addIssue({
+              code: z.ZodIssueCode.custom,
+              message: 'Frequency is required',
+              path: ['medications', index, 'frequency'],
+            });
+          }
+          if (item.purpose.trim() === '') {
+            ctx.addIssue({
+              code: z.ZodIssueCode.custom,
+              message: 'Purpose is required',
+              path: ['medications', index, 'purpose'],
+            });
+          }
+        });
+      }
+    }
+
+    // Previous surgeries: if yes, require at least one surgery with valid details
+    if (data.previousSurgeries === 'yes') {
+      if (!data.surgeries || data.surgeries.length === 0) {
+        ctx.addIssue({
+          code: z.ZodIssueCode.custom,
+          message:
+            'Please provide details for your previous surgeries',
+          path: ['surgeries'],
+        });
+      } else {
+        data.surgeries.forEach((item, index) => {
+          if (item.surgeryName.trim() === '') {
+            ctx.addIssue({
+              code: z.ZodIssueCode.custom,
+              message: 'Surgery name is required',
+              path: ['surgeries', index, 'surgeryName'],
+            });
+          }
+          if (item.surgeryYear.trim() === '') {
+            ctx.addIssue({
+              code: z.ZodIssueCode.custom,
+              message: 'Surgery year is required',
+              path: ['surgeries', index, 'surgeryYear'],
+            });
+          }
+          if (item.surgeryReason.trim() === '') {
+            ctx.addIssue({
+              code: z.ZodIssueCode.custom,
+              message: 'Surgery reason is required',
+              path: ['surgeries', index, 'surgeryReason'],
+            });
+          }
+        });
+      }
+    }
+  }
+);
 
 const MAX_FILE_SIZE = 2 * 1024 * 1024;
 
@@ -440,7 +725,7 @@ const steps = [
 ];
 
 function ConsultationForm() {
-  const [currentStep, setCurrentStep] = useState(0);
+  const [currentStep, setCurrentStep] = useState(2);
   const [formData, setFormData] = useState({});
   const [isSubmitted, setIsSubmitted] = useState(false);
 
@@ -492,63 +777,63 @@ function ConsultationForm() {
   });
 
   const medicalHistoryForm = useForm({
-    resolver: zodResolver(medicalHistorySchema(useForm().watch)),
+    resolver: zodResolver(medicalHistorySchema),
     defaultValues: {
-      hasIllness: undefined,
+      hasIllness: '',
       illnesses: [
         { condition: '', yearDiagnosed: '', description: '' },
       ],
-      hasAllergies: undefined,
+      hasAllergies: '',
       allergies: [{ allergicTo: '', reaction: '' }],
-      diabetes: undefined,
-      diabetesType: undefined,
-      hgbResult: undefined,
-      heartCondition: undefined,
-      heartConditionDetails: undefined,
-      heartSymptoms: undefined,
-      heartSymptomsDetails: undefined,
-      hasThyroidCondition: undefined,
-      thyroidConditionType: undefined,
-      thyroidYearDiagnosis: undefined,
-      otherThyroidCondition: undefined,
-      isThyroidControlled: undefined,
-      deepVein: undefined,
+      diabetes: '',
+      diabetesType: '',
+      hgbResult: '',
+      heartCondition: '',
+      heartConditionDetails: '',
+      heartSymptoms: '',
+      heartSymptomsDetails: '',
+      hasThyroidCondition: '',
+      thyroidConditionType: '',
+      thyroidYearDiagnosis: '',
+      otherThyroidCondition: '',
+      isThyroidControlled: '',
+      deepVein: '',
       deepVeinDetails: '',
-      highBloodPresure: undefined,
-      cholesterol: undefined,
-      kidenyOrUrinary: undefined,
-      asthma: undefined,
-      orthopedic: undefined,
+      highBloodPresure: '',
+      cholesterol: '',
+      kidenyOrUrinary: '',
+      asthma: '',
+      orthopedic: '',
       orthopedicDetails: '',
-      breathingProblems: undefined,
+      breathingProblems: '',
       breathingProblemsDetails: '',
-      mentalCondition: undefined,
+      mentalCondition: '',
       otherMentalCondition: '',
-      reflux: undefined,
+      reflux: '',
       refluxDetails: '',
-      liverDisease: undefined,
+      liverDisease: '',
       liverDiseaseDetails: '',
-      anemiaOrBleeding: undefined,
+      anemiaOrBleeding: '',
       anemiaOrBleedingDetails: '',
-      swellingOrVaricose: undefined,
+      swellingOrVaricose: '',
       swellingOrVaricoseDetails: '',
-      infectiousDisease: undefined,
+      infectiousDisease: '',
       infectiousDiseaseDetails: '',
-      hivPositive: undefined,
+      hivPositive: '',
       hivMedications: [
         { medicationName: '', dosage: '', frequency: '' },
       ],
-      lastViralLoadDate: undefined,
-      drinkAlcohol: undefined,
+      lastViralLoadDate: null,
+      drinkAlcohol: '',
       alcoholFrequency: '',
-      smokedOrVape: undefined,
+      smokedOrVape: '',
       currentSmokingAmount: '',
       currentSmokingSince: '',
       pastSmokingAmount: '',
       pastSmokingSince: '',
-      recreationalDrugUse: undefined,
+      recreationalDrugUse: '',
       drugUseDetails: '',
-      currentMedication: undefined,
+      currentMedication: '',
       medications: [
         {
           medicationName: '',
@@ -557,8 +842,8 @@ function ConsultationForm() {
           purpose: '',
         },
       ],
-      antidepressants: undefined,
-      previousSurgeries: undefined,
+      antidepressants: '',
+      previousSurgeries: '',
       surgeries: [
         { surgeryName: '', surgeryYear: '', surgeryReason: '' },
       ],
@@ -596,6 +881,10 @@ function ConsultationForm() {
 
   const handleSubmit = () => {
     setIsSubmitted(true);
+  };
+
+  const onError = (errors: any) => {
+    console.error('Validation Errors:', errors);
   };
 
   const renderStepContent = () => {
@@ -703,8 +992,9 @@ function ConsultationForm() {
                             ? medicalHistoryForm
                             : imageUploadForm;
 
-                    currentForm.handleSubmit((data) =>
-                      handleNextStep(data)
+                    currentForm.handleSubmit(
+                      (data) => handleNextStep(data),
+                      (errors) => onError(errors)
                     )();
                   }}>
                   Next
