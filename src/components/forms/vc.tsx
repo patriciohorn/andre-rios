@@ -883,6 +883,10 @@ function ConsultationForm() {
     setIsSubmitted(true);
   };
 
+  const updateFormData = (newData: Record<string, any>) => {
+    setFormData((prev) => ({ ...prev, ...newData }));
+  };
+
   const onError = (errors: any) => {
     console.error('Validation Errors:', errors);
   };
@@ -913,7 +917,10 @@ function ConsultationForm() {
       case 3:
         return (
           <div>
-            <Step4UploadPictures form={imageUploadForm} />
+            <Step4UploadPictures
+              form={imageUploadForm}
+              updateFormData={updateFormData}
+            />
           </div>
         );
       default:

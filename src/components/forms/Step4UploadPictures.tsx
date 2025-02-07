@@ -7,20 +7,48 @@ import {
   FormItem,
   FormLabel,
   FormMessage,
-  FormDescription
+  FormDescription,
 } from '@/components/ui/form';
 import { Input } from '@/components/ui/input';
 
-export const Step4UploadPictures = ({ form }: any) => {
-  const [extraFields, setExtraFields] = useState<{ id: number; name: string }[]>([]);
+interface Step4UploadPicturesProps {
+  form: any;
+  updateFormData: (newData: Record<string, any>) => void;
+}
+
+export const Step4UploadPictures: React.FC<
+  Step4UploadPicturesProps
+> = ({ form, updateFormData }) => {
+  const [extraFields, setExtraFields] = useState<
+    { id: number; name: string }[]
+  >([]);
   const maxFields = 3;
 
   const addExtraField = () => {
     setExtraFields((prevFields) => [
       ...prevFields,
-      { id: prevFields.length, name: `extraPhoto${prevFields.length + 1}` }
+      {
+        id: prevFields.length,
+        name: `extraPhoto${prevFields.length + 1}`,
+      },
     ]);
   };
+
+  function handleFileChange(
+    event: React.ChangeEvent<HTMLInputElement>,
+    fieldName: string
+  ) {
+    const file = event.target.files?.[0];
+    if (file) {
+      // FileReader returns an object
+      const reader = new FileReader();
+      // loadend -> fired when a read has completed, successfully or not
+      reader.onloadend = () => {
+        updateFormData({ [fieldName]: reader.result });
+      };
+      reader.readAsDataURL(file);
+    }
+  }
 
   return (
     <Form {...form}>
@@ -35,10 +63,14 @@ export const Step4UploadPictures = ({ form }: any) => {
                 <Input
                   type="file"
                   placeholder="Front Photo"
-                  onChange={(e) => field.onChange(e.target.files?.[0])}
+                  onChange={(e) =>
+                    handleFileChange(e, 'frontPhotoDataUrl')
+                  }
                 />
               </FormControl>
-              <FormDescription>Please upload a photo from the front</FormDescription>
+              <FormDescription>
+                Please upload a photo from the front
+              </FormDescription>
               <FormMessage />
             </FormItem>
           )}
@@ -53,10 +85,14 @@ export const Step4UploadPictures = ({ form }: any) => {
                 <Input
                   type="file"
                   placeholder="Back Photo"
-                  onChange={(e) => field.onChange(e.target.files?.[0])}
+                  onChange={(e) =>
+                    handleFileChange(e, 'backPhotoDataUrl')
+                  }
                 />
               </FormControl>
-              <FormDescription>Please upload a photo from the back</FormDescription>
+              <FormDescription>
+                Please upload a photo from the back
+              </FormDescription>
               <FormMessage />
             </FormItem>
           )}
@@ -71,10 +107,14 @@ export const Step4UploadPictures = ({ form }: any) => {
                 <Input
                   type="file"
                   placeholder="Left Side Photo"
-                  onChange={(e) => field.onChange(e.target.files?.[0])}
+                  onChange={(e) =>
+                    handleFileChange(e, 'leftPhotoDataUrl')
+                  }
                 />
               </FormControl>
-              <FormDescription>Please upload a photo from your left side</FormDescription>
+              <FormDescription>
+                Please upload a photo from your left side
+              </FormDescription>
               <FormMessage />
             </FormItem>
           )}
@@ -89,10 +129,14 @@ export const Step4UploadPictures = ({ form }: any) => {
                 <Input
                   type="file"
                   placeholder="Right Side Photo"
-                  onChange={(e) => field.onChange(e.target.files?.[0])}
+                  onChange={(e) =>
+                    handleFileChange(e, 'rightPhotoDataUrl')
+                  }
                 />
               </FormControl>
-              <FormDescription>Please upload a photo from your right side</FormDescription>
+              <FormDescription>
+                Please upload a photo from your right side
+              </FormDescription>
               <FormMessage />
             </FormItem>
           )}
@@ -111,10 +155,14 @@ export const Step4UploadPictures = ({ form }: any) => {
                   <Input
                     type="file"
                     placeholder={`Additional Photo ${field.id + 1}`}
-                    onChange={(e) => dynamicField.onChange(e.target.files?.[0])}
+                    onChange={(e) =>
+                      dynamicField.onChange(e.target.files?.[0])
+                    }
                   />
                 </FormControl>
-                <FormDescription>Upload an additional photo</FormDescription>
+                <FormDescription>
+                  Upload an additional photo
+                </FormDescription>
                 <FormMessage />
               </FormItem>
             )}
@@ -122,7 +170,10 @@ export const Step4UploadPictures = ({ form }: any) => {
         ))}
 
         {/* Button to add new fields */}
-        <Button type="button" onClick={addExtraField} disabled={extraFields.length >= maxFields}>
+        <Button
+          type="button"
+          onClick={addExtraField}
+          disabled={extraFields.length >= maxFields}>
           Add Additional Photo
         </Button>
       </form>

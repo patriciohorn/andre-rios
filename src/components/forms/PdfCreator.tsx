@@ -8,6 +8,7 @@ import {
   Document,
   StyleSheet,
   PDFDownloadLink,
+  Image,
 } from '@react-pdf/renderer';
 
 // Create styles
@@ -16,34 +17,44 @@ const styles = StyleSheet.create({
     padding: 40,
     fontFamily: 'Helvetica',
     fontSize: 11,
-    // lineHeight: 1.5,
-    backgroundColor: '#E4E4E4',
+    color: '#0A0A0A',
   },
   header: {
     fontSize: 20,
     fontWeight: 'bold',
-    marginBottom: 40,
+    marginBottom: 20,
     textAlign: 'center',
   },
+
   section: {
-    marginBottom: 16,
+    marginBottom: 0,
   },
 
   title: {
-    fontSize: 14,
+    fontSize: 12,
     fontWeight: 'bold',
     paddingVertical: 8,
     paddingHorizontal: 10,
-    backgroundColor: '#D1D5DC',
+    backgroundColor: '#F5F5F5',
+    border: '1px solid #E5E5E5',
   },
 
   label: {
-    fontSize: 12,
+    fontSize: 11,
     fontWeight: 'bold',
+    width: 200,
+    marginRight: 4,
+    paddingVertical: 6,
+    paddingLeft: 10,
   },
 
   input: {
-    // no styles yet
+    color: '#292524',
+    flex: 1,
+    fontSize: 10,
+    borderLeft: '1px solid #E5E5E5',
+    paddingVertical: 6,
+    paddingHorizontal: 10,
   },
 
   fieldRow: {
@@ -51,11 +62,28 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     alignItems: 'center',
     gap: 4,
-    borderRight: '1px solid #ccc',
-    borderLeft: '1px solid #ccc',
-    borderBottom: '1px solid #ccc',
-    paddingVertical: 8,
-    paddingHorizontal: 10,
+    borderRight: '1px solid #E5E5E5',
+    borderLeft: '1px solid #E5E5E5',
+    borderBottom: '1px solid #E5E5E5',
+  },
+
+  imageGrid: {
+    flexDirection: 'column',
+    justifyContent: 'space-between',
+    marginBottom: 10,
+  },
+
+  imagesRow: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    marginBottom: 10,
+    gap: 10,
+  },
+  image: {
+    flex: 1,
+    aspectRatio: 1,
+    objectFit: 'cover',
+    maxWidth: 250,
   },
 });
 
@@ -126,18 +154,26 @@ const renderFieldValue = (key: string, value: any) => {
       .map((item, idx) => {
         if (typeof item === 'object' && item !== null) {
           // For objects (like an illness record), we join its key-value pairs.
-          const itemText = Object.entries(item)
-            .map(([subKey, subValue]) => `${subKey}: ${subValue}`)
-            .join(', ');
-          return `${itemText}${idx < value.length - 1 ? '\n' : ''}`;
+          const subLines = Object.entries(item)
+            .map(
+              ([subKey, subValue]) =>
+                ` • ${capitalize(subKey)}: ${subValue?.toString() || ''}`
+            )
+            .join('\n');
+          return subLines;
         }
-        return `${item}${idx < value.length - 1 ? ', ' : ''}`;
+        return `- ${item}`;
       })
       .join('');
   } else if (value instanceof Date) {
     return value.toLocaleDateString();
   } else if (typeof value === 'object' && value !== null) {
-    return JSON.stringify(value, null, 2);
+    return Object.entries(value)
+      .map(
+        ([subKey, subValue]) =>
+          `${capitalize(subKey)}: ${subValue?.toString() || ''}`
+      )
+      .join('\n');
   }
   return value?.toString() || '';
 };
@@ -165,61 +201,61 @@ function PatientDocument({ formData }: PdfCreatorProps) {
     <Document>
       <Page size="A4" style={styles.page}>
         <Text style={styles.header}>Consultation Form</Text>
-
+        {/* ////// Personal Information //////*/}
         <View style={styles.section}>
           <Text style={styles.title}>Patient Information</Text>
 
           <View style={styles.fieldRow}>
-            <Text style={styles.label}>Name:</Text>
+            <Text style={styles.label}>Name</Text>
             <Text
               style={
                 styles.input
-              }>{`${formData.firstName} ${formData.lastName}`}</Text>
+              }>{`${formData.firstName.trim()} ${formData.lastName.trim()}`}</Text>
           </View>
 
           <View style={styles.fieldRow}>
-            <Text style={styles.label}>Date of Birth:</Text>
+            <Text style={styles.label}>Date of Birth</Text>
             <Text style={styles.input}>
               {dob ? dob.toLocaleDateString() : 'NA'}
             </Text>
           </View>
 
           <View style={styles.fieldRow}>
-            <Text style={styles.label}>Age:</Text>
+            <Text style={styles.label}>Age</Text>
             <Text style={styles.input}>
               {differenceInYears(new Date(), formData.dateOfBirth)}
             </Text>
           </View>
 
           <View style={styles.fieldRow}>
-            <Text style={styles.label}>Gender:</Text>
+            <Text style={styles.label}>Gender</Text>
             <Text style={styles.input}>
               {capitalize(formData.gender)}
             </Text>
           </View>
 
           <View style={styles.fieldRow}>
-            <Text style={styles.label}>Email:</Text>
+            <Text style={styles.label}>Email</Text>
             <Text style={styles.input}>{formData.email}</Text>
           </View>
 
           <View style={styles.fieldRow}>
-            <Text style={styles.label}>Phone:</Text>
+            <Text style={styles.label}>Phone</Text>
             <Text style={styles.input}>{formData.phone}</Text>
           </View>
 
           <View style={styles.fieldRow}>
-            <Text style={styles.label}>Address:</Text>
+            <Text style={styles.label}>Address</Text>
             <Text style={styles.input}>{formData.address}</Text>
           </View>
 
           <View style={styles.fieldRow}>
-            <Text style={styles.label}>Occupation:</Text>
+            <Text style={styles.label}>Occupation</Text>
             <Text style={styles.input}>{formData.occupation}</Text>
           </View>
 
           <View style={styles.fieldRow}>
-            <Text style={styles.label}>Height:</Text>
+            <Text style={styles.label}>Height</Text>
             <Text style={styles.input}>
               {formData.heightFt || formData.heightIn
                 ? `${formData.heightFt}ft ${formData.heightIn}in`
@@ -228,14 +264,14 @@ function PatientDocument({ formData }: PdfCreatorProps) {
           </View>
 
           <View style={styles.fieldRow}>
-            <Text style={styles.label}>Weight:</Text>
+            <Text style={styles.label}>Weight</Text>
             <Text
               style={styles.input}>{`${formData.weight} lbs`}</Text>
           </View>
 
           <View style={styles.fieldRow}>
             <Text style={styles.label}>
-              Have you had weight loss surgery?:
+              Have you had weight loss surgery?
             </Text>
             <Text style={styles.input}>
               {formData.hadSurgery ? 'Yes' : 'No'}
@@ -243,14 +279,14 @@ function PatientDocument({ formData }: PdfCreatorProps) {
           </View>
 
           <View style={styles.fieldRow}>
-            <Text style={styles.label}>Reference:</Text>
+            <Text style={styles.label}>Reference</Text>
             <Text style={styles.input}>
               {capitalize(formData.reference)}
             </Text>
           </View>
 
           <View style={styles.fieldRow}>
-            <Text style={styles.label}>Estimated surgery date:</Text>
+            <Text style={styles.label}>Estimated surgery date</Text>
             <Text style={styles.input}>
               {`${capitalize(formData.procedureMonth)} ${formData.procedureYear}`}
             </Text>
@@ -262,7 +298,7 @@ function PatientDocument({ formData }: PdfCreatorProps) {
           <Text style={styles.title}>General Information</Text>
 
           <View style={styles.fieldRow}>
-            <Text style={styles.label}>Desired Procedure:</Text>
+            <Text style={styles.label}>Desired Procedure</Text>
             <Text style={styles.input}>
               {formData.desiredProcedure &&
               formData.desiredProcedure.toLowerCase() === 'other'
@@ -272,7 +308,7 @@ function PatientDocument({ formData }: PdfCreatorProps) {
           </View>
 
           <View style={styles.fieldRow}>
-            <Text style={styles.label}>Specific Procedure:</Text>
+            <Text style={styles.label}>Specific Procedure</Text>
             <Text style={styles.input}>
               {formData.desiredProcedure
                 ? 'NA'
@@ -282,7 +318,7 @@ function PatientDocument({ formData }: PdfCreatorProps) {
 
           <View style={styles.fieldRow}>
             <Text style={styles.label}>
-              Treatment Area. Concerns and Desired Outcomes:
+              Treatment Area. Concerns and Desired Outcomes
             </Text>
             <Text style={styles.input}>
               {formData.dislikesAndDesires}
@@ -293,7 +329,7 @@ function PatientDocument({ formData }: PdfCreatorProps) {
             <>
               <View style={styles.fieldRow}>
                 <Text style={styles.label}>
-                  Interested in breast surgery:
+                  Interested in breast surgery
                 </Text>
                 <Text style={styles.input}>
                   {capitalize(formData.breastSurgery)}
@@ -301,7 +337,7 @@ function PatientDocument({ formData }: PdfCreatorProps) {
               </View>
 
               <View style={styles.fieldRow}>
-                <Text style={styles.label}>Current Cup Size:</Text>
+                <Text style={styles.label}>Current Cup Size</Text>
                 <Text style={styles.input}>
                   {capitalize(formData.cupSize)}
                 </Text>
@@ -309,7 +345,7 @@ function PatientDocument({ formData }: PdfCreatorProps) {
 
               <View style={styles.fieldRow}>
                 <Text style={styles.label}>
-                  Interested in breast implants?:
+                  Interested in breast implants?
                 </Text>
                 <Text style={styles.input}>
                   {capitalize(formData.breastImplants)}
@@ -318,7 +354,7 @@ function PatientDocument({ formData }: PdfCreatorProps) {
 
               <View style={styles.fieldRow}>
                 <Text style={styles.label}>
-                  Had breast augmentation before:
+                  Had breast augmentation before
                 </Text>
                 <Text style={styles.input}>
                   {capitalize(formData.breastAugmentationBefore)}
@@ -326,14 +362,14 @@ function PatientDocument({ formData }: PdfCreatorProps) {
               </View>
 
               <View style={styles.fieldRow}>
-                <Text style={styles.label}>Has been pregnant:</Text>
+                <Text style={styles.label}>Has been pregnant</Text>
                 <Text style={styles.input}>
                   {capitalize(formData.hasBeenPregnant)}
                 </Text>
               </View>
 
               <View style={styles.fieldRow}>
-                <Text style={styles.label}>Times pregnant:</Text>
+                <Text style={styles.label}>Times pregnant</Text>
                 <Text style={styles.input}>
                   {' '}
                   {formData.timesPregnant === 'yes'
@@ -343,7 +379,7 @@ function PatientDocument({ formData }: PdfCreatorProps) {
               </View>
 
               <View style={styles.fieldRow}>
-                <Text style={styles.label}>Delivery Method:</Text>
+                <Text style={styles.label}>Delivery Method</Text>
                 <Text style={styles.input}>
                   {' '}
                   {formData.desiredProcedure === 'yes'
@@ -353,7 +389,7 @@ function PatientDocument({ formData }: PdfCreatorProps) {
               </View>
 
               <View style={styles.fieldRow}>
-                <Text style={styles.label}>Birth control used:</Text>
+                <Text style={styles.label}>Birth control used</Text>
                 <Text style={styles.input}>
                   {formData.birthControl}
                 </Text>
@@ -361,7 +397,7 @@ function PatientDocument({ formData }: PdfCreatorProps) {
 
               <View style={styles.fieldRow}>
                 <Text style={styles.label}>
-                  Other birth control used:
+                  Other birth control used
                 </Text>
                 <Text style={styles.input}>
                   {formData.otherBirthControl === 'other'
@@ -371,7 +407,7 @@ function PatientDocument({ formData }: PdfCreatorProps) {
               </View>
 
               <View style={styles.fieldRow}>
-                <Text style={styles.label}>Currently Pregnant:</Text>
+                <Text style={styles.label}>Currently Pregnant</Text>
                 <Text style={styles.input}>
                   {capitalize(formData.currentlyPregnant)}
                 </Text>
@@ -379,7 +415,7 @@ function PatientDocument({ formData }: PdfCreatorProps) {
 
               <View style={styles.fieldRow}>
                 <Text style={styles.label}>
-                  Currently Breastfreeding:
+                  Currently Breastfreeding
                 </Text>
                 <Text style={styles.input}>
                   {formData.breastFeeding}
@@ -401,7 +437,7 @@ function PatientDocument({ formData }: PdfCreatorProps) {
 
               <View style={styles.fieldRow}>
                 <Text style={styles.label}>
-                  Chest surgery expectation:
+                  Chest surgery expectation
                 </Text>
                 <Text style={styles.input}>
                   {formData.chestExpectations
@@ -421,18 +457,58 @@ function PatientDocument({ formData }: PdfCreatorProps) {
             // Only render if the formData has this field.
             // (Optionally, you could check if the value is non-empty.)
             if (formData[fieldKey] === undefined) return null;
+            const rawValue =
+              renderFieldValue(fieldKey, formData[fieldKey]) || 'NA';
+
+            const formattedValue = rawValue
+              .split('\n')
+              .map((line: any) => (line ? capitalize(line) : ''))
+              .join('\n');
+
             return (
               <View style={styles.fieldRow}>
                 <Text key={fieldKey} style={styles.label}>
-                  {label}:
+                  {label}
                 </Text>
+
                 <Text key={fieldKey} style={styles.input}>
-                  {renderFieldValue(fieldKey, formData[fieldKey]) ||
-                    'NA'}
+                  {formattedValue}
                 </Text>
               </View>
             );
           })}
+        </View>
+
+        {/* ////// Images Upload //////*/}
+        <View style={styles.section}>
+          <Text style={styles.title}>Patient Photos</Text>
+          <View style={styles.imageGrid}>
+            <View style={styles.imagesRow}>
+              {formData.frontPhotoDataUrl && (
+                <Image
+                  style={styles.image}
+                  src={formData.frontPhotoDataUrl}></Image>
+              )}
+              {formData.backPhotoDataUrl && (
+                <Image
+                  style={styles.image}
+                  src={formData.backPhotoDataUrl}></Image>
+              )}
+            </View>
+
+            <View style={styles.imagesRow}>
+              {formData.leftPhotoDataUrl && (
+                <Image
+                  style={styles.image}
+                  src={formData.leftPhotoDataUrl}></Image>
+              )}
+              {formData.rightPhotoDataUrl && (
+                <Image
+                  style={styles.image}
+                  src={formData.rightPhotoDataUrl}></Image>
+              )}
+            </View>
+          </View>
         </View>
       </Page>
     </Document>
@@ -460,7 +536,7 @@ function PdfCreator({ formData }: PdfCreatorProps) {
     <div>
       <PDFDownloadLink
         document={<PatientDocument formData={formData} />}
-        fileName={`${formData.name}_${formData.lastName}.pdf`}
+        fileName={`${formData.firstName.trim()}_${formData.lastName.trim()}.pdf`}
         // Cast the render function as any to bypass strict type checking
         children={renderDownloadLink as any}
       />
