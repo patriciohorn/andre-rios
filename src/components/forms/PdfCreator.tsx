@@ -1,4 +1,3 @@
-import React from 'react';
 import { differenceInYears } from 'date-fns';
 
 import {
@@ -9,19 +8,37 @@ import {
   StyleSheet,
   PDFDownloadLink,
   Image,
+  Font,
 } from '@react-pdf/renderer';
+
+Font.register({
+  family: 'Roboto',
+  fonts: [
+    {
+      src: 'https://cdnjs.cloudflare.com/ajax/libs/ink/3.1.10/fonts/Roboto/roboto-regular-webfont.ttf',
+    },
+    {
+      src: 'https://cdnjs.cloudflare.com/ajax/libs/ink/3.1.10/fonts/Roboto/roboto-medium-webfont.ttf',
+      fontWeight: 'medium',
+    },
+    {
+      src: 'https://cdnjs.cloudflare.com/ajax/libs/ink/3.1.10/fonts/Roboto/roboto-semibold-webfont.ttf',
+      fontWeight: 'semibold',
+    },
+  ],
+});
 
 // Create styles
 const styles = StyleSheet.create({
   page: {
     padding: 40,
-    fontFamily: 'Helvetica',
+    fontFamily: 'Roboto',
     fontSize: 11,
     color: '#0A0A0A',
   },
   header: {
     fontSize: 20,
-    fontWeight: 'bold',
+    fontWeight: 'semibold',
     marginBottom: 20,
     textAlign: 'center',
   },
@@ -41,7 +58,7 @@ const styles = StyleSheet.create({
 
   label: {
     fontSize: 11,
-    fontWeight: 'bold',
+    fontWifth: 'medium',
     width: 200,
     marginRight: 4,
     paddingVertical: 6,
