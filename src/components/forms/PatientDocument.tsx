@@ -78,6 +78,7 @@ const styles = StyleSheet.create({
     justifyContent: 'space-between',
     marginBottom: 10,
     gap: 10,
+    flexWrap: 'wrap',
   },
   image: {
     flex: 1,
@@ -480,7 +481,7 @@ function PatientDocument({ formData }: PdfCreatorProps) {
         </View>
 
         {/* ////// Images Upload //////*/}
-        <View style={styles.section}>
+        <View style={styles.section} break>
           <Text style={styles.title}>Patient Photos</Text>
           <View style={styles.imageGrid}>
             <View style={styles.imagesRow}>
@@ -507,6 +508,21 @@ function PatientDocument({ formData }: PdfCreatorProps) {
                   style={styles.image}
                   src={formData.rightPhotoDataUrl}></Image>
               )}
+
+              {formData.additionalPhotos &&
+                formData.additionalPhotos.length > 0 && (
+                  <View style={styles.imagesRow} break>
+                    {formData.additionalPhotos.map(
+                      (photo: string, index: number) => (
+                        <Image
+                          key={`additional-${index}`}
+                          style={styles.image}
+                          src={photo}
+                        />
+                      )
+                    )}
+                  </View>
+                )}
             </View>
           </View>
         </View>

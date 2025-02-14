@@ -861,6 +861,7 @@ function ConsultationForm() {
       backPhoto: null,
       leftPhoto: null,
       rightPhoto: null,
+      additionalPhotos: [],
     },
     mode: 'onSubmit',
   });
