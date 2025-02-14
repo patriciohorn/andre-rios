@@ -1,10 +1,12 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { z } from 'zod';
 import { useForm, type UseFormWatch } from 'react-hook-form';
 // import { useToast } from '@/components/hooks/use-toast';
 // import { Toaster } from '@/components/ui/toaster';
-import PdfCreator from './PdfCreator';
+// import PdfCreator from './PdfCreator';
+import { pdf } from '@react-pdf/renderer';
+import PatientDocument from './PatientDocument';
 
 import { Button } from '@/components/ui/button';
 import {
@@ -891,6 +893,47 @@ function ConsultationForm() {
     console.error('Validation Errors:', errors);
   };
 
+  const blobToBase64 = (blob: Blob): Promise<string> => {
+    return new Promise((resolve, reject) => {
+      const reader = new FileReader();
+      reader.onerror = reject;
+      reader.onloadend = () => resolve(reader.result as string);
+      reader.readAsDataURL(blob);
+    });
+  };
+
+  const sendPdfEmail = async () => {
+    try {
+      const doc = <PatientDocument formData={formData} />;
+      const asPdf = pdf(doc);
+      const blob = await asPdf.toBlob();
+      const pdfBase64 = await blobToBase64(blob);
+
+      // Prepare the payload
+      const payload = {
+        pdfBase64,
+        doctorEmail: 'patriciohorn4@gmail.com',
+      };
+
+      const response = await fetch('/.netlify/functions/send-email', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(payload),
+      });
+
+      const result = await response.json();
+      console.log('Email sent successfully', result);
+    } catch (error) {
+      console.error('Error sending email:', error);
+    }
+  };
+
+  useEffect(() => {
+    if (isSubmitted) {
+      sendPdfEmail();
+    }
+  }, [isSubmitted]);
+
   const renderStepContent = () => {
     switch (currentStep) {
       case 0:
@@ -952,7 +995,7 @@ function ConsultationForm() {
               </div>
             </CardContent>
           </Card>
-          <PdfCreator formData={formData} />
+          {/* <PdfCreator formData={formData} /> */}
         </>
       ) : (
         <Card>
