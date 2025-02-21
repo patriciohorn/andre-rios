@@ -4,7 +4,7 @@ import {
   CarouselContent,
   CarouselItem,
   CarouselNext,
-  CarouselPrevious
+  CarouselPrevious,
 } from '@/components/ui/carousel';
 import TestimonialCard from '@/components/TestimonialCard';
 
@@ -24,20 +24,29 @@ interface TestimonialCarouselProps {
   testimonials: Testimonial[];
 }
 
-const avatars = [avatarCaro, avatarClaudia, avatarJaky, avatarMariana];
+const avatars = [
+  avatarCaro,
+  avatarClaudia,
+  avatarJaky,
+  avatarMariana,
+];
 
-const TestimonialCarousel: React.FC<TestimonialCarouselProps> = ({ testimonials }) => {
+const TestimonialCarousel: React.FC<TestimonialCarouselProps> = ({
+  testimonials,
+}) => {
   return (
     <Carousel
       opts={{
         slidesToScroll: 1,
         breakpoints: {
-          '(min-width: 768px)': { slidesToScroll: 2 }
-        }
+          '(min-width: 768px)': { slidesToScroll: 2 },
+        },
       }}>
       <CarouselContent className="cursor-grab active:cursor-grabbing">
         {testimonials.map((testimonial, idx) => (
-          <CarouselItem className="basis-full lg:basis-1/2 sm:px-8" key={idx}>
+          <CarouselItem
+            className="basis-full lg:basis-1/2 sm:px-8"
+            key={idx}>
             <TestimonialCard
               // src={avatars[idx].src}
               // alt={`${testimonial.TESTIMONIAL_NAME} avatar`}

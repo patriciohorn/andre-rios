@@ -1,34 +1,49 @@
---- 
-import { getI18N } from "@/i18n"
-const { currentLocale } = Astro
-const i18n = getI18N({ currentLocale })
-import { Image } from "astro:assets"
-
+---
+import { getI18N } from '@/i18n';
+const { currentLocale } = Astro;
+const i18n = getI18N({ currentLocale });
+import { Image } from 'astro:assets';
+import { LogoMarque } from './LogoMarquee';
 // import logo1 from "@/assets/cert_logo_1.svg"
 // import logo2 from "@/assets/cert_logo_2.svg"
 // import logo3 from "@/assets/cert_logo_3.svg"
 // import logo4 from "@/assets/cert_logo_4.svg"
 // import logo5 from "@/assets/cert_logo_5.svg"
-import logo1 from "@/assets/logo_1.jpg"
-import logo2 from "@/assets/logo_2.jpg"
-import logo3 from "@/assets/logo_3.jpg"
-import logo4 from "@/assets/logo_4.jpg"
-import logo5 from "@/assets/logo_5.jpg"
+// import logo1 from '@/assets/logos/amcper.png';
+// import logo3 from '@/assets/logos/asps.png';
+// import logo2 from '@/assets/logos/cmcg.png';
+// import logo4 from '@/assets/logos/cmcp.png';
+// import logo5 from '@/assets/logos/isaps.png';
 
-const logoImages = [logo1, logo2, logo3, logo4, logo5]
+// const logoImages = [logo5, logo4, logo2, logo3, logo1];
 ---
 
-
-<div class="bg-[#FAFAFA] py-16 sm:py-28">
-  <div class="mx-auto max-w-7xl px-6 lg:px-8">   
-    <h2 class="text-center text-4xl sm:text-5xl font-semibold leading-8 text-gray-900">{i18n.CERTIFICATIONS_TITLE}</h2>
-    <ul class="mx-auto mt-12 sm:mt-20 grid max-w-lg grid-cols-4 items-center gap-x-8 gap-y-10 sm:max-w-xl sm:grid-cols-6 sm:gap-x-10 lg:mx-0 lg:max-w-none lg:grid-cols-5">
-      {logoImages.map((image, idx) => (        
-        <li class={idx !== logoImages.length - 1 ? `col-span-2 lg:col-span-1 mx-auto` : `col-span-2 lg:col-span-1 col-start-2 sm:col-start-auto mx-auto`}>
-          <Image src={image} alt={`Logo de certificacion ${idx}`} class="max-w-28 lg:max-w-32 w-full text-center object-contain "/>
-          {/* <img class="max-w-28 lg:max-w-32 w-full text-center object-contain " src={image.src} alt="Certification logo"/>           */}
-        </li>
-      ))}     
-    </ul>
+<div class="bg-[#FAFAFA] py-12 sm:py-20">
+  <div class="mx-auto max-w-7xl px-0 md:px-4">
+    <h2
+      class="font-display text-center text-lg font-bold leading-8 text-gray-900 mb-6">
+      {i18n.CERTIFICATIONS_TITLE}
+    </h2>
+    <LogoMarque client:visible />
+    <!-- <ul
+      class="mx-auto mt-12 sm:mt-20 grid max-w-lg grid-cols-4 items-center gap-x-8 gap-y-10 sm:max-w-xl sm:grid-cols-6 sm:gap-x-24 lg:mx-0 lg:max-w-none lg:grid-cols-5">
+      {
+        logoImages.map((image, idx) => (
+          <li
+            class={
+              idx !== logoImages.length - 1
+                ? `col-span-2 lg:col-span-1 mx-auto`
+                : `col-span-2 lg:col-span-1 col-start-2 sm:col-start-auto mx-auto`
+            }>
+            <Image
+              src={image}
+              alt={`Logo de certificacion ${idx}`}
+              class="w-full h-full text-center object-cover grayscale brightness-0 "
+            />
+            {/* <img class="max-w-28 lg:max-w-32 w-full text-center object-contain " src={image.src} alt="Certification logo"/>           */}
+          </li>
+        ))
+      }
+    </ul> -->
   </div>
 </div>

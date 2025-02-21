@@ -13,8 +13,8 @@ import {
 } from '@/components/ui/dialog';
 
 // Images
-import gallery1 from '../assets/gallery/gallery_1.jpg';
-import gallery1Webp from '../assets/gallery/gallery_1.webp';
+import gallery1 from '../assets/galleryPages/liposculpture-1-2.jpg';
+import gallery1Webp from '../assets/galleryPages/liposculpture-1-2.webp';
 
 import gallery2 from '../assets/gallery/gallery_2.jpg';
 import gallery2Webp from '../assets/gallery/gallery_2.webp';
@@ -22,8 +22,8 @@ import gallery2Webp from '../assets/gallery/gallery_2.webp';
 import gallery3 from '../assets/gallery/gallery_3.jpg';
 import gallery3Webp from '../assets/gallery/gallery_3.webp';
 
-import gallery4 from '../assets/gallery/gallery_4.jpg';
-import gallery4Webp from '../assets/gallery/gallery_4.webp';
+import gallery4 from '../assets/galleryPages/liposculpture-3-8.jpg';
+import gallery4Webp from '../assets/galleryPages/liposculpture-3-8.jpg';
 
 import gallery5 from '../assets/gallery/gallery_5.jpg';
 import gallery5Webp from '../assets/gallery/gallery_5.webp';
@@ -62,34 +62,37 @@ const Gallery = () => {
     <div>
       <Carousel
         opts={{
-          align: 'center',
+          align: 'start',
+          loop: true,
 
           breakpoints: {
-            '(min-width: 768px)': { align: 'center', loop: true },
+            '(min-width: 768px)': { align: 'start', loop: true },
           },
         }}
-        className="-mr-4">
-        <CarouselContent className="ml-2">
+        className="w-full">
+        <CarouselContent className="-ml-2 md:-ml-4">
           {imagesWebp.map((image, idx) => (
             <CarouselItem
-              className="basis-1/2 md:basis-1/4 overflow-hidden rounded-lg relative group hover:cursor-zoom-in px-0 mr-4 sm:mr-8"
+              className="px-0 pl-4 basis-2/3 md:basis-1/4"
               key={idx}
               onClick={() => openDialog(idx)}>
-              <picture className="">
-                <source srcSet={image.src} type="image/webp" />
-                <source
-                  srcSet={imagesJpg[idx].src}
-                  type="image/jpg"
-                />
-                <img
-                  src={imagesJpg[idx].src}
-                  alt={`Gallery ${idx + 1}`}
-                  width={1024}
-                  height={1024}
-                  className="object-cover w-full h-full aspect-[14/13] rounded-md"
-                />
-              </picture>
-              <div className="absolute inset-0 bg-gradient-to-t from-black to-black opacity-0 group-hover:opacity-40 transition-opacity rounded-md"></div>
+              <div className="group relative hover:cursor-zoom-in aspect-square rounded-sm overflow-hidden">
+                <picture>
+                  <source srcSet={image.src} type="image/webp" />
+                  <source
+                    srcSet={imagesJpg[idx].src}
+                    type="image/jpg"
+                  />
+                  <img
+                    src={imagesJpg[idx].src}
+                    alt={`Gallery ${idx + 1}`}
+                    width={1024}
+                    height={1024}
+                    className="object-cover w-full h-full"
+                  />
+                </picture>
+                <div className="absolute inset-0 bg-gradient-to-t from-black/40 to-black/40 opacity-0 group-hover:opacity-100 transition-opacity rounded-md"></div>
+              </div>
             </CarouselItem>
           ))}
         </CarouselContent>

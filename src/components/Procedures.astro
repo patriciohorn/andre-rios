@@ -1,29 +1,37 @@
 ---
-import SectionWrapper from "./layout/SectionWrapper.astro"
-import Heading from "./Heading.astro"
-import ProcedureCard from "./ProcedureCard.astro"
-import { getI18N } from "@/i18n"
-
+import SectionWrapper from './layout/SectionWrapper.astro';
+import Heading from './Heading.astro';
+import ProcedureCard from './ProcedureCard.astro';
+import { getI18N } from '@/i18n';
 
 // Images
-import inyectablesImg from "../assets/inyectables.jpg";
-import facialImg from "../assets/facial.jpg";
-import bustoImg from "../assets/busto.jpg";
+import inyectablesImg from '../assets/inyectables.jpg';
+import facialImg from '../assets/facial.jpg';
+import bustoImg from '../assets/busto.jpg';
 
+const { currentLocale } = Astro;
+const i18n = getI18N({ currentLocale });
 
-const { currentLocale } = Astro
-const i18n = getI18N({ currentLocale })
-
-const proceduresHeadings = Object.values(i18n.PROCEDURES.PROCEDURES_HEADINGS)
-const proceduresImages = [inyectablesImg, facialImg, bustoImg]
-
+const proceduresHeadings = Object.values(
+  i18n.PROCEDURES.PROCEDURES_HEADINGS
+);
+const proceduresImages = [inyectablesImg, facialImg, bustoImg];
 ---
 
 <SectionWrapper class="bg-[#FAFAFA]">
-  <Heading title={i18n.PROCEDURES_TITLE}/>
-  <ul class="grid sm:grid-cols-2 lg:grid-cols-3 gap-x-8 gap-y-16 mt-20">
-    {proceduresHeadings.map((heading, idx) => (
-      <ProcedureCard src={proceduresImages[idx]} alt={heading} title={heading}/>
-    ))}
+  <h2
+    class="font-display font-bold text-4xl sm:text-5xl text-balance text-center max-w-2xl mx-auto mb-20">
+    {i18n.PROCEDURES_TITLE}
+  </h2>
+  <ul class="grid sm:grid-cols-2 lg:grid-cols-3 gap-x-8 gap-y-16">
+    {
+      proceduresHeadings.map((heading, idx) => (
+        <ProcedureCard
+          src={proceduresImages[idx]}
+          alt={heading}
+          title={heading}
+        />
+      ))
+    }
   </ul>
 </SectionWrapper>

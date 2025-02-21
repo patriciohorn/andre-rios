@@ -1,9 +1,9 @@
 ---
-import Heading from '@/components/Heading.astro';
 import { Image } from 'astro:assets';
-import IntroImg from '@/assets/intro.jpg';
-import IntroImg2 from '@/assets/intro_2.jpg';
+import aboutImage from '@/assets/about.jpg';
 import { getI18N } from '@/i18n';
+import { FileBadge, HeartHandshake } from 'lucide-react';
+
 const { currentLocale } = Astro;
 const i18n = getI18N({ currentLocale });
 ---
@@ -11,20 +11,46 @@ const i18n = getI18N({ currentLocale });
 <section class="py-16 sm:py-28 bg-[#FAFAFA]">
   <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
     <div class="grid lg:grid-cols-2 gap-x-20 gap-y-12 items-center">
-      <div class="flex flex-col space-y-8">
+      <div class="flex flex-col space-y-6">
         <h2
-          class="font-display font-semibold text-4xl sm:text-5xl sm:leading-[1.1] text-balance">
+          class="font-display font-semibold text-4xl sm:text-5xl text-balance">
           {i18n.INTRO_TITLE}
         </h2>
-        <p class="text-base sm:text-lg text-[#242528] max-w-[30em]">
+        <p class="text-base sm:text-lg">
           {i18n.INTRO}
         </p>
+        <div class="mt-8 flex gap-6">
+          <div class="space-y-4">
+            <FileBadge
+              strokeWidth={1}
+              size={48}
+              className="text-primary-700"
+            />
+            <h3 class="font-bold text-xl">Certified Specialist</h3>
+            <p>
+              Experience exceptional results with a trusted expert in
+              the field of surgery.
+            </p>
+          </div>
+          <div class="space-y-4">
+            <HeartHandshake
+              strokeWidth={1}
+              size={48}
+              className="text-primary-800"
+            />
+            <h3 class="font-bold text-xl">Advanced Techniques</h3>
+            <p>
+              Utilizing the latest technology for safe and effective
+              procedures tailored to your needs.
+            </p>
+          </div>
+        </div>
       </div>
-      <div class="overflow-hidden rounded-xl shadow-lg">
+      <div class="overflow-hidden rounded-sm shadow-lg aspect-square">
         <Image
-          src={IntroImg2}
+          src={aboutImage}
           alt="Dr. Andre Rios"
-          class="w-full h-full aspect-square object-cover"
+          class="w-full h-full object-cover"
         />
       </div>
     </div>

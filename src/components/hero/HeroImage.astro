@@ -1,6 +1,7 @@
 ---
 import { Image } from 'astro:assets';
-import heroImage from '../../assets/hero-img.jpg';
+// import heroImage from '../../assets/hero-img.jpg';
+// import heroImage from '../../assets/dr-rios-hero.webp';
 import { Button } from '../ui/button';
 import { cn } from '@/lib/utils';
 import { buttonVariants } from '@/components/ui/button';
@@ -16,32 +17,29 @@ const translatePath = useTranslatedPath(lang);
 import { LanguageDialog } from '../language-dialog';
 ---
 
-<section class="relative sm:h-screen">
+<section
+  class="relative sm:max-h-[86vh] bg-[url('/rios-hero.jpg')] bg-no-repeat bg-cover bg-center">
   <div
-    class="absolute top-0 right-0 w-full h-full bg-[url('/hero-img_2.webp')] bg-no-repeat bg-cover bg-center -z-50">
+    class="absolute inset-0 bg-gradient-to-t from-black/90 from-20% to-black/0">
   </div>
   <div
-    class="absolute inset-0 bg-gradient-to-r from-black/60 from-50% to-transparent -z-10">
-  </div>
-
-  <div
-    class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-32 sm:py-48 lg:py-56">
-    <div
-      class="flex flex-col space-y-4 items-center py-16 sm:py-0 sm:items-start sm:justify-center text-center sm:text-left">
-      <h1
-        class="font-display font-bold uppercase text-4xl sm:text-6xl leading-[1.2] text-slate-100">
-        {i18n.HERO_TITLE}
-      </h1>
-      <p
-        class="text-slate-300 text-base sm:text-lg leading-6 max-w-md">
-        {i18n.HERO_DESCRIPTION}
-      </p>
-      <div class="flex pt-4">
+    class="relative mx-auto max-w-screen-xl px-4 p-0 sm:px-6 lg:flex lg:items-end py-20 lg:py-24 lg:px-8 lg:min-h-[90vh]">
+    <div class="l">
+      <div class="">
+        <h1
+          class="font-display text-3xl font-bold text-white sm:text-6xl uppercase tracking-wide">
+          {i18n.HERO_TITLE}
+        </h1>
+        <p class="mt-4 max-w-lg text-white sm:text-xl/relaxed">
+          {i18n.HERO_DESCRIPTION}
+        </p>
+      </div>
+      <div class="flex mt-4">
         <a
           href={translatePath('/conoce-a-tu-doctor/')}
           class={cn(
             buttonVariants({ size: 'lg' }),
-            'flex bg-primary-500 text-primary-950 text-base hover:bg-primary-600'
+            'flex font-normal bg-primary-500 text-black text-base hover:bg-primary-600 '
           )}>{i18n.HERO_BUTTON}</a
         >
       </div>
