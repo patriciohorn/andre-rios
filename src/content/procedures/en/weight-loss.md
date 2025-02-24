@@ -1,9 +1,9 @@
 ---
-tag: 'Body'
-title: 'Massive Weight Loss'
-cover: '../../../assets/procedures/perdida.jpg'
-slug: massive-weight-loss
-lang: 'en'
+tag: "Body"
+title: "Massive Weight Loss"
+cover: "../../../assets/procedures/perdida.jpg"
+slug: "procedures/massive-weight-loss"
+lang: "en"
 ---
 
 Patients with massive weight loss are those who have lost more than 20 kg or 50 lbs, generally in short periods of time (less than 6 months), either through a diet or after bariatric surgery.

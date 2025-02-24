@@ -1,9 +1,9 @@
 ---
-tag: 'Inyectables'
-title: 'Rellenos'
-cover: '../../../assets/procedures/botox.jpg'
-slug: rellenos
-lang: 'es'
+tag: "Inyectables"
+title: "Rellenos"
+cover: "../../../assets/procedures/botox.jpg"
+slug: "procedimientos/rellenos"
+lang: "es"
 ---
 
 Los rellenos se utilizan para mejorar el volumen de ciertas zonas, generalmente en cara, y dar una apariencia más joven en una persona que ha perdido volumen con la edad o pérdida masiva de peso.

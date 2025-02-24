@@ -1,9 +1,9 @@
 ---
-tag: 'Body'
-title: 'Torsoplasty (Back Lift)'
-cover: '../../../assets/procedures/torsoplastia.jpg'
-slug: torsoplasty
-lang: 'en'
+tag: "Body"
+title: "Torsoplasty (Back Lift)"
+cover: "../../../assets/procedures/torsoplastia.jpg"
+slug: "procedures/torsoplasty"
+lang: "en"
 ---
 
 The torsoplasty, or back lift, is the surgery with which we remove the excess of skin in the upper back. It is an area that we can hardly improve much with only liposuction, in patients who have had a significant weight loss.

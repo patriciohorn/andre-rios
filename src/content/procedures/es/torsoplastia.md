@@ -1,9 +1,9 @@
 ---
-tag: 'Corporal'
-title: 'Torsoplastía'
-cover: '../../../assets/procedures/torsoplastia.jpg'
-slug: torsoplastia
-lang: 'es'
+tag: "Corporal"
+title: "Torsoplastía"
+cover: "../../../assets/procedures/torsoplastia.jpg"
+slug: "procedimientos/torsoplastia"
+lang: "es"
 ---
 
 La torsoplastía es la cirugía con la cual quitamos el exceso de piel en la parte de la espalda superior. Es un área que difícilmente podemos mejorar mucho con solamente liposucción, en pacientes que han tenido una pérdida importante de peso.

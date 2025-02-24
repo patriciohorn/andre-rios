@@ -1,9 +1,9 @@
 ---
-tag: 'Corporal'
-title: 'Cruroplastia'
-cover: '../../../assets/procedures/cruroplastia.jpg'
-slug: cruroplastia
-lang: 'es'
+tag: "Corporal"
+title: "Cruroplastia"
+cover: "../../../assets/procedures/cruroplastia.jpg"
+slug: "procedimientos/cruroplastia"
+lang: "es"
 ---
 
 La cruroplastía es la cirugía con la cual quitamos el exceso de piel en la parte interna del muslo. Al igual que la braquiplastía, es un área que difícilmente podemos mejorar mucho con solamente liposucción, ya que al quitar mucho volumen de grasa, la piel de esta zona tiende a colgarse en vez de retraerse.

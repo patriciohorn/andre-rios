@@ -1,9 +1,9 @@
 ---
-tag: 'Injectables'
-title: 'Botox (Botulinum toxin)'
-cover: '../../../assets/procedures/botox.jpg'
-slug: botulinum-toxin
-lang: 'en'
+tag: "Injectables"
+title: "Botox (Botulinum toxin)"
+cover: "../../../assets/procedures/botox.jpg"
+slug: "procedures/botulinum-toxin"
+lang: "en"
 ---
 
 The application of botulinum toxin is used to improve the areas affected by dynamic wrinkles, that is, those caused by making gestures with the muscles of facial expression. Generally the most commonly treated areas are the forehead, the frown and the region around the eyes (crow’s feet), however, we can use the toxin to improve other areas: gummy smile, drooping corner of the mouth, chewing muscles greatly increased in volume, wrinkles on the nose (bunny lines), among others.

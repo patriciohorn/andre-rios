@@ -1,9 +1,9 @@
 ---
-tag: 'Body'
-title: 'Cruroplasty (Thigh lift)'
-cover: '../../../assets/procedures/cruroplastia.jpg'
-slug: thigh-lift
-lang: 'en'
+tag: "Body"
+title: "Cruroplasty (Thigh lift)"
+cover: "../../../assets/procedures/cruroplastia.jpg"
+slug: "procedures/thigh-lift"
+lang: "en"
 ---
 
 The cruroplasty, or thigh lift, is the surgery with which we remove the excess skin in the inner part of the thigh. Like brachioplasty, it is an area that we can hardly improve much with only liposuction, since when removing a lot of fat, the skin in this area tends to hang and fold instead of retracting.

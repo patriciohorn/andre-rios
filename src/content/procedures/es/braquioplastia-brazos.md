@@ -1,9 +1,9 @@
 ---
-tag: 'Corporal'
-title: 'Braquioplastía'
-cover: '../../../assets/procedures/braquioplastia.jpg'
-slug: braquioplastia
-lang: 'es'
+tag: "Corporal"
+title: "Braquioplastía"
+cover: "../../../assets/procedures/braquioplastia.jpg"
+slug: "procedimientos/braquioplastia"
+lang: "es"
 ---
 
 La braquioplastía es la cirugía con la cual quitamos el exceso de piel en la parte interna del brazo, ya sea por flacidez de la piel o por una pérdida masiva de peso. Es un área que difícilmente podemos mejorar mucho con solamente liposucción, ya que al quitar mucho volumen de grasa, la piel de esta zona tiende a colgarse en vez de retraerse.

@@ -1,9 +1,9 @@
 ---
-tag: 'Breast'
-title: 'Breast lift'
-cover: '../../../assets/procedures/levantamiento-busto.jpg'
-slug: breast-lift
-lang: 'en'
+tag: "Breast"
+title: "Breast lift"
+cover: "../../../assets/procedures/levantamiento-busto.jpg"
+slug: "procedures/breast-lift"
+lang: "en"
 ---
 
 Mastopexy (breast lift) is a procedure with which we can reposition the breast tissue (skin, fat, and nipple) to achieve a better shape, and avoid the appearance of a sagging breast. The main element that makes a sagging breast look “saggy” is the position of the nipple in relation to the rest of the breast.

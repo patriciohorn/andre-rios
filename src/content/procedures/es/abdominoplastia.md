@@ -1,9 +1,9 @@
 ---
-tag: 'Corporal'
-title: 'Abdominoplastía'
-cover: '../../../assets/procedures/abdominoplastia.jpg'
-slug: abdominoplastia
-lang: 'es'
+tag: "Corporal"
+title: "Abdominoplastía"
+cover: "../../../assets/procedures/abdominoplastia.jpg"
+slug: "procedimientos/abdominoplastia"
+lang: "es"
 ---
 
 La abdominoplastía o lipectomía es la cirugía con la cual podemos quitar el exceso de piel en pacientes que después de una pérdida grande de peso, o de varios embarazos, tienen una piel flácida o en exceso alrededor del área del abdomen.

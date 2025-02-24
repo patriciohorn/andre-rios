@@ -1,9 +1,9 @@
 ---
-tag: 'Body'
-title: 'Liposuction'
-cover: '../../../assets/procedures/liposucción.jpg'
-slug: liposuction
-lang: 'en'
+tag: "Body"
+title: "Liposuction"
+cover: "../../../assets/procedures/liposucción.jpg"
+slug: "procedures/liposuction"
+lang: "en"
 ---
 
 Liposuction is the surgery with which we can shape the figure and change the contour of the body. Sometimes people think that with liposuction you can lose weight, however, it is not the goal of the surgery, but it is an added benefit depending on the amount of fat removed.

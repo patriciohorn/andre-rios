@@ -1,9 +1,9 @@
 ---
-tag: 'Breast'
-title: 'Breast Augmentation with Fat'
-cover: '../../../assets/procedures/busto.jpg'
-slug: breast-augmentation-with-fat
-lang: 'en'
+tag: "Breast"
+title: "Breast Augmentation with Fat"
+cover: "../../../assets/procedures/busto.jpg"
+slug: "procedures/breast-augmentation-with-fat"
+lang: "en"
 ---
 
 Augmentation mammoplasty (breast augmentation) with implants is the surgery with which we improve the shape and volume of the breast, to achieve that result that women like so much. There are different techniques and considerations that we must have when choosing the implant, which depends MAINLY on the measurements of the patient’s body.

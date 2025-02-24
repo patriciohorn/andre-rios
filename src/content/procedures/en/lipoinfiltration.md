@@ -1,9 +1,9 @@
 ---
-tag: 'Body'
-title: 'Lipoinfiltration'
-cover: '../../../assets/procedures/lipoinfiltracion.jpg'
-slug: lipoinfiltration
-lang: 'en'
+tag: "Body"
+title: "Lipoinfiltration"
+cover: "../../../assets/procedures/lipoinfiltracion.jpg"
+slug: "procedures/lipoinfiltration"
+lang: "en"
 ---
 
 Fat infiltration (lipoinfiltration) is the procedure with which we use the fat that we obtain through liposuction, to modify the shape and volume in different areas of the body.

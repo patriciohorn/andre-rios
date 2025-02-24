@@ -1,9 +1,9 @@
 ---
-tag: 'Body'
-title: 'Mommy Makeover'
-cover: '../../../assets/procedures/mommy.jpg'
-slug: mommy-makeover-en
-lang: 'en'
+tag: "Body"
+title: "Mommy Makeover"
+cover: "../../../assets/procedures/mommy.jpg"
+slug: "procedures/mommy-makeover-en"
+lang: "en"
 ---
 
 The Mommy Makeover is a combination of procedures that focuses on improving the two main affected areas in women who have had pregnancies: the abdomen and the breast. Due to changes that occur during pregnancy, these areas are generally left with flaccid skin, sometimes with stretch marks, and most of the times, there may be a separation of the abdominal muscles that causes the abdomen to look round and feel weak.

@@ -1,9 +1,9 @@
 ---
-tag: 'Body'
-title: 'Tummy Tuck'
-cover: '../../../assets/procedures/abdominoplastia.jpg'
-slug: abdominoplasty
-lang: 'en'
+tag: "Body"
+title: "Tummy Tuck"
+cover: "../../../assets/procedures/abdominoplastia.jpg"
+slug: "procedures/abdominoplasty"
+lang: "en"
 ---
 
 Abdominoplasty or Tummy tuck is the surgery with which we can remove excess skin in patients who after a considerable weight loss, or several pregnancies, have loose or excess skin around the abdomen area.

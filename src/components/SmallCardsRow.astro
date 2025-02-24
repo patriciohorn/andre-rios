@@ -1,0 +1,46 @@
+---
+import { Image } from 'astro:assets';
+import { Icon } from 'astro-icon/components';
+
+const {procedures} = Astro.props
+
+// interface ProcedureCard {
+//     slug: string, 
+//     data: {
+//         title: string,
+//         cover: string 
+//     }
+// }
+---
+
+
+<div
+class="col-span-4 grid sm:grid-cols-2 md:grid-cols-4 gap-6 sm:gap-y-7 lg:gap-x-7 ">
+{
+  procedures.map((procedure : any) => (
+    <a
+      href={`/${procedure.slug}`}
+      class="group shadow-sm rounded-xl border overflow-hidden bg-white ">
+      <div class="overflow-hidden aspect-[3/2]">
+        <Image
+          src={procedure.data.cover}
+          alt={procedure.data.title}
+          class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300 ease-in-out"
+          loading="eager"
+          format="webp"
+        />
+      </div>
+      <div class="py-3 px-4 border-t flex items-center justify-between">
+        <p class="font-medium text-gray-700 group-hover:text-primary-500 transition-colors duration-300 ease-in-out">
+          {procedure.data.title}
+        </p>
+        <Icon
+          name="arrow-right"
+          size={14}
+          class="text-gray-600 group-hover:-rotate-45 group-hover:text-primary-500 transition-transform duration-300 ease-in-out"
+        />
+      </div>
+    </a>
+  ))
+}
+</div>

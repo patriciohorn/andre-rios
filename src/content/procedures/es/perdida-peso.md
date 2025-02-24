@@ -1,9 +1,9 @@
 ---
-tag: 'Corporal'
-title: 'Pérdida Masiva de Peso'
-cover: '../../../assets/procedures/perdida.jpg'
-slug: perdida-masiva-de-peso
-lang: 'es'
+tag: "Corporal"
+title: "Pérdida Masiva de Peso"
+cover: "../../../assets/procedures/perdida.jpg"
+slug: "procedimientos/perdida-masiva-de-peso"
+lang: "es"
 ---
 
 Los pacientes con pérdida masiva de peso son aquellos que han perdido mas de 20 kgs o 50 lbs, generalmente en periodos cortos de tiempo (menos de 6 meses), ya sea mediante un régimen dietético o tras una cirugía bariátrica.

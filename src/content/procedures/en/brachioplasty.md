@@ -1,9 +1,9 @@
 ---
-tag: 'Body'
-title: 'Brachioplasty'
-cover: '../../../assets/procedures/braquioplastia.jpg'
-slug: brachioplasty
-lang: 'en'
+tag: "Body"
+title: "Brachioplasty"
+cover: "../../../assets/procedures/braquioplastia.jpg"
+slug: "procedures/brachioplasty"
+lang: "en"
 ---
 
 Brachioplasty is the surgery with which we remove excess skin on the inner part of the arm, either due to sagging skin or massive weight loss. It is an area that we can hardly improve much with liposuction only, since when removing a lot of fat volume, the skin in this area tends to hang and fold, instead of retracting.

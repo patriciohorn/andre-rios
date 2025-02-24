@@ -1,9 +1,9 @@
 ---
-tag: 'Corporal'
-title: 'Lipoinfiltración'
-cover: '../../../assets/procedures/lipoinfiltracion.jpg'
-slug: lipoinfiltracion
-lang: 'es'
+tag: "Corporal"
+title: "Lipoinfiltración"
+cover: "../../../assets/procedures/lipoinfiltracion.jpg"
+slug: "procedimientos/lipoinfiltracion"
+lang: "es"
 ---
 
 La infiltración de grasa (lipoinfiltración) es el procedimiento con el que utilizamos la grasa que obtenemos mediante la liposucción, para modificar la forma y moldear diferentes zonas del cuerpo.

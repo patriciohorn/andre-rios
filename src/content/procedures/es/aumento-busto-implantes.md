@@ -1,9 +1,9 @@
 ---
-tag: 'Busto'
-title: 'Aumento de Busto con Implantes'
-cover: '../../../assets/procedures/busto.jpg'
-slug: aumento-de-busto-con-implantes
-lang: 'es'
+tag: "Busto"
+title: "Aumento de Busto con Implantes"
+cover: "../../../assets/procedures/busto.jpg"
+slug: "procedimientos/aumento-de-busto-con-implantes"
+lang: "es"
 ---
 
 La mamoplastía de aumento (aumento de busto) con implantes es la cirugía con la que mejoramos la forma y volumen del busto, para lograr ese resultado que tanto le gusta a las mujeres. Hay diferentes técnicas y consideraciones que debemos tener al momento de elegir el implante, el cual depende PRINCIPALMENTE de las medidas del cuerpo de la paciente.

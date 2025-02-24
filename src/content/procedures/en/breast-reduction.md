@@ -1,9 +1,9 @@
 ---
-tag: 'Breast'
-title: 'Breast Reduction'
-cover: '../../../assets/procedures/busto.jpg'
-slug: breast-reduction
-lang: 'en'
+tag: "Breast"
+title: "Breast Reduction"
+cover: "../../../assets/procedures/busto.jpg"
+slug: "procedures/breast-reduction"
+lang: "en"
 ---
 
 Reduction mammoplasty is a procedure with which we can reposition the breast tissue (skin, fat and nipple) to achieve a better shape, and at the same time reduce the size of the breast. In general, it is a surgery that is performed in patients with a lot of volume in the breast, which causes discomfort such as back pain, skin infections or that they simply do not like aesthetically.

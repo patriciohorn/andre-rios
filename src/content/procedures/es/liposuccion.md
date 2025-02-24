@@ -1,9 +1,9 @@
 ---
-tag: 'Corporal'
-title: 'Liposucción'
-cover: '../../../assets/procedures/liposucción.jpg'
-slug: liposuccion
-lang: 'es'
+tag: "Corporal"
+title: "Liposucción"
+cover: "../../../assets/procedures/liposucción.jpg"
+slug: "procedimientos/liposuccion"
+lang: "es"
 ---
 
 La liposucción es la cirugía con la cual podemos moldear la figura y cambiar el contorno del cuerpo. Algunas veces la gente piensa que con la liposucción se puede bajar de peso, sin embargo, no es el objetivo de la cirugía, sino un beneficio agregado dependiendo de la cantidad que se quite de grasa.

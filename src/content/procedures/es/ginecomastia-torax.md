@@ -1,9 +1,9 @@
 ---
-tag: 'Corporal'
-title: 'Ginecomastia'
-cover: '../../../assets/procedures/ginecomastia.jpg'
-slug: ginecomastia
-lang: 'es'
+tag: "Corporal"
+title: "Ginecomastia"
+cover: "../../../assets/procedures/ginecomastia.jpg"
+slug: "procedimientos/ginecomastia"
+lang: "es"
 ---
 
 La cirugía de ginecomastía se enfoca en mejorar el área del tórax en hombres que tengan un volumen aumentado y que les sea molesto estéticamente. Existen muchas causas que pueden derivar en un aumento de volumen de grasa o glándula mamaria en hombres, y que puede dar una apariencia femenina al área del pecho, que no sea agradable para el paciente.

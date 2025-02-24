@@ -1,9 +1,9 @@
 ---
-tag: 'Corporal'
-title: 'Mommy Makeover'
-cover: '../../../assets/procedures/mommy.jpg'
-slug: mommy-makeover
-lang: 'es'
+tag: "Corporal"
+title: "Mommy Makeover"
+cover: "../../../assets/procedures/mommy.jpg"
+slug: "procedimientos/mommy-makeover"
+lang: "es"
 ---
 
 El Mommy Makeover es un conjunto de cirugías que se enfoca en mejorar las dos principales áreas afectadas en mujeres que han tenido embarazos: el abdomen y el busto. Por cambios que suceden durante el embarazo, generalmente estas áreas quedan con la piel flácida, a veces con estrías e incluso, se puede tener una separación de los músculos abdominales que causa que el abdomen se vea redondo y se sienta débil.

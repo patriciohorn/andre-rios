@@ -1,9 +1,9 @@
 ---
-tag: 'Busto'
-title: 'Levantamiento de busto'
-cover: '../../../assets/procedures/levantamiento-busto.jpg'
-slug: levantamiento-de-busto
-lang: 'es'
+tag: "Busto"
+title: "Levantamiento de busto"
+cover: "../../../assets/procedures/levantamiento-busto.jpg"
+slug: "procedimientos/levantamiento-de-busto"
+lang: "es"
 ---
 
 La mastopexia (levantamiento de busto) es un procedimiento con el cual podemos reposicionar los tejidos del busto (piel, grasa y pezón) para dar una mejor forma, y evitar la apariencia de una mama caída. El principal elemento que hace ver a un busto caído, es la posición del pezón en relación al resto del busto.

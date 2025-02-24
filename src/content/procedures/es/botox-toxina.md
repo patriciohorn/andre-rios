@@ -1,9 +1,9 @@
 ---
-tag: 'Inyectables'
-title: 'Botox (Toxina Botulínica)'
-cover: '../../../assets/procedures/botox.jpg'
-slug: botox-toxina-botulinica
-lang: 'es'
+tag: "Inyectables"
+title: "Botox (Toxina Botulínica)"
+cover: "../../../assets/procedures/botox.jpg"
+slug: "procedimientos/botox-toxina-botulinica"
+lang: "es"
 ---
 
 La aplicación de toxina botulínica se utiliza para mejorar las zonas afectadas por arrugas dinámicas, es decir, las que causamos al hacer gestos con los músculos de la expresión facial. Generalmente las zonas más comúnmente tratadas son la frente, el entrecejo y la región alrededor de los ojos (patas de gallo), sin embargo, podemos utilizar la toxina para mejorar otras zonas: sonrisa gingival, comisura de la boca caída, músculos de la masticación muy aumentados de volumen, arrugas sobre la nariz (bunny lines), entre otras.

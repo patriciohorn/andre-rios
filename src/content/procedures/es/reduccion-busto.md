@@ -1,9 +1,9 @@
 ---
-tag: 'Busto'
-title: 'Reducción de Busto'
-cover: '../../../assets/procedures/busto.jpg'
-slug: reduccion-de-busto
-lang: 'es'
+tag: "Busto"
+title: "Reducción de Busto"
+cover: "../../../assets/procedures/busto.jpg"
+slug: "procedimientos/reduccion-de-busto"
+lang: "es"
 ---
 
 La mamoplastía de reducción es un procedimiento con el cual podemos reposicionar los tejidos del busto (piel, grasa y pezón) para dar una mejor forma, y al mismo tiempo reducir el tamaño del busto. En general es una cirugía que se realiza en pacientes con mucho volumen en el busto, que causa molestias como dolor de espalda, infecciones en la piel o que simplemente no les agrada estéticamente.

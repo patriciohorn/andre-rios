@@ -1,9 +1,9 @@
 ---
-tag: 'Body'
-title: 'Gynecomastia'
-cover: '../../../assets/procedures/ginecomastia.jpg'
-slug: gynecomastia-thorax-liposuction
-lang: 'en'
+tag: "Body"
+title: "Gynecomastia"
+cover: "../../../assets/procedures/ginecomastia.jpg"
+slug: "procedures/gynecomastia-thorax-liposuction"
+lang: "en"
 ---
 
 Gynecomastia surgery focuses on improving the chest area in men who have increased glandular or fat volume, and are uncomfortable with it. There are many causes that can lead to an increase in fat or mammary gland volume in men, and that can give a feminine appearance to the chest area.

@@ -1,9 +1,9 @@
 ---
-tag: 'Injectables'
-title: 'Fillers'
-cover: '../../../assets/procedures/botox.jpg'
-slug: fillers
-lang: 'en'
+tag: "Injectables"
+title: "Fillers"
+cover: "../../../assets/procedures/botox.jpg"
+slug: "procedures/fillers"
+lang: "en"
 ---
 
 Fillers are used to enhance the volume of certain areas, generally the face, and give a younger appearance in a person who has lost volume with age or massive weight loss.

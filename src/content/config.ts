@@ -19,6 +19,7 @@ const privacyCollection = defineCollection({
   })
 });
 
+
 export const collections = {
   procedures: proceduresCollection,
   privacy: privacyCollection

@@ -1,9 +1,9 @@
 ---
-tag: 'Busto'
-title: 'Aumento de Busto con Grasa'
-cover: '../../../assets/procedures/busto.jpg'
-slug: aumento-de-busto-con-grasa
-lang: 'es'
+tag: "Busto"
+title: "Aumento de Busto con Grasa"
+cover: "../../../assets/procedures/busto.jpg"
+slug: "procedimientos/aumento-de-busto-con-grasa"
+lang: "es"
 ---
 
 La mamoplastía de aumento se puede realizar con implantes de silicon, lo cual es lo más común, o en algunos casos también se puede realizar con grasa propia de la paciente. Se reserva a pacientes con buena calidad y firmeza de piel en busto, enfermedades autoinmunes, y que buscan un aumento leve a moderado, ya que no se puede infiltrar mucha cantidad de grasa.
