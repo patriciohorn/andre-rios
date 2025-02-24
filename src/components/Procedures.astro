@@ -16,6 +16,7 @@ const proceduresHeadings = Object.values(
   i18n.PROCEDURES.PROCEDURES_HEADINGS
 );
 const proceduresImages = [inyectablesImg, facialImg, bustoImg];
+const isSpanish = currentLocale === 'es';
 ---
 
 <SectionWrapper class="bg-[#FAFAFA]">
@@ -30,6 +31,7 @@ const proceduresImages = [inyectablesImg, facialImg, bustoImg];
           src={proceduresImages[idx]}
           alt={heading}
           title={heading}
+          isSpanish={isSpanish}
         />
       ))
     }

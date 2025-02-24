@@ -8,61 +8,87 @@ import SmallCardsRow from '../SmallCardsRow.astro';
 const { currentLocale } = Astro;
 const i18n = getI18N({ currentLocale });
 
+const proceduresEs = await getCollection(
+  'procedures',
+  ({ data }) => data.lang === 'es'
+);
 
-const proceduresEs = await getCollection('procedures', ({data}) => data.lang === 'es')
+const proceduresEn = await getCollection(
+  'procedures',
+  ({ data }) => data.lang === 'en'
+);
 
-const proceduresEn = await getCollection('procedures', ({data}) => data.lang === 'en')
+const inyectables = proceduresEs.filter(
+  (procedure) => procedure.data.tag === 'Inyectables'
+);
+const busto = proceduresEs.filter(
+  (procedure) => procedure.data.tag === 'Busto'
+);
+const corporales = proceduresEs.filter(
+  (procedure) => procedure.data.tag === 'Corporal'
+);
 
-const inyectables = proceduresEs.filter((procedure) => procedure.data.tag === 'Inyectables')
-const busto = proceduresEs.filter((procedure) => procedure.data.tag === 'Busto')
-const corporales  = proceduresEs.filter((procedure) => procedure.data.tag === 'Corporal')
+const injectables = proceduresEn.filter(
+  (procedure) => procedure.data.tag === 'Injectables'
+);
+const breast = proceduresEn.filter(
+  (procedure) => procedure.data.tag === 'Breast'
+);
+const body = proceduresEn.filter(
+  (procedure) => procedure.data.tag === 'Body'
+);
 
-const injectables = proceduresEn.filter((procedure) => procedure.data.tag === 'Injectables')
-const breast = proceduresEn.filter((procedure) => procedure.data.tag === 'Breast')
-const body  = proceduresEn.filter((procedure) => procedure.data.tag === 'Body')
-
-
-const isSpanish = currentLocale === 'es'
-
+const isSpanish = currentLocale === 'es';
 ---
 
+<MainLayout
+  title={`Rios MD Plastics | ${i18n.PROCEDURES_PAGE_TITLE}`}>
+  <section class="bg-[#FAFAFA] py-16 md:py-28">
+    <div class="max-w-7xl px-8 mx-auto">
+      <h1
+        class="text-4xl sm:text-5xl font-bold text-gray-950 text-center mb-20">
+        {i18n.PROCEDURES_PAGE_TITLE}
+      </h1>
+      <!-- Inyectables -->
+      <div
+        id={i18n.PROCEDURES.PROCEDURES_HEADINGS.PROCEDURES_1.toLowerCase()}
+        class="grid md:grid-cols-[0.5fr_1fr_1fr_1fr_1fr] pb-10 gap-x-8 gap-y-16 scroll-m-28">
+        <h3
+          class="text-lg font-semibold text-neutral-700 col-span-3 xl:col-span-1">
+          {i18n.PROCEDURES.PROCEDURES_HEADINGS.PROCEDURES_1}
+        </h3>
+        <SmallCardsRow
+          procedures={isSpanish ? inyectables : injectables}
+          isSpanish={isSpanish}
+        />
+      </div>
 
-<MainLayout title={`Rios MD Plastics | ${i18n.PROCEDURES_PAGE_TITLE}`}>
-   <section class="bg-[#FAFAFA] py-16 md:py-28">
-        <div class="max-w-7xl px-8 mx-auto">     
-            <h1
-            class="text-4xl sm:text-5xl font-bold text-gray-950 text-center mb-20">
-            {i18n.PROCEDURES_PAGE_TITLE}
-            </h1>  
-            <!-- Inyectables -->
-            <div id={i18n.PROCEDURES.PROCEDURES_HEADINGS.PROCEDURES_1}
-            class="grid md:grid-cols-[0.5fr_1fr_1fr_1fr_1fr] pb-10 gap-x-8 gap-y-16">
-            <h3
-              class="text-lg font-semibold text-neutral-700 col-span-3 xl:col-span-1">
-              {i18n.PROCEDURES.PROCEDURES_HEADINGS.PROCEDURES_1}
-            </h3>
-           <SmallCardsRow procedures={isSpanish ? inyectables : injectables}/>
-            </div>
-           
-            <!-- Corporal -->
-            <div id={i18n.PROCEDURES.PROCEDURES_HEADINGS.PROCEDURES_2}
-            class="grid md:grid-cols-[0.5fr_1fr_1fr_1fr_1fr] py-10 gap-x-8 gap-y-16">
-            <h3
-              class="text-lg font-bold text-neutral-700 col-span-3 xl:col-span-1">
-              {i18n.PROCEDURES.PROCEDURES_HEADINGS.PROCEDURES_2}
-            </h3>
-            <SmallCardsRow procedures={isSpanish ? corporales : body}/>
-            </div>
-            <!-- Busto -->
-            <div id={i18n.PROCEDURES.PROCEDURES_HEADINGS.PROCEDURES_3}
-            class="grid md:grid-cols-[0.5fr_1fr_1fr_1fr_1fr] py-10 gap-x-8 gap-y-16">
-            <h3
-            class="text-lg font-semibold text-neutral-700 col-span-3 xl:col-span-1 ">
-            {i18n.PROCEDURES.PROCEDURES_HEADINGS.PROCEDURES_3}
-            </h3>
-           <SmallCardsRow procedures={isSpanish ? busto : breast}/>
-            </div>
-                       
-        </div>
-   </section>
+      <!-- Corporal -->
+      <div
+        id={i18n.PROCEDURES.PROCEDURES_HEADINGS.PROCEDURES_2.toLowerCase()}
+        class="grid md:grid-cols-[0.5fr_1fr_1fr_1fr_1fr] py-10 gap-x-8 gap-y-16 scroll-m-20">
+        <h3
+          class="text-lg font-bold text-neutral-700 col-span-3 xl:col-span-1">
+          {i18n.PROCEDURES.PROCEDURES_HEADINGS.PROCEDURES_2}
+        </h3>
+        <SmallCardsRow
+          procedures={isSpanish ? corporales : body}
+          isSpanish={isSpanish}
+        />
+      </div>
+      <!-- Busto -->
+      <div
+        id={i18n.PROCEDURES.PROCEDURES_HEADINGS.PROCEDURES_3.toLowerCase()}
+        class="grid md:grid-cols-[0.5fr_1fr_1fr_1fr_1fr] py-10 gap-x-8 gap-y-16 scroll-m-20">
+        <h3
+          class="text-lg font-semibold text-neutral-700 col-span-3 xl:col-span-1">
+          {i18n.PROCEDURES.PROCEDURES_HEADINGS.PROCEDURES_3}
+        </h3>
+        <SmallCardsRow
+          procedures={isSpanish ? busto : breast}
+          isSpanish={isSpanish}
+        />
+      </div>
+    </div>
+  </section>
 </MainLayout>
