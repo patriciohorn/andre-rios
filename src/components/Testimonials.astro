@@ -24,13 +24,6 @@ const avatars = [
 const title = 'Patient Success Stories';
 ---
 
-<SectionWrapper
-  class="bg-gradient-to-br from-primary-50 to-primary-50/40">
-  <h2
-    class="text-4xl sm:text-5xl text-center font-bold mb-20 text-primary-900">
-    {title}
-  </h2>
-  <div>
-    <TestimonialCarousel testimonials={testimonials} client:visible />
-  </div>
+<SectionWrapper class="bg-primary-100/80"> 
+  <TestimonialCarousel testimonials={testimonials} title={i18n.TESTIMONIALS_SECTION_TITLE} client:visible />  
 </SectionWrapper>
