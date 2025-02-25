@@ -9,9 +9,13 @@
   "HERO_DESCRIPTION": "CIRUGÍA PLÁSTICA, ESTÉTICA Y RECONSTRUCTIVA",
   "HERO_BUTTON": "Conoce a tu Doctor",
   "HERO_TAG": "CIRUGÍA PLÁSTICA, ESTÉTICA Y RECONSTRUCTIVA",
-  "INTRO_TITLE": "Quiénes Somos",
-  "INTRO": "Bienvenidos al lugar ideal para realizar ese procedimiento que realzará tu belleza, con las mejores y más novedosas técnicas, tanto en procedimientos quirúrgicos y  no quirúrgicos, siempre de la mano de la mayor seguridad en todos nuestros procesos, para que te sientas y veas como siempre lo imaginaste",
-  "PROCEDURES_TITLE": "Procedimientos",
+  "INTRO_TITLE": "Realza tu belleza con cuidados expertos",
+  "INTRO": "Bienvenidos al lugar ideal para realizar ese procedimiento que realzará tu belleza. Nuestro objetivo es que te sientas y luzcas como siempre has imaginado.",
+  "INTRO_ITEM_HEADING_1": "Especialista Certificado",
+  "INTRO_ITEM_HEADING_2": "Tecnicas Avanzadas",
+  "INTRO_ITEM_DESCRIPTION_1": "Experimenta resultados excepcionales con un experto de confianza en el campo de la cirugía.",
+  "INTRO_ITEM_DESCRIPTION_2": "Utilizamos las mejores y más novedosas técnicas, tanto en procedimientos quirúrgicos y no quirúrgicos.",
+  "PROCEDURES_TITLE": "Procedimientos a la medida",
   "PROCEDURES_PAGE_TITLE": "Procedimientos",
   "PROCEDURES": {
     "PROCEDURES_HEADINGS": {
@@ -94,7 +98,7 @@
   ],
   "GALLERY_TITLE": "Galería",
   "GALLERY_BUTTON": "Ver Galería",
-  "CERTIFICATIONS_TITLE": "Certificaciones",
+  "CERTIFICATIONS_TITLE": "Certificado por las principales asociaciones",
   "FOOTER": {
     "FOOTER_DISCLAIMER": "Dr. Andrei Ríos proporciona información en este sitio web o en sus medios de comunicación como correo y redes sociales con propósitos informativos y educativos solamente. El contenido de estos, no es un sustituto para un diagnóstico, opinión, tratamiento o servicio profesional. El material aquí desplegado no debe ser usado para sustituir una relación médico-paciente. Siempre se debe buscar el consejo de su Cirujano Plástico Certificado para resolver sus dudas o preocupaciones acerca de su tratamiento médico. Las fotos desplegadas se comparten con previa autorización de pacientes, y sirven para propósitos demostrativos solamente.",
     "FOOTER_NOTICE": "Aviso de Privacidad",

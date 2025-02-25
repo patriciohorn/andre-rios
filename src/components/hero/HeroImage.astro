@@ -14,27 +14,27 @@ import { LanguageDialog } from "../language-dialog";
 ---
 
 <section
-  class="relative sm:max-h-[86vh] bg-[url('/rios-hero.jpg')] bg-no-repeat bg-cover bg-center"
+  class="relative min-h-screen sm:max-h-[86vh] bg-[url('/rios-hero.jpg')] bg-no-repeat bg-cover bg-center"
 >
   <div
     class="absolute inset-0 bg-gradient-to-t from-black/90 from-20% to-black/0"
   >
   </div>
   <div
-    class="relative mx-auto max-w-screen-xl px-4 p-0 sm:px-6 lg:flex lg:items-end py-20 lg:py-36 lg:px-8 lg:min-h-[90vh]"
+    class="relative mx-auto max-w-screen-xl px-8 p-0 sm:px-6 flex items-end py-20 lg:py-36 lg:px-8 min-h-[90vh]"
   >
     <div>
-      <div>
+      <div class="text-center sm:text-left">
         <h1
-          class="font-display text-3xl font-bold text-white sm:text-6xl uppercase tracking-wide"
+          class="font-display text-4xl font-bold text-white sm:text-6xl uppercase tracking-wide"
         >
           {i18n.HERO_TITLE} 
         </h1>
-        <p class="mt-4 max-w-lg text-white sm:text-xl/relaxed">
+        <p class="mt-4 max-w-lg text-white text-lg sm:text-xl/relaxed">
           {i18n.HERO_DESCRIPTION}
         </p>
       </div>
-      <div class="flex mt-4">
+      <div class="flex justify-center sm:justify-start mt-4">
         <a
           href={translatePath("/conoce-a-tu-doctor/")}
           class={cn(

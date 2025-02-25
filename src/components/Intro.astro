@@ -8,40 +8,38 @@ const { currentLocale } = Astro;
 const i18n = getI18N({ currentLocale });
 ---
 
-<section class="py-16 sm:py-28 bg-[#FAFAFA]">
-  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+<section class="py-12 sm:py-28 bg-[#FAFAFA]">
+  <div class="max-w-7xl mx-auto px-5 lg:px-8">
     <div class="grid lg:grid-cols-2 gap-x-20 gap-y-12 items-center">
-      <div class="flex flex-col space-y-6">
+      <div class="flex flex-col space-y-4 sm:space-y-6">
         <h2
-          class="font-display font-semibold text-4xl sm:text-5xl text-balance">
+          class="font-display font-bold text-4xl sm:text-5xl text-balance">
           {i18n.INTRO_TITLE}
         </h2>
         <p class="text-base sm:text-lg">
           {i18n.INTRO}
         </p>
-        <div class="mt-8 flex gap-6">
-          <div class="space-y-4">
+        <div class="mt-6 sm:mt-8 flex flex-col sm:flex-row gap-6">
+          <div class="space-y-3 sm:space-y-4">
             <FileBadge
               strokeWidth={1}
-              size={48}
+              size={40}
               className="text-primary-700"
             />
-            <h3 class="font-bold text-xl">Certified Specialist</h3>
+            <h3 class="font-bold text-xl">{i18n.INTRO_ITEM_HEADING_1}</h3>
             <p>
-              Experience exceptional results with a trusted expert in
-              the field of surgery.
+              {i18n.INTRO_ITEM_DESCRIPTION_1}
             </p>
           </div>
-          <div class="space-y-4">
+          <div class="space-y-3 sm:space-y-4">
             <HeartHandshake
               strokeWidth={1}
-              size={48}
+              size={40}
               className="text-primary-800"
             />
-            <h3 class="font-bold text-xl">Advanced Techniques</h3>
+            <h3 class="font-bold text-xl">{i18n.INTRO_ITEM_HEADING_2}</h3>
             <p>
-              Utilizing the latest technology for safe and effective
-              procedures tailored to your needs.
+              {i18n.INTRO_ITEM_DESCRIPTION_2}
             </p>
           </div>
         </div>
