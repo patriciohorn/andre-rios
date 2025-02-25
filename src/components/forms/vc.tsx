@@ -844,7 +844,7 @@ function ConsultationForm() {
 
   const scrollToElement = (stepIndex: number) => {
     // stepRefs[stepIndex]?.current?.scrollIntoView({ behavior: 'smooth', block: 'start' });
-    window.scrollTo({ top: 208, behavior: "smooth" });
+    window.scrollTo({ top: 100, behavior: "smooth" });
   };
 
   const handleNextStep = (data: any) => {
@@ -973,7 +973,7 @@ function ConsultationForm() {
         </>
       ) : (
         <Card>
-          <CardHeader className=" h-[90px]">
+          <CardHeader className=" min-h-[90px]">
             <CardTitle className="text-2xl">{steps[currentStep]}</CardTitle>
             {currentStep === steps.length - 1 && (
               <CardDescription className="animate-fade-right animate-ease-in-out">
