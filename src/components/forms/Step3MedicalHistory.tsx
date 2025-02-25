@@ -1,13 +1,13 @@
-import { useFieldArray } from 'react-hook-form';
+import { useFieldArray } from "react-hook-form";
 
-import { cn } from '@/lib/utils';
-import { format } from 'date-fns';
+import { cn } from "@/lib/utils";
+import { format } from "date-fns";
 
 // Icons
-import { Trash2, CalendarIcon } from 'lucide-react';
+import { Trash2, CalendarIcon } from "lucide-react";
 
 // Shadcn Components
-import { Button } from '@/components/ui/button';
+import { Button } from "@/components/ui/button";
 import {
   Form,
   FormControl,
@@ -16,26 +16,23 @@ import {
   FormLabel,
   FormMessage,
   FormDescription,
-} from '@/components/ui/form';
-import { Input } from '@/components/ui/input';
-import {
-  RadioGroup,
-  RadioGroupItem,
-} from '@/components/ui/radio-group';
-import { Textarea } from '@/components/ui/textarea';
+} from "@/components/ui/form";
+import { Input } from "@/components/ui/input";
+import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
+import { Textarea } from "@/components/ui/textarea";
 import {
   Select,
   SelectTrigger,
   SelectContent,
   SelectItem,
   SelectValue,
-} from '@/components/ui/select';
-import { Calendar } from '@/components/ui/calendar';
+} from "@/components/ui/select";
+import { Calendar } from "@/components/ui/calendar";
 import {
   Popover,
   PopoverContent,
   PopoverTrigger,
-} from '@/components/ui/popover';
+} from "@/components/ui/popover";
 
 export const Step3MedicalHistory = ({ form }: any) => {
   const errors = form.formState.errors;
@@ -46,7 +43,7 @@ export const Step3MedicalHistory = ({ form }: any) => {
     remove: removeIllness,
   } = useFieldArray({
     control: form.control,
-    name: 'illnesses',
+    name: "illnesses",
   });
 
   const {
@@ -55,7 +52,7 @@ export const Step3MedicalHistory = ({ form }: any) => {
     remove: removeAllergy,
   } = useFieldArray({
     control: form.control,
-    name: 'allergies',
+    name: "allergies",
   });
 
   const {
@@ -64,7 +61,7 @@ export const Step3MedicalHistory = ({ form }: any) => {
     remove: removeHivMedication,
   } = useFieldArray({
     control: form.control,
-    name: 'hivMedications',
+    name: "hivMedications",
   });
 
   const {
@@ -73,7 +70,16 @@ export const Step3MedicalHistory = ({ form }: any) => {
     remove: removeMedication,
   } = useFieldArray({
     control: form.control,
-    name: 'medications',
+    name: "medications",
+  });
+
+  const {
+    fields: mentalHealthMedication,
+    append: appendMentalHealthMedication,
+    remove: removeMentalHealthMedication,
+  } = useFieldArray({
+    control: form.control,
+    name: "mentalHealthMedications",
   });
 
   const {
@@ -82,52 +88,47 @@ export const Step3MedicalHistory = ({ form }: any) => {
     remove: removeSurgery,
   } = useFieldArray({
     control: form.control,
-    name: 'surgeries',
+    name: "surgeries",
   });
 
-  const illness = form.watch('hasIllness') === 'yes';
-  const allergy = form.watch('hasAllergies') === 'yes';
-  const hasDiabetes = form.watch('diabetes') === 'yes';
-  const hasHeartCondition = form.watch('heartCondition') === 'yes';
-  const hasHeartSymptoms = form.watch('heartSymptoms') === 'yes';
-  const showThyroidOptions =
-    form.watch('hasThyroidCondition') === 'yes';
-  const otherThyroidCondition =
-    form.watch('thyroidConditionType') === 'other';
-  const hasDeepVeinHistory = form.watch('deepVein') === 'yes';
-  const hasOrthopedicProblems = form.watch('orthopedic') === 'yes';
-  const hasBreathingProblems =
-    form.watch('breathingProblems') === 'yes';
+  const illness = form.watch("hasIllness") === "yes";
+  const allergy = form.watch("hasAllergies") === "yes";
+  const hasDiabetes = form.watch("diabetes") === "yes";
+  const hasHeartCondition = form.watch("heartCondition") === "yes";
+  const hasHeartSymptoms = form.watch("heartSymptoms") === "yes";
+  const showThyroidOptions = form.watch("hasThyroidCondition") === "yes";
+  const otherThyroidCondition = form.watch("thyroidConditionType") === "other";
+  const hasDeepVeinHistory = form.watch("deepVein") === "yes";
+  const hasOrthopedicProblems = form.watch("orthopedic") === "yes";
+  const hasBreathingProblems = form.watch("breathingProblems") === "yes";
 
-  const mentalCondition = form.watch('mentalCondition') === 'other';
+  const mentalCondition = form.watch("mentalCondition") === "other";
 
-  const hasReflux = form.watch('reflux') === 'yes';
+  const hasReflux = form.watch("reflux") === "yes";
 
-  const hasLiverDisease = form.watch('liverDisease') === 'yes';
-  const hasAnemiaOrBleeding =
-    form.watch('anemiaOrBleeding') === 'yes';
-  const hasSwellingOrVaricose =
-    form.watch('swellingOrVaricose') === 'yes';
-  const hasInfectiousDisease =
-    form.watch('infectiousDisease') === 'yes';
-  const isHivPositive = form.watch('hivPositive') === 'yes';
-  const showAlcoholFrequency = form.watch('drinkAlcohol') === 'yes';
-  const smokingStatus = form.watch('smokedOrVape') === 'yes';
-  const quitSmoking = form.watch('smokedOrVape') === 'quit';
-  const useDrugs = form.watch('recreationalDrugUse') === 'yes';
-  const currentMedication = form.watch('currentMedication') === 'yes';
-  const previousSurgeries = form.watch('previousSurgeries') === 'yes';
+  const hasLiverDisease = form.watch("liverDisease") === "yes";
+  const hasAnemiaOrBleeding = form.watch("anemiaOrBleeding") === "yes";
+  const hasSwellingOrVaricose = form.watch("swellingOrVaricose") === "yes";
+  const hasInfectiousDisease = form.watch("infectiousDisease") === "yes";
+  const isHivPositive = form.watch("hivPositive") === "yes";
+  const showAlcoholFrequency = form.watch("drinkAlcohol") === "yes";
+  const smokingStatus = form.watch("smokedOrVape") === "yes";
+  const quitSmoking = form.watch("smokedOrVape") === "quit";
+  const useDrugs = form.watch("recreationalDrugUse") === "yes";
+  const currentMedication = form.watch("currentMedication") === "yes";
+  const useMentalHealthMedication = form.watch("antidepressants") === "yes";
+  const previousSurgeries = form.watch("previousSurgeries") === "yes";
 
   return (
     <Form {...form}>
-      <form className="space-y-8 animate-fade-right animate-ease-in-out">
+      <form className="space-y-6 animate-fade-right animate-ease-in-out">
         {/* Illness */}
         <div className="space-y-6">
           <FormField
             control={form.control}
             name="hasIllness"
             render={({ field }) => (
-              <FormItem className="space-y-3">
+              <FormItem>
                 <FormLabel>
                   Have you had any illnesses or conditions you've been
                   previously diagnosed with (ever)?
@@ -136,22 +137,19 @@ export const Step3MedicalHistory = ({ form }: any) => {
                   <RadioGroup
                     onValueChange={field.onChange}
                     defaultValue={field.value}
-                    className="flex flex-col space-y-1">
+                    className="flex flex-col space-y-1"
+                  >
                     <FormItem className="flex items-center space-x-3 space-y-0">
                       <FormControl>
                         <RadioGroupItem value="yes" />
                       </FormControl>
-                      <FormLabel className="font-normal">
-                        Yes
-                      </FormLabel>
+                      <FormLabel className="font-normal">Yes</FormLabel>
                     </FormItem>
                     <FormItem className="flex items-center space-x-3 space-y-0">
                       <FormControl>
                         <RadioGroupItem value="no" />
                       </FormControl>
-                      <FormLabel className="font-normal">
-                        No
-                      </FormLabel>
+                      <FormLabel className="font-normal">No</FormLabel>
                     </FormItem>
                   </RadioGroup>
                 </FormControl>
@@ -169,18 +167,20 @@ export const Step3MedicalHistory = ({ form }: any) => {
                   className="mt-2 sm:ml-auto"
                   onClick={() =>
                     appendIllness({
-                      condition: '',
-                      yearDiagnosed: '',
-                      description: '',
+                      condition: "",
+                      yearDiagnosed: "",
+                      description: "",
                     })
-                  }>
+                  }
+                >
                   Add Illness
                 </Button>
               </div>
               {illnessFields.map((item: any, index: any) => (
                 <div
                   key={item.id}
-                  className="animate-fade-down animate-ease-in-out animate-duration-300 flex flex-col sm:flex-row gap-4 sm:items-end bg-gray-300 p-4 border rounded-md mb-2">
+                  className="animate-fade-down animate-ease-in-out animate-duration-300 flex flex-col sm:flex-row gap-4 sm:items-end bg-gray-300 p-4 border rounded-md mb-2"
+                >
                   <FormField
                     control={form.control}
                     name={`illnesses.${index}.condition`}
@@ -188,10 +188,7 @@ export const Step3MedicalHistory = ({ form }: any) => {
                       <FormItem className="flex-1">
                         <FormLabel>Condition / Diagnosis</FormLabel>
                         <FormControl>
-                          <Input
-                            placeholder="Enter condition"
-                            {...field}
-                          />
+                          <Input placeholder="Enter condition" {...field} />
                         </FormControl>
                         <FormMessage />
                       </FormItem>
@@ -204,10 +201,7 @@ export const Step3MedicalHistory = ({ form }: any) => {
                       <FormItem className="flex-1">
                         <FormLabel>When You Were Diagnosed</FormLabel>
                         <FormControl>
-                          <Input
-                            placeholder="Enter year"
-                            {...field}
-                          />
+                          <Input placeholder="Enter year" {...field} />
                         </FormControl>
                         <FormMessage />
                       </FormItem>
@@ -220,10 +214,7 @@ export const Step3MedicalHistory = ({ form }: any) => {
                       <FormItem className="flex-1">
                         <FormLabel>Please describe</FormLabel>
                         <FormControl>
-                          <Input
-                            placeholder="Enter description"
-                            {...field}
-                          />
+                          <Input placeholder="Enter description" {...field} />
                         </FormControl>
                         <FormMessage />
                       </FormItem>
@@ -236,7 +227,8 @@ export const Step3MedicalHistory = ({ form }: any) => {
                       size="icon"
                       className="ml-auto"
                       aria-label="Delete"
-                      onClick={() => removeIllness(index)}>
+                      onClick={() => removeIllness(index)}
+                    >
                       <Trash2 className="shrink-0 w-4 h-4" />
                     </Button>
                   </div>
@@ -251,28 +243,25 @@ export const Step3MedicalHistory = ({ form }: any) => {
             control={form.control}
             name="hasAllergies"
             render={({ field }) => (
-              <FormItem className="space-y-3">
+              <FormItem>
                 <FormLabel>Do you have any allergies?</FormLabel>
                 <FormControl>
                   <RadioGroup
                     onValueChange={field.onChange}
                     defaultValue={field.value}
-                    className="flex flex-col space-y-1">
+                    className="flex flex-col space-y-1"
+                  >
                     <FormItem className="flex items-center space-x-3 space-y-0">
                       <FormControl>
                         <RadioGroupItem value="yes" />
                       </FormControl>
-                      <FormLabel className="font-normal">
-                        Yes
-                      </FormLabel>
+                      <FormLabel className="font-normal">Yes</FormLabel>
                     </FormItem>
                     <FormItem className="flex items-center space-x-3 space-y-0">
                       <FormControl>
                         <RadioGroupItem value="no" />
                       </FormControl>
-                      <FormLabel className="font-normal">
-                        No
-                      </FormLabel>
+                      <FormLabel className="font-normal">No</FormLabel>
                     </FormItem>
                   </RadioGroup>
                 </FormControl>
@@ -289,15 +278,17 @@ export const Step3MedicalHistory = ({ form }: any) => {
                   size="sm"
                   className="mt-2 sm:ml-auto"
                   onClick={() =>
-                    appendAllergy({ allergicTo: '', reaction: '' })
-                  }>
+                    appendAllergy({ allergicTo: "", reaction: "" })
+                  }
+                >
                   Add Allergy
                 </Button>
               </div>
               {allergiesFields.map((item: any, index: any) => (
                 <div
                   key={item.id}
-                  className="animate-fade-down animate-ease-in-out animate-duration-300 flex flex-col sm:flex-row gap-4 sm:items-end bg-gray-300 p-4 border rounded-md mb-2">
+                  className="animate-fade-down animate-ease-in-out animate-duration-300 flex flex-col sm:flex-row gap-4 sm:items-end bg-gray-300 p-4 border rounded-md mb-2"
+                >
                   <FormField
                     control={form.control}
                     name={`allergies.${index}.allergicTo`}
@@ -305,10 +296,7 @@ export const Step3MedicalHistory = ({ form }: any) => {
                       <FormItem className="flex-1">
                         <FormLabel>Allergic to</FormLabel>
                         <FormControl>
-                          <Input
-                            placeholder="Enter allergy"
-                            {...field}
-                          />
+                          <Input placeholder="Enter allergy" {...field} />
                         </FormControl>
                         <FormMessage />
                       </FormItem>
@@ -321,10 +309,7 @@ export const Step3MedicalHistory = ({ form }: any) => {
                       <FormItem className="flex-1">
                         <FormLabel>Reaction you have</FormLabel>
                         <FormControl>
-                          <Input
-                            placeholder="Enter reaction"
-                            {...field}
-                          />
+                          <Input placeholder="Enter reaction" {...field} />
                         </FormControl>
                         <FormMessage />
                       </FormItem>
@@ -337,7 +322,8 @@ export const Step3MedicalHistory = ({ form }: any) => {
                       size="icon"
                       className="ml-auto"
                       aria-label="Delete"
-                      onClick={() => removeAllergy(index)}>
+                      onClick={() => removeAllergy(index)}
+                    >
                       <Trash2 className="shrink-0 w-4 h-4" />
                     </Button>
                   </div>
@@ -352,28 +338,25 @@ export const Step3MedicalHistory = ({ form }: any) => {
             control={form.control}
             name="diabetes"
             render={({ field }) => (
-              <FormItem className="space-y-3">
+              <FormItem>
                 <FormLabel>Do you have diabetes?</FormLabel>
                 <FormControl>
                   <RadioGroup
                     onValueChange={field.onChange}
                     defaultValue={field.value}
-                    className="flex flex-col space-y-1">
+                    className="flex flex-col space-y-1"
+                  >
                     <FormItem className="flex items-center space-x-3 space-y-0">
                       <FormControl>
                         <RadioGroupItem value="yes" />
                       </FormControl>
-                      <FormLabel className="font-normal">
-                        Yes
-                      </FormLabel>
+                      <FormLabel className="font-normal">Yes</FormLabel>
                     </FormItem>
                     <FormItem className="flex items-center space-x-3 space-y-0">
                       <FormControl>
                         <RadioGroupItem value="no" />
                       </FormControl>
-                      <FormLabel className="font-normal">
-                        No
-                      </FormLabel>
+                      <FormLabel className="font-normal">No</FormLabel>
                     </FormItem>
                   </RadioGroup>
                 </FormControl>
@@ -387,28 +370,25 @@ export const Step3MedicalHistory = ({ form }: any) => {
                 control={form.control}
                 name="diabetesType"
                 render={({ field }) => (
-                  <FormItem className="space-y-3">
+                  <FormItem>
                     <FormLabel>Type of diabetes</FormLabel>
                     <FormControl>
                       <RadioGroup
                         onValueChange={field.onChange}
                         defaultValue={field.value}
-                        className="flex flex-col space-y-1">
+                        className="flex flex-col space-y-1"
+                      >
                         <FormItem className="flex items-center space-x-3 space-y-0">
                           <FormControl>
                             <RadioGroupItem value="type 1" />
                           </FormControl>
-                          <FormLabel className="font-normal">
-                            Type 1
-                          </FormLabel>
+                          <FormLabel className="font-normal">Type 1</FormLabel>
                         </FormItem>
                         <FormItem className="flex items-center space-x-3 space-y-0">
                           <FormControl>
                             <RadioGroupItem value="type 2" />
                           </FormControl>
-                          <FormLabel className="font-normal">
-                            Type 2
-                          </FormLabel>
+                          <FormLabel className="font-normal">Type 2</FormLabel>
                         </FormItem>
                       </RadioGroup>
                     </FormControl>
@@ -442,28 +422,25 @@ export const Step3MedicalHistory = ({ form }: any) => {
             control={form.control}
             name="heartCondition"
             render={({ field }) => (
-              <FormItem className="space-y-3">
+              <FormItem>
                 <FormLabel>Do you have a heart condition?</FormLabel>
                 <FormControl>
                   <RadioGroup
                     onValueChange={field.onChange}
                     defaultValue={field.value}
-                    className="flex flex-col space-y-1">
+                    className="flex flex-col space-y-1"
+                  >
                     <FormItem className="flex items-center space-x-3 space-y-0">
                       <FormControl>
                         <RadioGroupItem value="yes" />
                       </FormControl>
-                      <FormLabel className="font-normal">
-                        Yes
-                      </FormLabel>
+                      <FormLabel className="font-normal">Yes</FormLabel>
                     </FormItem>
                     <FormItem className="flex items-center space-x-3 space-y-0">
                       <FormControl>
                         <RadioGroupItem value="no" />
                       </FormControl>
-                      <FormLabel className="font-normal">
-                        No
-                      </FormLabel>
+                      <FormLabel className="font-normal">No</FormLabel>
                     </FormItem>
                   </RadioGroup>
                 </FormControl>
@@ -477,9 +454,7 @@ export const Step3MedicalHistory = ({ form }: any) => {
               name="heartConditionDetails"
               render={({ field }) => (
                 <FormItem className="animate-down">
-                  <FormLabel>
-                    Please describe your heart condition
-                  </FormLabel>
+                  <FormLabel>Please describe your heart condition</FormLabel>
                   <FormControl>
                     <Textarea
                       placeholder="Provide details of your condition, including any symptoms, diagnosis, and treatment"
@@ -499,32 +474,28 @@ export const Step3MedicalHistory = ({ form }: any) => {
             control={form.control}
             name="heartSymptoms"
             render={({ field }) => (
-              <FormItem className="space-y-3">
+              <FormItem>
                 <FormLabel>
-                  Do you have any heart symptoms like: chest pain,
-                  extreme fatigue, dizziness, and shortness of breath
-                  or palpitations?
+                  Do you have any heart symptoms like: chest pain, extreme
+                  fatigue, dizziness, and shortness of breath or palpitations?
                 </FormLabel>
                 <FormControl>
                   <RadioGroup
                     onValueChange={field.onChange}
                     defaultValue={field.value}
-                    className="flex flex-col space-y-1">
+                    className="flex flex-col space-y-1"
+                  >
                     <FormItem className="flex items-center space-x-3 space-y-0">
                       <FormControl>
                         <RadioGroupItem value="yes" />
                       </FormControl>
-                      <FormLabel className="font-normal">
-                        Yes
-                      </FormLabel>
+                      <FormLabel className="font-normal">Yes</FormLabel>
                     </FormItem>
                     <FormItem className="flex items-center space-x-3 space-y-0">
                       <FormControl>
                         <RadioGroupItem value="no" />
                       </FormControl>
-                      <FormLabel className="font-normal">
-                        No
-                      </FormLabel>
+                      <FormLabel className="font-normal">No</FormLabel>
                     </FormItem>
                   </RadioGroup>
                 </FormControl>
@@ -539,9 +510,9 @@ export const Step3MedicalHistory = ({ form }: any) => {
               render={({ field }) => (
                 <FormItem className="animate-down">
                   <FormLabel>
-                    Please describe your heart symptoms like: chest
-                    pain, extreme fatigue, dizziness, and shortness of
-                    breath or palpitations
+                    Please describe your heart symptoms like: chest pain,
+                    extreme fatigue, dizziness, and shortness of breath or
+                    palpitations
                   </FormLabel>
                   <FormControl>
                     <Textarea
@@ -562,30 +533,25 @@ export const Step3MedicalHistory = ({ form }: any) => {
             control={form.control}
             name="hasThyroidCondition"
             render={({ field }) => (
-              <FormItem className="space-y-3">
-                <FormLabel>
-                  Do you have a thyroid condition?
-                </FormLabel>
+              <FormItem>
+                <FormLabel>Do you have a thyroid condition?</FormLabel>
                 <FormControl>
                   <RadioGroup
                     onValueChange={field.onChange}
                     defaultValue={field.value}
-                    className="flex flex-col space-y-1">
+                    className="flex flex-col space-y-1"
+                  >
                     <FormItem className="flex items-center space-x-3 space-y-0">
                       <FormControl>
                         <RadioGroupItem value="yes" />
                       </FormControl>
-                      <FormLabel className="font-normal">
-                        Yes
-                      </FormLabel>
+                      <FormLabel className="font-normal">Yes</FormLabel>
                     </FormItem>
                     <FormItem className="flex items-center space-x-3 space-y-0">
                       <FormControl>
                         <RadioGroupItem value="no" />
                       </FormControl>
-                      <FormLabel className="font-normal">
-                        No
-                      </FormLabel>
+                      <FormLabel className="font-normal">No</FormLabel>
                     </FormItem>
                   </RadioGroup>
                 </FormControl>
@@ -605,7 +571,8 @@ export const Step3MedicalHistory = ({ form }: any) => {
                       onValueChange={(value) =>
                         field.onChange(value || undefined)
                       }
-                      defaultValue={field.value || undefined}>
+                      defaultValue={field.value || undefined}
+                    >
                       <FormControl>
                         <SelectTrigger>
                           <SelectValue placeholder="Select a condition" />
@@ -652,10 +619,7 @@ export const Step3MedicalHistory = ({ form }: any) => {
                   <FormItem>
                     <FormLabel>Year of Thyroid Diagnosis</FormLabel>
                     <FormControl>
-                      <Input
-                        placeholder="Enter the year"
-                        {...field}
-                      />
+                      <Input placeholder="Enter the year" {...field} />
                     </FormControl>
                     <FormMessage />
                   </FormItem>
@@ -665,30 +629,25 @@ export const Step3MedicalHistory = ({ form }: any) => {
                 control={form.control}
                 name="isThyroidControlled"
                 render={({ field }) => (
-                  <FormItem className="space-y-3">
-                    <FormLabel>
-                      Is the thyroid condition controlled?
-                    </FormLabel>
+                  <FormItem>
+                    <FormLabel>Is the thyroid condition controlled?</FormLabel>
                     <FormControl>
                       <RadioGroup
                         onValueChange={field.onChange}
                         defaultValue={field.value}
-                        className="flex flex-col space-y-1">
+                        className="flex flex-col space-y-1"
+                      >
                         <FormItem className="flex items-center space-x-3 space-y-0">
                           <FormControl>
                             <RadioGroupItem value="yes" />
                           </FormControl>
-                          <FormLabel className="font-normal">
-                            Yes
-                          </FormLabel>
+                          <FormLabel className="font-normal">Yes</FormLabel>
                         </FormItem>
                         <FormItem className="flex items-center space-x-3 space-y-0">
                           <FormControl>
                             <RadioGroupItem value="no" />
                           </FormControl>
-                          <FormLabel className="font-normal">
-                            No
-                          </FormLabel>
+                          <FormLabel className="font-normal">No</FormLabel>
                         </FormItem>
                       </RadioGroup>
                     </FormControl>
@@ -705,32 +664,28 @@ export const Step3MedicalHistory = ({ form }: any) => {
             control={form.control}
             name="deepVein"
             render={({ field }) => (
-              <FormItem className="space-y-3">
+              <FormItem>
                 <FormLabel>
-                  Do you have any history of Deep Vein
-                  Thrombosis/Blood Clots (DVT) or Pulmonary
-                  Thromboembolism (PE)?
+                  Do you have any history of Deep Vein Thrombosis/Blood Clots
+                  (DVT) or Pulmonary Thromboembolism (PE)?
                 </FormLabel>
                 <FormControl>
                   <RadioGroup
                     onValueChange={field.onChange}
                     defaultValue={field.value}
-                    className="flex flex-col space-y-1">
+                    className="flex flex-col space-y-1"
+                  >
                     <FormItem className="flex items-center space-x-3 space-y-0">
                       <FormControl>
                         <RadioGroupItem value="yes" />
                       </FormControl>
-                      <FormLabel className="font-normal">
-                        Yes
-                      </FormLabel>
+                      <FormLabel className="font-normal">Yes</FormLabel>
                     </FormItem>
                     <FormItem className="flex items-center space-x-3 space-y-0">
                       <FormControl>
                         <RadioGroupItem value="no" />
                       </FormControl>
-                      <FormLabel className="font-normal">
-                        No
-                      </FormLabel>
+                      <FormLabel className="font-normal">No</FormLabel>
                     </FormItem>
                   </RadioGroup>
                 </FormControl>
@@ -765,15 +720,14 @@ export const Step3MedicalHistory = ({ form }: any) => {
           control={form.control}
           name="highBloodPresure"
           render={({ field }) => (
-            <FormItem className="space-y-3">
-              <FormLabel>
-                Do you suffer from high blood pressure?
-              </FormLabel>
+            <FormItem>
+              <FormLabel>Do you suffer from high blood pressure?</FormLabel>
               <FormControl>
                 <RadioGroup
                   onValueChange={field.onChange}
                   defaultValue={field.value}
-                  className="flex flex-col space-y-1">
+                  className="flex flex-col space-y-1"
+                >
                   <FormItem className="flex items-center space-x-3 space-y-0">
                     <FormControl>
                       <RadioGroupItem value="yes" />
@@ -797,13 +751,14 @@ export const Step3MedicalHistory = ({ form }: any) => {
           control={form.control}
           name="cholesterol"
           render={({ field }) => (
-            <FormItem className="space-y-3">
+            <FormItem>
               <FormLabel>Do you have high cholesterol?</FormLabel>
               <FormControl>
                 <RadioGroup
                   onValueChange={field.onChange}
                   defaultValue={field.value}
-                  className="flex flex-col space-y-1">
+                  className="flex flex-col space-y-1"
+                >
                   <FormItem className="flex items-center space-x-3 space-y-0">
                     <FormControl>
                       <RadioGroupItem value="yes" />
@@ -827,15 +782,14 @@ export const Step3MedicalHistory = ({ form }: any) => {
           control={form.control}
           name="kidenyOrUrinary"
           render={({ field }) => (
-            <FormItem className="space-y-3">
-              <FormLabel>
-                Do you have a kidney or urinary disorder?
-              </FormLabel>
+            <FormItem>
+              <FormLabel>Do you have a kidney or urinary disorder?</FormLabel>
               <FormControl>
                 <RadioGroup
                   onValueChange={field.onChange}
                   defaultValue={field.value}
-                  className="flex flex-col space-y-1">
+                  className="flex flex-col space-y-1"
+                >
                   <FormItem className="flex items-center space-x-3 space-y-0">
                     <FormControl>
                       <RadioGroupItem value="yes" />
@@ -859,13 +813,14 @@ export const Step3MedicalHistory = ({ form }: any) => {
           control={form.control}
           name="asthma"
           render={({ field }) => (
-            <FormItem className="space-y-3">
+            <FormItem>
               <FormLabel>Do you suffer from asthma?</FormLabel>
               <FormControl>
                 <RadioGroup
                   onValueChange={field.onChange}
                   defaultValue={field.value}
-                  className="flex flex-col space-y-1">
+                  className="flex flex-col space-y-1"
+                >
                   <FormItem className="flex items-center space-x-3 space-y-0">
                     <FormControl>
                       <RadioGroupItem value="yes" />
@@ -890,30 +845,25 @@ export const Step3MedicalHistory = ({ form }: any) => {
             control={form.control}
             name="orthopedic"
             render={({ field }) => (
-              <FormItem className="space-y-3">
-                <FormLabel>
-                  Do you have any orthopedic problems?
-                </FormLabel>
+              <FormItem>
+                <FormLabel>Do you have any orthopedic problems?</FormLabel>
                 <FormControl>
                   <RadioGroup
                     onValueChange={(value) => field.onChange(value)}
                     defaultValue={field.value}
-                    className="flex flex-col space-y-1">
+                    className="flex flex-col space-y-1"
+                  >
                     <FormItem className="flex items-center space-x-3 space-y-0">
                       <FormControl>
                         <RadioGroupItem value="yes" />
                       </FormControl>
-                      <FormLabel className="font-normal">
-                        Yes
-                      </FormLabel>
+                      <FormLabel className="font-normal">Yes</FormLabel>
                     </FormItem>
                     <FormItem className="flex items-center space-x-3 space-y-0">
                       <FormControl>
                         <RadioGroupItem value="no" />
                       </FormControl>
-                      <FormLabel className="font-normal">
-                        No
-                      </FormLabel>
+                      <FormLabel className="font-normal">No</FormLabel>
                     </FormItem>
                   </RadioGroup>
                 </FormControl>
@@ -949,7 +899,7 @@ export const Step3MedicalHistory = ({ form }: any) => {
             control={form.control}
             name="breathingProblems"
             render={({ field }) => (
-              <FormItem className="space-y-3">
+              <FormItem>
                 <FormLabel>
                   Do you have any breathing or respiratory problems?
                 </FormLabel>
@@ -957,22 +907,19 @@ export const Step3MedicalHistory = ({ form }: any) => {
                   <RadioGroup
                     onValueChange={(value) => field.onChange(value)}
                     defaultValue={field.value}
-                    className="flex flex-col space-y-1">
+                    className="flex flex-col space-y-1"
+                  >
                     <FormItem className="flex items-center space-x-3 space-y-0">
                       <FormControl>
                         <RadioGroupItem value="yes" />
                       </FormControl>
-                      <FormLabel className="font-normal">
-                        Yes
-                      </FormLabel>
+                      <FormLabel className="font-normal">Yes</FormLabel>
                     </FormItem>
                     <FormItem className="flex items-center space-x-3 space-y-0">
                       <FormControl>
                         <RadioGroupItem value="no" />
                       </FormControl>
-                      <FormLabel className="font-normal">
-                        No
-                      </FormLabel>
+                      <FormLabel className="font-normal">No</FormLabel>
                     </FormItem>
                   </RadioGroup>
                 </FormControl>
@@ -987,8 +934,7 @@ export const Step3MedicalHistory = ({ form }: any) => {
               render={({ field }) => (
                 <FormItem className="animate-down">
                   <FormLabel>
-                    Please describe your breathing or respiratory
-                    problem(s)
+                    Please describe your breathing or respiratory problem(s)
                   </FormLabel>
                   <FormControl>
                     <Textarea
@@ -1011,14 +957,13 @@ export const Step3MedicalHistory = ({ form }: any) => {
             render={({ field }) => (
               <FormItem>
                 <FormLabel>
-                  Do you have history of mental condition, illness
-                  (psychiatric) or chronic pain?
+                  Do you have history of mental condition, illness (psychiatric)
+                  or chronic pain?
                 </FormLabel>
                 <Select
-                  onValueChange={(value) =>
-                    field.onChange(value || undefined)
-                  }
-                  defaultValue={field.value || undefined}>
+                  onValueChange={(value) => field.onChange(value || undefined)}
+                  defaultValue={field.value || undefined}
+                >
                   <FormControl>
                     <SelectTrigger>
                       <SelectValue placeholder="Select an option" />
@@ -1026,16 +971,10 @@ export const Step3MedicalHistory = ({ form }: any) => {
                   </FormControl>
                   <SelectContent>
                     <SelectItem value="none">None</SelectItem>
-                    <SelectItem value="fibromyalgia">
-                      Fibromyalgia
-                    </SelectItem>
-                    <SelectItem value="depression">
-                      Depression
-                    </SelectItem>
+                    <SelectItem value="fibromyalgia">Fibromyalgia</SelectItem>
+                    <SelectItem value="depression">Depression</SelectItem>
                     <SelectItem value="anxiety">Anxiety</SelectItem>
-                    <SelectItem value="panic attacks">
-                      Panic attacks
-                    </SelectItem>
+                    <SelectItem value="panic attacks">Panic attacks</SelectItem>
                     <SelectItem value="ocd">
                       Obsessive compulsive disorder (OCD)
                     </SelectItem>
@@ -1075,31 +1014,27 @@ export const Step3MedicalHistory = ({ form }: any) => {
             control={form.control}
             name="reflux"
             render={({ field }) => (
-              <FormItem className="space-y-3">
+              <FormItem>
                 <FormLabel>
-                  Do you suffer from reflux, heartburn and/or
-                  gastritis?
+                  Do you suffer from reflux, heartburn and/or gastritis?
                 </FormLabel>
                 <FormControl>
                   <RadioGroup
                     onValueChange={(value) => field.onChange(value)}
                     defaultValue={field.value}
-                    className="flex flex-col space-y-1">
+                    className="flex flex-col space-y-1"
+                  >
                     <FormItem className="flex items-center space-x-3 space-y-0">
                       <FormControl>
                         <RadioGroupItem value="yes" />
                       </FormControl>
-                      <FormLabel className="font-normal">
-                        Yes
-                      </FormLabel>
+                      <FormLabel className="font-normal">Yes</FormLabel>
                     </FormItem>
                     <FormItem className="flex items-center space-x-3 space-y-0">
                       <FormControl>
                         <RadioGroupItem value="no" />
                       </FormControl>
-                      <FormLabel className="font-normal">
-                        No
-                      </FormLabel>
+                      <FormLabel className="font-normal">No</FormLabel>
                     </FormItem>
                   </RadioGroup>
                 </FormControl>
@@ -1114,8 +1049,8 @@ export const Step3MedicalHistory = ({ form }: any) => {
               render={({ field }) => (
                 <FormItem className="animate-down">
                   <FormLabel>
-                    Please describe your reflux, heartburn, or
-                    gastritis symptoms
+                    Please describe your reflux, heartburn, or gastritis
+                    symptoms
                   </FormLabel>
                   <FormControl>
                     <Textarea
@@ -1136,28 +1071,25 @@ export const Step3MedicalHistory = ({ form }: any) => {
             control={form.control}
             name="liverDisease"
             render={({ field }) => (
-              <FormItem className="space-y-3">
+              <FormItem>
                 <FormLabel>Do you have a liver disease?</FormLabel>
                 <FormControl>
                   <RadioGroup
                     onValueChange={(value) => field.onChange(value)}
                     defaultValue={field.value}
-                    className="flex flex-col space-y-1">
+                    className="flex flex-col space-y-1"
+                  >
                     <FormItem className="flex items-center space-x-3 space-y-0">
                       <FormControl>
                         <RadioGroupItem value="yes" />
                       </FormControl>
-                      <FormLabel className="font-normal">
-                        Yes
-                      </FormLabel>
+                      <FormLabel className="font-normal">Yes</FormLabel>
                     </FormItem>
                     <FormItem className="flex items-center space-x-3 space-y-0">
                       <FormControl>
                         <RadioGroupItem value="no" />
                       </FormControl>
-                      <FormLabel className="font-normal">
-                        No
-                      </FormLabel>
+                      <FormLabel className="font-normal">No</FormLabel>
                     </FormItem>
                   </RadioGroup>
                 </FormControl>
@@ -1171,9 +1103,7 @@ export const Step3MedicalHistory = ({ form }: any) => {
               name="liverDiseaseDetails"
               render={({ field }) => (
                 <FormItem className="animate-down">
-                  <FormLabel>
-                    Please describe your liver disease
-                  </FormLabel>
+                  <FormLabel>Please describe your liver disease</FormLabel>
                   <FormControl>
                     <Textarea
                       placeholder="Include diagnosis, severity, and any ongoing treatment"
@@ -1193,7 +1123,7 @@ export const Step3MedicalHistory = ({ form }: any) => {
             control={form.control}
             name="anemiaOrBleeding"
             render={({ field }) => (
-              <FormItem className="space-y-3">
+              <FormItem>
                 <FormLabel>
                   Do you have anemia or a bleeding disorder?
                 </FormLabel>
@@ -1201,22 +1131,19 @@ export const Step3MedicalHistory = ({ form }: any) => {
                   <RadioGroup
                     onValueChange={(value) => field.onChange(value)}
                     defaultValue={field.value}
-                    className="flex flex-col space-y-1">
+                    className="flex flex-col space-y-1"
+                  >
                     <FormItem className="flex items-center space-x-3 space-y-0">
                       <FormControl>
                         <RadioGroupItem value="yes" />
                       </FormControl>
-                      <FormLabel className="font-normal">
-                        Yes
-                      </FormLabel>
+                      <FormLabel className="font-normal">Yes</FormLabel>
                     </FormItem>
                     <FormItem className="flex items-center space-x-3 space-y-0">
                       <FormControl>
                         <RadioGroupItem value="no" />
                       </FormControl>
-                      <FormLabel className="font-normal">
-                        No
-                      </FormLabel>
+                      <FormLabel className="font-normal">No</FormLabel>
                     </FormItem>
                   </RadioGroup>
                 </FormControl>
@@ -1252,7 +1179,7 @@ export const Step3MedicalHistory = ({ form }: any) => {
             control={form.control}
             name="swellingOrVaricose"
             render={({ field }) => (
-              <FormItem className="space-y-3">
+              <FormItem>
                 <FormLabel>
                   Do you suffer from leg swelling or varicose veins?
                 </FormLabel>
@@ -1260,22 +1187,19 @@ export const Step3MedicalHistory = ({ form }: any) => {
                   <RadioGroup
                     onValueChange={(value) => field.onChange(value)}
                     defaultValue={field.value}
-                    className="flex flex-col space-y-1">
+                    className="flex flex-col space-y-1"
+                  >
                     <FormItem className="flex items-center space-x-3 space-y-0">
                       <FormControl>
                         <RadioGroupItem value="yes" />
                       </FormControl>
-                      <FormLabel className="font-normal">
-                        Yes
-                      </FormLabel>
+                      <FormLabel className="font-normal">Yes</FormLabel>
                     </FormItem>
                     <FormItem className="flex items-center space-x-3 space-y-0">
                       <FormControl>
                         <RadioGroupItem value="no" />
                       </FormControl>
-                      <FormLabel className="font-normal">
-                        No
-                      </FormLabel>
+                      <FormLabel className="font-normal">No</FormLabel>
                     </FormItem>
                   </RadioGroup>
                 </FormControl>
@@ -1290,8 +1214,7 @@ export const Step3MedicalHistory = ({ form }: any) => {
               render={({ field }) => (
                 <FormItem className="animate-down">
                   <FormLabel>
-                    Please describe your leg swelling or varicose
-                    veins
+                    Please describe your leg swelling or varicose veins
                   </FormLabel>
                   <FormControl>
                     <Textarea
@@ -1312,30 +1235,25 @@ export const Step3MedicalHistory = ({ form }: any) => {
             control={form.control}
             name="infectiousDisease"
             render={({ field }) => (
-              <FormItem className="space-y-3">
-                <FormLabel>
-                  Do you have an infectious disease?
-                </FormLabel>
+              <FormItem>
+                <FormLabel>Do you have an infectious disease?</FormLabel>
                 <FormControl>
                   <RadioGroup
                     onValueChange={(value) => field.onChange(value)}
                     defaultValue={field.value}
-                    className="flex flex-col space-y-1">
+                    className="flex flex-col space-y-1"
+                  >
                     <FormItem className="flex items-center space-x-3 space-y-0">
                       <FormControl>
                         <RadioGroupItem value="yes" />
                       </FormControl>
-                      <FormLabel className="font-normal">
-                        Yes
-                      </FormLabel>
+                      <FormLabel className="font-normal">Yes</FormLabel>
                     </FormItem>
                     <FormItem className="flex items-center space-x-3 space-y-0">
                       <FormControl>
                         <RadioGroupItem value="no" />
                       </FormControl>
-                      <FormLabel className="font-normal">
-                        No
-                      </FormLabel>
+                      <FormLabel className="font-normal">No</FormLabel>
                     </FormItem>
                   </RadioGroup>
                 </FormControl>
@@ -1349,9 +1267,7 @@ export const Step3MedicalHistory = ({ form }: any) => {
               name="infectiousDiseaseDetails"
               render={({ field }) => (
                 <FormItem className="animate-down">
-                  <FormLabel>
-                    Please describe your infectious disease
-                  </FormLabel>
+                  <FormLabel>Please describe your infectious disease</FormLabel>
                   <FormControl>
                     <Textarea
                       placeholder="Provide details about the disease, diagnosis date, and any treatment received"
@@ -1371,28 +1287,25 @@ export const Step3MedicalHistory = ({ form }: any) => {
             control={form.control}
             name="hivPositive"
             render={({ field }) => (
-              <FormItem className="space-y-3">
+              <FormItem>
                 <FormLabel>Are you HIV positive?</FormLabel>
                 <FormControl>
                   <RadioGroup
                     onValueChange={(value) => field.onChange(value)}
                     defaultValue={field.value}
-                    className="flex flex-col space-y-1">
+                    className="flex flex-col space-y-1"
+                  >
                     <FormItem className="flex items-center space-x-3 space-y-0">
                       <FormControl>
                         <RadioGroupItem value="yes" />
                       </FormControl>
-                      <FormLabel className="font-normal">
-                        Yes
-                      </FormLabel>
+                      <FormLabel className="font-normal">Yes</FormLabel>
                     </FormItem>
                     <FormItem className="flex items-center space-x-3 space-y-0">
                       <FormControl>
                         <RadioGroupItem value="no" />
                       </FormControl>
-                      <FormLabel className="font-normal">
-                        No
-                      </FormLabel>
+                      <FormLabel className="font-normal">No</FormLabel>
                     </FormItem>
                   </RadioGroup>
                 </FormControl>
@@ -1405,8 +1318,7 @@ export const Step3MedicalHistory = ({ form }: any) => {
               <div className="flex flex-col animate-fade-down animate-ease-in-out animate-duration-300">
                 <div className="flex items-center mb-2">
                   <FormLabel>
-                    Please list what medications you are taking for
-                    HIV
+                    Please list what medications you are taking for HIV
                   </FormLabel>
                   <Button
                     type="button"
@@ -1414,18 +1326,20 @@ export const Step3MedicalHistory = ({ form }: any) => {
                     className="mt-2 sm:ml-auto"
                     onClick={() =>
                       appendHivMedication({
-                        medicationName: '',
-                        dosage: '',
-                        frequency: '',
+                        medicationName: "",
+                        dosage: "",
+                        frequency: "",
                       })
-                    }>
+                    }
+                  >
                     Add Medication
                   </Button>
                 </div>
                 {hivMedicationsFields.map((item: any, index: any) => (
                   <div
                     key={item.id}
-                    className="animate-fade-down animate-ease-in-out animate-duration-300 flex flex-col sm:flex-row gap-4 sm:items-end bg-gray-300 p-4 border rounded-md mb-2">
+                    className="animate-fade-down animate-ease-in-out animate-duration-300 flex flex-col sm:flex-row gap-4 sm:items-end bg-gray-300 p-4 border rounded-md mb-2"
+                  >
                     <FormField
                       control={form.control}
                       name={`hivMedications.${index}.medicationName`}
@@ -1449,10 +1363,7 @@ export const Step3MedicalHistory = ({ form }: any) => {
                         <FormItem className="flex-1">
                           <FormLabel>Dosage</FormLabel>
                           <FormControl>
-                            <Input
-                              placeholder="Enter dosage"
-                              {...field}
-                            />
+                            <Input placeholder="Enter dosage" {...field} />
                           </FormControl>
                           <FormMessage />
                         </FormItem>
@@ -1465,10 +1376,7 @@ export const Step3MedicalHistory = ({ form }: any) => {
                         <FormItem className="flex-1">
                           <FormLabel>How Often You Take It</FormLabel>
                           <FormControl>
-                            <Input
-                              placeholder="Enter frequency"
-                              {...field}
-                            />
+                            <Input placeholder="Enter frequency" {...field} />
                           </FormControl>
                           <FormMessage />
                         </FormItem>
@@ -1481,7 +1389,8 @@ export const Step3MedicalHistory = ({ form }: any) => {
                         size="icon"
                         className="ml-auto"
                         aria-label="Delete"
-                        onClick={() => removeHivMedication(index)}>
+                        onClick={() => removeHivMedication(index)}
+                      >
                         <Trash2 className="shrink-0 w-4 h-4" />
                       </Button>
                     </div>
@@ -1500,13 +1409,14 @@ export const Step3MedicalHistory = ({ form }: any) => {
                       <PopoverTrigger asChild>
                         <FormControl>
                           <Button
-                            variant={'outline'}
+                            variant={"outline"}
                             className={cn(
-                              'w-[240px] pl-3 text-left font-normal',
-                              !field.value && 'text-muted-foreground'
-                            )}>
+                              "w-[240px] pl-3 text-left font-normal",
+                              !field.value && "text-muted-foreground"
+                            )}
+                          >
                             {field.value ? (
-                              format(field.value, 'PPP')
+                              format(field.value, "PPP")
                             ) : (
                               <span>Pick a date</span>
                             )}
@@ -1514,16 +1424,13 @@ export const Step3MedicalHistory = ({ form }: any) => {
                           </Button>
                         </FormControl>
                       </PopoverTrigger>
-                      <PopoverContent
-                        className="w-auto p-0"
-                        align="start">
+                      <PopoverContent className="w-auto p-0" align="start">
                         <Calendar
                           mode="single"
                           selected={field.value}
                           onSelect={field.onChange}
                           disabled={(date) =>
-                            date > new Date() ||
-                            date < new Date('1900-01-01')
+                            date > new Date() || date < new Date("1900-01-01")
                           }
                           initialFocus
                         />
@@ -1542,28 +1449,25 @@ export const Step3MedicalHistory = ({ form }: any) => {
             control={form.control}
             name="drinkAlcohol"
             render={({ field }) => (
-              <FormItem className="space-y-3">
+              <FormItem>
                 <FormLabel>Do you drink alcohol?</FormLabel>
                 <FormControl>
                   <RadioGroup
                     onValueChange={field.onChange}
                     defaultValue={field.value}
-                    className="flex flex-col space-y-1">
+                    className="flex flex-col space-y-1"
+                  >
                     <FormItem className="flex items-center space-x-3 space-y-0">
                       <FormControl>
                         <RadioGroupItem value="yes" />
                       </FormControl>
-                      <FormLabel className="font-normal">
-                        Yes
-                      </FormLabel>
+                      <FormLabel className="font-normal">Yes</FormLabel>
                     </FormItem>
                     <FormItem className="flex items-center space-x-3 space-y-0">
                       <FormControl>
                         <RadioGroupItem value="no" />
                       </FormControl>
-                      <FormLabel className="font-normal">
-                        No
-                      </FormLabel>
+                      <FormLabel className="font-normal">No</FormLabel>
                     </FormItem>
                   </RadioGroup>
                 </FormControl>
@@ -1577,18 +1481,13 @@ export const Step3MedicalHistory = ({ form }: any) => {
               name="alcoholFrequency"
               render={({ field }) => (
                 <FormItem className="mt-4 animate-down">
-                  <FormLabel>
-                    How often and how much do you drink?
-                  </FormLabel>
+                  <FormLabel>How often and how much do you drink?</FormLabel>
                   <FormControl>
-                    <Input
-                      placeholder="Describe frequency"
-                      {...field}
-                    />
+                    <Input placeholder="Describe frequency" {...field} />
                   </FormControl>
                   <FormDescription>
-                    ex: glass of wine daily, occasional 4-5 times a
-                    year, weekends, etc.
+                    ex: glass of wine daily, occasional 4-5 times a year,
+                    weekends, etc.
                   </FormDescription>
                   <FormMessage />
                 </FormItem>
@@ -1602,20 +1501,19 @@ export const Step3MedicalHistory = ({ form }: any) => {
             control={form.control}
             name="smokedOrVape"
             render={({ field }) => (
-              <FormItem className="space-y-3">
+              <FormItem>
                 <FormLabel>Have you ever smoked or vaped?</FormLabel>
                 <FormControl>
                   <RadioGroup
                     onValueChange={field.onChange}
                     defaultValue={field.value}
-                    className="flex flex-col space-y-1">
+                    className="flex flex-col space-y-1"
+                  >
                     <FormItem className="flex items-center space-x-3 space-y-0">
                       <FormControl>
                         <RadioGroupItem value="yes" />
                       </FormControl>
-                      <FormLabel className="font-normal">
-                        Yes
-                      </FormLabel>
+                      <FormLabel className="font-normal">Yes</FormLabel>
                     </FormItem>
                     <FormItem className="flex items-center space-x-3 space-y-0">
                       <FormControl>
@@ -1629,9 +1527,7 @@ export const Step3MedicalHistory = ({ form }: any) => {
                       <FormControl>
                         <RadioGroupItem value="no" />
                       </FormControl>
-                      <FormLabel className="font-normal">
-                        No
-                      </FormLabel>
+                      <FormLabel className="font-normal">No</FormLabel>
                     </FormItem>
                   </RadioGroup>
                 </FormControl>
@@ -1640,7 +1536,7 @@ export const Step3MedicalHistory = ({ form }: any) => {
             )}
           />
           {smokingStatus && (
-            <div className="space-y-4 animate-down">
+            <div className="space-y-6 animate-down">
               <FormField
                 control={form.control}
                 name="currentSmokingAmount"
@@ -1648,14 +1544,9 @@ export const Step3MedicalHistory = ({ form }: any) => {
                   <FormItem>
                     <FormLabel>How much do you smoke?</FormLabel>
                     <FormControl>
-                      <Input
-                        placeholder="Enter estimated"
-                        {...field}
-                      />
+                      <Input placeholder="Enter estimated" {...field} />
                     </FormControl>
-                    <FormDescription>
-                      e.g. 1 pack a day
-                    </FormDescription>
+                    <FormDescription>e.g. 1 pack a day</FormDescription>
                     <FormMessage />
                   </FormItem>
                 )}
@@ -1667,10 +1558,7 @@ export const Step3MedicalHistory = ({ form }: any) => {
                   <FormItem>
                     <FormLabel>Since when do you smoke?</FormLabel>
                     <FormControl>
-                      <Input
-                        placeholder="Enter estimated"
-                        {...field}
-                      />
+                      <Input placeholder="Enter estimated" {...field} />
                     </FormControl>
                     <FormDescription>
                       e.g., started 10 years ago
@@ -1682,21 +1570,17 @@ export const Step3MedicalHistory = ({ form }: any) => {
             </div>
           )}
           {quitSmoking && (
-            <div className="space-y-4 animate-down">
+            <div className="space-y-6 animate-down">
               <FormField
                 control={form.control}
                 name="pastSmokingAmount"
                 render={({ field }) => (
                   <FormItem>
                     <FormLabel>
-                      How much did you smoke, and how long did you
-                      smoke for?
+                      How much did you smoke, and how long did you smoke for?
                     </FormLabel>
                     <FormControl>
-                      <Input
-                        placeholder="Enter estimated"
-                        {...field}
-                      />
+                      <Input placeholder="Enter estimated" {...field} />
                     </FormControl>
                     <FormDescription>
                       e.g., 1 pack a day, smoked for 10 years
@@ -1710,14 +1594,9 @@ export const Step3MedicalHistory = ({ form }: any) => {
                 name="pastSmokingSince"
                 render={({ field }) => (
                   <FormItem>
-                    <FormLabel>
-                      How long ago did you quit smoking?
-                    </FormLabel>
+                    <FormLabel>How long ago did you quit smoking?</FormLabel>
                     <FormControl>
-                      <Input
-                        placeholder="Enter estimated"
-                        {...field}
-                      />
+                      <Input placeholder="Enter estimated" {...field} />
                     </FormControl>
                     <FormDescription>
                       e.g., quit over 2 years ago
@@ -1735,28 +1614,25 @@ export const Step3MedicalHistory = ({ form }: any) => {
             control={form.control}
             name="recreationalDrugUse"
             render={({ field }) => (
-              <FormItem className="space-y-3">
+              <FormItem>
                 <FormLabel>Recreational drug use?</FormLabel>
                 <FormControl>
                   <RadioGroup
                     onValueChange={field.onChange}
                     defaultValue={field.value}
-                    className="flex flex-col space-y-1">
+                    className="flex flex-col space-y-1"
+                  >
                     <FormItem className="flex items-center space-x-3 space-y-0">
                       <FormControl>
                         <RadioGroupItem value="yes" />
                       </FormControl>
-                      <FormLabel className="font-normal">
-                        Yes
-                      </FormLabel>
+                      <FormLabel className="font-normal">Yes</FormLabel>
                     </FormItem>
                     <FormItem className="flex items-center space-x-3 space-y-0">
                       <FormControl>
                         <RadioGroupItem value="no" />
                       </FormControl>
-                      <FormLabel className="font-normal">
-                        No
-                      </FormLabel>
+                      <FormLabel className="font-normal">No</FormLabel>
                     </FormItem>
                   </RadioGroup>
                 </FormControl>
@@ -1794,15 +1670,14 @@ export const Step3MedicalHistory = ({ form }: any) => {
           control={form.control}
           name="currentMedication"
           render={({ field }) => (
-            <FormItem className="space-y-3">
-              <FormLabel>
-                Do you currently take any medication?
-              </FormLabel>
+            <FormItem>
+              <FormLabel>Do you currently take any medication?</FormLabel>
               <FormControl>
                 <RadioGroup
                   onValueChange={field.onChange}
                   defaultValue={field.value}
-                  className="flex flex-col space-y-1">
+                  className="flex flex-col space-y-1"
+                >
                   <FormItem className="flex items-center space-x-3 space-y-0">
                     <FormControl>
                       <RadioGroupItem value="yes" />
@@ -1831,19 +1706,21 @@ export const Step3MedicalHistory = ({ form }: any) => {
                 className="ml-auto"
                 onClick={() =>
                   appendMedication({
-                    medicationName: '',
-                    dosage: '',
-                    frequency: '',
-                    purpose: '',
+                    medicationName: "",
+                    dosage: "",
+                    frequency: "",
+                    purpose: "",
                   })
-                }>
+                }
+              >
                 Add Medication
               </Button>
             </div>
             {medicationFields.map((item, index) => (
               <div
                 key={item.id}
-                className="grid gap-4 sm:items-end bg-gray-300 p-4 border rounded-md mb-2">
+                className="grid gap-4 sm:items-end bg-gray-300 p-4 border rounded-md mb-2"
+              >
                 <div className="grid sm:grid-cols-2 items-center gap-x-8 gap-y-4">
                   <FormField
                     control={form.control}
@@ -1852,10 +1729,7 @@ export const Step3MedicalHistory = ({ form }: any) => {
                       <FormItem className="flex-1">
                         <FormLabel>Name of Medication</FormLabel>
                         <FormControl>
-                          <Input
-                            placeholder="e.g., Ibuprofen"
-                            {...field}
-                          />
+                          <Input placeholder="e.g., Ibuprofen" {...field} />
                         </FormControl>
                         <FormMessage />
                       </FormItem>
@@ -1868,10 +1742,7 @@ export const Step3MedicalHistory = ({ form }: any) => {
                       <FormItem className="flex-1">
                         <FormLabel>Dosage</FormLabel>
                         <FormControl>
-                          <Input
-                            placeholder="e.g., 200 mg"
-                            {...field}
-                          />
+                          <Input placeholder="e.g., 200 mg" {...field} />
                         </FormControl>
                         <FormMessage />
                       </FormItem>
@@ -1886,10 +1757,7 @@ export const Step3MedicalHistory = ({ form }: any) => {
                       <FormItem className="flex-1">
                         <FormLabel>How Often</FormLabel>
                         <FormControl>
-                          <Input
-                            placeholder="e.g., Twice a day"
-                            {...field}
-                          />
+                          <Input placeholder="e.g., Twice a day" {...field} />
                         </FormControl>
                         <FormMessage />
                       </FormItem>
@@ -1900,9 +1768,7 @@ export const Step3MedicalHistory = ({ form }: any) => {
                     name={`medications.${index}.purpose`}
                     render={({ field }) => (
                       <FormItem className="flex-1">
-                        <FormLabel>
-                          Purpose (Condition Treated)
-                        </FormLabel>
+                        <FormLabel>Purpose (Condition Treated)</FormLabel>
                         <FormControl>
                           <Input
                             placeholder="e.g., Pain relief for arthritis"
@@ -1920,7 +1786,8 @@ export const Step3MedicalHistory = ({ form }: any) => {
                   size="icon"
                   className="ml-auto"
                   aria-label="Delete"
-                  onClick={() => removeMedication(index)}>
+                  onClick={() => removeMedication(index)}
+                >
                   <Trash2 className="shrink-0 w-4 h-4" />
                 </Button>
               </div>
@@ -1932,16 +1799,16 @@ export const Step3MedicalHistory = ({ form }: any) => {
           control={form.control}
           name="antidepressants"
           render={({ field }) => (
-            <FormItem className="space-y-3">
+            <FormItem>
               <FormLabel>
-                Do you take antidepressants, anxiety pills or sleeping
-                pills?
+                Do you take antidepressants, anxiety pills or sleeping pills?
               </FormLabel>
               <FormControl>
                 <RadioGroup
                   onValueChange={field.onChange}
                   defaultValue={field.value}
-                  className="flex flex-col space-y-1">
+                  className="flex flex-col space-y-1"
+                >
                   <FormItem className="flex items-center space-x-3 space-y-0">
                     <FormControl>
                       <RadioGroupItem value="yes" />
@@ -1960,36 +1827,129 @@ export const Step3MedicalHistory = ({ form }: any) => {
             </FormItem>
           )}
         />
+        {useMentalHealthMedication && (
+          <div className="space-y-6 animate-fade-down">
+            <div className="flex items-center mb-2">
+              <FormLabel>Current Medications</FormLabel>
+              <Button
+                type="button"
+                size="sm"
+                className="ml-auto"
+                onClick={() =>
+                  appendMentalHealthMedication({
+                    medicationName: "",
+                    dosage: "",
+                    frequency: "",
+                    purpose: "",
+                  })
+                }
+              >
+                Add Medication
+              </Button>
+            </div>
+            {mentalHealthMedication.map((item, index) => (
+              <div
+                key={item.id}
+                className="grid gap-4 sm:items-end bg-gray-300 p-4 border rounded-md mb-2"
+              >
+                <div className="grid sm:grid-cols-2 items-center gap-x-8 gap-y-4">
+                  <FormField
+                    control={form.control}
+                    name={`mentalHealthMedications.${index}.medicationName`}
+                    render={({ field }) => (
+                      <FormItem className="flex-1">
+                        <FormLabel>Name of Medication</FormLabel>
+                        <FormControl>
+                          <Input placeholder="e.g., Ibuprofen" {...field} />
+                        </FormControl>
+                        <FormMessage />
+                      </FormItem>
+                    )}
+                  />
+                  <FormField
+                    control={form.control}
+                    name={`mentalHealthMedications.${index}.dosage`}
+                    render={({ field }) => (
+                      <FormItem className="flex-1">
+                        <FormLabel>Dosage</FormLabel>
+                        <FormControl>
+                          <Input placeholder="e.g., 200 mg" {...field} />
+                        </FormControl>
+                        <FormMessage />
+                      </FormItem>
+                    )}
+                  />
+                </div>
+                <div className="grid sm:grid-cols-2 items-center gap-x-8 gap-y-4">
+                  <FormField
+                    control={form.control}
+                    name={`mentalHealthMedications.${index}.frequency`}
+                    render={({ field }) => (
+                      <FormItem className="flex-1">
+                        <FormLabel>How Often</FormLabel>
+                        <FormControl>
+                          <Input placeholder="e.g., Twice a day" {...field} />
+                        </FormControl>
+                        <FormMessage />
+                      </FormItem>
+                    )}
+                  />
+                  <FormField
+                    control={form.control}
+                    name={`mentalHealthMedications.${index}.purpose`}
+                    render={({ field }) => (
+                      <FormItem className="flex-1">
+                        <FormLabel>Purpose (Condition Treated)</FormLabel>
+                        <FormControl>
+                          <Input
+                            placeholder="e.g., Pain relief for arthritis"
+                            {...field}
+                          />
+                        </FormControl>
+                        <FormMessage />
+                      </FormItem>
+                    )}
+                  />
+                </div>
+                <Button
+                  type="button"
+                  variant="destructive"
+                  size="icon"
+                  className="ml-auto"
+                  aria-label="Delete"
+                  onClick={() => removeMentalHealthMedication(index)}
+                >
+                  <Trash2 className="shrink-0 w-4 h-4" />
+                </Button>
+              </div>
+            ))}
+          </div>
+        )}
         {/* Previous Surgeries */}
         <div className="space-y-6">
           <FormField
             control={form.control}
             name="previousSurgeries"
             render={({ field }) => (
-              <FormItem className="space-y-3">
-                <FormLabel>
-                  Have you had any previous surgeries?
-                </FormLabel>
+              <FormItem>
+                <FormLabel>Have you had any previous surgeries?</FormLabel>
                 <FormControl>
                   <RadioGroup
                     onValueChange={field.onChange}
                     defaultValue={field.value}
-                    className="flex flex-col space-y-1">
+                    className="flex flex-col space-y-1"
+                  >
                     <FormItem className="flex items-center space-x-3 space-y-0">
                       <FormControl>
                         <RadioGroupItem value="yes" />
                       </FormControl>
-                      <FormLabel className="font-normal">
-                        Yes
-                      </FormLabel>
+                      <FormLabel className="font-normal">Yes</FormLabel>
                     </FormItem>
                     <FormItem className="flex items-center space-x-3 space-y-0">
                       <FormControl>
                         <RadioGroupItem value="no" />
                       </FormControl>
-                      <FormLabel className="font-normal">
-                        No
-                      </FormLabel>
+                      <FormLabel className="font-normal">No</FormLabel>
                     </FormItem>
                   </RadioGroup>
                 </FormControl>
@@ -2007,18 +1967,20 @@ export const Step3MedicalHistory = ({ form }: any) => {
                   className="mt-2 sm:ml-auto"
                   onClick={() =>
                     appendSurgery({
-                      surgeryName: '',
-                      surgeryYear: '',
-                      surgeryReason: '',
+                      surgeryName: "",
+                      surgeryYear: "",
+                      surgeryReason: "",
                     })
-                  }>
+                  }
+                >
                   Add Surgery
                 </Button>
               </div>
               {surgeryFields.map((item: any, index: any) => (
                 <div
                   key={item.id}
-                  className="animate-fade-down animate-ease-in-out animate-duration-300 flex flex-col sm:flex-row gap-4 sm:items-end bg-gray-300 p-4 border rounded-md mb-2">
+                  className="animate-fade-down animate-ease-in-out animate-duration-300 flex flex-col sm:flex-row gap-4 sm:items-end bg-gray-300 p-4 border rounded-md mb-2"
+                >
                   <FormField
                     control={form.control}
                     name={`surgeries.${index}.surgeryName`}
@@ -2026,10 +1988,7 @@ export const Step3MedicalHistory = ({ form }: any) => {
                       <FormItem className="flex-1">
                         <FormLabel>Surgery name</FormLabel>
                         <FormControl>
-                          <Input
-                            placeholder="Enter surgery name"
-                            {...field}
-                          />
+                          <Input placeholder="Enter surgery name" {...field} />
                         </FormControl>
                         <FormMessage />
                       </FormItem>
@@ -2042,10 +2001,7 @@ export const Step3MedicalHistory = ({ form }: any) => {
                       <FormItem className="flex-1">
                         <FormLabel>Surgery Year</FormLabel>
                         <FormControl>
-                          <Input
-                            placeholder="Enter year (YYYY)"
-                            {...field}
-                          />
+                          <Input placeholder="Enter year (YYYY)" {...field} />
                         </FormControl>
                         <FormMessage />
                       </FormItem>
@@ -2074,7 +2030,8 @@ export const Step3MedicalHistory = ({ form }: any) => {
                       size="icon"
                       className="ml-auto"
                       aria-label="Delete"
-                      onClick={() => removeSurgery(index)}>
+                      onClick={() => removeSurgery(index)}
+                    >
                       <Trash2 className="shrink-0 w-4 h-4" />
                     </Button>
                   </div>
