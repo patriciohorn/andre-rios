@@ -25,7 +25,7 @@ exports.handler = async (event, context) => {
     });
 
     const mailOptions = {
-      from: process.env.IONOS_USER,
+      from: process.env.IONOS_SMTP_USER,
       to: doctorEmail,
       subject: "New Patient Consultation PDF.",
       text: "Please find attached the consultation form PDF.",
