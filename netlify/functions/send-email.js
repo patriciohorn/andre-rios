@@ -20,13 +20,13 @@ exports.handler = async (event, context) => {
       secure: false,
       debug: true,
       auth: {
-        user: process.env.IONOS_SMTP_USER,
-        pass: process.env.IONOS_SMTP_PASSWORD,
+        user: process.env.GMAIL_USER,
+        pass: process.env.GMAIL_PASS,
       },
     });
 
     const mailOptions = {
-      from: process.env.IONOS_SMTP_USER,
+      from: process.env.GMAIL_USER,
       to: doctorEmail,
       subject: "New Patient Consultation PDF.",
       text: "Please find attached the consultation form PDF.",
