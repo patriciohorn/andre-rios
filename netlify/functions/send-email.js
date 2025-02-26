@@ -15,8 +15,8 @@ exports.handler = async (event, context) => {
     const pdfBuffer = Buffer.from(base64Data, "base64");
 
     const transporter = nodemailer.createTransport({
-      host: "smtp.ionos.com",
-      port: "465",
+      host: "smtp.ionos.mx",
+      port: "587",
       secure: true,
       auth: {
         user: process.env.IONOS_USER,
