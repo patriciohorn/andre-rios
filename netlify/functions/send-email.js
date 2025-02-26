@@ -18,6 +18,7 @@ exports.handler = async (event, context) => {
       host: "smtp.ionos.mx",
       port: 587,
       secure: false,
+      debug: true,
       auth: {
         user: process.env.IONOS_SMTP_USER,
         pass: process.env.IONOS_SMTP_PASSWORD,
