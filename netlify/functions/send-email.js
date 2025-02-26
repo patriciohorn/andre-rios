@@ -15,15 +15,17 @@ exports.handler = async (event, context) => {
     const pdfBuffer = Buffer.from(base64Data, "base64");
 
     const transporter = nodemailer.createTransport({
-      service: "Gmail",
+      host: "smtp.ionos.com",
+      port: "465",
+      secure: true,
       auth: {
-        user: process.env.GMAIL_USER,
-        pass: process.env.GMAIL_PASS,
+        user: process.env.IONOS_USER,
+        pass: process.env.IONOS_PASS,
       },
     });
 
     const mailOptions = {
-      from: process.env.GMAIL_USER,
+      from: process.env.IONOS_USER,
       to: doctorEmail,
       subject: "New Patient Consultation PDF.",
       text: "Please find attached the consultation form PDF.",
