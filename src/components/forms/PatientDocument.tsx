@@ -1,4 +1,4 @@
-import { differenceInYears } from "date-fns";
+import { differenceInYears, format } from "date-fns";
 
 import {
   Page,
@@ -6,7 +6,6 @@ import {
   View,
   Document,
   StyleSheet,
-  PDFDownloadLink,
   Image,
   Font,
   BlobProvider,
@@ -22,7 +21,6 @@ const styles = StyleSheet.create({
   header: {
     fontSize: 20,
     fontWeight: "semibold",
-    marginBottom: 20,
     textAlign: "center",
   },
 
@@ -43,8 +41,8 @@ const styles = StyleSheet.create({
     fontSize: 11,
     fontWidth: "medium",
     width: 200,
-    marginRight: 4,
-    paddingVertical: 6,
+    marginRight: 10,
+    paddingVertical: 5,
     paddingLeft: 10,
   },
 
@@ -53,7 +51,7 @@ const styles = StyleSheet.create({
     flex: 1,
     fontSize: 10,
     borderLeft: "1px solid #E5E5E5",
-    paddingVertical: 6,
+    paddingVertical: 5,
     paddingHorizontal: 10,
   },
 
@@ -86,97 +84,33 @@ const styles = StyleSheet.create({
     objectFit: "cover",
     maxWidth: 250,
   },
+
+  bulletItems: {
+    flexDirection: "column",
+    gap: 4,
+  },
+
+  headerContainer: {
+    flexDirection: "row",
+    justifyContent: "space-between",
+    alignItems: "center",
+    marginBottom: 20,
+  },
+
+  date: {
+    textAlign: "right",
+  },
+
+  inputContainer: {
+    color: "#292524",
+    flex: 1,
+    fontSize: 10,
+    borderLeft: "1px solid #E5E5E5",
+    paddingVertical: 4,
+    paddingHorizontal: 10,
+    flexDirection: "column",
+  },
 });
-
-const fieldLabels: Record<string, string> = {
-  hasIllness: "Patient has Illness",
-  illnesses: "Illness Details",
-  hasAllergies: "Patient has allergies",
-  allergies: "Allergy details",
-  diabetes: "Patient has diabetes",
-  diabetesType: "Type of diabetes",
-  hgbResult: "Last HGB A1C result",
-  heartCondition: "Patient has a Heart Condition",
-  heartConditionDetails: "Heart Condition Details",
-  heartSymptoms: "Patient has Heart Symptoms",
-  heartSymptomsDetails: "Heart Symptoms Details",
-  hasThyroidCondition: "Patient has a Thyroid Condition",
-  thyroidConditionType: "Thyroid Condition Type",
-  thyroidYearDiagnosis: "Year of Thyroid Diagnosis",
-  otherThyroidCondition: "Other Thyroid Condition Details",
-  isThyroidControlled: "Is Thyroid Condition Controlled",
-  deepVein: "History of Deep Vein Thrombosis/Blood Clots",
-  deepVeinDetails: "Deep Vein History Details",
-  highBloodPresure: "Patient has High Blood Pressure",
-  cholesterol: "Patient has High Cholesterol",
-  kidenyOrUrinary: "Patient has a Kidney/Urinary Disorder",
-  asthma: "Patient has Asthma",
-  orthopedic: "Patient has Orthopedic Problems",
-  orthopedicDetails: "Orthopedic Details",
-  breathingProblems: "Patient has Breathing/Respiratory Problems",
-  breathingProblemsDetails: "Breathing Problem Details",
-  mentalCondition: "Mental Condition",
-  otherMentalCondition: "Other Mental Condition Details",
-  reflux: "Patient suffers from Reflux/Heartburn/Gastritis",
-  refluxDetails: "Reflux Details",
-  liverDisease: "Patient has a Liver Disease",
-  liverDiseaseDetails: "Liver Disease Details",
-  anemiaOrBleeding: "Patient has Anemia/Bleeding Disorder",
-  anemiaOrBleedingDetails: "Anemia/Bleeding Details",
-  swellingOrVaricose: "Patient has Leg Swelling/Varicose Veins",
-  swellingOrVaricoseDetails: "Leg Swelling/Varicose Veins Details",
-  infectiousDisease: "Patient has an Infectious Disease",
-  infectiousDiseaseDetails: "Infectious Disease Details",
-  hivPositive: "Patient is HIV Positive",
-  hivMedications: "HIV Medications",
-  lastViralLoadDate: "Last Undetectable Viral Load Date",
-  drinkAlcohol: "Patient Drinks Alcohol",
-  alcoholFrequency: "Alcohol Consumption Frequency",
-  smokedOrVape: "Patient has Smoked or Vaped",
-  currentSmokingAmount: "Current Smoking Amount",
-  currentSmokingSince: "Current Smoking Since",
-  pastSmokingAmount: "Past Smoking Amount",
-  pastSmokingSince: "Past Smoking Since",
-  recreationalDrugUse: "Patient uses Recreational Drugs",
-  drugUseDetails: "Recreational Drug Use Details",
-  currentMedication: "Patient is on Medication",
-  medications: "Current Medications",
-  antidepressants: "Patient takes Antidepressants/Anxiety/Sleeping Pills",
-  previousSurgeries: "Patient has had Previous Surgeries",
-  surgeries: "Surgery Details",
-};
-
-// Helper function to render field values. If the value is an array,
-// it maps over the array and returns a formatted string for each entry.
-const renderFieldValue = (key: string, value: any) => {
-  if (Array.isArray(value)) {
-    return value
-      .map((item, idx) => {
-        if (typeof item === "object" && item !== null) {
-          // For objects (like an illness record), we join its key-value pairs.
-          const subLines = Object.entries(item)
-            .map(
-              ([subKey, subValue]) =>
-                ` • ${capitalize(subKey)}: ${subValue?.toString() || ""}`
-            )
-            .join("\n");
-          return subLines;
-        }
-        return `- ${item}`;
-      })
-      .join("");
-  } else if (value instanceof Date) {
-    return value.toLocaleDateString();
-  } else if (typeof value === "object" && value !== null) {
-    return Object.entries(value)
-      .map(
-        ([subKey, subValue]) =>
-          `${capitalize(subKey)}: ${subValue?.toString() || ""}`
-      )
-      .join("\n");
-  }
-  return value?.toString() || "";
-};
 
 function capitalize(str: string) {
   return str[0].toUpperCase() + str.slice(1);
@@ -194,13 +128,18 @@ interface PdfCreatorProps {
 
 // Create Document Component
 function PatientDocument({ formData }: PdfCreatorProps) {
-  const dob = toDate(formData.dateOfBirth);
+  const dob = format(formData.dateOfBirth, "dd/MMM/yyyy");
   const age = dob ? differenceInYears(new Date(), dob) : "NA";
+  const creationDate = new Date();
+  const formattedDate = format(creationDate, "dd/MMM/yyyy");
 
   return (
     <Document>
       <Page size="A4" style={styles.page}>
-        <Text style={styles.header}>Consultation Form</Text>
+        <View style={styles.headerContainer}>
+          <Text style={styles.header}>Virtual Consultation Form</Text>
+          <Text style={styles.date}>Date: {formattedDate}</Text>
+        </View>
         {/* ////// Personal Information //////*/}
         <View style={styles.section}>
           <Text style={styles.title}>Patient Information</Text>
@@ -213,10 +152,8 @@ function PatientDocument({ formData }: PdfCreatorProps) {
           </View>
 
           <View style={styles.fieldRow}>
-            <Text style={styles.label}>Date of Birth</Text>
-            <Text style={styles.input}>
-              {dob ? dob.toLocaleDateString() : "NA"}
-            </Text>
+            <Text style={styles.label}>Date of birth</Text>
+            <Text style={styles.input}>{dob}</Text>
           </View>
 
           <View style={styles.fieldRow}>
@@ -248,7 +185,7 @@ function PatientDocument({ formData }: PdfCreatorProps) {
 
           <View style={styles.fieldRow}>
             <Text style={styles.label}>Occupation</Text>
-            <Text style={styles.input}>{formData.occupation}</Text>
+            <Text style={styles.input}>{capitalize(formData.occupation)}</Text>
           </View>
 
           <View style={styles.fieldRow}>
@@ -266,7 +203,7 @@ function PatientDocument({ formData }: PdfCreatorProps) {
           </View>
 
           <View style={styles.fieldRow}>
-            <Text style={styles.label}>Have you had weight loss surgery?</Text>
+            <Text style={styles.label}>Weight loss surgery history</Text>
             <Text style={styles.input}>
               {formData.hadSurgery ? "Yes" : "No"}
             </Text>
@@ -292,7 +229,7 @@ function PatientDocument({ formData }: PdfCreatorProps) {
           <Text style={styles.title}>General Information</Text>
 
           <View style={styles.fieldRow}>
-            <Text style={styles.label}>Desired Procedure</Text>
+            <Text style={styles.label}>Desired procedure</Text>
             <Text style={styles.input}>
               {formData.desiredProcedure &&
               formData.desiredProcedure.toLowerCase() === "other"
@@ -301,43 +238,45 @@ function PatientDocument({ formData }: PdfCreatorProps) {
             </Text>
           </View>
 
-          <View style={styles.fieldRow}>
-            <Text style={styles.label}>Specific Procedure</Text>
-            <Text style={styles.input}>
-              {formData.desiredProcedure ? "NA" : formData.otherProcedure}
-            </Text>
-          </View>
+          {formData.desiredProcedure.toLowerCase() === "other" && (
+            <View style={styles.fieldRow}>
+              <Text style={styles.label}>Specific procedure</Text>
+              <Text style={styles.input}>{formData.otherProcedure}</Text>
+            </View>
+          )}
 
           <View style={styles.fieldRow}>
             <Text style={styles.label}>
-              Treatment Area. Concerns and Desired Outcomes
+              Treatment area: Concerns and desired outcomes
             </Text>
-            <Text style={styles.input}>{formData.dislikesAndDesires}</Text>
+            <Text style={styles.input}>
+              {capitalize(formData.dislikesAndDesires)}
+            </Text>
           </View>
 
           {formData.gender === "female" && (
             <>
               <View style={styles.fieldRow}>
-                <Text style={styles.label}>Interested in breast surgery</Text>
+                <Text style={styles.label}>Breast surgery interest</Text>
                 <Text style={styles.input}>
                   {capitalize(formData.breastSurgery)}
                 </Text>
               </View>
 
               <View style={styles.fieldRow}>
-                <Text style={styles.label}>Current Cup Size</Text>
+                <Text style={styles.label}>Current cup size</Text>
                 <Text style={styles.input}>{capitalize(formData.cupSize)}</Text>
               </View>
 
               <View style={styles.fieldRow}>
-                <Text style={styles.label}>Interested in breast implants?</Text>
+                <Text style={styles.label}>Breast implant interest</Text>
                 <Text style={styles.input}>
                   {capitalize(formData.breastImplants)}
                 </Text>
               </View>
 
               <View style={styles.fieldRow}>
-                <Text style={styles.label}>Had breast augmentation before</Text>
+                <Text style={styles.label}>Prior breast augmentation</Text>
                 <Text style={styles.input}>
                   {capitalize(formData.breastAugmentationBefore)}
                 </Text>
@@ -350,50 +289,46 @@ function PatientDocument({ formData }: PdfCreatorProps) {
                 </Text>
               </View>
 
-              <View style={styles.fieldRow}>
-                <Text style={styles.label}>Times pregnant</Text>
-                <Text style={styles.input}>
-                  {" "}
-                  {formData.timesPregnant === "yes"
-                    ? formData.timesPregnant
-                    : "NA"}
-                </Text>
-              </View>
+              {formData.hasBeenPregnant === "yes" && (
+                <>
+                  <View style={styles.fieldRow}>
+                    <Text style={styles.label}>Times pregnant</Text>
+                    <Text style={styles.input}>{formData.timesPregnant}</Text>
+                  </View>
 
-              <View style={styles.fieldRow}>
-                <Text style={styles.label}>Delivery Method</Text>
-                <Text style={styles.input}>
-                  {" "}
-                  {formData.desiredProcedure === "yes"
-                    ? formData.delivered
-                    : "NA"}
-                </Text>
-              </View>
+                  <View style={styles.fieldRow}>
+                    <Text style={styles.label}>Delivery method</Text>
+                    <Text style={styles.input}>{formData.delivered}</Text>
+                  </View>
+                </>
+              )}
 
               <View style={styles.fieldRow}>
                 <Text style={styles.label}>Birth control used</Text>
                 <Text style={styles.input}>{formData.birthControl}</Text>
               </View>
 
-              <View style={styles.fieldRow}>
-                <Text style={styles.label}>Other birth control used</Text>
-                <Text style={styles.input}>
-                  {formData.otherBirthControl === "other"
-                    ? formData.otherBirthControl
-                    : "NA"}
-                </Text>
-              </View>
+              {formData.birthControl.toLowerCase() === "other" && (
+                <View style={styles.fieldRow}>
+                  <Text style={styles.label}>Other birth control used</Text>
+                  <Text style={styles.input}>
+                    {capitalize(formData.otherBirthControl)}
+                  </Text>
+                </View>
+              )}
 
               <View style={styles.fieldRow}>
-                <Text style={styles.label}>Currently Pregnant</Text>
+                <Text style={styles.label}>Currently pregnant</Text>
                 <Text style={styles.input}>
                   {capitalize(formData.currentlyPregnant)}
                 </Text>
               </View>
 
               <View style={styles.fieldRow}>
-                <Text style={styles.label}>Currently Breastfreeding</Text>
-                <Text style={styles.input}>{formData.breastFeeding}</Text>
+                <Text style={styles.label}>Currently breastfreeding</Text>
+                <Text style={styles.input}>
+                  {capitalize(formData.breastFeeding)}
+                </Text>
               </View>
             </>
           )}
@@ -401,54 +336,620 @@ function PatientDocument({ formData }: PdfCreatorProps) {
           {formData.gender === "male" && (
             <>
               <View style={styles.fieldRow}>
-                <Text style={styles.label}>Interested in chest Surgery:</Text>
+                <Text style={styles.label}>Chest surgery interest</Text>
                 <Text style={styles.input}>
                   {capitalize(formData.chestSurgery)}
                 </Text>
               </View>
 
-              <View style={styles.fieldRow}>
-                <Text style={styles.label}>Chest surgery expectation</Text>
-                <Text style={styles.input}>
-                  {formData.chestExpectations
-                    ? capitalize(formData.chestExpectations)
-                    : "NA"}
-                </Text>
-              </View>
+              {formData.chestSurgery === "yes" && (
+                <View style={styles.fieldRow}>
+                  <Text style={styles.label}>Chest surgery expectations</Text>
+                  <Text style={styles.input}>
+                    {capitalize(formData.chestExpectation)}
+                  </Text>
+                </View>
+              )}
             </>
           )}
         </View>
 
         {/* ////// Medical History //////*/}
+
         <View style={styles.section}>
           <Text style={styles.title}>Medical History</Text>
 
-          {Object.entries(fieldLabels).map(([fieldKey, label]) => {
-            // Only render if the formData has this field.
-            // (Optionally, you could check if the value is non-empty.)
-            if (formData[fieldKey] === undefined) return null;
-            const rawValue =
-              renderFieldValue(fieldKey, formData[fieldKey]) || "NA";
+          <View style={styles.fieldRow}>
+            <Text style={styles.label}>Illness history</Text>
+            <Text style={styles.input}>{capitalize(formData.hasIllness)}</Text>
+          </View>
 
-            const formattedValue = rawValue
-              .split("\n")
-              .map((line: any) => (line ? capitalize(line) : ""))
-              .join("\n");
+          {formData.hasIllness === "yes" && formData.illnesses.length > 0 && (
+            <View style={styles.fieldRow}>
+              <Text style={styles.label}>Illness details</Text>
+              <View style={styles.inputContainer}>
+                {formData.illnesses.map(
+                  (
+                    { condition, yearDiagnosed, description }: any,
+                    index: number
+                  ) => (
+                    <View key={`illness-${index}`} style={styles.bulletItems}>
+                      <Text>• Condition: {capitalize(condition)}</Text>
+                      <Text>• Year Diagnosed: {capitalize(yearDiagnosed)}</Text>
+                      <Text>• Description: {capitalize(description)}</Text>
+                    </View>
+                  )
+                )}
+              </View>
+            </View>
+          )}
 
-            return (
+          <View style={styles.fieldRow}>
+            <Text style={styles.label}>Allergies history</Text>
+            <Text style={styles.input}>
+              {capitalize(formData.hasAllergies)}
+            </Text>
+          </View>
+
+          {formData.hasAllergies === "yes" && formData.allergies.length > 0 && (
+            <View style={styles.fieldRow}>
+              <Text style={styles.label}>Allergies details</Text>
+              <View style={styles.inputContainer}>
+                {formData.allergies.map(
+                  ({ allergicTo, reaction }: any, index: number) => (
+                    <View key={`allergies-${index}`} style={styles.bulletItems}>
+                      <Text>• Allergic to: {capitalize(allergicTo)}</Text>
+                      <Text>• Reaction: {capitalize(reaction)}</Text>
+                    </View>
+                  )
+                )}
+              </View>
+            </View>
+          )}
+          <View style={styles.fieldRow}>
+            <Text style={styles.label}>Diabetes history</Text>
+            <Text style={styles.input}>{capitalize(formData.diabetes)}</Text>
+          </View>
+          {formData.diabetes === "yes" && (
+            <>
               <View style={styles.fieldRow}>
-                <Text key={fieldKey} style={styles.label}>
-                  {label}
-                </Text>
-
-                <Text key={fieldKey} style={styles.input}>
-                  {formattedValue}
+                <Text style={styles.label}>Diabetes type</Text>
+                <Text style={styles.input}>
+                  {capitalize(formData.diabetesType)}
                 </Text>
               </View>
-            );
-          })}
-        </View>
+              <View style={styles.fieldRow}>
+                <Text style={styles.label}>Last HGB A1C result</Text>
+                <Text style={styles.input}>
+                  {capitalize(formData.hgbResult)}
+                </Text>
+              </View>
+            </>
+          )}
+          <View style={styles.fieldRow}>
+            <Text style={styles.label}>Heart condition history</Text>
+            <Text style={styles.input}>
+              {capitalize(formData.heartCondition)}
+            </Text>
+          </View>
+          {formData.heartCondition === "yes" && (
+            <View style={styles.fieldRow}>
+              <Text style={styles.label}>Heart condition details</Text>
+              <Text style={styles.input}>
+                {capitalize(formData.heartConditionDetails)}
+              </Text>
+            </View>
+          )}
+          <View style={styles.fieldRow}>
+            <Text style={styles.label}>Heart Symptoms history</Text>
+            <Text style={styles.input}>
+              {capitalize(formData.heartSymptoms)}
+            </Text>
+          </View>
+          {formData.heartSymptoms === "yes" && (
+            <View style={styles.fieldRow}>
+              <Text style={styles.label}>Heart symptoms details</Text>
+              <Text style={styles.input}>
+                {capitalize(formData.heartSymptomsDetails)}
+              </Text>
+            </View>
+          )}
+          <View style={styles.fieldRow}>
+            <Text style={styles.label}>Thyroid Condition history</Text>
+            <Text style={styles.input}>
+              {capitalize(formData.hasThyroidCondition)}
+            </Text>
+          </View>
+          {formData.hasThyroidCondition === "yes" && (
+            <>
+              <View style={styles.fieldRow}>
+                <Text style={styles.label}>Thyroid condition type</Text>
+                <Text style={styles.input}>
+                  {formData.thyroidConditionType}
+                </Text>
+              </View>
+              {formData.thyroidYearDiagnosis && (
+                <View style={styles.fieldRow}>
+                  <Text style={styles.label}>Thyroid diagnosis year</Text>
+                  <Text style={styles.input}>
+                    {formData.thyroidYearDiagnosis}
+                  </Text>
+                </View>
+              )}
+              {formData.otherThyroidCondition && (
+                <View style={styles.fieldRow}>
+                  <Text style={styles.label}>
+                    Other thyroid condition details
+                  </Text>
+                  <Text style={styles.input}>
+                    {capitalize(formData.otherThyroidCondition)}
+                  </Text>
+                </View>
+              )}
 
+              <View style={styles.fieldRow}>
+                <Text style={styles.label}>Thyroid condition controlled</Text>
+                <Text style={styles.input}>
+                  {capitalize(formData.isThyroidControlled)}
+                </Text>
+              </View>
+            </>
+          )}
+
+          <View style={styles.fieldRow}>
+            <Text style={styles.label}>
+              Deep Vein Thrombosis/Blood Clots history
+            </Text>
+            <Text style={styles.input}>{capitalize(formData.deepVein)}</Text>
+          </View>
+
+          {formData.deepVein === "yes" && (
+            <>
+              {formData.deepVeinDetails && (
+                <View style={styles.fieldRow}>
+                  <Text style={styles.label}>DVT/PE history details</Text>
+                  <Text style={styles.input}>
+                    {capitalize(formData.deepVeinDetails)}
+                  </Text>
+                </View>
+              )}
+            </>
+          )}
+
+          <View style={styles.fieldRow}>
+            <Text style={styles.label}>High blood pressure</Text>
+            <Text style={styles.input}>
+              {capitalize(formData.highBloodPresure)}
+            </Text>
+          </View>
+
+          <View style={styles.fieldRow}>
+            <Text style={styles.label}>High cholesterol</Text>
+            <Text style={styles.input}>{capitalize(formData.cholesterol)}</Text>
+          </View>
+
+          <View style={styles.fieldRow}>
+            <Text style={styles.label}>Kidney/Urinary disorder</Text>
+            <Text style={styles.input}>
+              {capitalize(formData.kidenyOrUrinary)}
+            </Text>
+          </View>
+
+          <View style={styles.fieldRow}>
+            <Text style={styles.label}>Asthma</Text>
+            <Text style={styles.input}>{capitalize(formData.asthma)}</Text>
+          </View>
+
+          <View style={styles.fieldRow}>
+            <Text style={styles.label}>Orthopedic problems</Text>
+            <Text style={styles.input}>{capitalize(formData.orthopedic)}</Text>
+          </View>
+
+          {formData.orthopedic === "yes" && (
+            <>
+              {formData.orthopedicDetails && (
+                <View style={styles.fieldRow}>
+                  <Text style={styles.label}>Orthopedic details</Text>
+                  <Text style={styles.input}>
+                    {capitalize(formData.orthopedicDetails)}
+                  </Text>
+                </View>
+              )}
+            </>
+          )}
+          <View style={styles.fieldRow}>
+            <Text style={styles.label}>Breathing/Respiratory problems</Text>
+            <Text style={styles.input}>
+              {capitalize(formData.breathingProblems)}
+            </Text>
+          </View>
+
+          {formData.breathingProblems === "yes" && (
+            <>
+              {formData.breathingProblemsDetails && (
+                <View style={styles.fieldRow}>
+                  <Text style={styles.label}>Breathing problem details</Text>
+                  <Text style={styles.input}>
+                    {capitalize(formData.breathingProblemsDetails)}
+                  </Text>
+                </View>
+              )}
+            </>
+          )}
+
+          <View style={styles.fieldRow}>
+            <Text style={styles.label}>
+              Mental condition, psychiatric or chronic pain
+            </Text>
+            <Text style={styles.input}>
+              {capitalize(formData.mentalCondition)}
+            </Text>
+          </View>
+
+          {formData.mentalCondition === "yes" && (
+            <>
+              {formData.otherMentalCondition && (
+                <View style={styles.fieldRow}>
+                  <Text style={styles.label}>
+                    Other mental condition details
+                  </Text>
+                  <Text style={styles.input}>
+                    {capitalize(formData.otherMentalCondition)}
+                  </Text>
+                </View>
+              )}
+            </>
+          )}
+
+          <View style={styles.fieldRow}>
+            <Text style={styles.label}>
+              Suffers from Reflux/Heartburn/Gastritis
+            </Text>
+            <Text style={styles.input}>{capitalize(formData.reflux)}</Text>
+          </View>
+
+          {formData.reflux === "yes" && (
+            <>
+              {formData.refluxDetails && (
+                <View style={styles.fieldRow}>
+                  <Text style={styles.label}>Reflux details</Text>
+                  <Text style={styles.input}>
+                    {capitalize(formData.refluxDetails)}
+                  </Text>
+                </View>
+              )}
+            </>
+          )}
+
+          <View style={styles.fieldRow}>
+            <Text style={styles.label}>Liver Disease</Text>
+            <Text style={styles.input}>
+              {capitalize(formData.liverDisease)}
+            </Text>
+          </View>
+
+          {formData.liverDisease === "yes" && (
+            <>
+              {formData.liverDiseaseDetails && (
+                <View style={styles.fieldRow}>
+                  <Text style={styles.label}>Liver disease details</Text>
+                  <Text style={styles.input}>
+                    {capitalize(formData.liverDiseaseDetails)}
+                  </Text>
+                </View>
+              )}
+            </>
+          )}
+
+          <View style={styles.fieldRow}>
+            <Text style={styles.label}>Anemia/Bleeding disorder</Text>
+            <Text style={styles.input}>
+              {capitalize(formData.anemiaOrBleeding)}
+            </Text>
+          </View>
+
+          {formData.anemiaOrBleeding === "yes" && (
+            <>
+              {formData.anemiaOrBleedingDetails && (
+                <View style={styles.fieldRow}>
+                  <Text style={styles.label}>Anemia/Bleeding details</Text>
+                  <Text style={styles.input}>
+                    {capitalize(formData.anemiaOrBleedingDetails)}
+                  </Text>
+                </View>
+              )}
+            </>
+          )}
+
+          <View style={styles.fieldRow}>
+            <Text style={styles.label}>Leg Swelling/Varicose veins</Text>
+            <Text style={styles.input}>
+              {capitalize(formData.swellingOrVaricose)}
+            </Text>
+          </View>
+
+          {formData.swellingOrVaricose === "yes" && (
+            <>
+              {formData.swellingOrVaricoseDetails && (
+                <View style={styles.fieldRow}>
+                  <Text style={styles.label}>
+                    Leg Swelling/Varicose veins details
+                  </Text>
+                  <Text style={styles.input}>
+                    {capitalize(formData.swellingOrVaricoseDetails)}
+                  </Text>
+                </View>
+              )}
+            </>
+          )}
+
+          <View style={styles.fieldRow}>
+            <Text style={styles.label}>Infectious Disease</Text>
+            <Text style={styles.input}>
+              {capitalize(formData.infectiousDisease)}
+            </Text>
+          </View>
+
+          {formData.infectiousDisease === "yes" && (
+            <>
+              {formData.infectiousDiseaseDetails && (
+                <View style={styles.fieldRow}>
+                  <Text style={styles.label}>Infectious disease details</Text>
+                  <Text style={styles.input}>
+                    {capitalize(formData.infectiousDiseaseDetails)}
+                  </Text>
+                </View>
+              )}
+            </>
+          )}
+
+          <View style={styles.fieldRow}>
+            <Text style={styles.label}>HIV Positive</Text>
+            <Text style={styles.input}>{capitalize(formData.hivPositive)}</Text>
+          </View>
+
+          {formData.hivPositive === "yes" && (
+            <>
+              {formData.hivMedications.length > 0 && (
+                <View style={styles.fieldRow}>
+                  <Text style={styles.label}>HIV medications</Text>
+                  <View style={styles.inputContainer}>
+                    {formData.hivMedications.map(
+                      (
+                        { medicationName, dosage, frequency }: any,
+                        index: number
+                      ) => (
+                        <View
+                          key={`hivMedication-${index}`}
+                          style={styles.bulletItems}
+                        >
+                          <Text>
+                            • Medication Name: {capitalize(medicationName)}
+                          </Text>
+                          <Text>• Dosage: {capitalize(dosage)}</Text>
+                          <Text>• Frequency: {capitalize(frequency)}</Text>
+                        </View>
+                      )
+                    )}
+                  </View>
+                </View>
+              )}
+
+              {formData.lastViralLoadDate && (
+                <View style={styles.fieldRow}>
+                  <Text style={styles.label}>
+                    HIV last undetectable viral load date
+                  </Text>
+                  <Text style={styles.input}>
+                    {format(formData.lastViralLoadDate, "dd/MMM/yy")}
+                  </Text>
+                </View>
+              )}
+            </>
+          )}
+          <View style={styles.fieldRow}>
+            <Text style={styles.label}>Drinks alcohol</Text>
+            <Text style={styles.input}>
+              {capitalize(formData.drinkAlcohol)}
+            </Text>
+          </View>
+
+          {formData.drinkAlcohol === "yes" && (
+            <>
+              {formData.alcoholFrequency && (
+                <View style={styles.fieldRow}>
+                  <Text style={styles.label}>
+                    Alcohol consumption frequency
+                  </Text>
+                  <Text style={styles.input}>
+                    {capitalize(formData.alcoholFrequency)}
+                  </Text>
+                </View>
+              )}
+            </>
+          )}
+
+          <View style={styles.fieldRow}>
+            <Text style={styles.label}>Smoked or vaped</Text>
+            <Text style={styles.input}>
+              {capitalize(formData.smokedOrVape)}
+            </Text>
+          </View>
+
+          {formData.smokedOrVape === "yes" && (
+            <>
+              {formData.currentSmokingAmount && (
+                <View style={styles.fieldRow}>
+                  <Text style={styles.label}>Current smoking amount</Text>
+                  <Text style={styles.input}>
+                    {capitalize(formData.currentSmokingAmount)}
+                  </Text>
+                </View>
+              )}
+              {formData.currentSmokingSince && (
+                <View style={styles.fieldRow}>
+                  <Text style={styles.label}>Current smoking since</Text>
+                  <Text style={styles.input}>
+                    {capitalize(formData.currentSmokingSince)}
+                  </Text>
+                </View>
+              )}
+            </>
+          )}
+
+          {formData.smokedOrVape === "quit" && (
+            <>
+              {formData.pastSmokingAmount && (
+                <View style={styles.fieldRow}>
+                  <Text style={styles.label}>Past smoking amount</Text>
+                  <Text style={styles.input}>
+                    {capitalize(formData.pastSmokingAmount)}
+                  </Text>
+                </View>
+              )}
+              {formData.pastSmokingSince && (
+                <View style={styles.fieldRow}>
+                  <Text style={styles.label}>Past smoking since</Text>
+                  <Text style={styles.input}>
+                    {capitalize(formData.pastSmokingSince)}
+                  </Text>
+                </View>
+              )}
+            </>
+          )}
+
+          <View style={styles.fieldRow}>
+            <Text style={styles.label}>Patient uses recreational drugs</Text>
+            <Text style={styles.input}>
+              {capitalize(formData.recreationalDrugUse)}
+            </Text>
+          </View>
+
+          {formData.recreationalDrugUse === "yes" && (
+            <>
+              {formData.drugUseDetails && (
+                <View style={styles.fieldRow}>
+                  <Text style={styles.label}>
+                    Recreational drug use details
+                  </Text>
+                  <Text style={styles.input}>
+                    {capitalize(formData.drugUseDetails)}
+                  </Text>
+                </View>
+              )}
+            </>
+          )}
+
+          <View style={styles.fieldRow}>
+            <Text style={styles.label}>Currently medicated</Text>
+            <Text style={styles.input}>
+              {capitalize(formData.currentMedication)}
+            </Text>
+          </View>
+
+          {formData.currentMedication === "yes" && (
+            <>
+              {formData.medications.length > 0 && (
+                <View style={styles.fieldRow}>
+                  <Text style={styles.label}>Current medications</Text>
+                  <View style={styles.inputContainer}>
+                    {formData.medications.map(
+                      (
+                        { medicationName, dosage, frequency, purpose }: any,
+                        index: number
+                      ) => (
+                        <View
+                          key={`medications-${index}`}
+                          style={styles.bulletItems}
+                        >
+                          <Text>
+                            • Medication Name: {capitalize(medicationName)}
+                          </Text>
+                          <Text>• Dosage: {capitalize(dosage)}</Text>
+                          <Text>• Frequency: {capitalize(frequency)}</Text>
+                          <Text>• Purpose: {capitalize(purpose)}</Text>
+                        </View>
+                      )
+                    )}
+                  </View>
+                </View>
+              )}
+            </>
+          )}
+          <View style={styles.fieldRow}>
+            <Text style={styles.label}>
+              Takes antidepressants, anxiety or sleeping pills
+            </Text>
+            <Text style={styles.input}>
+              {capitalize(formData.antidepressants)}
+            </Text>
+          </View>
+
+          {formData.antidepressants === "yes" &&
+            formData.mentalHealthMedications.length > 0 && (
+              <View style={styles.fieldRow}>
+                <Text style={styles.label}>
+                  Current mental health medications
+                </Text>
+                <View style={styles.inputContainer}>
+                  {formData.mentalHealthMedications.map(
+                    (
+                      { medicationName, dosage, frequency, purpose }: any,
+                      index: number
+                    ) => (
+                      <View
+                        key={`mentalHealthMedication-${index}`}
+                        style={styles.bulletItems}
+                      >
+                        <Text>
+                          • Medication Name: {capitalize(medicationName)}
+                        </Text>
+                        <Text>• Dosage: {capitalize(dosage)}</Text>
+                        <Text>• Frequency: {capitalize(frequency)}</Text>
+                        <Text>• Purpose: {capitalize(purpose)}</Text>
+                      </View>
+                    )
+                  )}
+                </View>
+              </View>
+            )}
+
+          <View style={styles.fieldRow}>
+            <Text style={styles.label}>Previous surgeries</Text>
+            <Text style={styles.input}>
+              {capitalize(formData.previousSurgeries)}
+            </Text>
+          </View>
+
+          {formData.previousSurgeries === "yes" && (
+            <>
+              {formData.surgeries.length > 0 && (
+                <View style={styles.fieldRow}>
+                  <Text style={styles.label}>Surgery details</Text>
+                  <View style={styles.inputContainer}>
+                    {formData.surgeries.map(
+                      (
+                        { surgeryName, surgeryYear, surgeryReason }: any,
+                        index: number
+                      ) => (
+                        <View
+                          key={`surgeryDetails-${index}`}
+                          style={styles.bulletItems}
+                        >
+                          <Text>• Surgery Name: {capitalize(surgeryName)}</Text>
+                          <Text>• Surgery Year: {capitalize(surgeryYear)}</Text>
+                          <Text>
+                            • Surgery Reason: {capitalize(surgeryReason)}
+                          </Text>
+                        </View>
+                      )
+                    )}
+                  </View>
+                </View>
+              )}
+            </>
+          )}
+        </View>
         {/* ////// Images Upload //////*/}
         <View style={styles.section} break>
           <Text style={styles.title}>Patient Photos</Text>

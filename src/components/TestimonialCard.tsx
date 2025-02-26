@@ -21,11 +21,11 @@ const TestimonialCard: React.FC<TestimonialCardProps> = ({
         </div>
       </div> */}
       <figure className="flex flex-col items-center">
-        <blockquote className="text-lg sm:text-xl text-center  text-gray-900 text-balance font-medium">
+        <blockquote className="text-lg sm:text-xl text-center  text-primary-950 text-balance font-medium">
           <p>{`“${testimonialText}”`}</p>
         </blockquote>
         <figcaption className="flex">
-          <p className="text-base text-center text-primary-800 font-semibold mt-4 mx-auto">
+          <p className="text-base text-center text-primary-700 font-semibold mt-4 mx-auto">
             {testimonialName}
           </p>
         </figcaption>

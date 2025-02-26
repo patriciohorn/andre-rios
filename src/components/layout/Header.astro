@@ -37,7 +37,7 @@ const translatePath = useTranslatedPath(lang);
     <div class="hidden lg:flex lg:justify-end lg:flex-1 items-center gap-4 ">
       <LanguagePicker/>
 
-      <a href={translatePath('/contacto/')} class={cn(buttonVariants({ size: "sm"}), "hidden lg:flex bg-primary-500 text-primary-950 hover:bg-primary-600" )}>{i18n.CONTACT_BUTTON}</a>
+      <a href={translatePath('/contacto/')} class={cn(buttonVariants({ size: "sm"}), "hidden lg:flex" )}>{i18n.CONTACT_BUTTON}</a>
     </div>
   </div>
 </header>

@@ -4,7 +4,7 @@ import { z } from "zod";
 import { useForm, type UseFormWatch } from "react-hook-form";
 // import { useToast } from '@/components/hooks/use-toast';
 // import { Toaster } from '@/components/ui/toaster';
-// import PdfCreator from './PdfCreator';
+import PdfCreator from "./PdfCreator";
 import { pdf } from "@react-pdf/renderer";
 import PatientDocument from "./PatientDocument";
 
@@ -174,6 +174,7 @@ const medicalHistoryBaseSchema = z.object({
   highBloodPresure: z.enum(["yes", "no"], {
     required_error: "You need to select an option.",
   }),
+
   cholesterol: z.enum(["yes", "no"], {
     required_error: "You need to select an option.",
   }),
@@ -860,6 +861,7 @@ function ConsultationForm() {
 
   const handleSubmit = () => {
     setIsSubmitted(true);
+    window.scrollTo({ top: 0, behavior: "smooth" });
   };
 
   const updateFormData = (newData: Record<string, any>) => {
@@ -949,9 +951,9 @@ function ConsultationForm() {
     <>
       {isSubmitted ? (
         <>
-          <Card>
-            <CardContent className="min-h-screen grid place-content-center">
-              <div className="px-8 py-10 text-center flex flex-col gap-y-8 items-center bg-green-50 text-green-800 rounded-sm">
+          <Card className="px-8 py-10 bg-green-50/80">
+            <CardContent className="grid place-content-center">
+              <div className="text-center flex flex-col gap-y-8 items-center  text-green-800 rounded-sm">
                 <div className="space-y-4">
                   <CircleCheck className="text-green-800 w-full h-12" />
                   <p className="max-w-prose text-lg">

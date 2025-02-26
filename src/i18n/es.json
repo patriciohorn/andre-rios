@@ -45,7 +45,7 @@
       "PROCEDURE_9": "Lipoinfiltration"
     }
   },
-
+  "PROCEDURES_BUTTON": "Ver todos los procedimientos",
   "TESTIMONIALS_SECTION_TITLE": "Testimonios de pacientes",
   "TESTIMONIALS": [
     {
@@ -97,7 +97,7 @@
       "TESTIMONIAL_TEXT": "Recientemente tuve el placer de someterse a varios procedimientos cosméticos con el Dr. Andrei Ríos, incluyendo la liposucción 360, un levantamiento de glúteos brasileño (BBL), una abdominoplastia, un levantamiento de busto, y una torsoplastia. De principio a fin, mi experiencia con el Dr. Ríos y todo su equipo fue nada menos que excepcional."
     }
   ],
-  "GALLERY_TITLE": "Galería",
+  "GALLERY_TITLE": "Resultados de pacientes",
   "GALLERY_BUTTON": "Ver Galería",
   "CERTIFICATIONS_TITLE": "Certificado por las principales asociaciones",
   "FOOTER": {

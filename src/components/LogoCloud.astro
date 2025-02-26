@@ -18,32 +18,12 @@ import { LogoMarque } from './LogoMarquee';
 // const logoImages = [logo5, logo4, logo2, logo3, logo1];
 ---
 
-<div class="bg-[#FCF6EF] py-12 sm:py-16">
-  <div class="mx-auto max-w-7xl px-0 md:px-4">
+<div class="bg-primary-50 py-12 sm:py-16">
+  <div class="mx-auto max-w-screen-xl  px-0 md:px-4">
     <h2
-      class="font-display text-center text-xl sm:text-2xl font-bold text-gray-900 mb-6">
+      class="font-display text-center text-xl sm:text-2xl font-bold text-primary-950 mb-6">
       {i18n.CERTIFICATIONS_TITLE}
     </h2>
-    <LogoMarque client:visible />
-    <!-- <ul
-      class="mx-auto mt-12 sm:mt-20 grid max-w-lg grid-cols-4 items-center gap-x-8 gap-y-10 sm:max-w-xl sm:grid-cols-6 sm:gap-x-24 lg:mx-0 lg:max-w-none lg:grid-cols-5">
-      {
-        logoImages.map((image, idx) => (
-          <li
-            class={
-              idx !== logoImages.length - 1
-                ? `col-span-2 lg:col-span-1 mx-auto`
-                : `col-span-2 lg:col-span-1 col-start-2 sm:col-start-auto mx-auto`
-            }>
-            <Image
-              src={image}
-              alt={`Logo de certificacion ${idx}`}
-              class="w-full h-full text-center object-cover grayscale brightness-0 "
-            />
-            {/* <img class="max-w-28 lg:max-w-32 w-full text-center object-contain " src={image.src} alt="Certification logo"/>           */}
-          </li>
-        ))
-      }
-    </ul> -->
+    <LogoMarque client:visible />    
   </div>
 </div>

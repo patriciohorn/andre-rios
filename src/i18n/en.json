@@ -45,6 +45,7 @@
       "PROCEDURE_9": "Lipoinfiltration"
     }
   },
+  "PROCEDURES_BUTTON": "View All Procedures",
   "TESTIMONIALS_SECTION_TITLE": "Patient Testimonials",
   "TESTIMONIALS": [
     {
@@ -96,7 +97,7 @@
       "TESTIMONIAL_TEXT": "I recently had the pleasure of undergoing several cosmetic procedures with Dr. Andrei Rios, including 360 liposuction, a Brazilian butt lift (BBL), a belt tummy tuck, a breast lift, and a torsoplasty. From start to finish, my experience with Dr. Rios and his entire team was nothing short of exceptional."
     }
   ],
-  "GALLERY_TITLE": "Gallery",
+  "GALLERY_TITLE": "Patient Results & Outcomes",
   "GALLERY_BUTTON": "Go to Gallery",
   "CERTIFICATIONS_TITLE": "Trusted Certifications from Leading Associations",
   "FOOTER": {

@@ -3,7 +3,9 @@ import SectionWrapper from './layout/SectionWrapper.astro';
 import Heading from './Heading.astro';
 import ProcedureCard from './ProcedureCard.astro';
 import { getI18N } from '@/i18n';
-
+import { buttonVariants } from "@/components/ui/button";
+import { cn } from "@/lib/utils";
+import { getLangFromUrl, useTranslatedPath } from "@/i18n/utils";
 // Images
 import inyectablesImg from '../assets/inyectables.jpg';
 import facialImg from '../assets/facial.jpg';
@@ -11,6 +13,8 @@ import bustoImg from '../assets/busto.jpg';
 
 const { currentLocale } = Astro;
 const i18n = getI18N({ currentLocale });
+const lang = getLangFromUrl(Astro.url);
+const translatePath = useTranslatedPath(lang);
 
 const proceduresHeadings = Object.values(
   i18n.PROCEDURES.PROCEDURES_HEADINGS
@@ -19,9 +23,9 @@ const proceduresImages = [inyectablesImg, facialImg, bustoImg];
 const isSpanish = currentLocale === 'es';
 ---
 
-<SectionWrapper class="bg-[#FCF6EF]">
+<SectionWrapper class="bg-primary-50">
   <h2
-    class="font-display font-bold text-4xl sm:text-5xl text-balance mb-20 text-center">
+    class="font-display font-bold text-4xl sm:text-5xl text-balance mb-20 text-center text-primary-950">
     {i18n.PROCEDURES_TITLE}
   </h2>
   <ul class="grid sm:grid-cols-2 lg:grid-cols-3 gap-x-8 gap-y-16">
@@ -36,4 +40,14 @@ const isSpanish = currentLocale === 'es';
       ))
     }
   </ul>
+  <div class="flex justify-center mt-12">
+    <a
+    href={translatePath("/procedimientos/")}
+    class={cn(
+      buttonVariants({ size: "lg" }),
+      "flex text-base ",
+    )}>{i18n.PROCEDURES_BUTTON}</a
+  >
+</div>
+  </div>
 </SectionWrapper>

@@ -14,7 +14,7 @@ const content = Object.values(i18n.ABOUT.CONTENT);
 ---
 
 <MainLayout title={`Rios MD Plastics | ${i18n.CONTACT.TITLE}`}>
-  <section class="py-16 md:py-28 bg-[#FAFAFA]">
+  <section class="py-16 bg-primary-50">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
       <div class="flex flex-col gap-12 md:gap-28">
         <HeaderCenteredEyebrow title={i18n.CONTACT.TITLE} />
@@ -22,12 +22,12 @@ const content = Object.values(i18n.ABOUT.CONTENT);
           <div class="flex flex-col space-y-20">
             <div>
               <h2
-                class="text-gray-950 text-3xl sm:text-4xl text-balance tracking-tight font-medium mb-8">
+                class="text-primary-950 text-3xl sm:text-4xl text-balance tracking-tight font-semibold mb-8">
                 {i18n.CONTACT.SUBTITLE_1}
               </h2>
               <div class="grid sm:grid-cols-2 gap-x-20 gap-y-12">
                 <article class="flex flex-col">
-                  <h3 class="font-semibold text-gray-900">{i18n.CONTACT.LOCATION.TITLE}</h3>
+                  <h3 class="font-semibold text-primary-950">{i18n.CONTACT.LOCATION.TITLE}</h3>
                   <address class="flex-col space-y-2 text-gray-700 not-italic mt-2 text-sm">
                     {Object.values(i18n.CONTACT.LOCATION.DESCRIPTIONS).map((item) => <p>{item}</p>)}
                   </address>

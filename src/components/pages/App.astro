@@ -28,7 +28,7 @@ const translatePath = useTranslatedPath(lang);
   <Procedures />
   <Testimonials />
   <div
-    class="py-12 sm:py-28  bg-[#FCF6EF]">
+    class="py-12 sm:py-28  bg-primary-50">
     <div class="max-w-7xl mx-auto px-6 lg:px-8">
       <Heading title={i18n.GALLERY_TITLE} />
       <div
@@ -38,7 +38,7 @@ const translatePath = useTranslatedPath(lang);
           href={translatePath('/galeria/')}
           class={cn(
             buttonVariants({ size: 'lg' }),
-            'hidden lg:flex bg-primary-500 text-primary-950 text-base hover:bg-primary-600'
+            'hidden lg:flex'
           )}>{i18n.GALLERY_BUTTON}</a
         >
       </div>
