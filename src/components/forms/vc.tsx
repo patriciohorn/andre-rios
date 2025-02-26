@@ -881,17 +881,18 @@ function ConsultationForm() {
     });
   };
 
-  const sendPdfEmail = async () => {
+  const sendPdfEmail = async (formData: any) => {
     try {
       const doc = <PatientDocument formData={formData} />;
       const asPdf = pdf(doc);
       const blob = await asPdf.toBlob();
       const pdfBase64 = await blobToBase64(blob);
-
+      const fileName = `ConsultationForm_${formData.lastName}_${formData.firstName}.pdf`;
       // Prepare the payload
       const payload = {
         pdfBase64,
         doctorEmail: "patriciohorn4@gmail.com",
+        fileName,
       };
 
       const response = await fetch("/.netlify/functions/send-email", {
@@ -909,7 +910,7 @@ function ConsultationForm() {
 
   useEffect(() => {
     if (isSubmitted) {
-      sendPdfEmail();
+      sendPdfEmail(formData);
     }
   }, [isSubmitted]);
 
