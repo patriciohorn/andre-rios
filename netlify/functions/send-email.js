@@ -16,11 +16,11 @@ exports.handler = async (event, context) => {
 
     const transporter = nodemailer.createTransport({
       host: "smtp.ionos.mx",
-      port: "587",
+      port: 587,
       secure: true,
       auth: {
-        user: process.env.IONOS_USER,
-        pass: process.env.IONOS_PASS,
+        user: process.env.IONOS_SMTP_USER,
+        pass: process.env.IONOS_SMTP_PASSWORD,
       },
     });
 
