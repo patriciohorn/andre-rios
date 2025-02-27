@@ -130,6 +130,11 @@ function PatientDocument({ formData }: PdfCreatorProps) {
   const creationDate = new Date();
   const formattedDate = format(creationDate, 'dd/MMM/yyyy');
 
+  const hasExtraPhotos =
+    formData.extraPhoto1 ||
+    formData.extraPhoto2 ||
+    formData.extraPhoto3;
+
   return (
     <Document>
       <Page size="A4" style={styles.page}>
@@ -230,7 +235,6 @@ function PatientDocument({ formData }: PdfCreatorProps) {
             </Text>
           </View>
         </View>
-
         {/* ////// General Information //////*/}
         <View style={styles.section}>
           <Text style={styles.title}>General Information</Text>
@@ -384,7 +388,6 @@ function PatientDocument({ formData }: PdfCreatorProps) {
             </>
           )}
         </View>
-
         {/* ////// Medical History //////*/}
         <View style={styles.section} break>
           <Text style={styles.title}>Medical History</Text>
@@ -1075,7 +1078,6 @@ function PatientDocument({ formData }: PdfCreatorProps) {
             </>
           )}
         </View>
-
         {/* ////// Images Upload //////*/}
         <View style={styles.section} break>
           <Text style={styles.title}>Patient Photos</Text>
@@ -1114,25 +1116,38 @@ function PatientDocument({ formData }: PdfCreatorProps) {
             )}
           </View>
         </View>
-
-        {/* ////// Additional Images //////*/}
-        {/* {formData.additionalPhotos.length > 0 && (
+        {/* ////// Additional Images Here//////*/}
+        {hasExtraPhotos && (
           <View style={styles.section} break>
             <Text style={styles.title}>Additional Photos</Text>
             <View style={styles.imageGrid}>
-              {formData.additionalPhotos.map(
-                ({ id, name }: any, index: number) => (
-                  <View key={id} style={styles.imageContainer}>
-                    <Image
-                      style={styles.image}
-                      src={formData.additionalPhotos[name]}
-                    />
-                  </View>
-                )
+              {formData.extraPhoto1 && (
+                <View style={styles.imageContainer}>
+                  <Image
+                    style={styles.image}
+                    src={formData.extraPhoto1}
+                  />
+                </View>
+              )}
+              {formData.extraPhoto2 && (
+                <View style={styles.imageContainer}>
+                  <Image
+                    style={styles.image}
+                    src={formData.extraPhoto2}
+                  />
+                </View>
+              )}
+              {formData.extraPhoto3 && (
+                <View style={styles.imageContainer}>
+                  <Image
+                    style={styles.image}
+                    src={formData.extraPhoto3}
+                  />
+                </View>
               )}
             </View>
           </View>
-        )} */}
+        )}
       </Page>
     </Document>
   );

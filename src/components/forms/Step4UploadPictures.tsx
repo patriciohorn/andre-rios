@@ -155,9 +155,7 @@ export const Step4UploadPictures: React.FC<
                   <Input
                     type="file"
                     placeholder={`Additional Photo ${i + 1}`}
-                    onChange={(e) =>
-                      dynamicField.onChange(e.target.files?.[0])
-                    }
+                    onChange={(e) => handleFileChange(e, field.name)}
                   />
                 </FormControl>
                 <FormDescription>

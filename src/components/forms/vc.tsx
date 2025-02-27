@@ -951,11 +951,11 @@ function ConsultationForm() {
     }
   };
 
-  // useEffect(() => {
-  //   if (isSubmitted) {
-  //     sendPdfEmail(formData);
-  //   }
-  // }, [isSubmitted]);
+  useEffect(() => {
+    if (isSubmitted) {
+      sendPdfEmail(formData);
+    }
+  }, [isSubmitted]);
 
   const renderStepContent = () => {
     switch (currentStep) {
@@ -1018,7 +1018,7 @@ function ConsultationForm() {
               </div>
             </CardContent>
           </Card>
-          <PdfCreator formData={formData} />
+          {/* <PdfCreator formData={formData} /> */}
         </>
       ) : (
         <Card>
