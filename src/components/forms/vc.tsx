@@ -934,7 +934,7 @@ function ConsultationForm() {
       // Prepare the payload
       const payload = {
         pdfBase64,
-        doctorEmail: 'patriciohorn4@gmail.com',
+        doctorEmail: 'info@riosmdplastics.com',
         fileName,
       };
 
