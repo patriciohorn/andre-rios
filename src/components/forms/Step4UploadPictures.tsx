@@ -143,18 +143,18 @@ export const Step4UploadPictures: React.FC<
         />
 
         {/* Dynamically rendering additional fields */}
-        {extraFields.map((field) => (
+        {extraFields.map((field, i) => (
           <FormField
             key={field.id}
             control={form.control}
             name={field.name}
             render={({ field: dynamicField }) => (
               <FormItem>
-                <FormLabel>Additional Photo {field.id + 1}</FormLabel>
+                <FormLabel>Additional Photo {i + 1}</FormLabel>
                 <FormControl>
                   <Input
                     type="file"
-                    placeholder={`Additional Photo ${field.id + 1}`}
+                    placeholder={`Additional Photo ${i + 1}`}
                     onChange={(e) =>
                       dynamicField.onChange(e.target.files?.[0])
                     }

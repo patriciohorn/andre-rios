@@ -66,22 +66,20 @@ const styles = StyleSheet.create({
   },
 
   imageGrid: {
-    flexDirection: 'column',
+    flexDirection: 'row',
+    flexWrap: 'wrap',
     justifyContent: 'space-between',
   },
 
-  imagesRow: {
-    flexDirection: 'row',
-    justifyContent: 'space-between',
+  imageContainer: {
+    width: '48%',
     marginBottom: 10,
-    gap: 10,
-    flexWrap: 'wrap',
+    aspectRatio: 1,
   },
   image: {
-    flex: 1,
-    aspectRatio: 1,
+    width: '100%',
+    height: '100%',
     objectFit: 'cover',
-    maxWidth: 250,
   },
 
   bulletItems: {
@@ -388,10 +386,8 @@ function PatientDocument({ formData }: PdfCreatorProps) {
         </View>
 
         {/* ////// Medical History //////*/}
-
         <View style={styles.section} break>
           <Text style={styles.title}>Medical History</Text>
-
           <View style={styles.fieldRow}>
             <Text style={styles.label}>Illness history</Text>
             <Text style={styles.input}>
@@ -1079,52 +1075,64 @@ function PatientDocument({ formData }: PdfCreatorProps) {
             </>
           )}
         </View>
+
         {/* ////// Images Upload //////*/}
         <View style={styles.section} break>
           <Text style={styles.title}>Patient Photos</Text>
           <View style={styles.imageGrid}>
-            <View style={styles.imagesRow}>
-              {formData.frontPhotoDataUrl && (
+            {formData.frontPhotoDataUrl && (
+              <View style={styles.imageContainer}>
                 <Image
                   style={styles.image}
-                  src={formData.frontPhotoDataUrl}></Image>
-              )}
-              {formData.backPhotoDataUrl && (
+                  src={formData.frontPhotoDataUrl}
+                />
+              </View>
+            )}
+            {formData.backPhotoDataUrl && (
+              <View style={styles.imageContainer}>
                 <Image
                   style={styles.image}
-                  src={formData.backPhotoDataUrl}></Image>
-              )}
-            </View>
-
-            <View style={styles.imagesRow}>
-              {formData.leftPhotoDataUrl && (
+                  src={formData.backPhotoDataUrl}
+                />
+              </View>
+            )}
+            {formData.leftPhotoDataUrl && (
+              <View style={styles.imageContainer}>
                 <Image
                   style={styles.image}
-                  src={formData.leftPhotoDataUrl}></Image>
-              )}
-              {formData.rightPhotoDataUrl && (
+                  src={formData.leftPhotoDataUrl}
+                />
+              </View>
+            )}
+            {formData.rightPhotoDataUrl && (
+              <View style={styles.imageContainer}>
                 <Image
                   style={styles.image}
-                  src={formData.rightPhotoDataUrl}></Image>
-              )}
-
-              {formData.additionalPhotos &&
-                formData.additionalPhotos.length > 0 && (
-                  <View style={styles.imagesRow} break>
-                    {formData.additionalPhotos.map(
-                      (photo: string, index: number) => (
-                        <Image
-                          key={`additional-${index}`}
-                          style={styles.image}
-                          src={photo}
-                        />
-                      )
-                    )}
-                  </View>
-                )}
-            </View>
+                  src={formData.rightPhotoDataUrl}
+                />
+              </View>
+            )}
           </View>
         </View>
+
+        {/* ////// Additional Images //////*/}
+        {/* {formData.additionalPhotos.length > 0 && (
+          <View style={styles.section} break>
+            <Text style={styles.title}>Additional Photos</Text>
+            <View style={styles.imageGrid}>
+              {formData.additionalPhotos.map(
+                ({ id, name }: any, index: number) => (
+                  <View key={id} style={styles.imageContainer}>
+                    <Image
+                      style={styles.image}
+                      src={formData.additionalPhotos[name]}
+                    />
+                  </View>
+                )
+              )}
+            </View>
+          </View>
+        )} */}
       </Page>
     </Document>
   );
