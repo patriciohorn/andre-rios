@@ -93,7 +93,7 @@ const breastPaths = [
             {i18n.GALLERY.BREAST.TITLE}
           </h3>
           <div
-            class="col-span-3 grid sm:grid-cols-2 md:grid-cols-3 gap-6 sm:gap-y-7 lg:gap-x-7 max-h-[50px]">
+            class="col-span-3 grid sm:grid-cols-2 md:grid-cols-3 gap-6 sm:gap-y-7 lg:gap-x-7">
             {
               breastImages.map((item, idx) => (
                 <a
@@ -107,8 +107,8 @@ const breastPaths = [
                       loading="eager"
                     />
                   </div>
-                  <div class="py-3 px-4 border-t flex items-center justify-between">
-                    <p class="font-medium text-gray-700 group-hover:text-primary-500 transition-colors duration-300 ease-in-out whitespace-normal">
+                  <div class="py-3 px-4 border-t flex items-center justify-between max-h-[50px]">
+                    <p class="font-medium text-gray-700 group-hover:text-primary-500 transition-colors duration-300 ease-in-out">
                       {breastTitles[idx]}
                     </p>
                     <Icon
