@@ -1,0 +1,45 @@
+---
+import { getI18N } from '@/i18n';
+import { getLangFromUrl, useTranslatedPath } from '@/i18n/utils';
+import { Image } from 'astro:assets';
+import ctaImage from '@/assets/cta.jpg';
+import { cn } from '@/lib/utils';
+import { buttonVariants } from '@/components/ui/button';
+const { currentLocale } = Astro;
+const i18n = getI18N({ currentLocale });
+const lang = getLangFromUrl(Astro.url);
+const translatePath = useTranslatedPath(lang);
+---
+
+<section class="py-12 sm:py-28 sm:pb-56 overflow-hidden bg-section">
+  <div class="max-w-6xl mx-auto px-5 lg:px-8">
+    <div
+      class="sm:grid sm:grid-cols-[1fr_1fr] gap-x-20 gap-y-12 rounded-lg overflow-hidden shadow-lg bg-[url('/overlay-light.svg')] bg-cover">
+      <div class="flex flex-col justify-center p-10 sm:-12">
+        <h2
+          class="text-3xl font-bold text-heading md:text-5xl tracking-tight text-balance text-center sm:text-left">
+          {i18n.CTA.TITLE}
+        </h2>
+
+        <p class="hidden text-stone-700 text-lg md:mt-6 md:block">
+          {i18n.CTA.DESCRIPTION}
+        </p>
+
+        <div class="mt-4 md:mt-10">
+          <a
+            href={translatePath('/consulta-virtual/')}
+            class={cn(buttonVariants({ size: 'lg' }), 'text-base ')}
+            >{i18n.CTA.BUTTON}</a
+          >
+        </div>
+      </div>
+      <div class="hidden sm:block sm:aspect-square">
+        <Image
+          src={ctaImage}
+          alt="Dr. Andrei Rios"
+          class="object-cover w-full h-full"
+        />
+      </div>
+    </div>
+  </div>
+</section>

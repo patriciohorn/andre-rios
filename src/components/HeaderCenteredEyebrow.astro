@@ -1,29 +1,29 @@
 ---
-import { getI18N } from "@/i18n";
+import { getI18N } from '@/i18n';
 
-const {currentLocale} = Astro
-const i18n = getI18N({currentLocale})
+const { currentLocale } = Astro;
+const i18n = getI18N({ currentLocale });
 
 interface Props {
-  eyebrow?: string; 
-  title: string; 
-  description?: string; 
+  eyebrow?: string;
+  title: string;
+  description?: string;
 }
-const {eyebrow, title, description} = Astro.props
+const { eyebrow, title, description } = Astro.props;
 ---
 
 <div class="">
-  <div class="max-w-2xl mx-auto text-center flex flex-col items-center gap-6">
+  <div
+    class="max-w-2xl mx-auto text-center flex flex-col items-center gap-6">
     <div class="flex flex-col gap-2">
       <p
-        class="text-primary-500 text-sm font-semibold uppercase tracking-wide">
+        class="text-primary-600 text-sm font-semibold uppercase tracking-wide">
         {eyebrow}
       </p>
-      <h1
-        class="text-4xl sm:text-5xl font-bold tracking-tight text-primary-950">
+      <h1 class="text-4xl sm:text-5xl font-bold font-heading">
         {title}
       </h1>
     </div>
-    <p class="text-lg leading-8 max-w-prose">{description}</p>    
+    <p class="text-lg leading-8 max-w-prose">{description}</p>
   </div>
 </div>

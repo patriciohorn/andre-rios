@@ -1,9 +1,12 @@
 ---
 interface Props {
-  title: string
+  title: string;
 }
 
-const {title} = Astro.props
+const { title } = Astro.props;
 ---
 
-<h2 class="text-4xl sm:text-5xl text-center font-bold text-primary-950 max-w-3xl mx-auto">{title}</h2>
+<h2
+  class="text-4xl sm:text-5xl text-center font-bold text-heading font-display max-w-3xl mx-auto">
+  {title}
+</h2>

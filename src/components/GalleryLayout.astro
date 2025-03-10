@@ -4,12 +4,12 @@ import HeaderCenteredEyebrow from './HeaderCenteredEyebrow.astro';
 import { GalleryTabs } from '@/components/GalleryTabs';
 import { WeightLossGalleryTabs } from '@/components/WeightLossGalleryTabs';
 import MainLayout from '@/layouts/MainLayout.astro';
-
+import CTASmall from '@/components/CTASmall.astro';
 const { eyebrow, title, tabsData } = Astro.props;
 ---
 
 <MainLayout title={`Rios MD Plastics | Gallery - ${title}`}>
-  <section class="bg-primary-50 py-16 sm:py-20">
+  <section class="bg-section py-16 sm:py-20">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
       <div class="flex flex-col gap-10">
         <div>
@@ -39,4 +39,5 @@ const { eyebrow, title, tabsData } = Astro.props;
       </div>
     </div>
   </section>
+  <CTASmall />
 </MainLayout>

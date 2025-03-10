@@ -1,18 +1,19 @@
 {
   "SEO_TITLE": "Rios MD Plastics - Cirugía Plástica, Estética y Reconstructiva",
   "SEO_DESCRIPTION": "Realza tu belleza, con las mejores y más innovadoras técnicas, tanto en procedimientos quirúrgicos como no quirúrgicos.",
-  "CONTACT_BUTTON": "Contáctanos",
+  "CONTACT_BUTTON": "Consulta Virtual",
   "BANNER": {
     "BUSINESS_HOURS": "Lun - Vie 11 am - 8 pm / Sáb 10 am - 2 pm (PST)"
   },
   "HERO_TITLE": "Dr. Andrei Ríos",
   "HERO_DESCRIPTION": "CIRUGÍA PLÁSTICA, ESTÉTICA Y RECONSTRUCTIVA",
   "HERO_BUTTON": "Conoce a tu Doctor",
+  "HERO_BUTTON_SECONDARY": "Consulta Virtual",
   "HERO_TAG": "CIRUGÍA PLÁSTICA, ESTÉTICA Y RECONSTRUCTIVA",
   "INTRO_TITLE": "Realza tu belleza con cuidados expertos",
   "INTRO": "Bienvenidos al lugar ideal para realizar ese procedimiento que realzará tu belleza. Nuestro objetivo es que te sientas y luzcas como siempre has imaginado.",
   "INTRO_ITEM_HEADING_1": "Especialista Certificado",
-  "INTRO_ITEM_HEADING_2": "Tecnicas Avanzadas",
+  "INTRO_ITEM_HEADING_2": "Técnicas Avanzadas",
   "INTRO_ITEM_DESCRIPTION_1": "Experimenta resultados excepcionales con un experto de confianza en el campo de la cirugía.",
   "INTRO_ITEM_DESCRIPTION_2": "Utilizamos las mejores y más novedosas técnicas, tanto en procedimientos quirúrgicos y no quirúrgicos.",
   "PROCEDURES_TITLE": "Procedimientos a la medida",
@@ -99,6 +100,11 @@
   ],
   "GALLERY_TITLE": "Resultados de pacientes",
   "GALLERY_BUTTON": "Ver Galería",
+  "CTA": {
+    "TITLE": "Obtén tu consulta virtual",
+    "DESCRIPTION": "Da el primer paso hacia tus objetivos estéticos con una consulta virtual. Envíanos tus datos y revisaremos tu caso",
+    "BUTTON": "Comienza tu consulta virtual"
+  },
   "CERTIFICATIONS_TITLE": "Certificado por las principales asociaciones",
   "FOOTER": {
     "FOOTER_DISCLAIMER": "Dr. Andrei Ríos proporciona información en este sitio web o en sus medios de comunicación como correo y redes sociales con propósitos informativos y educativos solamente. El contenido de estos, no es un sustituto para un diagnóstico, opinión, tratamiento o servicio profesional. El material aquí desplegado no debe ser usado para sustituir una relación médico-paciente. Siempre se debe buscar el consejo de su Cirujano Plástico Certificado para resolver sus dudas o preocupaciones acerca de su tratamiento médico. Las fotos desplegadas se comparten con previa autorización de pacientes, y sirven para propósitos demostrativos solamente.",

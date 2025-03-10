@@ -42,16 +42,18 @@
     --primary-900: 27 32% 28%;
     --primary-950: 25 35% 15%;
 
-    --secondary-200: 37 71% 78%;
+    /* --heading: 20 43% 1%; */
+    --heading: 17 33% 4%;
+    --section: 30 50% 99%;
   }
 
-  input[type="number"]::-webkit-outer-spin-button,
-  input[type="number"]::-webkit-inner-spin-button {
+  input[type='number']::-webkit-outer-spin-button,
+  input[type='number']::-webkit-inner-spin-button {
     @apply appearance-none; /* Tailwind's utility for removing appearance */
     margin: 0;
   }
 
-  input[type="number"] {
+  input[type='number'] {
     appearance: textfield; /* Standard property for appearance */
     -moz-appearance: textfield; /* Vendor prefix for Firefox */
     -webkit-appearance: none; /* Vendor prefix for WebKit browsers */
@@ -60,36 +62,36 @@
 
 @layer base {
   @font-face {
-    font-family: "Inter";
-    src: url("/fonts/inter.woff2") format("woff2");
+    font-family: 'Inter';
+    src: url('/fonts/inter.woff2') format('woff2');
     font-weight: normal;
     font-style: normal;
     font-display: swap;
   }
   @font-face {
-    font-family: "Inter";
-    src: url("/fonts/inter.woff2") format("woff2");
+    font-family: 'Inter';
+    src: url('/fonts/inter.woff2') format('woff2');
     font-weight: bold;
     font-style: bold;
     font-display: swap;
   }
   @font-face {
-    font-family: "Inter";
-    src: url("/fonts/inter.woff2") format("woff2");
+    font-family: 'Inter';
+    src: url('/fonts/inter.woff2') format('woff2');
     font-weight: 500;
     font-style: normal;
     font-display: swap;
   }
   @font-face {
-    font-family: "Inter";
-    src: url("/fonts/inter.woff2") format("woff2");
+    font-family: 'Inter';
+    src: url('/fonts/inter.woff2') format('woff2');
     font-weight: 600;
     font-style: normal;
     font-display: swap;
   }
   @font-face {
-    font-family: "Inter";
-    src: url("/fonts/inter.woff2") format("woff2");
+    font-family: 'Inter';
+    src: url('/fonts/inter.woff2') format('woff2');
     font-weight: extrabold;
     font-style: extrabold;
     font-display: swap;

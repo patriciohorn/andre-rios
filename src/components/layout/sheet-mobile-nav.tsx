@@ -5,9 +5,18 @@ import { Button } from '@components/ui/button';
 import { cn } from '@/lib/utils';
 import { buttonVariants } from '@/components/ui/button';
 
-import { Sheet, SheetContent, SheetTrigger, SheetTitle } from '@/components/ui/sheet';
+import {
+  Sheet,
+  SheetContent,
+  SheetTrigger,
+  SheetTitle,
+} from '@/components/ui/sheet';
 import { ScrollArea } from '@/components/ui/scroll-area';
-import { Collapsible, CollapsibleContent, CollapsibleTrigger } from '@/components/ui/collapsible';
+import {
+  Collapsible,
+  CollapsibleContent,
+  CollapsibleTrigger,
+} from '@/components/ui/collapsible';
 
 // Icons
 import { Menu } from 'lucide-react';
@@ -41,7 +50,11 @@ interface SheetMobileNavProps {
   procedures: Record<string, { title: string; url: string }[]>;
 }
 
-export function SheetMobileNav({ translations, paths, procedures }: SheetMobileNavProps) {
+export function SheetMobileNav({
+  translations,
+  paths,
+  procedures,
+}: SheetMobileNavProps) {
   const [open, setOpen] = React.useState(false);
   const [isLoaded, setIsLoaded] = React.useState(false);
 
@@ -57,17 +70,26 @@ export function SheetMobileNav({ translations, paths, procedures }: SheetMobileN
   return (
     <Sheet open={open} onOpenChange={setOpen}>
       <SheetTrigger asChild>
-        <Button variant="secondary" size="sm" className="h-8 px-1.5 lg:hidden bg-transparent">
+        <Button
+          variant="secondary"
+          size="sm"
+          className="h-8 px-1.5 lg:hidden bg-transparent">
           <span className="sr-only">Desplegar Menú</span>
-          <Menu className="size-6 text-primary-50" />
+          <Menu className="size-6 text-white" />
         </Button>
       </SheetTrigger>
-      <SheetContent side="left" className="flex flex-col gap-y-5 bg-primary-100">
+      <SheetContent
+        side="left"
+        className="flex flex-col gap-y-5 bg-section">
         <SheetTitle className="sr-only">Menu</SheetTitle>
         <div className="h-16">
           <a href="/">
             <div className="sr-only">Inicio</div>
-            <img src={logo.src} alt="Dr. Andrei Ríos logo" className="h-10" />
+            <img
+              src={logo.src}
+              alt="Dr. Andrei Ríos logo"
+              className="h-10"
+            />
           </a>
         </div>
 
@@ -90,22 +112,26 @@ export function SheetMobileNav({ translations, paths, procedures }: SheetMobileN
                   </CollapsibleTrigger>
                   <CollapsibleContent>
                     <div className="flex flex-col space-y-2">
-                      {Object.entries(procedures).map(([category, items], idx) => (
-                        <div className="flex flex-col pl-2">
-                          <h4 className="text-sm text-slate-900 font-semibold p-2">{category}</h4>
-                          <ul className="pl-4">
-                            {items?.map((item, i) => (
-                              <li key={i}>
-                                <a
-                                  href={item.url}
-                                  className="flex items-center text-sm leading-6 text-slate-600 p-1 rounded-md">
-                                  {item.title}
-                                </a>
-                              </li>
-                            ))}
-                          </ul>
-                        </div>
-                      ))}
+                      {Object.entries(procedures).map(
+                        ([category, items], idx) => (
+                          <div className="flex flex-col pl-2">
+                            <h4 className="text-sm text-slate-900 font-semibold p-2">
+                              {category}
+                            </h4>
+                            <ul className="pl-4">
+                              {items?.map((item, i) => (
+                                <li key={i}>
+                                  <a
+                                    href={item.url}
+                                    className="flex items-center text-sm leading-6 text-slate-600 p-1 rounded-md">
+                                    {item.title}
+                                  </a>
+                                </li>
+                              ))}
+                            </ul>
+                          </div>
+                        )
+                      )}
                     </div>
                   </CollapsibleContent>
                 </Collapsible>
@@ -120,9 +146,9 @@ export function SheetMobileNav({ translations, paths, procedures }: SheetMobileN
 
                 <li>
                   <a
-                    href={paths['nav.virtual']}
+                    href={paths['nav.contacto']}
                     className="flex items-center text-sm font-medium leading-6 text-slate-900 p-2 -mx-2">
-                    {translations['nav.virtual']}
+                    {translations['nav.contacto']}
                   </a>
                 </li>
               </ul>
@@ -130,9 +156,9 @@ export function SheetMobileNav({ translations, paths, procedures }: SheetMobileN
             <div className="mt-6">
               <Button asChild>
                 <a
-                  href={paths['nav.contacto']}
+                  href={paths['nav.virtual']}
                   className="flex bg-primary text-primary-950 hover:bg-primary-600 w-full">
-                  {translations['nav.contacto']}
+                  {translations['nav.virtual']}
                 </a>
               </Button>
             </div>

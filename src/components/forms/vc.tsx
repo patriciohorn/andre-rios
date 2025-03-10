@@ -23,6 +23,7 @@ import { Step2Expectations } from './Step2Expectations';
 import { Step3MedicalHistory } from './Step3MedicalHistory';
 import { Step4UploadPictures } from './Step4UploadPictures';
 import { CircleCheck } from 'lucide-react';
+import ConsultationStart from './ConsultationStart';
 
 const personalInformationSchema = z.object({
   firstName: z
@@ -712,13 +713,23 @@ const medicalHistorySchema = medicalHistoryBaseSchema.superRefine(
   }
 );
 
-const MAX_FILE_SIZE = 2 * 1024 * 1024;
+const MAX_FILE_SIZE = 5 * 1024 * 1024;
+const ACCEPTED_IMAGE_MIME_TYPES = [
+  'image/jpeg',
+  'image/jpg',
+  'image/png',
+  'image/webp',
+];
 
 const fileSchema = z
   .instanceof(File)
   .refine((file) => file.size <= MAX_FILE_SIZE, {
-    message: `File size must not exceed ${MAX_FILE_SIZE / (1024 * 1024)} MB.`,
-  });
+    message: `File size must not exceed 5 MB.`,
+  })
+  .refine(
+    (file) => ACCEPTED_IMAGE_MIME_TYPES.includes(file.type),
+    'Only .jpg, .jpeg, .png and .webp formats are supported.'
+  );
 
 const imageUploadSchema = z.object({
   frontPhoto: fileSchema.optional(),
@@ -732,6 +743,7 @@ const imageUploadSchema = z.object({
 });
 
 const steps = [
+  'Before we begin',
   'Personal Information',
   'General Information',
   'Medical History',
@@ -962,10 +974,17 @@ function ConsultationForm() {
       case 0:
         return (
           <div>
+            <ConsultationStart />
+          </div>
+        );
+
+      case 1:
+        return (
+          <div>
             <Step1GeneralInfo form={personalInformationForm} />
           </div>
         );
-      case 1:
+      case 2:
         return (
           <div>
             <Step2Expectations
@@ -974,13 +993,13 @@ function ConsultationForm() {
             />
           </div>
         );
-      case 2:
+      case 3:
         return (
           <div>
             <Step3MedicalHistory form={medicalHistoryForm} />
           </div>
         );
-      case 3:
+      case 4:
         return (
           <div>
             <Step4UploadPictures
@@ -1018,12 +1037,12 @@ function ConsultationForm() {
               </div>
             </CardContent>
           </Card>
-          {/* <PdfCreator formData={formData} /> */}
+          <PdfCreator formData={formData} />
         </>
       ) : (
         <Card>
           <CardHeader className=" min-h-[90px]">
-            <CardTitle className="text-2xl">
+            <CardTitle className="text-2xl text-heading">
               {steps[currentStep]}
             </CardTitle>
             {currentStep === steps.length - 1 && (
@@ -1046,35 +1065,48 @@ function ConsultationForm() {
               </p>
             )}
           </CardContent>
-          <CardFooter className="flex justify-between">
-            {currentStep > 0 && (
-              <Button variant="outline" onClick={handlePreviousStep}>
+          <CardFooter className="flex justify-between mt-4">
+            {currentStep === 0 && (
+              <Button
+                className="mx-auto"
+                onClick={() => setCurrentStep((prev) => prev + 1)}>
+                Start Consultation
+              </Button>
+            )}
+
+            {currentStep > 1 && (
+              <Button
+                variant="outline"
+                className="text-black"
+                onClick={handlePreviousStep}>
                 Previous
               </Button>
             )}
-            {currentStep < steps.length - 1 ? (
-              <Button
-                className="ml-auto min-w-24"
-                onClick={() => {
-                  const currentForm =
-                    currentStep === 0
-                      ? personalInformationForm
-                      : currentStep === 1
-                        ? generalInformationForm
-                        : currentStep === 2
-                          ? medicalHistoryForm
-                          : imageUploadForm;
 
-                  currentForm.handleSubmit(
-                    (data) => handleNextStep(data),
-                    (errors) => onError(errors)
-                  )();
-                }}>
-                Next
-              </Button>
-            ) : (
-              <Button onClick={handleSubmit}>Submit</Button>
-            )}
+            {currentStep > 0 &&
+              (currentStep < steps.length - 1 ? (
+                <Button
+                  className="ml-auto min-w-24"
+                  onClick={() => {
+                    const currentForm =
+                      currentStep === 1
+                        ? personalInformationForm
+                        : currentStep === 2
+                          ? generalInformationForm
+                          : currentStep === 3
+                            ? medicalHistoryForm
+                            : imageUploadForm;
+
+                    currentForm.handleSubmit(
+                      (data) => handleNextStep(data),
+                      (errors) => onError(errors)
+                    )();
+                  }}>
+                  Next
+                </Button>
+              ) : (
+                <Button onClick={handleSubmit}>Submit</Button>
+              ))}
           </CardFooter>
         </Card>
       )}

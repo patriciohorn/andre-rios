@@ -1,43 +1,54 @@
 ---
-import {Image} from "astro:assets"
-import logoWhite from "@/assets/logo-white.svg"
+import { Image } from 'astro:assets';
+import logoWhite from '@/assets/logo-white.svg';
 // import { Button } from "@/components/ui/button";
-import { cn } from "@/lib/utils";
-import { buttonVariants } from "@/components/ui/button"
+import { cn } from '@/lib/utils';
+import { buttonVariants } from '@/components/ui/button';
 
-import LanguagePicker from "../LanguagePicker.astro";
+import LanguagePicker from '../LanguagePicker.astro';
 
-import { getI18N } from "@/i18n/index"
-const { currentLocale } = Astro
-const i18n = getI18N({ currentLocale })
-import { getLangFromUrl, useTranslatedPath, } from '@/i18n/utils';
-import LangPickSmall from "../LangPickSmall.astro";
+import { getI18N } from '@/i18n/index';
+const { currentLocale } = Astro;
+const i18n = getI18N({ currentLocale });
+import { getLangFromUrl, useTranslatedPath } from '@/i18n/utils';
+import LangPickSmall from '../LangPickSmall.astro';
 const lang = getLangFromUrl(Astro.url);
 const translatePath = useTranslatedPath(lang);
-
 ---
 
-<header class="flex items-center h-16 md:h-20 z-50 sticky top-0 bg-neutral-900 shadow-xl py-4">
-  <div class="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex items-center justify-between w-full h-full">   
+<header
+  class="flex items-center h-16 md:h-20 z-50 sticky top-0 bg-[#101820] shadow-xl py-4">
+  <div
+    class="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex items-center justify-between w-full h-full">
     <a href={translatePath('/')} class="flex-1">
       <div class="sr-only">Inicio</div>
-      <Image src={logoWhite} alt="logo Dr. Andrei Rios" height="64" width="252" class="h-10 sm:h-12 w-auto"/>
-    </a> 
+      <Image
+        src={logoWhite}
+        alt="logo Dr. Andrei Rios"
+        height="64"
+        width="252"
+        class="h-10 sm:h-12 w-auto"
+      />
+    </a>
 
-
-    <LangPickSmall/>
-    <slot name="mobile-nav-header"/>  
-
+    <LangPickSmall />
+    <slot name="mobile-nav-header" />
 
     <div class="hidden lg:flex">
-      <slot name="center-header"/>
+      <slot name="center-header" />
     </div>
 
-   
-    <div class="hidden lg:flex lg:justify-end lg:flex-1 items-center gap-4 ">
-      <LanguagePicker/>
+    <div
+      class="hidden lg:flex lg:justify-end lg:flex-1 items-center gap-4">
+      <LanguagePicker />
 
-      <a href={translatePath('/contacto/')} class={cn(buttonVariants({ size: "sm"}), "hidden lg:flex" )}>{i18n.CONTACT_BUTTON}</a>
+      <a
+        href={translatePath('/consulta-virtual/')}
+        class={cn(
+          buttonVariants({ size: 'sm' }),
+          'hidden lg:flex text-sm'
+        )}>{i18n.CONTACT_BUTTON}</a
+      >
     </div>
   </div>
 </header>

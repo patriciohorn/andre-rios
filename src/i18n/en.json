@@ -4,11 +4,12 @@
   "BANNER": {
     "BUSINESS_HOURS": "Mon - Fri 11 am - 8 pm / Sat 10 am - 2 pm (PST)"
   },
-  "CONTACT_BUTTON": "Contact Us",
+  "CONTACT_BUTTON": "Virtual Consultation",
   "HERO_TITLE": "Dr. Andrei Ríos",
   "HERO_DESCRIPTION": "BOARD CERTIFIED PLASTIC, AESTHETIC AND RECONSTRUCTIVE SURGEON",
   "HERO_TAG": "BOARD CERTIFIED PLASTIC, AESTHETIC AND RECONSTRUCTIVE SURGEON",
   "HERO_BUTTON": "Meet Your Doctor",
+  "HERO_BUTTON_SECONDARY": "Virtual Consultation",
   "INTRO_TITLE": "Enhance Your Beauty with Expert Care",
   "INTRO": "Welcome to the ideal place to have that procedure which will enhance your beauty. Our goal is to make you feel and look as you have always imagined.",
   "INTRO_ITEM_HEADING_1": "Certified Specialist",
@@ -99,6 +100,11 @@
   ],
   "GALLERY_TITLE": "Patient Results & Outcomes",
   "GALLERY_BUTTON": "Go to Gallery",
+  "CTA": {
+    "TITLE": "Get Your Virtual Consultation",
+    "DESCRIPTION": "Take the first step toward your aesthetic goals with a virtual consultation. Submit your details and we will review your case",
+    "BUTTON": "Start Your Virtual Consultation"
+  },
   "CERTIFICATIONS_TITLE": "Trusted Certifications from Leading Associations",
   "FOOTER": {
     "FOOTER_DISCLAIMER": "Dr. Andrei Ríos provides information on this website or through his communication means such as mail and social networks for informational and educational purposes only. The content of these is not a substitute for a professional diagnosis, opinion, treatment or service. The material displayed here should not be used to substitute a doctor-patient relationship. You should always seek the advice of your Board Certified Plastic Surgeon to resolve your questions or concerns about your medical treatment. Photos displayed are shared with prior permission from patients, and are for demonstration purposes only.",

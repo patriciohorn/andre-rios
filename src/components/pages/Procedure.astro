@@ -2,22 +2,31 @@
 import MainLayout from '@/layouts/MainLayout.astro';
 import HeaderCenteredEyebrow from '../HeaderCenteredEyebrow.astro';
 import { Image } from 'astro:assets';
+import CTASmall from '@/components/CTASmall.astro';
 const { title, tag, cover } = Astro.props;
 ---
 
 <MainLayout title={`Rios MD Plastics | ${title}`}>
   <!-- bg-gradient-to-t from-white from-[73%] to-primary-200 to-[27%] -->
-  <section class="bg-primary-50">
-    <div class="max-w-4xl px-8 mx-auto py-16 sm:py-20">
+
+  <section class="bg-section">
+    <section class="max-w-4xl px-8 mx-auto pt-16 sm:pt-20">
       <div class="flex flex-col gap-20">
         <HeaderCenteredEyebrow eyebrow={tag} title={title} />
-        <div class="rounded-xl overflow-hidden shadow-sm border border-gray-100">
-          <Image src={cover} alt={title} class="w-full h-auto object-cover max-h-[576px]" />
+        <div
+          class="rounded-xl overflow-hidden shadow-sm border border-gray-100">
+          <Image
+            src={cover}
+            alt={title}
+            class="w-full h-auto object-cover max-h-[576px]"
+          />
         </div>
-        <div class="flex flex-col gap-6 lg:gap-8 text-gray-800 leading-6 lg:text-lg lg:leading-7">
+        <div
+          class="flex flex-col gap-6 lg:gap-8 text-gray-800 leading-6 lg:text-lg lg:leading-7">
           <slot />
         </div>
       </div>
-    </div>
+    </section>
+    <CTASmall />
   </section>
 </MainLayout>

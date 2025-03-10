@@ -1,4 +1,4 @@
-import React from "react";
+import React from 'react';
 
 interface TestimonialCardProps {
   // src: string;
@@ -21,7 +21,7 @@ const TestimonialCard: React.FC<TestimonialCardProps> = ({
         </div>
       </div> */}
       <figure className="flex flex-col items-center">
-        <blockquote className="text-lg sm:text-xl text-center  text-primary-950 text-balance font-medium">
+        <blockquote className="text-lg sm:text-xl text-center  text-stone-600 text-balance font-medium">
           <p>{`“${testimonialText}”`}</p>
         </blockquote>
         <figcaption className="flex">

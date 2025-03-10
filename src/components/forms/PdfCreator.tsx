@@ -1,5 +1,5 @@
-import { differenceInYears } from "date-fns";
-import PatientDocument from "./PatientDocument";
+import { differenceInYears } from 'date-fns';
+import PatientDocument from './PatientDocument';
 import {
   Page,
   Text,
@@ -10,7 +10,7 @@ import {
   Image,
   Font,
   BlobProvider,
-} from "@react-pdf/renderer";
+} from '@react-pdf/renderer';
 
 // Font.register({
 //   family: 'Roboto',

@@ -14,12 +14,12 @@ import { LanguageDialog } from '../language-dialog';
 ---
 
 <section
-  class="relative min-h-screen sm:max-h-[90vh] bg-[url('/rios-hero.jpg')] bg-no-repeat bg-cover bg-center">
+  class="relative min-h-[85vh] sm:min-h-screen bg-[url('/hero-rios-mobile.jpg')] sm:bg-[url('/rios-hero.jpg')] bg-no-repeat bg-center bg-cover">
   <div
-    class="absolute inset-0 bg-gradient-to-t from-black/90 from-20% to-black/0">
+    class="absolute inset-0 bg-gradient-to-t sm:bg-gradient-to-tr from-black/90 sm:from-black/70 to-transparent">
   </div>
   <div
-    class="relative mx-auto max-w-screen-xl px-8 p-0 sm:px-6 flex items-end py-20 lg:px-8 min-h-[90vh]">
+    class="relative mx-auto max-w-screen-xl px-8 p-0 sm:px-6 flex items-end py-20 lg:px-8 min-h-[85vh]">
     <div>
       <div class="text-center sm:text-left">
         <h1
@@ -27,15 +27,23 @@ import { LanguageDialog } from '../language-dialog';
           {i18n.HERO_TITLE}
         </h1>
         <p
-          class="mt-4 max-w-lg text-white text-lg sm:text-xl/relaxed">
+          class="mt-4 max-w-lg text-white text-lg sm:text-lg/relaxed">
           {i18n.HERO_DESCRIPTION}
         </p>
       </div>
-      <div class="flex justify-center sm:justify-start mt-4">
+      <div
+        class="flex flex-col sm:flex-row justify-center sm:justify-start gap-4 mt-4">
+        <a
+          href={translatePath('/consulta-virtual/')}
+          class={cn(
+            buttonVariants({ size: 'lg' }),
+            'flex text-base '
+          )}>{i18n.HERO_BUTTON_SECONDARY}</a
+        >
         <a
           href={translatePath('/conoce-a-tu-doctor/')}
           class={cn(
-            buttonVariants({ size: 'lg' }),
+            buttonVariants({ size: 'lg', variant: 'outline' }),
             'flex text-base '
           )}>{i18n.HERO_BUTTON}</a
         >

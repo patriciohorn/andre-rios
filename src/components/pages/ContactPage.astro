@@ -14,7 +14,7 @@ const content = Object.values(i18n.ABOUT.CONTENT);
 ---
 
 <MainLayout title={`Rios MD Plastics | ${i18n.CONTACT.TITLE}`}>
-  <section class="py-16 bg-primary-50">
+  <section class="py-16 bg-section">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
       <div class="flex flex-col gap-12 md:gap-28">
         <HeaderCenteredEyebrow title={i18n.CONTACT.TITLE} />
@@ -22,57 +22,78 @@ const content = Object.values(i18n.ABOUT.CONTENT);
           <div class="flex flex-col space-y-20">
             <div>
               <h2
-                class="text-primary-950 text-3xl sm:text-4xl text-balance tracking-tight font-semibold mb-8">
+                class="text-heading text-3xl sm:text-4xl text-balance tracking-tight font-semibold mb-8">
                 {i18n.CONTACT.SUBTITLE_1}
               </h2>
               <div class="grid sm:grid-cols-2 gap-x-20 gap-y-12">
                 <article class="flex flex-col">
-                  <h3 class="font-semibold text-primary-950">{i18n.CONTACT.LOCATION.TITLE}</h3>
-                  <address class="flex-col space-y-2 text-gray-700 not-italic mt-2 text-sm">
-                    {Object.values(i18n.CONTACT.LOCATION.DESCRIPTIONS).map((item) => <p>{item}</p>)}
+                  <h3 class="font-semibold text-heading">
+                    {i18n.CONTACT.LOCATION.TITLE}
+                  </h3>
+                  <address
+                    class="flex-col space-y-2 text-stone-600 not-italic mt-2 text-sm">
+                    {
+                      Object.values(
+                        i18n.CONTACT.LOCATION.DESCRIPTIONS
+                      ).map((item) => <p>{item}</p>)
+                    }
                   </address>
                 </article>
                 <article class="flex flex-col">
-                  <h3 class="font-semibold text-primary-950">{i18n.CONTACT.DETAILS.TITLE}</h3>
-                  <div class="flex space-x-2 items-center text-gray-700 mt-2 text-sm">
+                  <h3 class="font-semibold text-heading">
+                    {i18n.CONTACT.DETAILS.TITLE}
+                  </h3>
+                  <div
+                    class="flex space-x-2 items-center text-stone-600 mt-2 text-sm">
                     <h4>{i18n.CONTACT.DETAILS.MOVIL.TITLE}:</h4>
                     <Link
                       variant="link"
                       target="_blank"
-                      href={i18n.CONTACT.DETAILS.MOVIL.DESCRIPTION_1_REF}
-                      className="hover:text-white0 transition-colors duration-300 ease-in-out py-0 px-0 h-full"
-                      >{i18n.CONTACT.DETAILS.MOVIL.DESCRIPTION_1}</Link
+                      href={i18n.CONTACT.DETAILS.MOVIL
+                        .DESCRIPTION_1_REF}
+                      className="text-stone-600 text-sm hover:text-primary-600 transition-colors duration-200 ease-in-out py-0 px-0 h-full"
+                      >{
+                        i18n.CONTACT.DETAILS.MOVIL.DESCRIPTION_1
+                      }</Link
                     >
                   </div>
-                  <div class="flex space-x-2 items-center text-gray-700 mt-2 text-sm">
+                  <div
+                    class="flex space-x-2 items-center text-stone-600 mt-2 text-sm">
                     <h4>{i18n.CONTACT.DETAILS.EMAIL.TITLE}:</h4>
                     <Link
                       variant="link"
                       target="_blank"
-                      href={i18n.CONTACT.DETAILS.EMAIL.DESCRIPTION_1_REF}
-                      className="hover:text-white0 transition-colors duration-300 ease-in-out py-0 px-0 h-full"
-                      >{i18n.CONTACT.DETAILS.EMAIL.DESCRIPTION_1}</Link
+                      href={i18n.CONTACT.DETAILS.EMAIL
+                        .DESCRIPTION_1_REF}
+                      className="text-stone-600 text-sm hover:text-primary-600 transition-colors duration-200 ease-in-out py-0 px-0 h-full"
+                      >{
+                        i18n.CONTACT.DETAILS.EMAIL.DESCRIPTION_1
+                      }</Link
                     >
                   </div>
                 </article>
                 <article class="flex flex-col space-y-2">
-                  <h3 class="font-semibold text-primary-950">
+                  <h3 class="font-semibold text-heading">
                     {i18n.CONTACT.BUSINESS_HOURS.TITLE}
                   </h3>
                   {
-                    Object.values(i18n.CONTACT.BUSINESS_HOURS.DESCRIPTIONS).map((item) => (
-                      <p class="text-sm text-gray-700">{item}</p>
+                    Object.values(
+                      i18n.CONTACT.BUSINESS_HOURS.DESCRIPTIONS
+                    ).map((item) => (
+                      <p class="text-sm text-stone-600">{item}</p>
                     ))
                   }
                 </article>
                 <article class="flex flex-col">
-                  <h3 class="font-semibold text-primary-950">{i18n.CONTACT.FOLLOW.TITLE}</h3>
+                  <h3 class="font-semibold text-heading">
+                    {i18n.CONTACT.FOLLOW.TITLE}
+                  </h3>
                   <ul class="flex space-x-4 mt-4">
                     <li>
                       <Link
                         href="https://www.instagram.com/drandreirios/"
                         target="_blank"
-                        className="inline-flex items-center rounded-md bg-primary-500 hover:bg-primary-600 shadow-sm w-8 h-8">
+                        className="inline-flex items-center p-1 rounded-md bg-primary-500 hover:bg-primary-600 shadow-sm w-8 h-8">
                         <Icon
                           name="instagram"
                           size={24}
@@ -116,7 +137,8 @@ const content = Object.values(i18n.ABOUT.CONTENT);
                     </li>
                     <li>
                       <Link
-                        href={i18n.CONTACT.DETAILS.MOVIL.DESCRIPTION_1_REF}
+                        href={i18n.CONTACT.DETAILS.MOVIL
+                          .DESCRIPTION_1_REF}
                         className="inline-flex items-center p-1 rounded-md bg-primary-500 hover:bg-primary-600 shadow-sm w-8 h-8">
                         <Icon
                           name="whatsapp"

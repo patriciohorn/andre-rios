@@ -1,86 +1,121 @@
 ---
-import { Image } from "astro:assets";
-import SocialGroup from "../SocialGroup.astro"
-import Link from "@/components/Link.astro"
-import logoWhite from "@/assets/logo-white.svg"
-import { Icon } from "astro-icon/components";
-import { getI18N } from "@/i18n";
+import { Image } from 'astro:assets';
+import SocialGroup from '../SocialGroup.astro';
+import Link from '@/components/Link.astro';
+import logoWhite from '@/assets/logo-white.svg';
+import { Icon } from 'astro-icon/components';
+import { getI18N } from '@/i18n';
 
-const {currentLocale} = Astro
-const i18n = getI18N({currentLocale})
+const { currentLocale } = Astro;
+const i18n = getI18N({ currentLocale });
 
 const contactInfo = [
   {
-    icon: 'whatsapp', 
-    url: 'https://wa.me/526646703359', 
-    description: '664 670 3359'
-  }, 
- 
-]
-
+    icon: 'whatsapp',
+    url: 'https://wa.me/526646703359',
+    description: '664 670 3359',
+  },
+];
 ---
 
-<footer class="bg-black/90">
-  <div class="max-w-7xl mx-auto pb-8 pt-16 md:pt-24 lg:pt-32 px-4 sm:px-6 lg:px-8">
-    <div class="grid md:grid-cols-3 gap-x-20 gap-y-12 text-center md:text-left">
-      <div class=" flex flex-col space-y-8 items-center text-center md:items-start">
+<footer class="bg-[#101820]">
+  <div
+    class="max-w-7xl mx-auto pb-8 pt-16 md:pt-24 lg:pt-32 px-4 sm:px-6 lg:px-8">
+    <div
+      class="grid md:grid-cols-3 gap-x-20 gap-y-12 text-center md:text-left">
+      <div
+        class="flex flex-col space-y-8 items-center text-center md:items-start">
         <a href="/">
-          <Image src={logoWhite} alt="logo" class="w-52 h-auto"/>        
+          <Image src={logoWhite} alt="logo" class="w-52 h-auto" />
         </a>
         <ul role="list" class="space-y-4">
           <li class="group">
-            <Link href={i18n.FOOTER.FOOTER_CONTACT.WHATSAPP_REF} class="text-sm flex gap-2 items-center text-gray-200 group-hover:text-primary-500 justify-center md:justify-start">
-            <Icon name="whatsapp" class="text-gray-200 group-hover:text-primary-500  transition-colors duration-200 ease-in-out"/>
-            {i18n.FOOTER.FOOTER_CONTACT.WHATSAPP}
+            <Link
+              href={i18n.FOOTER.FOOTER_CONTACT.WHATSAPP_REF}
+              class="text-sm flex gap-2 items-center text-gray-200 group-hover:text-primary-500 justify-center md:justify-start">
+              <Icon
+                name="whatsapp"
+                class="text-gray-200 group-hover:text-primary-500 transition-colors duration-200 ease-in-out"
+              />
+              {i18n.FOOTER.FOOTER_CONTACT.WHATSAPP}
             </Link>
-          </li>        
-          <li class="group ">
-            <Link href={i18n.FOOTER.FOOTER_CONTACT.EMAIL_HREF} class="text-sm flex gap-2 items-center text-gray-200 group-hover:text-primary-500 justify-center md:justify-start">
-            <Icon name="email" class="text-gray-200 group-hover:text-primary-500 transition-colors duration-200 ease-in-out"/>
-            {i18n.FOOTER.FOOTER_CONTACT.EMAIL}
+          </li>
+          <li class="group">
+            <Link
+              href={i18n.FOOTER.FOOTER_CONTACT.EMAIL_HREF}
+              class="text-sm flex gap-2 items-center text-gray-200 group-hover:text-primary-500 justify-center md:justify-start">
+              <Icon
+                name="email"
+                class="text-gray-200 group-hover:text-primary-500 transition-colors duration-200 ease-in-out"
+              />
+              {i18n.FOOTER.FOOTER_CONTACT.EMAIL}
             </Link>
           </li>
         </ul>
-        <SocialGroup/>
-        <Link href={i18n.FOOTER.FOOTER_NOTICE_HREF} class="text-sm text-gray-200 hover:text-primary-500 transition-colors duration-200 ease-in-out">{i18n.FOOTER.FOOTER_NOTICE}</Link>
-      </div> 
+        <SocialGroup />
+        <Link
+          href={i18n.FOOTER.FOOTER_NOTICE_HREF}
+          class="text-sm text-gray-200 hover:text-primary-500 transition-colors duration-200 ease-in-out"
+          >{i18n.FOOTER.FOOTER_NOTICE}</Link
+        >
+      </div>
 
       <div class="md:ml-auto">
-        <h3 class="text-sm font-semibold leading-6 text-white">{i18n.FOOTER.FOOTER_HOURS.TITLE}</h3>
+        <h3 class="text-sm font-semibold leading-6 text-white">
+          {i18n.FOOTER.FOOTER_HOURS.TITLE}
+        </h3>
         <ul role="list" class="mt-4 space-y-4">
           <li class="text-gray-200 text-sm flex flex-col">
             <p>{i18n.FOOTER.FOOTER_HOURS.WEEK}</p>
-            <p class="text-gray-400">{i18n.FOOTER.FOOTER_HOURS.WEEK_HOURS}</p>
-                    
+            <p class="text-gray-400">
+              {i18n.FOOTER.FOOTER_HOURS.WEEK_HOURS}
+            </p>
           </li>
           <li class="text-gray-200 text-sm flex flex-col">
             <p>{i18n.FOOTER.FOOTER_HOURS.WEEKEND}</p>
-            <p class="text-gray-400">{i18n.FOOTER.FOOTER_HOURS.WEEKEND_HOURS}</p>          
-          </li>          
+            <p class="text-gray-400">
+              {i18n.FOOTER.FOOTER_HOURS.WEEKEND_HOURS}
+            </p>
+          </li>
         </ul>
       </div>
 
       <div>
-        <h3 class="text-sm font-semibold leading-6 text-white">{i18n.FOOTER.FOOTER_LOCATION.TITLE}</h3>
+        <h3 class="text-sm font-semibold leading-6 text-white">
+          {i18n.FOOTER.FOOTER_LOCATION.TITLE}
+        </h3>
         <ul role="list" class="flex flex-col space-y-4 mt-4">
-          <li class="group">            
-            <Link href={i18n.FOOTER.FOOTER_LOCATION.LOCATION_HREF} class="text-sm inline-flex gap-2 max-w-prose text-gray-200 group-hover:text-primary-500 cursor-pointer">
-              <Icon name="location" size={16} class=" text-gray-200 group-hover:text-primary-500 flex-shrink-0 mt-[2px] transition-colors duration-200 ease-in-out"/>            
+          <li class="group">
+            <Link
+              href={i18n.FOOTER.FOOTER_LOCATION.LOCATION_HREF}
+              class="text-sm inline-flex gap-2 max-w-prose text-gray-200 group-hover:text-primary-500 cursor-pointer">
+              <Icon
+                name="location"
+                size={16}
+                class="text-gray-200 group-hover:text-primary-500 flex-shrink-0 mt-[2px] transition-colors duration-200 ease-in-out"
+              />
               {i18n.FOOTER.FOOTER_LOCATION.LOCATION}
-            </Link>            
-          </li> 
-          <li class="rounded-md overflow-hidden aspect-video">            
-            <iframe title="Rios MD plastics Location" src="https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d3364.2551038810616!2d-117.01239000000001!3d32.519333!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x80d9484083360ea7%3A0x16cd0dc5cd7aa63!2sTorre%20Platino%2C%20Blvrd%20Gral%20Rodolfo%20S%C3%A1nchez%20Taboada%2010488%2C%20Zona%20Urbana%20Rio%20Tijuana%2C%2022010%20Tijuana%2C%20B.C.%2C%20M%C3%A9xico!5e0!3m2!1ses!2sus!4v1723573516278!5m2!1ses!2sus" width="400" height="300" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade" class="w-full h-full object-cover"></iframe>           
-        </li> 
-            
-          
+            </Link>
+          </li>
+          <li class="rounded-md overflow-hidden aspect-video">
+            <iframe
+              title="Rios MD plastics Location"
+              src="https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d3364.2551038810616!2d-117.01239000000001!3d32.519333!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x80d9484083360ea7%3A0x16cd0dc5cd7aa63!2sTorre%20Platino%2C%20Blvrd%20Gral%20Rodolfo%20S%C3%A1nchez%20Taboada%2010488%2C%20Zona%20Urbana%20Rio%20Tijuana%2C%2022010%20Tijuana%2C%20B.C.%2C%20M%C3%A9xico!5e0!3m2!1ses!2sus!4v1723573516278!5m2!1ses!2sus"
+              width="400"
+              height="300"
+              style="border:0;"
+              allowfullscreen=""
+              loading="lazy"
+              referrerpolicy="no-referrer-when-downgrade"
+              class="w-full h-full object-cover"></iframe>
+          </li>
         </ul>
       </div>
-
     </div>
-   
 
     <hr class="my-6 border-gray-700 sm:mx-auto lg:my-8" />
-    <p class="text-xs sm:text-center text-gray-400 px-4">{i18n.FOOTER.FOOTER_DISCLAIMER}</p>
+    <p class="text-xs sm:text-center text-gray-400 px-4">
+      {i18n.FOOTER.FOOTER_DISCLAIMER}
+    </p>
   </div>
 </footer>

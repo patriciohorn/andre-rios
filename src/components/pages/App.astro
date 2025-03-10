@@ -13,6 +13,7 @@ import Intro from '@/components/Intro.astro';
 import { getI18N } from '@/i18n';
 import { getLangFromUrl, useTranslatedPath } from '@/i18n/utils';
 import { LogoMarque } from '@/components/LogoMarquee';
+import CTA from '../ui/CTA.astro';
 
 const { currentLocale } = Astro;
 const i18n = getI18N({ currentLocale });
@@ -27,21 +28,19 @@ const translatePath = useTranslatedPath(lang);
   <LogoCloud />
   <Procedures />
   <Testimonials />
-  <div
-    class="py-12 sm:py-28  bg-primary-50">
+  <div class="py-12 sm:py-28 bg-section">
     <div class="max-w-7xl mx-auto px-6 lg:px-8">
       <Heading title={i18n.GALLERY_TITLE} />
       <div
-        class="mt-20 flex flex-col gap-12 items-center -mr-4 sm:mx-0">
+        class="mt-12 sm:mt-20 flex flex-col gap-12 items-center -mr-4 sm:mx-0">
         <Gallery client:visible />
         <a
           href={translatePath('/galeria/')}
-          class={cn(
-            buttonVariants({ size: 'lg' }),
-            'hidden lg:flex'
-          )}>{i18n.GALLERY_BUTTON}</a
+          class={cn(buttonVariants({ size: 'lg' }), 'hidden lg:flex')}
+          >{i18n.GALLERY_BUTTON}</a
         >
       </div>
     </div>
   </div>
+  <CTA />
 </Layout>

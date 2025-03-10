@@ -1,34 +1,39 @@
-import React from "react";
+import React from 'react';
 import {
   Carousel,
   CarouselContent,
   CarouselItem,
   CarouselNext,
   CarouselPrevious,
-} from "@/components/ui/carousel";
-import TestimonialCard from "@/components/TestimonialCard";
-import { ArrowLeft, ArrowRight } from "lucide-react";
+} from '@/components/ui/carousel';
+import TestimonialCard from '@/components/TestimonialCard';
+import { ArrowLeft, ArrowRight } from 'lucide-react';
 // Images
-import avatarCaro from "../assets/testimonials/Caro.jpg";
-import avatarClaudia from "../assets/testimonials/Claudia.jpg";
-import avatarJaky from "../assets/testimonials/Jaky.jpg";
-import avatarMariana from "../assets/testimonials/Mariana.jpg";
+import avatarCaro from '../assets/testimonials/Caro.jpg';
+import avatarClaudia from '../assets/testimonials/Claudia.jpg';
+import avatarJaky from '../assets/testimonials/Jaky.jpg';
+import avatarMariana from '../assets/testimonials/Mariana.jpg';
 
 interface Testimonial {
   TESTIMONIAL_NAME: string;
   TESTIMONIAL_TEXT: string;
 }
 
-import type { CarouselApi } from "@/components/ui/carousel";
-import { Button } from "@/components/ui/button";
-import { ChevronLeft, ChevronRight } from "lucide-react";
+import type { CarouselApi } from '@/components/ui/carousel';
+import { Button } from '@/components/ui/button';
+import { ChevronLeft, ChevronRight } from 'lucide-react';
 // Define the props type for the component
 interface TestimonialCarouselProps {
   testimonials: Testimonial[];
   title: string;
 }
 
-const avatars = [avatarCaro, avatarClaudia, avatarJaky, avatarMariana];
+const avatars = [
+  avatarCaro,
+  avatarClaudia,
+  avatarJaky,
+  avatarMariana,
+];
 
 const TestimonialCarousel: React.FC<TestimonialCarouselProps> = ({
   testimonials,
@@ -54,7 +59,7 @@ const TestimonialCarousel: React.FC<TestimonialCarouselProps> = ({
   return (
     <>
       <div className="flex items-center justify-center mb-12 sm:mb-20">
-        <h2 className="flex-1 text-4xl sm:text-5xl text-center font-bold text-primary-950">
+        <h2 className="flex-1 text-4xl sm:text-5xl text-center font-bold text-heading ">
           {title}
         </h2>
         {/* <div className=" flex items-center space-x-2">
@@ -81,16 +86,14 @@ const TestimonialCarousel: React.FC<TestimonialCarouselProps> = ({
         opts={{
           slidesToScroll: 1,
           breakpoints: {
-            "(min-width: 768px)": { slidesToScroll: 2 },
+            '(min-width: 768px)': { slidesToScroll: 2 },
           },
-        }}
-      >
+        }}>
         <CarouselContent className="cursor-grab active:cursor-grabbing ">
           {testimonials.map((testimonial, idx) => (
             <CarouselItem
               className="basis-full lg:basis-1/2 sm:px-8 "
-              key={idx}
-            >
+              key={idx}>
               <TestimonialCard
                 // src={avatars[idx].src}
                 // alt={`${testimonial.TESTIMONIAL_NAME} avatar`}

@@ -8,15 +8,15 @@ const { currentLocale } = Astro;
 const i18n = getI18N({ currentLocale });
 ---
 
-<section class="py-12 sm:py-28 bg-primary-50">
+<section class="py-12 sm:py-28 bg-section">
   <div class="max-w-screen-xl mx-auto px-5 lg:px-8">
     <div class="grid lg:grid-cols-2 gap-x-20 gap-y-12 items-center">
       <div class="flex flex-col space-y-4 sm:space-y-6">
         <h2
-          class="font-display font-bold text-4xl sm:text-5xl text-balance text-primary-950">
+          class="font-display font-bold text-heading text-4xl sm:text-5xl text-balance">
           {i18n.INTRO_TITLE}
         </h2>
-        <p class="text-base sm:text-lg">
+        <p class="text-base sm:text-lg text-stone-600">
           {i18n.INTRO}
         </p>
         <div class="mt-6 sm:mt-8 flex flex-col sm:flex-row gap-6">
@@ -24,10 +24,12 @@ const i18n = getI18N({ currentLocale });
             <FileBadge
               strokeWidth={1}
               size={40}
-              className="text-primary-800"
+              className="text-primary-600"
             />
-            <h3 class="font-bold text-xl text-primary-950">{i18n.INTRO_ITEM_HEADING_1}</h3>
-            <p>
+            <h3 class="font-bold text-xl text-heading">
+              {i18n.INTRO_ITEM_HEADING_1}
+            </h3>
+            <p class="text-stone-600">
               {i18n.INTRO_ITEM_DESCRIPTION_1}
             </p>
           </div>
@@ -35,10 +37,12 @@ const i18n = getI18N({ currentLocale });
             <HeartHandshake
               strokeWidth={1}
               size={40}
-              className="text-primary-800"
+              className="text-primary-600"
             />
-            <h3 class="font-bold text-xl text-primary-950">{i18n.INTRO_ITEM_HEADING_2}</h3>
-            <p>
+            <h3 class="font-bold text-xl text-heading">
+              {i18n.INTRO_ITEM_HEADING_2}
+            </h3>
+            <p class="text-stone-600">
               {i18n.INTRO_ITEM_DESCRIPTION_2}
             </p>
           </div>
