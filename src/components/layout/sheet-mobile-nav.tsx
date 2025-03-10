@@ -73,7 +73,7 @@ export function SheetMobileNav({
         <Button
           variant="secondary"
           size="sm"
-          className="h-8 px-1.5 lg:hidden bg-transparent">
+          className="h-8 px-1.5 lg:hidden bg-transparent focus-visible:ring-0">
           <span className="sr-only">Desplegar Menú</span>
           <Menu className="size-6 text-white" />
         </Button>
