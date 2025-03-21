@@ -944,26 +944,12 @@ function ConsultationForm() {
   const sendPdfEmail = async (formData: any) => {
     try {
       // Convert the files to base64
-      const frontPhotoBase64 = formData.frontPhoto
-        ? await blobToBase64(formData.frontPhoto)
-        : null;
-      const backPhotoBase64 = formData.backPhoto
-        ? await blobToBase64(formData.backPhoto)
-        : null;
-      const leftPhotoBase64 = formData.leftPhoto
-        ? await blobToBase64(formData.leftPhoto)
-        : null;
-      const rightPhotoBase64 = formData.rightPhoto
-        ? await blobToBase64(formData.rightPhoto)
-        : null;
+      const frontPhotoBase64 = formData.frontPhoto;
+      const backPhotoBase64 = formData.backPhoto;
+      const leftPhotoBase64 = formData.leftPhoto;
+      const rightPhotoBase64 = formData.rightPhoto;
 
-      const additionalPhotosBase64 = formData.additionalPhotos
-        ? await Promise.all(
-            formData.additionalPhotos.map(
-              async (file: any) => await blobToBase64(file)
-            )
-          )
-        : [];
+      const additionalPhotosBase64 = formData.additionalPhotos;
 
       // Create a *new* formData object with the data URLs
       const formDataWithDataUrls = {
