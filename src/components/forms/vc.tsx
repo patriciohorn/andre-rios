@@ -926,8 +926,14 @@ function ConsultationForm() {
     console.error('Validation Errors:', errors);
   };
 
-  const blobToBase64 = (blob: Blob): Promise<string> => {
+  const blobToBase64 = (
+    blob: Blob | null
+  ): Promise<string | null> => {
     return new Promise((resolve, reject) => {
+      if (!blob) {
+        resolve(null);
+        return;
+      }
       const reader = new FileReader();
       reader.onerror = reject;
       reader.onloadend = () => resolve(reader.result as string);
