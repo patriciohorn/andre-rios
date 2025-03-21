@@ -28,13 +28,23 @@ export const Step4UploadPictures: React.FC<
   const MAX_FILE_SIZE_MB = 5;
   const MAX_FILE_SIZE = MAX_FILE_SIZE_MB * 1024 * 1024;
 
+  const addExtraField = () => {
+    setExtraFields((prevFields) => [
+      ...prevFields,
+      {
+        id: prevFields.length,
+        name: `additionalPhotos[${prevFields.length}]`,
+      },
+    ]);
+  };
+
   const compressImage = useCallback(
     async (
       file: File,
       maxWidth = 800,
       maxHeight = 600,
       quality = 0.7
-    ): Promise<Blob> => {
+    ): Promise<string> => {
       return new Promise((resolve, reject) => {
         const img = new Image();
         img.onload = () => {
@@ -60,11 +70,7 @@ export const Step4UploadPictures: React.FC<
 
           // Get the compressed data URL
           const dataURL = canvas.toDataURL('image/jpeg', quality); // You can also use 'image/webp' or 'image/png'
-
-          // Convert data URL to blob
-          const blob = dataURLToBlob(dataURL);
-
-          resolve(blob);
+          resolve(dataURL);
         };
         img.onerror = (error) => {
           reject(error);
@@ -74,30 +80,6 @@ export const Step4UploadPictures: React.FC<
     },
     []
   );
-
-  const dataURLToBlob = useCallback((dataURL: string): Blob => {
-    const parts = dataURL.split(';base64,');
-    const contentType = parts[0].split(':')[1];
-    const raw = window.atob(parts[1]);
-    const rawLength = raw.length;
-    const uInt8Array = new Uint8Array(rawLength);
-
-    for (let i = 0; i < rawLength; ++i) {
-      uInt8Array[i] = raw.charCodeAt(i);
-    }
-
-    return new Blob([uInt8Array], { type: contentType });
-  }, []);
-
-  const addExtraField = () => {
-    setExtraFields((prevFields) => [
-      ...prevFields,
-      {
-        id: prevFields.length,
-        name: `additionalPhotos[${prevFields.length}]`,
-      },
-    ]);
-  };
 
   const handleFileChange = useCallback(
     (
@@ -124,8 +106,8 @@ export const Step4UploadPictures: React.FC<
 
       // Compress the image *before* setting in form:
       compressImage(file)
-        .then((compressedBlob) => {
-          setValue(fieldName, compressedBlob); // Set the compressed blob in form
+        .then((compressedBase64) => {
+          setValue(fieldName, compressedBase64); // Set the compressed base64 in form
         })
         .catch((error) => {
           console.error('Error compressing image:', error);
