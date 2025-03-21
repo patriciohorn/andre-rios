@@ -1069,7 +1069,7 @@ function ConsultationForm() {
               </div>
             </CardContent>
           </Card>
-          {/* <PdfCreator formData={formData} /> */}
+          <PdfCreator formData={formData} />
         </>
       ) : (
         <Card>

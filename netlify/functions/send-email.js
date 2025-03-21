@@ -1,5 +1,5 @@
 const nodemailer = require('nodemailer');
-const sharp = require(sharp);
+const sharp = require('sharp');
 
 exports.handler = async (event, context) => {
   try {
@@ -70,6 +70,7 @@ exports.handler = async (event, context) => {
           content: pdfBuffer,
           contentType: 'application/pdf',
         },
+        ...imageAttachments,
       ],
     };
 
