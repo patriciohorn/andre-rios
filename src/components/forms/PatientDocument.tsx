@@ -74,12 +74,12 @@ const styles = StyleSheet.create({
   imageContainer: {
     width: '48%',
     marginBottom: 10,
-    aspectRatio: 1,
+    aspectRatio: 3 / 4,
   },
   image: {
     width: '100%',
     height: '100%',
-    objectFit: 'cover',
+    objectFit: 'contain',
   },
 
   bulletItems: {
@@ -130,10 +130,7 @@ function PatientDocument({ formData }: PdfCreatorProps) {
   const creationDate = new Date();
   const formattedDate = format(creationDate, 'dd/MMM/yyyy');
 
-  const hasExtraPhotos =
-    formData.extraPhoto1 ||
-    formData.extraPhoto2 ||
-    formData.extraPhoto3;
+  const hasExtraPhotos = formData.additionalPhotos.length > 0;
 
   return (
     <Document>
@@ -1082,35 +1079,35 @@ function PatientDocument({ formData }: PdfCreatorProps) {
         <View style={styles.section} break>
           <Text style={styles.title}>Patient Photos</Text>
           <View style={styles.imageGrid}>
-            {formData.frontPhotoDataUrl && (
+            {formData.frontPhoto && (
               <View style={styles.imageContainer}>
                 <Image
                   style={styles.image}
-                  src={formData.frontPhotoDataUrl}
+                  src={formData.frontPhoto}
                 />
               </View>
             )}
-            {formData.backPhotoDataUrl && (
+            {formData.backPhoto && (
               <View style={styles.imageContainer}>
                 <Image
                   style={styles.image}
-                  src={formData.backPhotoDataUrl}
+                  src={formData.backPhoto}
                 />
               </View>
             )}
-            {formData.leftPhotoDataUrl && (
+            {formData.leftPhoto && (
               <View style={styles.imageContainer}>
                 <Image
                   style={styles.image}
-                  src={formData.leftPhotoDataUrl}
+                  src={formData.leftPhoto}
                 />
               </View>
             )}
-            {formData.rightPhotoDataUrl && (
+            {formData.rightPhoto && (
               <View style={styles.imageContainer}>
                 <Image
                   style={styles.image}
-                  src={formData.rightPhotoDataUrl}
+                  src={formData.rightPhoto}
                 />
               </View>
             )}
@@ -1121,27 +1118,27 @@ function PatientDocument({ formData }: PdfCreatorProps) {
           <View style={styles.section} break>
             <Text style={styles.title}>Additional Photos</Text>
             <View style={styles.imageGrid}>
-              {formData.extraPhoto1 && (
+              {formData.additionalPhotos[0] && (
                 <View style={styles.imageContainer}>
                   <Image
                     style={styles.image}
-                    src={formData.extraPhoto1}
+                    src={formData.additionalPhotos[0]}
                   />
                 </View>
               )}
-              {formData.extraPhoto2 && (
+              {formData.additionalPhotos[1] && (
                 <View style={styles.imageContainer}>
                   <Image
                     style={styles.image}
-                    src={formData.extraPhoto2}
+                    src={formData.additionalPhotos[1]}
                   />
                 </View>
               )}
-              {formData.extraPhoto3 && (
+              {formData.additionalPhotos[2] && (
                 <View style={styles.imageContainer}>
                   <Image
                     style={styles.image}
-                    src={formData.extraPhoto3}
+                    src={formData.additionalPhotos[2]}
                   />
                 </View>
               )}

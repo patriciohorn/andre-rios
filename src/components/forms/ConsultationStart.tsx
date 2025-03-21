@@ -1,6 +1,6 @@
 const ConsultationStart = () => {
   return (
-    <>
+    <div>
       <p className="text-stone-700">
         <span className="font-medium text-stone-900">IMPORTANT</span>:
         Please answer the questions as accurately and truthfully as
@@ -11,7 +11,7 @@ const ConsultationStart = () => {
         deposit AND/OR not being able to be out patient now or in the
         future.
       </p>
-    </>
+    </div>
   );
 };
 

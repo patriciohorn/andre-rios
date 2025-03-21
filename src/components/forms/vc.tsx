@@ -725,21 +725,17 @@ const fileSchema = z
   .instanceof(File)
   .refine((file) => file.size <= MAX_FILE_SIZE, {
     message: `File size must not exceed 5 MB.`,
-  })
-  .refine(
-    (file) => ACCEPTED_IMAGE_MIME_TYPES.includes(file.type),
-    'Only .jpg, .jpeg, .png and .webp formats are supported.'
-  );
+  });
 
 const imageUploadSchema = z.object({
-  frontPhoto: fileSchema.optional(),
-  backPhoto: fileSchema.optional(),
-  leftPhoto: fileSchema.optional(),
-  rightPhoto: fileSchema.optional(),
+  frontPhoto: fileSchema.nullable(),
+  backPhoto: fileSchema.nullable(),
+  leftPhoto: fileSchema.nullable(),
+  rightPhoto: fileSchema.nullable(),
   additionalPhotos: z
     .array(fileSchema)
     .max(3, 'You can upload up to 3 additional photos.')
-    .optional(),
+    .nullable(),
 });
 
 const steps = [
@@ -747,7 +743,7 @@ const steps = [
   'Personal Information',
   'General Information',
   'Medical History',
-  'Upload Picture',
+  'Upload Pictures',
 ];
 
 function ConsultationForm() {
@@ -915,8 +911,14 @@ function ConsultationForm() {
   };
 
   const handleSubmit = () => {
-    setIsSubmitted(true);
-    window.scrollTo({ top: 0, behavior: 'smooth' });
+    imageUploadForm.handleSubmit(
+      (data) => {
+        setFormData((prev) => ({ ...prev, ...data }));
+        setIsSubmitted(true);
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+      },
+      (errors) => onError(errors)
+    )();
   };
 
   const updateFormData = (newData: Record<string, any>) => {
@@ -943,11 +945,41 @@ function ConsultationForm() {
       const blob = await asPdf.toBlob();
       const pdfBase64 = await blobToBase64(blob);
       const fileName = `ConsultationForm_${formData.lastName}_${formData.firstName}.pdf`;
+
+      const frontPhotoBase64 = formData.frontPhoto
+        ? await blobToBase64(formData.frontPhoto)
+        : null;
+      const backPhotoBase64 = formData.backPhoto
+        ? await blobToBase64(formData.backPhoto)
+        : null;
+      const leftPhotoBase64 = formData.leftPhoto
+        ? await blobToBase64(formData.leftPhoto)
+        : null;
+      const rightPhotoBase64 = formData.rightPhoto
+        ? await blobToBase64(formData.rightPhoto)
+        : null;
+      const additionalPhotosBase64 = formData.additionalPhotos
+        ? await Promise.all(
+            formData.additionalPhotos.map(
+              async (file: any) => await blobToBase64(file)
+            )
+          )
+        : [];
+
+      const imageDataURLs = [
+        frontPhotoBase64,
+        backPhotoBase64,
+        leftPhotoBase64,
+        rightPhotoBase64,
+        ...additionalPhotosBase64,
+      ].filter(Boolean);
+
       // Prepare the payload
       const payload = {
         pdfBase64,
         doctorEmail: 'info@riosmdplastics.com',
         fileName,
+        imageDataURLs: imageDataURLs,
       };
 
       const response = await fetch('/.netlify/functions/send-email', {
@@ -1037,7 +1069,7 @@ function ConsultationForm() {
               </div>
             </CardContent>
           </Card>
-          <PdfCreator formData={formData} />
+          {/* <PdfCreator formData={formData} /> */}
         </>
       ) : (
         <Card>
@@ -1047,11 +1079,17 @@ function ConsultationForm() {
             </CardTitle>
             {currentStep === steps.length - 1 && (
               <CardDescription className="animate-fade-right animate-ease-in-out">
-                <p className="mt-4 mb-2 font-semibold text-[#020817]">
+                <p>
+                  Please ensure all uploaded images are less than 5MB
+                  in size
+                </p>
+                <p className="mt-6 mb-2 font-semibold text-[#020817]">
                   How to take your pictures
                 </p>
-                Without any clothes (AND without underwear), from neck
-                to knees and at the following angles
+                <p>
+                  Without any clothes (AND without underwear), from
+                  neck to knees and at the following angles
+                </p>
               </CardDescription>
             )}
           </CardHeader>
