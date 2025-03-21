@@ -728,14 +728,11 @@ const fileSchema = z
   });
 
 const imageUploadSchema = z.object({
-  frontPhoto: fileSchema.nullable(),
-  backPhoto: fileSchema.nullable(),
-  leftPhoto: fileSchema.nullable(),
-  rightPhoto: fileSchema.nullable(),
-  additionalPhotos: z
-    .array(fileSchema)
-    .max(3, 'You can upload up to 3 additional photos.')
-    .nullable(),
+  frontPhoto: z.string().nullable(),
+  backPhoto: z.string().nullable(),
+  leftPhoto: z.string().nullable(),
+  rightPhoto: z.string().nullable(),
+  additionalPhotos: z.array(z.string()).nullable(),
 });
 
 const steps = [
