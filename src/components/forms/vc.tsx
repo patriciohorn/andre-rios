@@ -940,12 +940,7 @@ function ConsultationForm() {
 
   const sendPdfEmail = async (formData: any) => {
     try {
-      const doc = <PatientDocument formData={formData} />;
-      const asPdf = pdf(doc);
-      const blob = await asPdf.toBlob();
-      const pdfBase64 = await blobToBase64(blob);
-      const fileName = `ConsultationForm_${formData.lastName}_${formData.firstName}.pdf`;
-
+      // Convert the files to base64
       const frontPhotoBase64 = formData.frontPhoto
         ? await blobToBase64(formData.frontPhoto)
         : null;
@@ -958,6 +953,7 @@ function ConsultationForm() {
       const rightPhotoBase64 = formData.rightPhoto
         ? await blobToBase64(formData.rightPhoto)
         : null;
+
       const additionalPhotosBase64 = formData.additionalPhotos
         ? await Promise.all(
             formData.additionalPhotos.map(
@@ -966,20 +962,27 @@ function ConsultationForm() {
           )
         : [];
 
-      const imageDataURLs = [
-        frontPhotoBase64,
-        backPhotoBase64,
-        leftPhotoBase64,
-        rightPhotoBase64,
-        ...additionalPhotosBase64,
-      ].filter(Boolean);
+      // Create a *new* formData object with the data URLs
+      const formDataWithDataUrls = {
+        ...formData,
+        frontPhoto: frontPhotoBase64,
+        backPhoto: backPhotoBase64,
+        leftPhoto: leftPhotoBase64,
+        rightPhoto: rightPhotoBase64,
+        additionalPhotos: additionalPhotosBase64,
+      };
+
+      const doc = <PatientDocument formData={formDataWithDataUrls} />; // Pass the *new* formData
+      const asPdf = pdf(doc);
+      const blob = await asPdf.toBlob();
+      const pdfBase64 = await blobToBase64(blob);
+      const fileName = `ConsultationForm_${formData.lastName}_${formData.firstName}.pdf`;
 
       // Prepare the payload
       const payload = {
         pdfBase64,
         doctorEmail: 'info@riosmdplastics.com',
         fileName,
-        imageDataURLs: imageDataURLs,
       };
 
       const response = await fetch('/.netlify/functions/send-email', {
@@ -1069,7 +1072,7 @@ function ConsultationForm() {
               </div>
             </CardContent>
           </Card>
-          <PdfCreator formData={formData} />
+          {/* <PdfCreator formData={formData} /> */}
         </>
       ) : (
         <Card>

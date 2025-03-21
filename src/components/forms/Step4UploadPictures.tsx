@@ -18,7 +18,7 @@ interface Step4UploadPicturesProps {
 
 export const Step4UploadPictures: React.FC<
   Step4UploadPicturesProps
-> = ({ form, updateFormData }) => {
+> = ({ form }) => {
   const [extraFields, setExtraFields] = useState<
     { id: number; name: string }[]
   >([]);
@@ -27,6 +27,67 @@ export const Step4UploadPictures: React.FC<
   const maxFields = 3;
   const MAX_FILE_SIZE_MB = 5;
   const MAX_FILE_SIZE = MAX_FILE_SIZE_MB * 1024 * 1024;
+
+  const compressImage = useCallback(
+    async (
+      file: File,
+      maxWidth = 800,
+      maxHeight = 600,
+      quality = 0.7
+    ): Promise<Blob> => {
+      return new Promise((resolve, reject) => {
+        const img = new Image();
+        img.onload = () => {
+          let width = img.width;
+          let height = img.height;
+
+          // Resize if necessary
+          if (width > maxWidth || height > maxHeight) {
+            if (width > height) {
+              height = Math.round((height * maxWidth) / width);
+              width = maxWidth;
+            } else {
+              width = Math.round((width * maxHeight) / height);
+              height = maxHeight;
+            }
+          }
+
+          const canvas = document.createElement('canvas');
+          canvas.width = width;
+          canvas.height = height;
+          const ctx = canvas.getContext('2d');
+          ctx?.drawImage(img, 0, 0, width, height);
+
+          // Get the compressed data URL
+          const dataURL = canvas.toDataURL('image/jpeg', quality); // You can also use 'image/webp' or 'image/png'
+
+          // Convert data URL to blob
+          const blob = dataURLToBlob(dataURL);
+
+          resolve(blob);
+        };
+        img.onerror = (error) => {
+          reject(error);
+        };
+        img.src = URL.createObjectURL(file); // Create a temporary URL
+      });
+    },
+    []
+  );
+
+  const dataURLToBlob = useCallback((dataURL: string): Blob => {
+    const parts = dataURL.split(';base64,');
+    const contentType = parts[0].split(':')[1];
+    const raw = window.atob(parts[1]);
+    const rawLength = raw.length;
+    const uInt8Array = new Uint8Array(rawLength);
+
+    for (let i = 0; i < rawLength; ++i) {
+      uInt8Array[i] = raw.charCodeAt(i);
+    }
+
+    return new Blob([uInt8Array], { type: contentType });
+  }, []);
 
   const addExtraField = () => {
     setExtraFields((prevFields) => [
@@ -38,36 +99,44 @@ export const Step4UploadPictures: React.FC<
     ]);
   };
 
-  function handleFileChange(
-    event: React.ChangeEvent<HTMLInputElement>,
-    fieldName: string
-  ) {
-    const file = event.target.files?.[0];
-    if (!file) {
-      setValue(fieldName, undefined);
-      return;
-    }
+  const handleFileChange = useCallback(
+    (
+      event: React.ChangeEvent<HTMLInputElement>,
+      fieldName: string
+    ) => {
+      const file = event.target.files?.[0];
+      if (!file) {
+        setValue(fieldName, undefined);
+        return;
+      }
 
-    if (file.size > MAX_FILE_SIZE) {
-      setError(fieldName, {
-        type: 'maxSize',
-        message: `File size exceeds ${MAX_FILE_SIZE_MB}MB. Please select a smaller file.`,
-      });
-      event.target.value = ''; // Clear the input
-      setValue(fieldName, undefined); // Clear form value, triggering validation
-      return;
-    }
+      if (file.size > MAX_FILE_SIZE) {
+        setError(fieldName, {
+          type: 'maxSize',
+          message: `File size exceeds ${MAX_FILE_SIZE_MB}MB. Please select a smaller file.`,
+        });
+        event.target.value = ''; // Clear the input
+        setValue(fieldName, undefined); // Clear form value, triggering validation
+        return;
+      }
 
-    clearErrors(fieldName);
+      clearErrors(fieldName);
 
-    // If the file is valid, proceed with reading it
-    const reader = new FileReader();
-    reader.onloadend = () => {
-      //updateFormData({ [fieldName]: reader.result }); -- REMOVE THIS LINE
-      setValue(fieldName, file); // Set the file object directly
-    };
-    reader.readAsDataURL(file);
-  }
+      // Compress the image *before* setting in form:
+      compressImage(file)
+        .then((compressedBlob) => {
+          setValue(fieldName, compressedBlob); // Set the compressed blob in form
+        })
+        .catch((error) => {
+          console.error('Error compressing image:', error);
+          setError(fieldName, {
+            type: 'compressionError',
+            message: 'Error compressing image', // Handle compression error
+          });
+        });
+    },
+    [compressImage, clearErrors, setError, setValue]
+  );
 
   return (
     <Form {...form}>

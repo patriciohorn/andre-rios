@@ -1076,7 +1076,7 @@ function PatientDocument({ formData }: PdfCreatorProps) {
           )}
         </View>
         {/* ////// Images Upload //////*/}
-        {/* <View style={styles.section} break>
+        <View style={styles.section} break>
           <Text style={styles.title}>Patient Photos</Text>
           <View style={styles.imageGrid}>
             {formData.frontPhoto && (
@@ -1112,9 +1112,9 @@ function PatientDocument({ formData }: PdfCreatorProps) {
               </View>
             )}
           </View>
-        </View> */}
+        </View>
         {/* ////// Additional Images Here//////*/}
-        {/* {hasExtraPhotos && (
+        {hasExtraPhotos && (
           <View style={styles.section} break>
             <Text style={styles.title}>Additional Photos</Text>
             <View style={styles.imageGrid}>
@@ -1144,7 +1144,7 @@ function PatientDocument({ formData }: PdfCreatorProps) {
               )}
             </View>
           </View>
-        )} */}
+        )}
       </Page>
     </Document>
   );

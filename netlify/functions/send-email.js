@@ -4,8 +4,9 @@ const sharp = require('sharp');
 exports.handler = async (event, context) => {
   try {
     // Destructuring the incoming JSON body
-    const { pdfBase64, doctorEmail, fileName, imageDataURLs } =
-      JSON.parse(event.body);
+    const { pdfBase64, doctorEmail, fileName } = JSON.parse(
+      event.body
+    );
     if (!pdfBase64 || !doctorEmail) {
       return {
         statusCode: 400,
@@ -20,34 +21,34 @@ exports.handler = async (event, context) => {
     const pdfBuffer = Buffer.from(base64Data, 'base64');
 
     // 1. Compress Images
-    const imageAttachments = [];
-    if (imageDataURLs && imageDataURLs.length > 0) {
-      for (let i = 0; i < imageDataURLs.length; i++) {
-        const imageDataURL = imageDataURLs[i];
-        try {
-          const buffer = Buffer.from(
-            imageDataURL.split(',')[1],
-            'base64'
-          );
+    // const imageAttachments = [];
+    // if (imageDataURLs && imageDataURLs.length > 0) {
+    //   for (let i = 0; i < imageDataURLs.length; i++) {
+    //     const imageDataURL = imageDataURLs[i];
+    //     try {
+    //       const buffer = Buffer.from(
+    //         imageDataURL.split(',')[1],
+    //         'base64'
+    //       );
 
-          // Compress the image using Sharp
-          const compressedBuffer = await sharp(buffer)
-            .resize({ width: 800, height: 600, fit: 'inside' }) // Adjust as needed
-            .jpeg({ quality: 70 }) // Adjust quality
-            .toBuffer();
+    //       // Compress the image using Sharp
+    //       const compressedBuffer = await sharp(buffer)
+    //         .resize({ width: 800, height: 600, fit: 'inside' }) // Adjust as needed
+    //         .jpeg({ quality: 70 }) // Adjust quality
+    //         .toBuffer();
 
-          // Create attachment object
-          imageAttachments.push({
-            filename: `image_${i + 1}.jpg`,
-            content: compressedBuffer,
-            encoding: 'base64', // Important: Ensure correct encoding
-          });
-        } catch (imageError) {
-          console.error('Error compressing image:', imageError);
-          // Handle image compression error (e.g., skip the image)
-        }
-      }
-    }
+    //       // Create attachment object
+    //       imageAttachments.push({
+    //         filename: `image_${i + 1}.jpg`,
+    //         content: compressedBuffer,
+    //         encoding: 'base64', // Important: Ensure correct encoding
+    //       });
+    //     } catch (imageError) {
+    //       console.error('Error compressing image:', imageError);
+    //       // Handle image compression error (e.g., skip the image)
+    //     }
+    //   }
+    // }
 
     // 2. Nodemailer Setup
     const transporter = nodemailer.createTransport({
@@ -70,7 +71,6 @@ exports.handler = async (event, context) => {
           content: pdfBuffer,
           contentType: 'application/pdf',
         },
-        ...imageAttachments,
       ],
     };
 
