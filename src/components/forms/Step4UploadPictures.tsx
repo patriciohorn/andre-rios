@@ -137,8 +137,7 @@ export const Step4UploadPictures: React.FC<
                 />
               </FormControl>
               <FormDescription>
-                Please upload a photo from the front (Max. 5MB file
-                size)
+                Please upload a photo from the front
               </FormDescription>
               <FormMessage />
             </FormItem>
@@ -158,8 +157,7 @@ export const Step4UploadPictures: React.FC<
                 />
               </FormControl>
               <FormDescription>
-                Please upload a photo from the back (Max. 5MB file
-                size)
+                Please upload a photo from the back
               </FormDescription>
               <FormMessage />
             </FormItem>
@@ -179,8 +177,7 @@ export const Step4UploadPictures: React.FC<
                 />
               </FormControl>
               <FormDescription>
-                Please upload a photo from your left side (Max. 5MB
-                file size)
+                Please upload a photo from your left side
               </FormDescription>
               <FormMessage />
             </FormItem>
@@ -200,8 +197,7 @@ export const Step4UploadPictures: React.FC<
                 />
               </FormControl>
               <FormDescription>
-                Please upload a photo from your right side (Max. 5MB
-                file size)
+                Please upload a photo from your right side
               </FormDescription>
               <FormMessage />
             </FormItem>
@@ -225,7 +221,7 @@ export const Step4UploadPictures: React.FC<
                   />
                 </FormControl>
                 <FormDescription>
-                  Upload an additional photo (Max. 5MB file size)
+                  Upload an additional photo
                 </FormDescription>
                 <FormMessage />
               </FormItem>

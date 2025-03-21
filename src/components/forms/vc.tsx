@@ -1071,10 +1071,10 @@ function ConsultationForm() {
             </CardTitle>
             {currentStep === steps.length - 1 && (
               <CardDescription className="animate-fade-right animate-ease-in-out">
-                <p>
+                {/* <p>
                   Please ensure all uploaded images are less than 5MB
                   in size
-                </p>
+                </p> */}
                 <p className="mt-6 mb-2 font-semibold text-[#020817]">
                   How to take your pictures
                 </p>
