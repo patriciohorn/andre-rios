@@ -8,7 +8,7 @@ const ConsultationStart = () => {
         history (such as your weight, illnesses, meds, drug, nicotine
         or alcohol usage -current or previous-) WILL result in the
         cancellation of your surgery and unfortunately losing your
-        deposit AND/OR not being able to be out patient now or in the
+        deposit AND/OR not being able to be our patient now or in the
         future.
       </p>
     </div>
