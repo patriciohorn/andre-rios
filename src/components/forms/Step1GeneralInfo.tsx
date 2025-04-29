@@ -1,12 +1,12 @@
-import { cn } from "@/lib/utils";
-import { format, differenceInYears } from "date-fns";
-import { useState, useEffect, useMemo } from "react";
+import { cn } from '@/lib/utils';
+import { format, differenceInYears } from 'date-fns';
+import { useState, useEffect, useMemo } from 'react';
 
 // Icons
-import { Info, CalendarIcon } from "lucide-react";
+import { Info, CalendarIcon } from 'lucide-react';
 
 // Shadcn Components
-import { Button } from "@/components/ui/button";
+import { Button } from '@/components/ui/button';
 import {
   Form,
   FormControl,
@@ -15,50 +15,56 @@ import {
   FormItem,
   FormLabel,
   FormMessage,
-} from "@/components/ui/form";
-import { Input } from "@/components/ui/input";
-import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
-import { Calendar } from "@/components/ui/calendar";
+} from '@/components/ui/form';
+import { Input } from '@/components/ui/input';
+import {
+  RadioGroup,
+  RadioGroupItem,
+} from '@/components/ui/radio-group';
+import { Calendar } from '@/components/ui/calendar';
 import {
   Popover,
   PopoverContent,
   PopoverTrigger,
-} from "@/components/ui/popover";
+} from '@/components/ui/popover';
 import {
   Select,
   SelectContent,
   SelectItem,
   SelectTrigger,
   SelectValue,
-} from "@/components/ui/select";
+} from '@/components/ui/select';
 
 const months = [
-  "January",
-  "February",
-  "March",
-  "April",
-  "May",
-  "June",
-  "July",
-  "August",
-  "September",
-  "October",
-  "November",
-  "December",
+  'January',
+  'February',
+  'March',
+  'April',
+  'May',
+  'June',
+  'July',
+  'August',
+  'September',
+  'October',
+  'November',
+  'December',
 ];
 
-const years = Array.from({ length: 5 }, (_, i) => new Date().getFullYear() + i);
+const years = Array.from(
+  { length: 5 },
+  (_, i) => new Date().getFullYear() + i
+);
 
 const maxYearAllowed = new Date().getFullYear() - 18;
 
 export const Step1GeneralInfo = ({ form }: any) => {
   const [dateOfBirthTouched, setDateOfBirthTouched] = useState(false);
 
-  const dateOfBirth = form.watch("dateOfBirth");
-  const weight = form.watch("weight");
-  const heightFt = form.watch("heightFt");
-  const heightIn = form.watch("heightIn");
-  const reference = form.watch("reference");
+  const dateOfBirth = form.watch('dateOfBirth');
+  const weight = form.watch('weight');
+  const heightFt = form.watch('heightFt');
+  const heightIn = form.watch('heightIn');
+  const reference = form.watch('reference');
 
   const age = useMemo(() => {
     if (!dateOfBirth) return null;
@@ -87,35 +93,39 @@ export const Step1GeneralInfo = ({ form }: any) => {
     const totalHeightInches = heightFt * 12 + heightIn;
     const totalHeightMeters = totalHeightInches * 0.0254;
     const totalWeightKilograms = weight * 0.453592;
-    const bmi = totalWeightKilograms / (totalHeightMeters * totalHeightMeters);
+    const bmi =
+      totalWeightKilograms / (totalHeightMeters * totalHeightMeters);
 
     return Number(bmi.toFixed(1));
   };
 
   const bmi = useMemo(() => {
-    return calculateBmi(heightFt, heightIn, weight);
+    const calculatedBmi = calculateBmi(heightFt, heightIn, weight);
+    // Update the form with the BMI value
+    form.setValue('bmi', calculatedBmi);
+    return calculatedBmi;
   }, [heightFt, heightIn, weight]);
 
   const bmiError = useMemo(() => {
     if (!weight || !heightFt || !heightIn) return null;
 
     if (bmi !== null && bmi > 32.9) {
-      return "Your BMI should be below 32.9 to be eligible for the virtual consultation";
+      return 'Your BMI should be below 32.9 to be eligible for the virtual consultation';
     }
     return null;
   }, [bmi, weight, heightFt, heightIn]);
 
-  const hadSurgery = form.watch("hadSurgery");
+  const hadSurgery = form.watch('hadSurgery');
 
   const handleSurgeryChange = (value: any) => {
-    form.setValue("surgeryType", null);
+    form.setValue('surgeryType', null);
     if (!value) {
-      form.setValue("surgeryType", undefined);
+      form.setValue('surgeryType', undefined);
     }
   };
 
   const handleDateChange = (date: any) => {
-    form.setValue("dateOfBirth", date);
+    form.setValue('dateOfBirth', date);
     setDateOfBirthTouched(true);
   };
 
@@ -160,7 +170,9 @@ export const Step1GeneralInfo = ({ form }: any) => {
           render={({ field }) => (
             <FormItem>
               <FormLabel>Birth Gender</FormLabel>
-              <Select onValueChange={field.onChange} defaultValue={field.value}>
+              <Select
+                onValueChange={field.onChange}
+                defaultValue={field.value}>
                 <FormControl>
                   <SelectTrigger>
                     <SelectValue placeholder="Select a gender" />
@@ -187,21 +199,22 @@ export const Step1GeneralInfo = ({ form }: any) => {
                 <Popover>
                   <PopoverTrigger asChild>
                     <Button
-                      variant={"outline"}
+                      variant={'outline'}
                       className={cn(
-                        " flex justify-start h-10 w-full rounded-md border border-input bg-background px-3 py-2 text-sm ring-offset-background file:border-0 file:bg-transparent file:text-sm file:font-medium placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50",
-                        !field.value && "text-muted-foreground"
-                      )}
-                    >
+                        ' flex justify-start h-10 w-full rounded-md border border-input bg-background px-3 py-2 text-sm ring-offset-background file:border-0 file:bg-transparent file:text-sm file:font-medium placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50',
+                        !field.value && 'text-muted-foreground'
+                      )}>
                       <CalendarIcon className="mr-2 h-4 w-4" />
                       {field.value ? (
-                        format(field.value, "PPP")
+                        format(field.value, 'PPP')
                       ) : (
                         <span>Pick a date</span>
                       )}
                     </Button>
                   </PopoverTrigger>
-                  <PopoverContent align="start" className=" w-auto p-0">
+                  <PopoverContent
+                    align="start"
+                    className=" w-auto p-0">
                     <Calendar
                       mode="single"
                       captionLayout="dropdown-buttons"
@@ -223,7 +236,7 @@ export const Step1GeneralInfo = ({ form }: any) => {
               <Input
                 type="number"
                 placeholder="Age"
-                value={age !== null ? age : ""}
+                value={age !== null ? age : ''}
                 readOnly
               />
             </FormControl>
@@ -231,10 +244,10 @@ export const Step1GeneralInfo = ({ form }: any) => {
           {dateOfBirthTouched && !isValidAge && (
             <div
               className="sm:col-span-2 flex items-center p-4 text-sm text-red-800 rounded-lg bg-red-50 border border-red-300 animate-fade-down animate-duration-300 animate-ease-in-out"
-              role="alert"
-            >
+              role="alert">
               <Info className="flex-shrink-0 inline w-5 h-5 fill-red-800 text-red-50 me-3" />
-              Your age must be between 18 and 60 to proceed with the evaluation
+              Your age must be between 18 and 60 to proceed with the
+              evaluation
             </div>
           )}
         </div>
@@ -315,11 +328,11 @@ export const Step1GeneralInfo = ({ form }: any) => {
                   <FormControl>
                     <Input
                       placeholder="Enter feet"
-                      value={field.value ?? ""}
+                      value={field.value ?? ''}
                       onChange={(e) =>
                         field.onChange(
                           e.target.value === undefined
-                            ? ""
+                            ? ''
                             : Number(e.target.value)
                         )
                       }
@@ -338,10 +351,10 @@ export const Step1GeneralInfo = ({ form }: any) => {
                   <FormControl>
                     <Input
                       placeholder="Enter inches"
-                      value={field.value ?? ""}
+                      value={field.value ?? ''}
                       onChange={(e) =>
                         field.onChange(
-                          e.target.value === ""
+                          e.target.value === ''
                             ? undefined
                             : Number(e.target.value)
                         )
@@ -361,10 +374,10 @@ export const Step1GeneralInfo = ({ form }: any) => {
                   <FormControl>
                     <Input
                       placeholder="Enter your weight"
-                      value={field.value ?? ""}
+                      value={field.value ?? ''}
                       onChange={(e) =>
                         field.onChange(
-                          e.target.value === ""
+                          e.target.value === ''
                             ? undefined
                             : Number(e.target.value)
                         )
@@ -382,15 +395,14 @@ export const Step1GeneralInfo = ({ form }: any) => {
             <FormControl>
               <Input
                 type="number"
-                value={bmi !== null ? bmi.toFixed(2) : ""}
+                value={bmi !== null ? bmi.toFixed(2) : ''}
                 readOnly
               />
             </FormControl>
             {bmiError && (
               <div
                 className="flex items-center p-4 text-sm text-red-800 rounded-lg bg-red-50 border border-red-300 animate-fade-down animate-duration-300 animate-ease-in-out"
-                role="alert"
-              >
+                role="alert">
                 <Info className="flex-shrink-0 inline w-5 h-5 fill-red-800 text-red-50 me-3" />
                 {bmiError}
               </div>
@@ -398,12 +410,12 @@ export const Step1GeneralInfo = ({ form }: any) => {
             {bmi !== null && bmi >= 31 && bmi <= 32.9 && (
               <div
                 className="flex items-center p-4 text-sm text-yellow-800 border border-yellow-300 rounded-lg bg-yellow-50 animate-fade-down animate-duration-300 animate-ease-in-out"
-                role="alert"
-              >
+                role="alert">
                 <Info className="flex-shrink-0 inline w-5 h-5 me-3 fill-yellow-800 text-yellow-50" />
                 <span>
-                  You can still get an evaluation, but you need to know that we
-                  can't proceed with surgery unless you're below a 31 BMI{" "}
+                  You can still get an evaluation, but you need to
+                  know that we can't proceed with surgery unless
+                  you're below a 31 BMI{' '}
                   <strong>AT THE DAY OF SURGERY</strong>
                 </span>
               </div>
@@ -419,13 +431,12 @@ export const Step1GeneralInfo = ({ form }: any) => {
               <FormControl>
                 <RadioGroup
                   onValueChange={(value) => {
-                    const booleanValue = value === "true";
+                    const booleanValue = value === 'true';
                     field.onChange(booleanValue);
                     handleSurgeryChange(booleanValue);
                   }}
-                  defaultValue={field.value ? "true" : "false"}
-                  className="flex flex-col space-y-1"
-                >
+                  defaultValue={field.value ? 'true' : 'false'}
+                  className="flex flex-col space-y-1">
                   <FormItem className="flex items-center space-x-3 space-y-0">
                     <FormControl>
                       <RadioGroupItem value="true" />
@@ -453,10 +464,11 @@ export const Step1GeneralInfo = ({ form }: any) => {
               render={({ field }) => (
                 <FormItem
                   className={cn(
-                    "space-y-3 animate-ease-in-out animate-duration-300",
-                    hadSurgery ? "animate-fade-down" : "animate-fade-up"
-                  )}
-                >
+                    'space-y-3 animate-ease-in-out animate-duration-300',
+                    hadSurgery
+                      ? 'animate-fade-down'
+                      : 'animate-fade-up'
+                  )}>
                   <FormLabel>
                     If yes, please specify the type of surgery:
                   </FormLabel>
@@ -464,8 +476,7 @@ export const Step1GeneralInfo = ({ form }: any) => {
                     <RadioGroup
                       onValueChange={field.onChange}
                       defaultValue={field.value}
-                      className="flex flex-col space-y-1"
-                    >
+                      className="flex flex-col space-y-1">
                       <FormItem className="flex items-center space-x-3 space-y-0">
                         <FormControl>
                           <RadioGroupItem value="gastric-sleeve" />
@@ -478,13 +489,17 @@ export const Step1GeneralInfo = ({ form }: any) => {
                         <FormControl>
                           <RadioGroupItem value="bypass" />
                         </FormControl>
-                        <FormLabel className="font-normal">Bypass</FormLabel>
+                        <FormLabel className="font-normal">
+                          Bypass
+                        </FormLabel>
                       </FormItem>
                       <FormItem className="flex items-center space-x-3 space-y-0">
                         <FormControl>
                           <RadioGroupItem value="lapband" />
                         </FormControl>
-                        <FormLabel className="font-normal">Lap band</FormLabel>
+                        <FormLabel className="font-normal">
+                          Lap band
+                        </FormLabel>
                       </FormItem>
                       <FormItem className="flex items-center space-x-3 space-y-0">
                         <FormControl>
@@ -506,7 +521,8 @@ export const Step1GeneralInfo = ({ form }: any) => {
               render={({ field }) => (
                 <FormItem className="animate-ease-in-out animate-duration-300 animate-fade-down">
                   <FormLabel>
-                    How many lbs (kg) did you lose from your highest weight?
+                    How many lbs (kg) did you lose from your highest
+                    weight?
                   </FormLabel>
                   <FormControl>
                     <Input
@@ -528,7 +544,9 @@ export const Step1GeneralInfo = ({ form }: any) => {
           render={({ field }) => (
             <FormItem>
               <FormLabel>How did you hear about us?</FormLabel>
-              <Select onValueChange={field.onChange} defaultValue={field.value}>
+              <Select
+                onValueChange={field.onChange}
+                defaultValue={field.value}>
                 <FormControl>
                   <SelectTrigger>
                     <SelectValue placeholder="Please select an option" />
@@ -550,7 +568,8 @@ export const Step1GeneralInfo = ({ form }: any) => {
           )}
         />
 
-        {(reference === "friend-or-relative" || reference === "others") && (
+        {(reference === 'friend-or-relative' ||
+          reference === 'others') && (
           <FormField
             control={form.control}
             name="referralSource"
@@ -583,8 +602,7 @@ export const Step1GeneralInfo = ({ form }: any) => {
                   {/* <FormLabel>Esimated month</FormLabel> */}
                   <Select
                     onValueChange={field.onChange}
-                    defaultValue={field.value}
-                  >
+                    defaultValue={field.value}>
                     <FormControl>
                       <SelectTrigger>
                         <SelectValue placeholder="Select an estimated month" />
@@ -592,7 +610,9 @@ export const Step1GeneralInfo = ({ form }: any) => {
                     </FormControl>
                     <SelectContent>
                       {months.map((month: string) => (
-                        <SelectItem key={month} value={month.toLowerCase()}>
+                        <SelectItem
+                          key={month}
+                          value={month.toLowerCase()}>
                           {month}
                         </SelectItem>
                       ))}
@@ -610,8 +630,7 @@ export const Step1GeneralInfo = ({ form }: any) => {
                   {/* <FormLabel>Estimated year</FormLabel> */}
                   <Select
                     onValueChange={field.onChange}
-                    defaultValue={field.value}
-                  >
+                    defaultValue={field.value}>
                     <FormControl>
                       <SelectTrigger>
                         <SelectValue placeholder="Select an estimated year" />
@@ -619,7 +638,9 @@ export const Step1GeneralInfo = ({ form }: any) => {
                     </FormControl>
                     <SelectContent>
                       {years.map((year) => (
-                        <SelectItem key={year} value={year.toString()}>
+                        <SelectItem
+                          key={year}
+                          value={year.toString()}>
                           {year}
                         </SelectItem>
                       ))}

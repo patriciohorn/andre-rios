@@ -50,6 +50,7 @@ const personalInformationSchema = z.object({
   heightFt: z.number().optional(),
   heightIn: z.number().optional(),
   weight: z.number().min(1, 'Weight is required'),
+  bmi: z.number(),
   hadSurgery: z.boolean(),
   surgeryType: z.string().optional(),
   reference: z.string().min(2, 'Please select one option'),
@@ -898,7 +899,11 @@ function ConsultationForm() {
 
   const handleNextStep = (data: any) => {
     setFormData((prev) => ({ ...prev, ...data }));
-    setCurrentStep((prev) => prev + 1);
+    const bmi = (data as any).bmi || (formData as any).bmi;
+
+    if (bmi <= 33) {
+      setCurrentStep((prev) => prev + 1);
+    }
     scrollToElement(currentStep + 1);
   };
 
@@ -989,7 +994,7 @@ function ConsultationForm() {
 
   useEffect(() => {
     if (isSubmitted) {
-      sendPdfEmail(formData);
+      // sendPdfEmail(formData);
     }
   }, [isSubmitted]);
 
