@@ -994,7 +994,7 @@ function ConsultationForm() {
 
   useEffect(() => {
     if (isSubmitted) {
-      // sendPdfEmail(formData);
+      sendPdfEmail(formData);
     }
   }, [isSubmitted]);
 
