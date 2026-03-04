@@ -246,7 +246,7 @@ export const Step1GeneralInfo = ({ form }: any) => {
               className="sm:col-span-2 flex items-center p-4 text-sm text-red-800 rounded-lg bg-red-50 border border-red-300 animate-fade-down animate-duration-300 animate-ease-in-out"
               role="alert">
               <Info className="flex-shrink-0 inline w-5 h-5 fill-red-800 text-red-50 me-3" />
-              Your age must be between 18 and 60 to proceed with the
+              Your age must be between 18 and 65 to proceed with the
               evaluation
             </div>
           )}
