@@ -71,7 +71,7 @@ export const Step1GeneralInfo = ({ form }: any) => {
     return differenceInYears(new Date(), dateOfBirth);
   }, [dateOfBirth]);
 
-  const isValidAge = age !== null && age >= 18 && age <= 60;
+  const isValidAge = age !== null && age >= 18 && age <= 65;
 
   const calculateBmi = (
     heightFt: number | undefined,
