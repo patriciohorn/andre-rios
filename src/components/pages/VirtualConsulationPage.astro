@@ -1,36 +1,13 @@
 ---
 import '../../styles/globals.css';
 import MainLayout from '@/layouts/MainLayout.astro';
-import ConsultationForm from '../forms/vc';
-
-import { getI18N } from '@/i18n';
-const { currentLocale } = Astro;
-const i18n = getI18N({ currentLocale });
-
-const proceduresBreast = Object.values(
-  i18n.PROCEDURES.PROCEDURES_BREAST
-);
-const proceduresInjectables = Object.values(
-  i18n.PROCEDURES.PROCEDURES_INJECTABLES
-);
-const proceduresCorporal = Object.values(
-  i18n.PROCEDURES.PROCEDURES_BODY
-);
-
-const proceduresField = [
-  proceduresBreast,
-  proceduresInjectables,
-  proceduresCorporal,
-];
+import { ConsultaWizard } from '../consulta-virtual/ConsultaWizard';
 ---
 
 <MainLayout title="Rios MD Plastics | Virtual Consultation">
   <section class="py-16 bg-section">
     <div class="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8 min-h-[60vh]">
-      <h1 class="mb-8 text-4xl font-bold text-heading text-center">
-        Virtual Consultation
-      </h1>
-      <ConsultationForm client:visible />
-    </div>
+      <ConsultaWizard client:load/>
+    </div>  
   </section>
 </MainLayout>
