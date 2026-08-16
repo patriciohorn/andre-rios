@@ -1,0 +1,30 @@
+---
+import MainLayout from "@/layouts/MainLayout.astro";
+import { Button } from "@/components/ui/button";
+import drRiosImage from "@/assets/hero-img_2.jpg";
+import { Image } from "astro:assets";
+---
+
+<MainLayout title="Confirmation page">
+  <div class="max-w-6xl mx-auto py-16 sm:py-28 px-4">
+     <div class="grid sm:grid-cols-2 rounded-3xl shadow-lg bg-[#101820] overflow-hidden">
+          <div class="flex flex-col justify-center p-6 sm:p-16">
+            <h1 class="text-2xl sm:text-4xl font-semibold mb-4 sm:mb-6 text-white">Thank you for your submission!</h1>
+            <p class="text-base sm:text-lg text-neutral-200 mb-6 sm:mb-8">
+              We have received your consultation request. Our team will review the information and get back to you shortly
+            </p>
+            <Button className="sm:w-fit">
+               <a  href="/">
+                Return to Home
+              </a>
+            </Button>
+          
+          </div>
+          
+          <div class="hidden sm:flex sm:justify-center sm:items-center">
+            <Image src={drRiosImage} alt="Thank You" class="max-w-full h-auto" inferSize format="webp">
+          </div>
+        </div>
+  
+  </div>
+</MainLayout>

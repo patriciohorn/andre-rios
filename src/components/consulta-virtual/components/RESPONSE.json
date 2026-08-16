@@ -1,0 +1,133 @@
+{
+  "fullname": "Patricio Mena",
+  "email": "pato@gmail.com",
+  "phone": "8134583065",
+  "desiredProcedures": [
+    "breast_augmentation_with_implants",
+    "hyperhidrosis",
+    "fillers"
+  ],
+  "desiredSurgeryMonth": "August",
+  "desiredSurgeryYear": "2027",
+  "personalInfo": {
+    "firstName": "Patricio",
+    "lastName": "Mena",
+    "birthGender": "male",
+    "email": "pato@gmail.com",
+    "phone": "8134583065",
+    "address": "1234 Blvd Sunset",
+    "city": "San Diego",
+    "country": "Mexico",
+    "occupation": "",
+    "heightFt": 5,
+    "heightIn": 10,
+    "weightLbs": 150,
+    "hadWeightLossSurgery": true,
+    "referralSource": "facebook",
+    "referralOther": "",
+    "desiredSurgeryMonth": "August",
+    "desiredSurgeryYear": "2027",
+    "dateOfBirth": "1989-02-12T06:00:00.000Z"
+  },
+  "generalInfo": {
+    "desiredProcedures": [
+      "breast_augmentation_with_implants",
+      "hyperhidrosis",
+      "fillers"
+    ],
+    "desiredProcedureOther": "",
+    "dislikesAndDesires": "ive had two children",
+    "interestedInChestSurgery": true,
+    "chestSurgeryGoals": "id like to go from a to c"
+  },
+  "medicalHistory": {
+    "hasIllness": true,
+    "illness": [
+      {
+        "condition": "lupus",
+        "yearDiagnosed": "2018",
+        "description": "remission"
+      }
+    ],
+    "hasAllergies": true,
+    "allergies": [
+      {
+        "allergicTo": "Penicilin",
+        "reaction": "Rash"
+      }
+    ],
+    "hasDiabetes": true,
+    "diabetes": {
+      "diabetesType": "type_2",
+      "hgba1cResult": "6.8"
+    },
+    "hasHeartCondition": true,
+    "heartConditionDetails": "prolapse",
+    "heartSymptoms": true,
+    "heartSymptomsDetails": "palpitations",
+    "hasThyroidCondition": true,
+    "thyroid": {
+      "type": "hypothyroidism",
+      "yearDiagnosed": "2013",
+      "isControlled": true
+    },
+    "hasDVT": true,
+    "dvtDetails": "dvt in leg",
+    "hasHighBloodPressure": true,
+    "hasHighCholesterol": true,
+    "hasKidneyDisorder": true,
+    "hasAsthma": true,
+    "hasOrthopedicProblems": true,
+    "orthopedicDetails": "chronic lower back",
+    "hasRespiratoryProblems": false,
+    "respiratoryDetails": "",
+    "mentalHealthCondition": "fibromyalgia",
+    "mentalHealthOther": "",
+    "hasReflux": true,
+    "refluxDetails": "diagnosed in 2015",
+    "hasLiverDisease": true,
+    "liverDiseaseDetails": "mild fatt liver",
+    "hasBleedingDisorder": true,
+    "bleedingDisorderDetails": "type 1",
+    "hasVericoseVeins": true,
+    "vericoseVeinsDetails": "moderat vericose",
+    "hasInfectiousDisease": true,
+    "infectiousDiseaseDetails": "latent tuberculosis",
+    "isHIVPositive": false,
+    "hivMedications": [],
+    "hivLastUndetectableViralLoad": "",
+    "drinksAlcohol": true,
+    "alcoholDetails": "2 to 3 glasses ",
+    "smokingStatus": "yes",
+    "smokingAmountPerDay": "half a pack ",
+    "smokingSince": "since age 18",
+    "usesRecreationalDrug": true,
+    "recreationalDrugDetails": "Marijuana about once a week",
+    "takesMedication": true,
+    "medications": [
+      {
+        "name": "metmorfin",
+        "dose": "100mg",
+        "frequency": "twice daily",
+        "purpose": "Type 2"
+      }
+    ],
+    "takesPsychMeds": false,
+    "psychMeds": [],
+    "hasPreviousSurgeries": true,
+    "surgeries": [
+      {
+        "procedures": "c-section",
+        "year": "2020",
+        "reason": "childbirth"
+      }
+    ]
+  },
+  "photos": {
+    "front": "https://res.cloudinary.com/dur53upok/image/upload/v1786162426/ibf718yljlfectcsoaxv.jpg",
+    "back": "https://res.cloudinary.com/dur53upok/image/upload/v1786162434/aptd3clhyjgxsyqofxvg.jpg",
+    "leftSide": "https://res.cloudinary.com/dur53upok/image/upload/v1786162447/mqwft3bqkufk1frh2sl3.jpg",
+    "rightSide": "https://res.cloudinary.com/dur53upok/image/upload/v1786162455/mzy3gvgdwaqj6h5e1sns.jpg",
+    "additionalPhotos": []
+  }
+}

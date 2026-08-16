@@ -6,6 +6,7 @@ import { FormBase } from "../components/FormBase.tsx";
 import { FormSelect } from "../components/FormSelect.tsx";
 import { FormCheckbox } from "../components/FormCheckbox.tsx";
 import { FormTextarea } from "../components/FormTextarea.tsx";
+import { Loader2 } from "lucide-react";
 
 function SubscribeButton({ label }: { label: string }) {
   const form = useFormContext();
@@ -14,7 +15,14 @@ function SubscribeButton({ label }: { label: string }) {
     <form.Subscribe selector={(state) => state.isSubmitting}>
       {(isSubmitting) => (
         <Button type="submit" disabled={isSubmitting}>
-          {label}
+          {isSubmitting ? (
+            <>
+              <Loader2 className="mr-2 h-4 w-4 animate-spin" />
+              Sending...
+            </>
+          ) : (
+            label
+          )}
         </Button>
       )}
     </form.Subscribe>

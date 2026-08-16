@@ -7,6 +7,7 @@ import {
   FieldError,
   FieldLabel,
 } from "@/components/ui/field";
+import { cn } from "@/lib/utils";
 
 export type FormControlProps = {
   label?: string;
@@ -14,12 +15,14 @@ export type FormControlProps = {
   description?: string;
   placeholder?: string;
   type?: string;
+  className?: string;
 };
 
 type FormBaseProps = FormControlProps & {
   children: ReactNode;
   horizontal?: boolean;
   controlFirst?: boolean;
+  className?: string;
 };
 
 export function FormBase({
@@ -29,9 +32,11 @@ export function FormBase({
   description,
   controlFirst,
   horizontal,
+  className,
 }: FormBaseProps) {
   const field = useFieldContext();
   const isInvalid = field.state.meta.isTouched && !field.state.meta.isValid;
+
   const labelElement = label ? (
     <>
       <FieldLabel
@@ -53,6 +58,7 @@ export function FormBase({
     <Field
       data-invalid={isInvalid}
       orientation={horizontal ? "horizontal" : undefined}
+      className={cn(className)}
     >
       {controlFirst ? (
         <>

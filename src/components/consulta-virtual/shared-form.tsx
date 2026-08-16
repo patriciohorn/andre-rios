@@ -51,6 +51,7 @@ export const YEARS = Array.from({ length: 82 }, (_, i) =>
 export const COUNTRIES = [
   { value: "USA", label: "United States" },
   { value: "Mexico", label: "Mexico" },
+  { value: "Canada", label: "Canada" },
   { value: "Other", label: "Other" },
 ] as const;
 
@@ -105,6 +106,7 @@ export const personalInfoSchema = z
     address: z.string().trim(),
     city: requiredString("City is required"),
     country: requiredString("Country is required"),
+    countryOther: z.string().trim(),
     occupation: z.string().trim(),
     heightFt: z
       .string()
@@ -150,7 +152,7 @@ export const personalInfoSchema = z
       .or(z.literal("")),
     referralOther: z.string().trim(),
     desiredSurgeryMonth: z.string(),
-    desiredSurgeryYear: z.boolean(),
+    desiredSurgeryYear: z.string(),
   })
   .refine(
     (data) => calculateAge(data.dobDay, data.dobMonth, data.dobYear) >= 18,
@@ -190,6 +192,10 @@ export const personalInfoSchema = z
       message: "Please tell us how you heard about us",
       path: ["referralOther"],
     },
+  )
+  .refine(
+    (data) => data.country !== "Other" || data.countryOther?.trim().length > 0,
+    { message: "Please tell us your country", path: ["countryOther"] },
   );
 
 // General Info
@@ -230,7 +236,7 @@ export const generalInfoSchema = z
 const illnessItem = z.object({
   condition: requiredString("Please specify the condition"),
   yearDiagnosed: requiredString("Please specify the year of diagnosis"),
-  description: z.string().trim().optional(),
+  description: z.string().trim(),
 });
 
 const allergyItem = z.object({
@@ -242,7 +248,7 @@ const medicationItem = z.object({
   name: requiredString("Medication name is required"),
   dose: requiredString("Dose is required"),
   frequency: requiredString("Frequency is required"),
-  purpose: z.string().trim().optional(),
+  purpose: z.string().trim(),
 });
 
 const hivMedicationItem = z.object({
@@ -254,8 +260,36 @@ const hivMedicationItem = z.object({
 const surgeryItem = z.object({
   procedures: requiredString("Please specify the procedure"),
   year: requiredString("Please specify the year"),
-  reason: z.string().trim().optional(),
+  reason: z.string().trim(),
 });
+
+export const MENTAL_HEALTH_CONDITIONS = [
+  "none",
+  "fibromyalgia",
+  "depression",
+  "anxiety",
+  "panic_attacks",
+  "ocd",
+  "personality_disorders",
+  "other",
+] as const;
+
+export const DIABETES_TYPES = [
+  { value: "type_1", label: "Type 1" },
+  { value: "type_2", label: "Type 2" },
+] as const;
+
+export const THYROID_TYPES = [
+  { value: "hypothyroidism", label: "Hypothyroidism" },
+  { value: "hyperthyroidism", label: "Hyperthyroidism" },
+  { value: "other", label: "Other" },
+] as const;
+
+export const SMOKING_STATUS = [
+  { value: "no", label: "I don't smoke" },
+  { value: "quit", label: "I used to smoke, but quit" },
+  { value: "yes", label: "I currently smoke" },
+] as const;
 
 const medicalHistoryBase = z.object({
   hasIllness: z.boolean(),
@@ -264,110 +298,53 @@ const medicalHistoryBase = z.object({
   allergies: z.array(allergyItem),
   hasDiabetes: z.boolean(),
   diabetes: z.object({
-    diabetesType: z.enum(["type_1", "type_2"]).optional().or(z.literal("")),
-    hgba1cResult: z.string().trim().optional(),
+    diabetesType: z.enum(["type_1", "type_2"]).or(z.literal("")),
+    hgba1cResult: z.string().trim(),
   }),
   hasHeartCondition: z.boolean(),
-  heartConditionDetails: z.string().trim().optional(),
+  heartConditionDetails: z.string().trim(),
   heartSymptoms: z.boolean(),
-  heartSymptomsDetails: z.string().trim().optional(),
+  heartSymptomsDetails: z.string().trim(),
   hasThyroidCondition: z.boolean(),
   thyroid: z.object({
     type: z
       .enum(["hypothyroidism", "hyperthyroidism", "other"])
-      .optional()
       .or(z.literal("")),
-    yearDiagnosed: z.string().trim().optional(),
+    yearDiagnosed: z.string().trim(),
     isControlled: z.boolean(),
-    hasDVT: z.boolean(),
-    dvtDetails: z.string().trim().optional(),
-    hasHighBloodPressure: z.boolean(),
-    hasHighCholesterol: z.boolean(),
-    hasKidneyDisorder: z.boolean(),
-    hasAsthma: z.boolean(),
-    hasOrthopedicProblems: z.boolean(),
-    orthopedicDetails: z.string().trim().optional(),
-    hasRespiratoryProblems: z.boolean(),
-    respiratoryDetails: z.string().trim().optional(),
-    mentalHealthCondition: z.enum([
-      "none",
-      "fibromyalgia",
-      "depression",
-      "anxiety",
-      "panic_attacks",
-      "ocd",
-      "personality_disorders",
-      "other",
-    ]),
-    mentalHealthOther: z.string().trim().optional(),
-    hasReflux: z.boolean(),
-    refluxDetails: z.string().trim().optional(),
-    hasLiverDisease: z.boolean(),
-    liverDiseaseDetails: z.string().trim().optional(),
-    hasBleedingDisorder: z.boolean(),
-    bleedingDisorderDetails: z.string().trim().optional(),
-    hasVericoseVeins: z.boolean(),
-    vericoseVeinsDetails: z.string().trim().optional(),
-    hasInfectiousDisease: z.boolean(),
-    infectiousDiseaseDetails: z.string().trim().optional(),
-    isHIVPositive: z.boolean(),
-    hivMedications: z.array(hivMedicationItem),
-    hivLastUndetectableViralLoad: z.string().trim().optional(),
-    drinksAlcohol: z.boolean(),
-    alcoholDetails: z.string().trim().optional(),
-    smokingStatus: z.enum(["yes", "quit", "no"]),
-    smokingAmountPerDay: z.string().trim().optional(),
-    smokingSince: z.string().trim().optional(),
-    usesRecreationalDrug: z.boolean(),
-    recreationalDrugDetails: z.string().trim().optional(),
-    takesMedication: z.boolean(),
-    medications: z.array(medicationItem),
-    takesPsychMeds: z.boolean(),
-    psychMeds: z.array(medicationItem),
-    hasPreviousSurgeries: z.boolean(),
-    surgeries: z.array(surgeryItem),
-  }),
+  }), // ← closes here
   hasDVT: z.boolean(),
-  dvtDetails: z.string().trim().optional(),
+  dvtDetails: z.string().trim(),
   hasHighBloodPressure: z.boolean(),
   hasHighCholesterol: z.boolean(),
   hasKidneyDisorder: z.boolean(),
   hasAsthma: z.boolean(),
   hasOrthopedicProblems: z.boolean(),
-  orthopedicDetails: z.string().trim().optional(),
+  orthopedicDetails: z.string().trim(),
   hasRespiratoryProblems: z.boolean(),
-  respiratoryDetails: z.string().trim().optional(),
-  mentalHealthCondition: z.enum([
-    "none",
-    "fibromyalgia",
-    "depression",
-    "anxiety",
-    "panic_attacks",
-    "ocd",
-    "personality_disorders",
-    "other",
-  ]),
-  mentalHealthOther: z.string().trim().optional(),
+  respiratoryDetails: z.string().trim(),
+  mentalHealthCondition: z.enum(MENTAL_HEALTH_CONDITIONS),
+  mentalHealthOther: z.string().trim(),
   hasReflux: z.boolean(),
-  refluxDetails: z.string().trim().optional(),
+  refluxDetails: z.string().trim(),
   hasLiverDisease: z.boolean(),
-  liverDiseaseDetails: z.string().trim().optional(),
+  liverDiseaseDetails: z.string().trim(),
   hasBleedingDisorder: z.boolean(),
-  bleedingDisorderDetails: z.string().trim().optional(),
+  bleedingDisorderDetails: z.string().trim(),
   hasVericoseVeins: z.boolean(),
-  vericoseVeinsDetails: z.string().trim().optional(),
+  vericoseVeinsDetails: z.string().trim(),
   hasInfectiousDisease: z.boolean(),
-  infectiousDiseaseDetails: z.string().trim().optional(),
+  infectiousDiseaseDetails: z.string().trim(),
   isHIVPositive: z.boolean(),
   hivMedications: z.array(hivMedicationItem),
-  hivLastUndetectableViralLoad: z.string().trim().optional(),
+  hivLastUndetectableViralLoad: z.string().trim(),
   drinksAlcohol: z.boolean(),
-  alcoholDetails: z.string().trim().optional(),
+  alcoholDetails: z.string().trim(),
   smokingStatus: z.enum(["yes", "quit", "no"]),
-  smokingAmountPerDay: z.string().trim().optional(),
-  smokingSince: z.string().trim().optional(),
+  smokingAmountPerDay: z.string().trim(),
+  smokingSince: z.string().trim(),
   usesRecreationalDrug: z.boolean(),
-  recreationalDrugDetails: z.string().trim().optional(),
+  recreationalDrugDetails: z.string().trim(),
   takesMedication: z.boolean(),
   medications: z.array(medicationItem),
   takesPsychMeds: z.boolean(),
@@ -375,7 +352,6 @@ const medicalHistoryBase = z.object({
   hasPreviousSurgeries: z.boolean(),
   surgeries: z.array(surgeryItem),
 });
-
 type medicalHistoryData = z.infer<typeof medicalHistoryBase>;
 
 const requiredIf =
@@ -517,6 +493,12 @@ export type medicalHistoryFormData = z.infer<typeof medicalHistorySchema>;
 export type photosData = z.infer<typeof photosSchema>;
 export type Procedure = (typeof PROCEDURES)[number];
 
+export type IllnessItem = z.infer<typeof illnessItem>;
+export type AllergyItem = z.infer<typeof allergyItem>;
+export type MedicationItem = z.infer<typeof medicationItem>;
+export type HivMedicationItem = z.infer<typeof hivMedicationItem>;
+export type SurgeryItem = z.infer<typeof surgeryItem>;
+
 export const wizardFormOpts = formOptions({
   defaultValues: {
     personalInfo: {
@@ -531,6 +513,7 @@ export const wizardFormOpts = formOptions({
       address: "",
       city: "",
       country: "",
+      countryOther: "",
       occupation: "",
       heightFt: "",
       heightIn: "",
@@ -557,17 +540,25 @@ export const wizardFormOpts = formOptions({
     },
     medicalHistory: {
       hasIllness: false,
-      illness: [],
+      illness: [] as IllnessItem[],
       hasAllergies: false,
-      allergies: [],
+      allergies: [] as AllergyItem[],
       hasDiabetes: false,
-      diabetes: { diabetesType: "", hgba1cResult: "" },
+      diabetes: {
+        diabetesType: "" as "" | "type_1" | "type_2",
+        hgba1cResult: "",
+      },
+
       hasHeartCondition: false,
       heartConditionDetails: "",
       heartSymptoms: false,
       heartSymptomsDetails: "",
       hasThyroidCondition: false,
-      thyroid: { type: "", yearDiagnosed: "", isControlled: false },
+      thyroid: {
+        type: "" as "" | "hypothyroidism" | "hyperthyroidism" | "other",
+        yearDiagnosed: "",
+        isControlled: false,
+      },
       hasDVT: false,
       dvtDetails: "",
       hasHighBloodPressure: false,
@@ -578,7 +569,8 @@ export const wizardFormOpts = formOptions({
       orthopedicDetails: "",
       hasRespiratoryProblems: false,
       respiratoryDetails: "",
-      mentalHealthCondition: "none",
+      mentalHealthCondition:
+        "none" as (typeof MENTAL_HEALTH_CONDITIONS)[number],
       mentalHealthOther: "",
       hasReflux: false,
       refluxDetails: "",
@@ -591,28 +583,28 @@ export const wizardFormOpts = formOptions({
       hasInfectiousDisease: false,
       infectiousDiseaseDetails: "",
       isHIVPositive: false,
-      hivMedications: [],
+      hivMedications: [] as HivMedicationItem[],
       hivLastUndetectableViralLoad: "",
       drinksAlcohol: false,
       alcoholDetails: "",
-      smokingStatus: "no",
+      smokingStatus: "no" as "yes" | "quit" | "no",
       smokingAmountPerDay: "",
       smokingSince: "",
       usesRecreationalDrug: false,
       recreationalDrugDetails: "",
       takesMedication: false,
-      medications: [],
+      medications: [] as MedicationItem[],
       takesPsychMeds: false,
-      psychMeds: [],
+      psychMeds: [] as MedicationItem[],
       hasPreviousSurgeries: false,
-      surgeries: [],
+      surgeries: [] as SurgeryItem[],
     },
     photos: {
-      front: null,
-      back: null,
-      leftSide: null,
-      rightSide: null,
-      additionalPhotos: [],
+      front: null as string | null,
+      back: null as string | null,
+      leftSide: null as string | null,
+      rightSide: null as string | null,
+      additionalPhotos: [] as string[],
     },
   },
 });
