@@ -102,7 +102,7 @@ export const personalInfoSchema = z
     city: requiredString("City is required"),
     country: requiredString("Country is required"),
     countryOther: z.string().trim(),
-    occupation: z.string().trim(),
+    occupation: requiredString("Occupation is required"),
     heightFt: z
       .string()
       .trim()

@@ -164,7 +164,7 @@ export const PersonalInfoForm = withForm({
                 <form.AppField name="personalInfo.occupation">
                   {(field) => (
                     <field.FormInput
-                      label="Occupation (optional)"
+                      label="Occupation"
                       placeholder="Nurse, teacher, etc."
                     />
                   )}
