@@ -18,12 +18,7 @@ const calculateAge = (
   return hadBirthday ? age : age - 1;
 };
 
-export const BIRTH_GENDERS = [
-  "female",
-  "male",
-  "other",
-  "prefer_not_to_say",
-] as const;
+export const BIRTH_GENDERS = ["female", "male"] as const;
 
 export const DAYS = Array.from({ length: 31 }, (_, i) => (i + 1).toString());
 
@@ -103,7 +98,7 @@ export const personalInfoSchema = z
     dobYear: requiredString("Select a year"),
     email: z.string().trim().email("Please enter a valid email address"),
     phone: z.string().trim().min(10, "Phone number must be at least 10 digits"),
-    address: z.string().trim(),
+    address: requiredString("Address is required"),
     city: requiredString("City is required"),
     country: requiredString("Country is required"),
     countryOther: z.string().trim(),
@@ -504,7 +499,7 @@ export const wizardFormOpts = formOptions({
     personalInfo: {
       firstName: "",
       lastName: "",
-      birthGender: "" as "" | "male" | "female" | "other" | "prefer_not_to_say",
+      birthGender: "" as "" | "male" | "female",
       dobDay: "",
       dobMonth: "",
       dobYear: "",

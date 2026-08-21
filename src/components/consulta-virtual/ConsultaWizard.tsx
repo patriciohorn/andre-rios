@@ -38,7 +38,7 @@ const clearSavedForm = () => {
 // ──────────────────────────────────────────────────────────
 
 export function ConsultaWizard() {
-  const [step, setStep] = useState(getSavedStep); // ← CHANGED
+  const [step, setStep] = useState(getSavedStep);
   const [submitError, setSubmitError] = useState("");
   const [hasAccepted, setHasAccepted] = useState(false);
 

@@ -172,7 +172,7 @@ export const PersonalInfoForm = withForm({
                 <form.AppField name="personalInfo.address">
                   {(field) => (
                     <field.FormInput
-                      label="Address (optional)"
+                      label="Address"
                       placeholder="1234 Sunset Blvd"
                     />
                   )}
