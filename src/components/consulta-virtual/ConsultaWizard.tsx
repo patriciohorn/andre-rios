@@ -136,7 +136,7 @@ export function ConsultaWizard() {
       <CardHeader className="px-4 sm:px-6">
         <Stepper activeStep={step} />
       </CardHeader>
-      <CardContent className="px-4 sm:px-6">
+      <CardContent className="mt-4 px-4 sm:px-6">
         {submitError && (
           <p className="mb-4 rounded-lg border border-red-200 bg-red-50 p-3 text-sm text-red-800">
             {submitError}

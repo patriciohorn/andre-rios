@@ -42,19 +42,30 @@ export const PhotosForm = withForm({
               e.stopPropagation();
               formGroup.handleSubmit();
             }}
-            className="space-y-8"
+            className="space-y-10"
           >
             {/* ═══ REQUIRED VIEWS ═══ */}
             <FieldSet>
-              <FieldLegend>Clinical photos</FieldLegend>
+              <FieldLegend>How to take your photos</FieldLegend>
               <FieldDescription>
-                Please take these in good lighting, wearing fitted clothing or
-                underwear, standing against a plain background. Dr. Ríos uses
-                them to evaluate whether you're a candidate.
+                <p className="mt-2 text-neutral-600">
+                  <strong>Without any clothes (AND without underwear)</strong>,
+                  from neck to knees, in a well lit room in the following
+                  angles:
+                  <ul className="mt-2 pl-8 flex flex-col gap-1 list-disc">
+                    <li>Front: with your arms on your back</li>
+                    <li>
+                      Sides (right and left): placing your arms on the front
+                    </li>
+                    <li>
+                      Back: raising your arms on your sides at a 90&deg; angle
+                    </li>
+                  </ul>
+                </p>
               </FieldDescription>
 
               <FieldGroup>
-                <div className="grid grid-cols-2 gap-4 sm:grid-cols-4">
+                <div className="mt-2 grid grid-cols-2 gap-4 sm:grid-cols-4">
                   {NAMED_SLOTS.map(({ name, label }) => (
                     <form.AppField key={name} name={name}>
                       {(field) => (
@@ -79,7 +90,7 @@ export const PhotosForm = withForm({
             {/* ═══ ADDITIONAL PHOTOS ═══ */}
             <FieldSet>
               <FieldLegend>Additional photos (optional)</FieldLegend>
-              <FieldDescription>
+              <FieldDescription className="mt-2 text-neutral-600">
                 Add up to {MAX_ADDITIONAL} more photos of the areas you'd like
                 Dr. Ríos to focus on.
               </FieldDescription>
@@ -91,7 +102,7 @@ export const PhotosForm = withForm({
                     const remaining = MAX_ADDITIONAL - photos.length;
 
                     return (
-                      <div className="grid grid-cols-2 gap-4 sm:grid-cols-4">
+                      <div className="mt-2 grid grid-cols-2 gap-4 sm:grid-cols-4">
                         {photos.map((url: string, i: number) => (
                           <PhotoSlot
                             key={`${url}-${i}`}
