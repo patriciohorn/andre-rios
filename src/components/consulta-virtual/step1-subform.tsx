@@ -226,17 +226,23 @@ export const PersonalInfoForm = withForm({
               <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
                 <form.AppField name="personalInfo.heightFt">
                   {(field) => (
-                    <field.FormInput label="Height (feet)" placeholder="5" />
+                    <field.FormInput label="Height (feet)" placeholder="Feet" />
                   )}
                 </form.AppField>
                 <form.AppField name="personalInfo.heightIn">
                   {(field) => (
-                    <field.FormInput label="Height (inches)" placeholder="10" />
+                    <field.FormInput
+                      label="Height (inches)"
+                      placeholder="Inches"
+                    />
                   )}
                 </form.AppField>
                 <form.AppField name="personalInfo.weightLbs">
                   {(field) => (
-                    <field.FormInput label="Weight (lbs)" placeholder="150" />
+                    <field.FormInput
+                      label="Weight (lbs)"
+                      placeholder="Pounds"
+                    />
                   )}
                 </form.AppField>
               </div>
