@@ -195,6 +195,19 @@ export const personalInfoSchema = z
 
 // General Info
 
+export const CUP_SIZES = ["A", "B", "C", "D", "DD/E", "DDD"] as const;
+
+export const DESIRED_CUP_SIZES = [
+  "Keep current size",
+  "A",
+  "B",
+  "C",
+  "D",
+  "DD/E",
+  "F or larger",
+  "Not sure yet",
+] as const;
+
 export const generalInfoSchema = z
   .object({
     desiredProcedures: z
@@ -206,6 +219,12 @@ export const generalInfoSchema = z
     ),
     interestedInChestSurgery: z.boolean(),
     chestSurgeryGoals: z.string().trim(),
+    currentCupSize: z.string(),
+    desiredCupSize: z.string(),
+    hasBreastImplants: z.boolean(),
+    implantSize: z.string().trim(),
+    implantBrand: z.string().trim(),
+    implantPlacement: z.string().trim(),
   })
   .refine(
     (data) =>
@@ -532,6 +551,12 @@ export const wizardFormOpts = formOptions({
       dislikesAndDesires: "",
       interestedInChestSurgery: false,
       chestSurgeryGoals: "",
+      currentCupSize: "",
+      desiredCupSize: "",
+      hasBreastImplants: false,
+      implantSize: "",
+      implantBrand: "",
+      implantPlacement: "",
     },
     medicalHistory: {
       hasIllness: false,

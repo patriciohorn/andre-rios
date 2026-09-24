@@ -58,7 +58,7 @@ export function ConsultaWizard() {
     onSubmit: async ({ value }) => {
       const { personalInfo, generalInfo, medicalHistory, photos } = value;
       const { dobDay, dobMonth, dobYear, ...personalInfoRest } = personalInfo;
-
+      ``;
       const formData = {
         fullName: `${personalInfo.firstName} ${personalInfo.lastName}`,
         email: personalInfo.email,

@@ -6,8 +6,13 @@ import {
   FieldDescription,
 } from "../ui/field";
 import { withForm } from "./hooks/form";
-import { generalInfoSchema, wizardFormOpts } from "./shared-form";
-import { PROCEDURES } from "./shared-form";
+import {
+  DESIRED_CUP_SIZES,
+  generalInfoSchema,
+  wizardFormOpts,
+} from "./shared-form";
+import { CUP_SIZES, PROCEDURES } from "./shared-form";
+import { SelectItem } from "@/components/ui/select";
 import { cleanLabel } from "@/lib/helpers";
 import { Checkbox } from "@/components/ui/checkbox";
 import { Button } from "@/components/ui/button";
@@ -38,14 +43,14 @@ export const GeneralInfoForm = withForm({
               formGroup.handleSubmit();
             }}
           >
-            <FieldGroup>
+            <FieldGroup className="space-y-4 pb-4">
               {/* ~~~~ DESIRED PROCEDURES ~~~~ */}
               <form.AppField name="generalInfo.desiredProcedures">
                 {(field) => (
                   <Field>
                     <FieldLabel>Procedures you're interested in</FieldLabel>
                     <FieldDescription>Select all that apply.</FieldDescription>
-                    <div className="grid grid-cols-1 sm:grid-cols-2 gap-2">
+                    <div className="grid grid-cols-1 sm:grid-cols-2 gap-x-2 gap-y-1">
                       {PROCEDURES.map((procedure) => {
                         const checked = field.state.value.includes(procedure);
                         return (
@@ -86,7 +91,6 @@ export const GeneralInfoForm = withForm({
                   </Field>
                 )}
               </form.AppField>
-
               {/* ~~~~ OTHER PROCEDURE ~~~~ */}
               <form.Subscribe
                 selector={(state) => state.values.generalInfo.desiredProcedures}
@@ -104,7 +108,6 @@ export const GeneralInfoForm = withForm({
                   )
                 }
               </form.Subscribe>
-
               {/* ~~~~ DISLIKES AND DESIRES ~~~~ */}
               <form.AppField name="generalInfo.dislikesAndDesires">
                 {(field) => (
@@ -115,7 +118,75 @@ export const GeneralInfoForm = withForm({
                   />
                 )}
               </form.AppField>
+              {/* ~~~~ CURRENT CUP SIZE ~~~~ */}
+              <div className="grid sm:grid-cols-2">
+                <form.AppField name="generalInfo.currentCupSize">
+                  {(field) => (
+                    <field.FormSelect
+                      label="Current cup size"
+                      placeholder="Select an option"
+                    >
+                      {CUP_SIZES.map((size) => (
+                        <SelectItem key={size} value={size}>
+                          {size}
+                        </SelectItem>
+                      ))}
+                    </field.FormSelect>
+                  )}
+                </form.AppField>
+                {/* ~~~~ DESIRED CUP SIZE ~~~~ */}
+                <form.AppField name="generalInfo.desiredCupSize">
+                  {(field) => (
+                    <field.FormSelect
+                      label="Desired cup size"
+                      placeholder="Select an option"
+                    >
+                      {DESIRED_CUP_SIZES.map((size) => (
+                        <SelectItem key={size} value={size}>
+                          {size}
+                        </SelectItem>
+                      ))}
+                    </field.FormSelect>
+                  )}
+                </form.AppField>
+              </div>
 
+              {/* ~~~~ BREAST IMPLANTS ~~~~ */}
+              <form.AppField
+                name="generalInfo.hasBreastImplants"
+                listeners={{
+                  onChange: ({ value }) => {
+                    if (!value) {
+                      form.setFieldValue("generalInfo.implantSize", "");
+                      form.setFieldValue("generalInfo.implantBrand", "");
+                      form.setFieldValue("generalInfo.implantPlacement", "");
+                    }
+                  },
+                }}
+              >
+                {(field) => (
+                  <field.FormCheckbox label="I currently have breast implants" />
+                )}
+              </form.AppField>
+              <form.Subscribe
+                selector={(state) => state.values.generalInfo.hasBreastImplants}
+              >
+                {(hasBreastImplants) =>
+                  hasBreastImplants && (
+                    <div className="grid md:grid-cols-3 gap-2">
+                      <form.AppField name="generalInfo.implantSize">
+                        {(field) => <field.FormInput label="Implant size" />}
+                      </form.AppField>
+                      <form.AppField name="generalInfo.implantBrand">
+                        {(field) => <field.FormInput label="Brand" />}
+                      </form.AppField>
+                      <form.AppField name="generalInfo.implantPlacement">
+                        {(field) => <field.FormInput label="Placement" />}
+                      </form.AppField>
+                    </div>
+                  )
+                }
+              </form.Subscribe>
               {/* ~~~~ CHEST SURGERY ~~~~ */}
               <form.AppField
                 name="generalInfo.interestedInChestSurgery"
@@ -131,7 +202,6 @@ export const GeneralInfoForm = withForm({
                   <field.FormCheckbox label="I'm also interested in breast or chest surgery" />
                 )}
               </form.AppField>
-
               <form.Subscribe
                 selector={(state) =>
                   state.values.generalInfo.interestedInChestSurgery
